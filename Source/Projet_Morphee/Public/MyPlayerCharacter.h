@@ -6,9 +6,8 @@
 #include "GameFramework/Character.h"
 #include "MyPlayerCharacter.generated.h"
 
-class UCameraComponent;
 class USpringArmComponent;
-
+class UCameraComponent;
 UCLASS()
 class PROJET_MORPHEE_API AMyPlayerCharacter : public ACharacter
 {
@@ -29,6 +28,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	UCameraComponent* PlayerCamera;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 	USpringArmComponent* SpringArm;
 
 
