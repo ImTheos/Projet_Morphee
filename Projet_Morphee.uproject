@@ -3,6 +3,16 @@
 	"EngineAssociation": "5.4",
 	"Category": "",
 	"Description": "",
+	"Modules": [
+		{
+			"Name": "Projet_Morphee",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		}
+	],
 	"Plugins": [
 		{
 			"Name": "ModelingToolsEditorMode",
@@ -28,6 +38,11 @@
 			"Name": "NodeGraphAssistant",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/d9baaaeadeaf41dcb52b3f6e134e9514"
+		},
+		{
+			"Name": "GmGameplayAbilitySystem",
+			"Enabled": true,
+			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/c0e3fece3f4c4fa0a28e5dbc17020987"
 		}
 	]
 }
