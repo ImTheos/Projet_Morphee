@@ -5,15 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
-#include "MyCPPCharacter.generated.h"
 #include "AbilitySystemInterface.h"
-
+#include "MyCPPCharacter.generated.h"
 
 class UAbilitySystemComponent;
 class USpringArmComponent;
 class UCameraComponent;
 
-UCLASS(config=Game)
+UCLASS()
 class PROJET_MORPHEE_API AMyCPPCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()

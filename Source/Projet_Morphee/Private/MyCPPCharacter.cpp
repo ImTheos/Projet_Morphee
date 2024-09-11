@@ -10,6 +10,10 @@
 #include "EnhancedInputSubsystems.h"
 #include "AbilitySystemComponent.h"
 
+class UAbilitySystemComponent;
+class USpringArmComponent;
+class UCameraComponent;
+
 // Sets default values
 AMyCPPCharacter::AMyCPPCharacter()
 {

@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "BP_PlayerCharacter.generated.h"
+#include "TestCharacter.generated.h"
 
 UCLASS()
-class PROJET_MORPHEE_API ABP_PlayerCharacter : public ACharacter
+class PROJET_MORPHEE_API ATestCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	ABP_PlayerCharacter();
+	ATestCharacter();
 
 protected:
 	// Called when the game starts or when spawned
