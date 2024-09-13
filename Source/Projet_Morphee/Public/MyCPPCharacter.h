@@ -39,6 +39,8 @@ protected:
 		return AbilitySystemComponent;
 	}
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS", meta = (AllowPrivateAccess = "true"))
+	const class UBasicAttributeSet* BasicAttributeSet;
 
 public:	
 	// Called every frame

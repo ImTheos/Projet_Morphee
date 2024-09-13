@@ -9,6 +9,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "AbilitySystemComponent.h"
+#include "BasicAttributeSet.h"
 
 class UAbilitySystemComponent;
 class USpringArmComponent;
@@ -46,6 +47,11 @@ void AMyCPPCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (IsValid(AbilitySystemComponent))
+	{
+	BasicAttributeSet = AbilitySystemComponent->GetSet<UBasicAttributeSet>();
+	}
+
 }
 
 // Called every frame
