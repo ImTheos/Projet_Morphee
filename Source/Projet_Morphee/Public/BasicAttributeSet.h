@@ -38,5 +38,12 @@ public:
 	FGameplayAttributeData MaxStamina;
 	ATTRIBUTE_ACCESSORS(UBasicAttributeSet, MaxStamina);
 
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData StaminaRegenRate;
+	ATTRIBUTE_ACCESSORS(UBasicAttributeSet, StaminaRegenRate);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData HealthRegenRate;
+	ATTRIBUTE_ACCESSORS(UBasicAttributeSet, HealthRegenRate);
 };
 
