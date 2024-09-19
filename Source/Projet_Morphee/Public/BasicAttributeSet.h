@@ -21,6 +21,7 @@ class PROJET_MORPHEE_API UBasicAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
 	
+// Attribute accessors
 public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 	FGameplayAttributeData Health;
@@ -45,5 +46,9 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 	FGameplayAttributeData HealthRegenRate;
 	ATTRIBUTE_ACCESSORS(UBasicAttributeSet, HealthRegenRate);
+
+	// Override function to handle attribute changes
+	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
+
 };
 
