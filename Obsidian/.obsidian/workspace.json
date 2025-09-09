@@ -1,0 +1,195 @@
+{
+  "main": {
+    "id": "6f7079e1b54620ad",
+    "type": "split",
+    "children": [
+      {
+        "id": "bfe0dcc85a4e30c1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2be722b9a758ea80",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Morphée.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Morphée"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7d3b34d487dcec65",
+    "type": "split",
+    "children": [
+      {
+        "id": "19eb9150605c22db",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "46c1dc853f3e5a29",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorateur de fichiers"
+            }
+          },
+          {
+            "id": "4ed2bedf5d6ad3d0",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Rechercher"
+            }
+          },
+          {
+            "id": "443dcf4401164db6",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Signets"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "6f7984fff9c4659a",
+    "type": "split",
+    "children": [
+      {
+        "id": "34773b604a7a431f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f3ca843fd6e6ba52",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Morphée.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Rétrolien pour Morphée"
+            }
+          },
+          {
+            "id": "7781e5903c5cdc0c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Morphée.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Liens sortants de Morphée"
+            }
+          },
+          {
+            "id": "914ce969eaddc2d6",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Mots-clés"
+            }
+          },
+          {
+            "id": "9ace0a7e2965ecdf",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Morphée.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Plan de Morphée"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Ouvrir le sélecteur rapide": false,
+      "graph:Ouvrir la vue graphique": false,
+      "canvas:Créer une nouvelle toile": false,
+      "daily-notes:Ouvrir la note quotidienne": false,
+      "templates:Insérer le modèle": false,
+      "command-palette:Ouvrir la palette de commandes": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "2be722b9a758ea80",
+  "lastOpenFiles": [
+    "Relation Thalia-Phobétor-Morphée.md",
+    "Phobétor.md",
+    "Thalia.md",
+    "Traumatisme.md",
+    "Morphée.md",
+    "Monde Réel.md",
+    "Onyria.md",
+    "Ennemis/X.md",
+    "Niveaux",
+    "Ennemis.md",
+    "ennemis.md",
+    "Ennemis",
+    "Sans titre/Sans titre.md",
+    "lein 2.md",
+    "Bienvenue.md",
+    "Sans titre/Sans titre.base",
+    "Sans titre 1",
+    "créez un lien.md",
+    "2025-09-09.md",
+    "Sans titre.canvas"
+  ]
+}

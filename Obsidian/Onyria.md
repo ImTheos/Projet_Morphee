@@ -1,0 +1,1 @@
+L'histoire de [[Thalia]] explorant le monde de [[X]] en compagnie de [[Morphée]], sous la forme d'une balle qu'elle utilise pour vaincre ses ennemis. Leur objectif, à ce duo, est de mettre fin à la mission de [[Phobétor]].
