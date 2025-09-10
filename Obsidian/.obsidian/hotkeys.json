@@ -115,14 +115,6 @@
       "key": "5"
     }
   ],
-  "editor:toggle-strikethrough": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "6"
-    }
-  ],
   "editor:insert-wikilink": [
     {
       "modifiers": [
@@ -139,20 +131,12 @@
       "key": "Insert"
     }
   ],
-  "editor:insert-codeblock": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "ArrowDown"
-    }
-  ],
   "editor:insert-callout": [
     {
       "modifiers": [
         "Mod"
       ],
-      "key": "PageDown"
+      "key": "ArrowDown"
     }
   ],
   "editor:insert-mathblock": [
@@ -193,6 +177,30 @@
         "Mod"
       ],
       "key": "ArrowLeft"
+    }
+  ],
+  "editor:toggle-strikethrough": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "9"
+    }
+  ],
+  "editor:toggle-blockquote": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "6"
+    }
+  ],
+  "editor:insert-codeblock": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "PageDown"
     }
   ]
 }
