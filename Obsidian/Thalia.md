@@ -1,3 +1,7 @@
+---
+tags:
+  - Personnages
+---
 ![[Thalia_sketch.png]]
 
 #### 1. Informations générales
@@ -52,15 +56,16 @@
 
 - **Vie d'avant**
 
-> 
+> Enfant unique, ses parents ont toujours étés en soutien, dans le domaine/le monde de la musique. Elle a donc toujours eu un lien, une connection et une éducation lié à la musique. Son instrument phare est le piano dont elle a apprit les rudiments très tôt dans un conservatoire réputé et très strict. Précisément, un prof imposant avec une vision très renfermée de la musique, avec lequel elle a eu des broutilles.
+> Son enfance s'est déroulé à la capitale en compagnie de ses amis de tout bord où elle a pu expérimenter, vivre des drames et des joies. Tout cela se retrouvant dans ses rêves... 
 
 - **Expérience transformatif**
 
-> 
+> Traumatisme indélibile, crytpique au début du jeu, il se révèle morceau par morceau au contact des personnages, niveaux, boss ect... jusqu'à être révélé tel un puzzle à la fin du jeu.
 
 - **Situation actuelle**
 
-> 
+> Endommagée sur le plan psychologique, elle s'est isolée, se sent dépossédée de la musique hormis cela elle se trouve dans une situation finançière acceptable avec des parents et des amis toujours présents pour elle. L'insomnie rythme sa vie jusqu'à l'empêcher de profiter du moment présent, de sorties entre amis ou des simples plaisirs du quotidien. Son appartement relativement insalubre et sale, qu'elle n'ose pas le ranger. Aucun médicament ou traitement. Pas de suivi.
 
 ---
 
@@ -68,9 +73,16 @@
 
 - **Traits dominants**
 
-> 
+> 1. Rationnelle
+> 2. Calme
+> 3. Rigoureuse
+> 4. `A Réfléchir...`
 
 - **Qualité majeure / Défaut majeur**
+
+> 1. Perfectionniste 
+
+---
 
 > 
 
@@ -95,10 +107,6 @@
 > 
 
 - **Loisirs**
-
-> 
-
-- **Opinion politique**
 
 > 
 
