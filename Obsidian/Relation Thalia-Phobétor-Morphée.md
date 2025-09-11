@@ -1,6 +1,6 @@
 Selon le second topique de Freud[^1], la réflexion est composée du ==Ça, Moi et du Surmoi.== Ce trio permet d'avoir un comportement et une psychée sains via un système de conflit et d'arbitre.
 
-Le Ça est l'essence de la réflexion humaine, ses pulsions, ses pensées inhérentes et héritées. Il n'a aucun frein et exige d'être écouté car il est un besoin primordial.
+- Le Ça est l'essence de la réflexion humaine, ses pulsions, ses pensées inhérentes et héritées. Il n'a aucun frein et exige d'être écouté car il est un besoin primordial.
 
 Le Surmoi est l'inconscient servant de liant social, ayant été crée via l'inculcation des normes sociales et des conventions culturelles.
 

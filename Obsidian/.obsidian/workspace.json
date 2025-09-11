@@ -44,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorateur de fichiers"
             }
           },
           {
@@ -133,7 +133,7 @@
                 "searchQuery": ""
               },
               "icon": "lucide-tags",
-              "title": "Tags"
+              "title": "Mots-clés"
             }
           },
           {
@@ -160,27 +160,28 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
+      "switcher:Ouvrir le sélecteur rapide": false,
+      "graph:Ouvrir la vue graphique": false,
+      "canvas:Créer une nouvelle toile": false,
+      "daily-notes:Ouvrir la note quotidienne": false,
+      "templates:Insérer le modèle": false,
+      "command-palette:Ouvrir la palette de commandes": false,
       "bases:Create new base": false
     }
   },
   "active": "f78eb1d188e6b39e",
   "lastOpenFiles": [
+    "Thalia.md",
+    "Relation Thalia-Phobétor-Morphée.md",
+    "Morphée.md",
+    "Onyria.md",
+    "Thalia_sketch.png",
+    "Relation.md",
+    "Ennemis/X.md",
+    "Traumatisme.md",
     "Phobétor.md",
     "Monde Réel.md",
-    "Traumatisme.md",
-    "Thalia.md",
-    "Relation.md",
     "Need to Know.md",
-    "Morphée.md",
-    "Relation Thalia-Phobétor-Morphée.md",
-    "Onyria.md",
-    "Ennemis/X.md",
     "826e40da9a7407aaf412655e4b412518.jpg",
     "Untitled",
     "Untitled 1",
