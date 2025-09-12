@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Personnages Principaux/Thalia.md",
+                "file": "Outils/Voyage du Héros.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Thalia"
+              "title": "Voyage du Héros"
             }
           }
         ]
@@ -171,24 +171,28 @@
   },
   "active": "f78eb1d188e6b39e",
   "lastOpenFiles": [
-    "Personnages Principaux/Morphée.md",
-    "Personnages Principaux/Thalia.md",
+    "Outils/Voyage du Héros.md",
+    "Outils/Liste des Tropes et Procédés Narratifs.md",
+    "Outils/Need to Know.md",
     "Outils/Relation Thalia-Phobétor-Morphée.md",
+    "Outils/Schéma Narratif.md",
+    "Outils/Structure Narratif en 3 et 5.md",
+    "Outils/Arc Narratif (Positif).md",
+    "Outils/Références.md",
+    "Personnages Principaux/Thalia.md",
+    "Traumatisme.md",
+    "Personnages Principaux/Morphée.md",
+    "Personnages Principaux/Phobétor.md",
+    "Personnages Secondaires/Parents de Thalia.md",
     "RelationThalia-Phobétor-Morphée.md",
     "Relation.md",
-    "Personnages Principaux/Phobétor.md",
     "Images/Thalia_sketch.png",
     "Images",
-    "Outils/Références.md",
-    "Outils/Need to Know.md",
     "Outils",
-    "Traumatisme.md",
-    "Personnages Secondaires/Parents de Thalia.md",
     "Niveaux/Onyria.md",
     "Personnages Principaux",
     "Personnages Secondaires",
     "Personnages Secondaires.md",
-    "Sans titre.md",
     "Ennemis/X.md",
     "Niveaux/Monde Réel.md",
     "826e40da9a7407aaf412655e4b412518.jpg",
@@ -205,10 +209,7 @@
     "Ennemis",
     "Sans titre/Sans titre.md",
     "lein 2.md",
-    "Bienvenue.md",
     "Sans titre/Sans titre.base",
-    "créez un lien.md",
-    "2025-09-09.md",
     "Sans titre.canvas"
   ]
 }

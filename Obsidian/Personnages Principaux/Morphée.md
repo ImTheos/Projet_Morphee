@@ -1,3 +1,7 @@
+---
+tags:
+  - Personnages
+---
 Inspiré de la divinité du sommeil à la forme humaine[^1], il est un personnage cryptique avec la capacité de manipuler le rêve dans lequel se déroule le jeu. [[Onyria]] lui appartient et il est censé en être le maître.
 
 En début d'aventure, il tente d'être distant avec le joueur (incarnant [[Thalia]]) sauf que par sa nouvelle forme de sphère - dont [[Phobétor]][^2] est le responsable - il devient la seule manière d'éliminer les abérrations d'[[Onyria]]. Cela crée une collaboration d'infortune entre [[Thalia]] et Morphée. 

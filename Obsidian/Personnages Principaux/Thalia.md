@@ -81,9 +81,9 @@ tags:
 
 - **Qualité majeure / Défaut majeur**
 
-> 6. Entraide
-> 7. Ouverte d'esprit
-> 8. Fiable
+> 1. Entraide
+> 2. Ouverte d'esprit
+> 3. Fiable
 
 ---
 
@@ -100,17 +100,17 @@ tags:
 
 - **Faiblesses**
 
-> 4. Regard des autres
-> 5. Culpabilité de ne pas être à la hauteur de ses parents, être dans leur ombre
-> 6. Déni d'elle-même
-> 7. Addiction par compensation, pour le réconfort
+> 1. Regard des autres
+> 2. Culpabilité de ne pas être à la hauteur de ses parents, être dans leur ombre
+> 3. Déni d'elle-même
+> 4. Addiction par compensation, pour le réconfort
 
 - **Croyances, valeurs ou obsessions**
 
-> 8. Valeurs parentales de glorification du travail en contradiction avec ses valeurs personnelles centré sur l'appréciation global de la musique comme un art créatif et libre
-> 9. Agnostique
-> 10. Curiosité
-> 11. ==La musique pour exprimer son identité, comme expression de soi-même==[^1]
+> 1. Valeurs parentales de glorification du travail en contradiction avec ses valeurs personnelles centré sur l'appréciation global de la musique comme un art créatif et libre
+> 2. Agnostique
+> 3. Curiosité
+> 4. ==La musique pour exprimer son identité, comme expression de soi-même==[^1]
 
 - **Tics gestuels**
 
@@ -118,20 +118,20 @@ tags:
 
 - **Loisirs**
 
-> 12. Journal intime
-> 13. La musique
-> 14. Le dessin
-> 15. Les réseaux sociaux
-> 16. Bars à chat 
+> 1. Journal intime
+> 2. La musique
+> 3. Le dessin
+> 4. Les réseaux sociaux
+> 5. Bars à chat 
 
 - **Aime / N'Aime Pas**
 
-> 17. Les chats
-> 18. Le piano
-> 19. La composition
-> 20. (Un artiste musicien dans le classique)
-> 21. (Un artiste musicien dans de la musique récente)
-> 22. La science de l'acoustique
+> 1. Les hermines
+> 2. Le piano
+> 3. La composition
+> 4. (Un artiste musicien dans le classique)
+> 5. (Un artiste musicien dans de la musique récente)
+> 6. La science de l'acoustique
 
 ---
 
@@ -211,6 +211,26 @@ tags:
 
 
 ---
+
+#### 7. Archétypes
+
+##### L'Artiste
+
+> **Devise** : `Ce qui peut être imaginé, peut être fait`.
+
+> **Besoins** : Créer quelque chose de valeur, laisser sa trace dans le monde, être libre, amener de l’ordre au chaos
+
+> **Buts** : Innover, créer grâce à son imagination, transformer une vision en réalité, créer quelque chose de personnel, trouver des solutions apportant de l’ordre
+
+> **Peurs** : Syndrome de l’imposteurice, ne pas laisser sa marque, être médiocre
+
+> **Faiblesses** : Perfectionnisme, stagnation, suffisance, inconstance, pense mais n’agit pas
+
+> **Forces** : Créativité, imagination, visionnaire, non-conformiste, novateurice
+
+##### Le Héros
+
+> Le héros est le protagoniste d'une histoire. Vogler explique que tous les autres archétypes sont conçus pour servir, défier ou influencer ce personnage. Toujours caractérisé par une recherche d'identité et d'intégrité, le Héros représente nos propres luttes, obstacles et triomphes.
 
 [^1]: En conclusion.
 
