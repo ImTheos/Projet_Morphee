@@ -8,7 +8,7 @@ tags:
 
 - Où se situe l’histoire ? 
 
-> Dans les rêves de [[Thalia]], un monde onirique peuplé d'entités habitant l'esprit de la jeune femme. Dans sa forme d'hermine, elle explore avec Morphée différents niveaux de ce monde appelé [Onyria](Onyria) représentant le [[Sommeil]] sous tous ses angles.
+> Dans les rêves de [[Thalia]], un monde onirique peuplé d'entités habitant l'esprit de la jeune femme. Dans sa forme d'hermine, elle explore avec Morphée différents niveaux de ce monde appelé [Onyria](Onyria.md) représentant le [[Sommeil]] sous tous ses angles.
 
 - Qui sont les personnes qui habitent cet endroit ? 
 
@@ -20,7 +20,7 @@ tags:
 
 - Comment est-ce qu’elles y vivent ? 
 
-> Les habitants d'Onyria possèdent leur routine défini par les traits de personnalité de leur alter ego de [l'autre monde](Monde Réel). Lorsque le [rêve](Onyria) de Thalia s'interrompt, leur existence, à leur tour, s'interrompt le temps d'une journée avant de reprendre convenablement le soir. Récemment, leur mode de vie a été bouleversé par la dictature du [nouveau "roi"](Phobétor). 
+> Les habitants d'Onyria possèdent leur routine défini par les traits de personnalité de leur alter ego de [l'autre monde](Monde Réel). Lorsque le [rêve](Onyria.md) de Thalia s'interrompt, leur existence, à leur tour, s'interrompt le temps d'une journée avant de reprendre convenablement le soir. Récemment, leur mode de vie a été bouleversé par la dictature du [nouveau "roi"](Phobétor.md). 
 
 - Quels sont les obstacles auxquelles elles font face ? 
 
