@@ -16,6 +16,6 @@ class PROJET_MORPHEE_API UHealthBar : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<UHeartSlot*> heartSlots;
 };

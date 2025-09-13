@@ -21,11 +21,12 @@ public:
 	UFUNCTION()
 	void HideWhiteHeart();
 	
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UImage* whiteStar;
 
-	bool hasPlayedAnimation = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UWidgetAnimation* whiteStarDissipateAnim;
 
-	UPROPERTY(BlueprintReadWrite)
-	UWidgetAnimation* whiteStarDissipate;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool hasPlayedAnimation = false;
 };

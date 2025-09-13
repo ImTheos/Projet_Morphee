@@ -23,29 +23,28 @@ void UPlayerUI::UpdateHealthBar(int playerHealth)
 			continue;
 		}
 		
-		heartSlot->SetWhiteHeartVisibility(WhiteStar->GetVisibility());
+		heartSlot->SetWhiteHeartVisibility(ESlateVisibility::Visible);
 	}
 
 	for (int i = playerHealth; i < heartSlots.Num(); i++)
 	{
 		UHeartSlot* heartSlot = heartSlots[i];
 		
-		bool hasPlayedAnimation = false;
 		if (!IsValid(heartSlot) || heartSlot->hasPlayedAnimation)
 		{
 			continue;
 		}
 		
-		if (!IsValid(heartSlot) || !IsValid(heartSlot->whiteStarDissipate))
+		if (!IsValid(heartSlot) || !IsValid(heartSlot->whiteStarDissipateAnim))
 		{
 			continue;
 		}
-		heartSlot->PlayAnimation(heartSlot->whiteStarDissipate);
+		heartSlot->PlayAnimation(heartSlot->whiteStarDissipateAnim);
 		heartSlot->hasPlayedAnimation = true;
 
 		FWidgetAnimationDynamicEvent hideWidget;
 		hideWidget.BindDynamic(heartSlot, &UHeartSlot::HideWhiteHeart);
-
-		heartSlot->whiteStarDissipate->BindToAnimationFinished(this, hideWidget);
+		
+		heartSlot->BindToAnimationFinished(heartSlot->whiteStarDissipateAnim, hideWidget);
 	}
 }
