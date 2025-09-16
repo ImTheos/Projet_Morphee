@@ -14,7 +14,8 @@ Le héros est un personnage ordinaire dans un monde ordinaire. Nous découvrons 
 
 > Thalia vit dans notre monde où on la retrouve à son point le plus bas. Habituée à une vie d'isolement toxique et sans sommeil, elle n'est ni heureuse ni épanouie toutefois elle est dans un certain déni d'elle-même.
 
-##### 2 - L'appel de l'aventure
+
+ ##### 2 - L'appel de l'aventure
 
 ```
 Un problème survient. Le monde du héros est en danger. Il est le seul à pouvoir le sauver.
@@ -76,16 +77,26 @@ Le héros doit affronter un ennemi redoutable pour atteindre l’élixir. Il est
 Le héros triomphe de son épreuve majeure. Il obtient sa récompense – l’élixir – qui va lui permettre de guérir son monde.
 ```
 
-> Thalia accepte Phobétor et 
+> Thalia accepte Phobétor et le réconcilie avec Morphée. Onyria guérit et grâce à cette résolution et aux efforts de Thalia dans le monde réel : Thalia se décide à reprendre sa vie en main. Elle explique qu'elle s'est rendue compte de sa réelle envie de devenir compositrice en plus de commencer à écouter sa voix intérieure trop souvent étouffée par son perfectionnisme et sa peur de décevoir.
 
 ##### 10 - Le chemin du retour
 
-> Le héros veut rentrer chez lui. Il doit souvent encore affronter la colère ou la vengeance de ceux à qui il a dérobé l’élixir. 
+```
+Le héros veut rentrer chez lui. Il doit souvent encore affronter la colère ou la vengeance de ceux à qui il a dérobé l’élixir.
+```
 
+> Dans une dernière discussion, les 3 protagonistes résolvent leurs problèmes avant de renvoyer Thalia dans sa vie de tous les jours, elle prend tout de même le temps de saluer une dernière fois les habitants d'Onyria.
 ##### 11 - La résurrection
 
-> Le héros a réussi à traverser le seuil dans le sens inverse. Il est revenu dans le monde ordinaire. Il n’est plus le même. Il est transformé par toutes les épreuves.
+```
+Le héros a réussi à traverser le seuil dans le sens inverse. Il est revenu dans le monde ordinaire. Il n’est plus le même. Il est transformé par toutes les épreuves.
+```
 
+> Thalia réveillée plutôt que rester au lit, elle se lève et se dirige vers son PC. Silencieusement, elle applique à un conservatoire pour la formation Compositrice. Une fois fait, elle se sent libérée. Une notification la sort de son euphorie. Il s'agit d'une de ses amies proches qui l'invite à sortir. Ce coup-là, elle accepte et l'invite même à venir chez elle. Plus tard, on les observe passer un bon moment ensemble dans un appartement bien rangé avec différents objets représentant son aventure tout du long du jeu. De nouveau, une notification, elle est acceptée au conservatoire.
 ##### 12 - Le retour avec l'élixir
 
-> Le héros utilise l’élixir pour guérir son monde. Par la même occasion il donne un sens final à son voyage, sa quête.
+```
+Le héros utilise l’élixir pour guérir son monde. Par la même occasion il donne un sens final à son voyage, sa quête.
+```
+
+> ...`À voir`

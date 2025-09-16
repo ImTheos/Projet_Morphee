@@ -191,7 +191,7 @@ tags:
 
 - **Son antagoniste**
 
-> [Phobétor](Phobétor)
+> [Phobétor](Phobétor.md)
 
 - **Quel est leur lien ?**
 
