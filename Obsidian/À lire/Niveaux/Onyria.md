@@ -1,16 +1,17 @@
 ---
 tags:
   - Univers
+  - Onyria
 ---
 ### Contexte
 
 - Où se situe l’histoire ? 
 
-> Dans les rêves de [[Thalia]], un monde onirique peuplé d'entités habitant l'esprit de la jeune femme. Dans sa forme d'hermine, elle explore avec Morphée différents niveaux de ce monde appelé [Onyria](Onyria.md) représentant le [[Sommeil]] sous tous ses angles.
+> Dans les rêves de [[Thalia]], un monde onirique peuplé d'entités et décoré de paysages fantastiques. Sous sa forme d'hermine, elle explore en compagnie de [Morphée]() différents strates de ce monde appelé [Onyria](Onyria.md) représentant le Sommeil.
 
 - Qui sont les personnes qui habitent cet endroit ? 
 
-> Des personnages représentatifs des amis, de l'environnement et des souvenirs du [[Monde Réel]] se baladant en Onyria tout en tentant de survivre au nouveau régime strict instauré par [[Phobétor]]
+> Des personnages incarnant sa représentation de ses proches, de son environnement et de ses souvenirs du [[Monde Réel]]D'ordinaire, Ils vivent, se promènent et prospèrent en Onyria comme dans un petit et paisible paradis. 
 
 - Pourquoi y vivent-elles ? 
 
@@ -18,18 +19,18 @@ tags:
 
 - Comment est-ce qu’elles y vivent ? 
 
-> Les habitants d'Onyria possèdent leur routine défini par les traits de personnalité de leur alter ego de [l'autre monde](Monde Réel). Lorsque le [rêve](Onyria.md) de Thalia s'interrompt, leur existence, à leur tour, s'interrompt le temps d'une journée avant de reprendre convenablement le soir. Récemment, leur mode de vie a été bouleversé par la dictature du [nouveau "roi"](Phobétor.md). 
+> Les habitants d'Onyria possèdent leur routine définie par les traits de personnalité de la personne d'origine. Lorsque le [rêve](Onyria.md) de Thalia s'interrompt, leur existence, à leur tour, s'interrompt le temps d'une journée avant de reprendre le soir venu. Récemment, leur mode de vie a été troublé par la récente dictature du [nouveau "roi"](Phobétor.md).
 
-- Quels sont les obstacles auxquelles elles font face ? 
+- Quels sont les obstacles auxquels elles font face ? 
 
-> Comme dit précédemment, Phobétor a chamboulé le monde interne de Thalia. Cela affecte Onyria de différentes manières, l'apparition d'aberrations, la déformation des niveaux et un impact variable sur les habitants du rêve.
+> Comme dit précédemment, Phobétor a chamboulé le monde interne de Thalia. Cela affecte Onyria de différentes manières, l'apparition d'aberrations, la déformation des strates et un impact variable sur les habitants du rêve.
 
 - A quelle temporalité de ce monde sommes-nous ?
 
-> Tout le narratif se passe une année après l'[l'incident](Traumatisme.md), quelques mois après le début d'un train de vie particulièrement casanier et néfaste. Phobétor est bien installé sur son trône et les habitants ont commencés à s'habituer à sa présence, malgré eux. Morphée, quant à lui, est restreint par Phobétor dans/sous la forme d'une sphère.
+> Tout le narratif se passe une année après l'[incident](Traumatisme.md) et quelques mois après le début de son train de vie particulièrement casanier et néfaste. Tandis que Phobétor est bien installé sur son trône, les habitants ont commencé à s'habituer à sa présence, malgré eux. Morphée, quant à lui, est restreint par Phobétor dans/sous la forme d'une sphère.
 
 ---
 ### Thème
 
 > [!quote]
-> Le thème du jeu est le [[Sommeil]], ses causes comme ses conséquences. Par exemple, il est indiqué dès le début que le [Personnage Principale](Thalia.md) éprouve une [Insomnie](Traumatisme), signe indéniable de la descente de sa santé mentale.
+> Le thème du jeu est le Sommeil, ses causes comme ses conséquences. Par exemple, il est indiqué dès le début que le Personnage Principale éprouve une [Insomnie](Traumatisme), signe indéniable de la baisse de sa santé mentale.

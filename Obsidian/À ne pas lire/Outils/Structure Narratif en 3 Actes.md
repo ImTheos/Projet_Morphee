@@ -1,3 +1,7 @@
+---
+tags:
+  - Narration
+---
 #### ARC 1 : EXPOSITION
 
 ###### ACCROCHE (INCLUT LE JOUEUR)

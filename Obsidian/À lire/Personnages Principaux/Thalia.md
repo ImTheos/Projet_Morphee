@@ -1,6 +1,7 @@
 ---
 tags:
   - Personnages
+  - Réalité
 ---
 ![[Thalia_sketch.png]]
 
@@ -164,7 +165,6 @@ tags:
 > Des discussions, des conseils, des expériences de pensée... Les autres personnages d'Onyria ont la fonction d'orienter Thalia vers la bonne direction pour elle, à leur manière.
 
 > Les appels, les messages et les réseaux sociaux sont les derniers efforts de Thalia pour garder une interaction avec autrui.
-
 
 - **Relations familiales**
 
