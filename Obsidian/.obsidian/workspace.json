@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Onyria.md",
+                "file": "À lire/Boss/Ordre et Actes des Boss.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Onyria"
+              "title": "Ordre et Actes des Boss"
             }
           }
         ]
@@ -44,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorateur de fichiers"
             }
           },
           {
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Onyria.md",
+                "file": "À lire/Boss/Ordre et Actes des Boss.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Onyria"
+              "title": "Rétrolien pour Ordre et Actes des Boss"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Onyria.md",
+                "file": "Outils/Relation Thalia-Phobétor-Morphée.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Onyria"
+              "title": "Liens sortants de Relation Thalia-Phobétor-Morphée"
             }
           },
           {
@@ -133,7 +133,7 @@
                 "searchQuery": ""
               },
               "icon": "lucide-tags",
-              "title": "Tags"
+              "title": "Mots-clés"
             }
           },
           {
@@ -151,8 +151,7 @@
               "title": "Outline of Onyria"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
@@ -160,46 +159,58 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
+      "switcher:Ouvrir le sélecteur rapide": false,
+      "graph:Ouvrir la vue graphique": false,
+      "canvas:Créer une nouvelle toile": false,
+      "daily-notes:Ouvrir la note quotidienne": false,
+      "templates:Insérer le modèle": false,
+      "command-palette:Ouvrir la palette de commandes": false,
       "bases:Create new base": false
     }
   },
   "active": "f78eb1d188e6b39e",
   "lastOpenFiles": [
-    "Phobétor.md",
-    "Monde Réel.md",
-    "Traumatisme.md",
-    "Thalia.md",
-    "Relation.md",
-    "Need to Know.md",
-    "Morphée.md",
-    "Relation Thalia-Phobétor-Morphée.md",
-    "Onyria.md",
-    "Ennemis/X.md",
+    "À lire/Personnages Secondaires/Parents de Thalia.md",
+    "À lire/Personnages Principaux/Morphée.md",
+    "À lire/Personnages Principaux/Phobétor.md",
+    "À ne pas lire/Images/Morphee 1.png",
+    "À ne pas lire/Images/Morphee_splashdialogue8bit.png",
+    "Morphee.png",
+    "À ne pas lire/Outils/Schéma Narratif.md",
+    "À ne pas lire/Outils/Références.md",
+    "À ne pas lire/Outils/Liste des Tropes et Procédés Narratifs.md",
+    "À ne pas lire/Outils/Need to Know.md",
+    "À ne pas lire/Outils/Arc Narratif (Positif) de Thalia.md",
+    "À ne pas lire/Outils/Structure Narratif en 3 Actes.md",
+    "À ne pas lire/Outils/Voyage du Héros.md",
+    "À ne pas lire/Outils/Relation Thalia-Phobétor-Morphée.md",
+    "À lire/Traumatisme.md",
+    "À lire/Niveaux/Monde Réel.md",
+    "À lire/Niveaux/Souk.md",
+    "À lire/Boss/Ordre et Actes des Boss.md",
+    "À lire/Boss/Hygiène.md",
+    "À lire/Boss/Isolement.md",
+    "À lire/Boss/Anxiété.md",
+    "À lire/Personnages Principaux/Thalia.md",
+    "À lire/Niveaux/Final.md",
+    "À lire/Niveaux/Onyria.md",
+    "À lire/Niveaux/Théâtre.md",
+    "À lire/Niveaux/Désert.md",
+    "À lire/Niveaux/Metro.md",
+    "Insomnie.md",
+    "Sans titre",
+    "À ne pas lire",
+    "À lire",
+    "À lire/Boss",
+    "À ne pas lire/Images/Thalia_sketch.png",
+    "À ne pas lire/Images",
+    "À ne pas lire/Outils",
+    "À lire/Personnages Principaux",
+    "À lire/Personnages Secondaires",
     "826e40da9a7407aaf412655e4b412518.jpg",
     "Untitled",
     "Untitled 1",
-    "2025-09-10.md",
     "Untitled.canvas",
-    "Untitled.base",
-    "dd.md",
-    "Et.md",
-    "Niveaux",
-    "Ennemis.md",
-    "ennemis.md",
-    "Ennemis",
-    "Sans titre/Sans titre.md",
-    "lein 2.md",
-    "Bienvenue.md",
-    "Sans titre/Sans titre.base",
-    "Sans titre 1",
-    "créez un lien.md",
-    "2025-09-09.md",
     "Sans titre.canvas"
   ]
 }
