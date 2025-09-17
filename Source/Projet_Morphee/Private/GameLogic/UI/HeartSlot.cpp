@@ -3,15 +3,10 @@
 
 #include "GameLogic/UI/HeartSlot.h"
 
-void UHeartSlot::SetWhiteHeartVisibility(ESlateVisibility visibility) const
+void UHeartSlot::SetWhiteStarVisibility(ESlateVisibility visibility) const
 {
 	if (IsValid(whiteStar))
 	{
 		whiteStar->SetVisibility(visibility);
 	}
-}
-
-void UHeartSlot::HideWhiteHeart()
-{
-	SetWhiteHeartVisibility(ESlateVisibility::Hidden);
 }

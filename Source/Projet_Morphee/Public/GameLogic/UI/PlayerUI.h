@@ -17,7 +17,7 @@ class PROJET_MORPHEE_API UPlayerUI : public UUserWidget
 	
 public:
 	UFUNCTION(BlueprintCallable)
-	void UpdateHealthBar(int playerHealth);
+	void UpdateHealthBar(int playerHealth, bool animate = true);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UHealthBar* healthBar;

@@ -16,17 +16,17 @@ class PROJET_MORPHEE_API UHeartSlot : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	void SetWhiteHeartVisibility(ESlateVisibility visibility) const;
-
-	UFUNCTION()
-	void HideWhiteHeart();
+	void SetWhiteStarVisibility(ESlateVisibility visibility) const;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UImage* whiteStar;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UWidgetAnimation* whiteStarDissipateAnim;
+	UWidgetAnimation* dissipateAnim;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool hasPlayedAnimation = false;
+	UWidgetAnimation* resplenishAnim;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool visible = true;
 };
