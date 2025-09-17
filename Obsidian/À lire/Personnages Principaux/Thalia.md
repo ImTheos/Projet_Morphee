@@ -1,6 +1,7 @@
 ---
 tags:
   - Personnages
+  - Réalité
 ---
 ![[Thalia_sketch.png]]
 
@@ -165,7 +166,6 @@ tags:
 
 > Les appels, les messages et les réseaux sociaux sont les derniers efforts de Thalia pour garder une interaction avec autrui.
 
-
 - **Relations familiales**
 
 > Une relation dure pour la jeune femme, l'admiration candide a disparue, remplacée par une amertume due à la culpabilité de ne pas assez bien faire les choses. Elle s'auto-inflige ce ressentiment car de leur côté, les parents de Thalia ont toujours étés présents et en soutien pour elle.
@@ -191,7 +191,7 @@ tags:
 
 - **Son antagoniste**
 
-> [Phobétor](Phobétor)
+> [Phobétor](Phobétor.md)
 
 - **Quel est leur lien ?**
 
