@@ -58,6 +58,29 @@ FVector UDashAbility::CalculateDashTeleport(FVector actorLocation, FVector targe
 	return actorLocation;
 }
 
+FVector UDashAbility::CalculateDashEndPostTeleport(FVector actorLocation, FVector targetLocation, FVector postTeleportLocation)
+{
+	float remainingDistance = dashMaxDistance - FVector::DistXY(actorLocation, postTeleportLocation);
+
+	if (remainingDistance < capsuleRadius)
+	{
+		return postTeleportLocation;
+	}
+
+	int capsuleAmount = 1 + remainingDistance / capsuleRadius;
+	FVector dashDirection = (targetLocation - actorLocation).GetSafeNormal();
+	float test = dashDirection.Length();
+	
+	FVector initialPosition = postTeleportLocation;
+
+	for (int i = 0; i < capsuleAmount; i++)
+	{
+		
+	}
+
+	return FVector::Zero();
+}
+
 FVector UDashAbility::GetDashEndLocation(FVector actorLocation, FVector targetLocation)
 {
 	if (!Init())
@@ -72,10 +95,8 @@ FVector UDashAbility::GetDashEndLocation(FVector actorLocation, FVector targetLo
 	}
 
 	FVector dashTeleportLocation = CalculateDashTeleport(actorLocation, targetLocation);
-
 	
+	FVector endOfDashLocation = CalculateDashEndPostTeleport(actorLocation, targetLocation, dashTeleportLocation);
 	
-	//FVector endOfDashLocation = CalculateDashEndPostTeleport(dashTeleportLocation);
-	
-	return FVector::Zero();
+	return endOfDashLocation;
 }

@@ -21,6 +21,7 @@ class PROJET_MORPHEE_API UDashAbility : public UGameplayAbility
 	float capsuleHalfHeight;
 
 public:
+	FVector CalculateDashEndPostTeleport(FVector actorLocation, FVector targetLocation, FVector postTeleportLocation);
 	UFUNCTION(BlueprintCallable)
 	FVector GetDashEndLocation(FVector actorLocation, FVector targetLocation);
 
