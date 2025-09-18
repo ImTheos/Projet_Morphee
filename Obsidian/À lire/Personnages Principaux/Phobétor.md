@@ -14,7 +14,11 @@ tags:
 > Dans la [[Relation Thalia-Phobétor-Morphée]], Morphée représente une partie de Thalia tout comme Morphée, plus précisément le Ça. Il est l'essence de sa réflexion humaine, ses pulsions, ses pensées inhérentes et héritées. Il n'a aucun frein et exige d'être écouté car il est un besoin primordial.
 #### Son comportement
 
-> `À voir avec les Art et Léo`
+> La logique implacable, selon lui, par laquelle il justifie 
+
+==Ou==
+
+> ...
 #### Son ton
 
 > `À voir avec les Art et Théo`

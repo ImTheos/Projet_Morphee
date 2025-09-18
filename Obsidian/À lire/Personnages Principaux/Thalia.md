@@ -57,16 +57,16 @@ tags:
 
 - **Vie d'avant**
 
-> Enfant unique, ses parents ont toujours étés en soutien, dans le domaine/le monde de la musique. Elle a donc toujours eu un lien, une connection et une éducation lié à la musique. Son instrument phare est le piano dont elle a apprit les rudiments très tôt dans un conservatoire réputé et très strict. Précisément, un prof imposant avec une vision très renfermée de la musique, avec lequel elle a eu des broutilles.
-> Son enfance s'est déroulé à la capitale en compagnie de ses amis de tout bord où elle a pu expérimenter, vivre des drames et des joies. Tout cela se retrouvant dans ses rêves... 
+> Enfant unique, ses parents ont toujours été en soutien, dans le domaine/le monde de la musique. Elle a donc toujours eu un lien, une connexion et une éducation liée à la musique. Son instrument phare est le piano dont elle a appris les rudiments très tôt dans un conservatoire réputé et très strict. Précisément, un professeur imposant avec une vision très renfermée de la musique, avec lequel elle a eu des ennuis.
+> Son enfance s'est déroulée à la capitale en compagnie de ses amis de tout bord où elle a pu expérimenter, vivre des drames et des joies. Tout cela se retrouvant dans ses rêves...
 
 - **Expérience transformatif**
 
-> Traumatisme indélibile, crytpique au début du jeu, il se révèle morceau par morceau au contact des personnages, niveaux, boss ect... jusqu'à être révélé tel un puzzle à la fin du jeu.
+> Traumatisme indélébile, cryptique au début du jeu, il se révèle morceau par morceau au contact des personnages, niveaux, boss ect... jusqu'à être révélé tel un puzzle à la fin du jeu.
 
 - **Situation actuelle**
 
-> Endommagée sur le plan psychologique, elle s'est isolée, se sent dépossédée de la musique hormis cela elle se trouve dans une situation finançière acceptable avec des parents et des amis toujours présents pour elle. L'insomnie rythme sa vie jusqu'à l'empêcher de profiter du moment présent, de sorties entre amis ou des simples plaisirs du quotidien. Son appartement relativement insalubre et sale, qu'elle n'ose pas le ranger. Aucun médicament ou traitement. Pas de suivi.
+> Endommagée sur le plan psychologique, elle s'est isolée, se sent dépossédée de la musique hormis cela elle se trouve dans une situation financière acceptable avec des parents et des amis toujours présents pour elle. L'insomnie rythme sa vie jusqu'à l'empêcher de profiter du moment présent, de sorties entre amis ou des simples plaisirs du quotidien. Son appartement relativement insalubre et sale, qu'elle n'ose pas le ranger. Aucun médicament ou traitement. Pas de suivi.
 
 ---
 
@@ -156,9 +156,9 @@ tags:
 
 - **Ancrage culturel / social : ce qui rattache le personnage à son monde**
 
-> Onyria correspond au propre inconscient de Thalia. Elle s'y rend tous les soirs en dormant.
+> Onyria correspond au propre inconscient de Thalia. Elle s'y rend tous les soirs en s'endormant.
 
-> Musicienne, avec un début de réputation, l'appréciation de gens pour elle n'avait d'égal que sa passion pour la musique. Malheureusement, c'est du passé, ne lui restant que peu de choses auxquelles se raccrocher.
+> Musicienne, avec un début de réputation, l'appréciation des gens pour elle n'avait d'égal que sa passion pour la musique. Malheureusement, c'est du passé, ne lui restant que peu de choses auxquelles se raccrocher.
 
 - **Interactions avec d’autres personnages**
 
@@ -168,11 +168,11 @@ tags:
 
 - **Relations familiales**
 
-> Une relation dure pour la jeune femme, l'admiration candide a disparue, remplacée par une amertume due à la culpabilité de ne pas assez bien faire les choses. Elle s'auto-inflige ce ressentiment car de leur côté, les parents de Thalia ont toujours étés présents et en soutien pour elle.
+> Une relation dure pour la jeune femme, l'admiration candide a disparu, remplacée par une amertume due à la culpabilité de ne pas assez bien faire les choses. Elle s'auto-inflige ce ressentiment car de leur côté, les parents de Thalia ont toujours été présents et en soutien pour elle.
 
 - **Relations amicales**
 
-> Des amitiés sincères, purs et sans solennité. Iels ont toujours étés présents, de manière similaire à ses parents, pour le soutenir dans son ascension vers la représentation musicale.
+> Des amitiés sincères, pures et sans solennité. Iels ont toujours été présents, de manière similaire à ses parents, pour la soutenir dans son ascension vers la représentation musicale.
 
 - **Relations amoureuses**
 
@@ -187,7 +187,7 @@ tags:
 
 > Ce qu'elle veut : Battre Phobétor pour pouvoir reprendre la représentation musicale.
 > 
-> Ce dont elle a besoin : Accepter Phobétor et résoudre le conflit entre lui et Morphée en plus d'apprendre à s'écouter elle-même pour faire le choix de se mettre à la composition.
+> Ce dont elle a besoin : Accepter Phobétor et résoudre le conflit entre lui et Morphée puis apprendre à s'écouter elle-même pour enfin se admettre qu'elle sera plus heureuse dans la composition.
 
 - **Son antagoniste**
 
