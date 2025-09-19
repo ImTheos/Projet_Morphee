@@ -53,5 +53,26 @@ tags:
 ```
 # Liste des NtK de Phobétor
 
-1. ...
+1. Son inspiration est la divinité des rêves chargée d'apparaître sous la forme d'animaux et de bêtes dans les rêves des mortels.
+   
+2. Il est l'une des deux entités maîtresses d'Onyria
+   
+3. Comparé à Morphée, il a longtemps été passif dans son influence sur Thalia
+   
+4. Il représente les besoins primaires et parfois enfouis de Thalia. Souvent réprimé pour permettre à Thalia de réussir dans la musique
+   
+5. Il se prétend être le sauveur qu'à besoin Thalia pour sortir de sa situation
+
+6. Comparé à Morphée, il n'est pas en conflit direct
+   
+7. Il confronte réguliérement Thalia 
+   
+8. Sa pensée est dogmatique
+   
+9. Les autres boss ne sont pas à ses ordres mais retiennent l'avancée de Morphée et Thalia
+
+10. Il n'est pas la source direct de la corruption mais s'en sert à son avantage
+
+11. Pour lui, il peut se permettre de mettre de côté les sentiments de Thalia pour son futur
+
 ```

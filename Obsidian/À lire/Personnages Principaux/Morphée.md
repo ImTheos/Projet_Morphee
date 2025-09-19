@@ -15,7 +15,7 @@ tags:
 > Dans la [[Relation Thalia-Phobétor-Morphée]], Morphée représente une partie de Thalia tout comme Phobétor, plus précisément le Surmoi. Il est l'inconscient servant de liant social, développé par l'inculcation des normes sociales et des conventions culturelles.
 #### Son comportement
 
-> Morphée est une divinité cryptique avec une image de soi arrogante. Omniscient dans le monde des rêves, il en devient un ignare pour ce qui est du [[Monde Réel]]. Parfois impétueux, parfois sincère, les interactions entre Thalia et lui sont variés et s'améliorent au fil du temps vers une considération de l'un pour l'autre. D'un côté, la culpabilité le ronge depuis les derniers incidents, il s'en veut d'avoir conduit Thalia vers son burnout et de ne pas avoir pu se révéler utile lorsqu'elle en avait besoin. 
+> Morphée est une divinité cryptique avec une image de soi arrogante. Omniscient dans le monde des rêves, il en devient un ignare pour ce qui est du [[Monde Réel]]. Parfois impétueux, parfois sincère, les interactions entre Thalia et lui sont variées et s'améliorent au fil du temps vers une considération de l'un pour l'autre. D'un autre côté, la culpabilité le ronge depuis les derniers incidents, il s'en veut d'avoir conduit Thalia vers son burnout et de ne pas avoir pu se révéler utile lorsqu'elle en avait besoin. 
 #### Son ton
 
 > `À voir avec Théo`
