@@ -4,6 +4,26 @@
     "type": "split",
     "children": [
       {
+        "id": "4376c55cd4af2dba",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ad5b6dc006ed5359",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "À lire/Personnages Principaux/Phobétor.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Phobétor"
+            }
+          }
+        ]
+      },
+      {
         "id": "bfe0dcc85a4e30c1",
         "type": "tabs",
         "children": [
@@ -13,12 +33,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "À ne pas lire/Outils/Relation Thalia-Phobétor-Morphée.md",
+                "file": "À ne pas lire/Outils/Need to Know.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Relation Thalia-Phobétor-Morphée"
+              "title": "Need to Know"
             }
           }
         ]
@@ -94,7 +114,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "À ne pas lire/Outils/Relation Thalia-Phobétor-Morphée.md",
+                "file": "À ne pas lire/Outils/Need to Know.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +124,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Rétrolien pour Relation Thalia-Phobétor-Morphée"
+              "title": "Rétrolien pour Need to Know"
             }
           },
           {
@@ -155,7 +175,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -170,34 +191,33 @@
   },
   "active": "f78eb1d188e6b39e",
   "lastOpenFiles": [
-    "À ne pas lire/Outils/Arc Narratif (Positif) de Thalia.md",
-    "À ne pas lire/Outils/Need to Know.md",
-    "À ne pas lire/Outils/Liste des Tropes et Procédés Narratifs.md",
-    "À ne pas lire/Outils/Voyage du Héros.md",
     "À lire/Personnages Principaux/Phobétor.md",
-    "À lire/Personnages Principaux/Morphée.md",
-    "À lire/Niveaux/Metro.md",
-    "À lire/Niveaux/Onyria.md",
-    "Sommeil.md",
-    "À lire/Boss/Ordre et Actes des Boss.md",
-    "À ne pas lire/Outils/Structure Narratif en 3 Actes.md",
-    "À ne pas lire/Outils/Références.md",
-    "À ne pas lire/Outils/Relation Thalia-Phobétor-Morphée.md",
-    "À lire/Traumatisme.md",
-    "À lire/Personnages Secondaires/Parents de Thalia.md",
     "À lire/Personnages Principaux/Thalia.md",
+    "À ne pas lire/Outils/Need to Know.md",
+    "À ne pas lire/Outils/Easter Eggs.md",
+    "À ne pas lire/Images/Thalia_sketch.png",
+    "À ne pas lire/Images/Morphee 1.png",
+    "À lire/Personnages Secondaires/Parents de Thalia.md",
+    "À lire/Traumatisme.md",
+    "À lire/Personnages Principaux/Morphée.md",
+    "À lire/Niveaux/Souk.md",
+    "À lire/Niveaux/Metro.md",
     "À lire/Niveaux/Désert.md",
     "À lire/Niveaux/Forêt.md",
     "À lire/Niveaux/Final.md",
     "À lire/Niveaux/Théâtre.md",
     "À lire/Niveaux/Monde Réel.md",
+    "À lire/Niveaux/Onyria.md",
     "À lire/Boss/Anxiété.md",
     "À lire/Boss/Hygiène.md",
     "À lire/Boss/Isolement.md",
-    "À lire/Niveaux/Souk.md",
-    "À ne pas lire/Images/Morphee 1.png",
-    "À ne pas lire/Images/Thalia_sketch.png",
-    "À ne pas lire/Outils/Schéma Narratif.md",
+    "À lire/Boss/Ordre et Actes des Boss.md",
+    "À ne pas lire/Outils/Structure Narratif en 3 Actes.md",
+    "À ne pas lire/Outils/Références.md",
+    "À ne pas lire/Outils/Relation Thalia-Phobétor-Morphée.md",
+    "À ne pas lire/Outils/Arc Narratif (Positif) de Thalia.md",
+    "À ne pas lire/Outils/Liste des Tropes et Procédés Narratifs.md",
+    "À ne pas lire/Outils/Voyage du Héros.md",
     "À ne pas lire/Images/Morphee_splashdialogue8bit.png",
     "Morphee.png",
     "Sans titre",

@@ -14,7 +14,15 @@ tags:
 > Dans la [[Relation Thalia-Phobétor-Morphée]], Morphée représente une partie de Thalia tout comme Morphée, plus précisément le Ça. Il est l'essence de sa réflexion humaine, ses pulsions, ses pensées inhérentes et héritées. Il n'a aucun frein et exige d'être écouté car il est un besoin primordial.
 #### Son comportement
 
-> `À voir avec les Art et Léo`
+> Au-dessus de tout, **dogmatique**, Phobétor représente un mur infranchissable en Onyria, face auquel personne n'a pu s'opposer. Les critiques et sentiments de ceux qui tentent de l'arrêter le rendent indifférent. Tout le reste est dérisoire hormis son objectif : "sauver" Thalia. 
+> 
+> Son mode de fonctionnement consiste à confronter Thalia pour qu'elle réalise ses failles et erreurs, qu'elle se reprenne en main et ainsi évite qu'une dizaine d'années de vie ne soient gâchées pour une vie qu'il juge indigne d'elle. 
+> 
+> Phobétor a l'habitude immuable de penser que Thalia lorsque mise face à ses problèmes et faiblesses - même de force - surpassera ces derniers pour finalement atteindre ce qu'elle veut. 
+> 
+> Dans son équation, ce qu'elle pense ou ressent est mis de côté. Il considère son objectif plus important que l'animosité qu'elle peut éprouver, sur le moment. De plus, il la perçoit incapable de réfléchir à long terme aux conséquences et aux bénéfices de sa mission (de sauvetage). 
+> 
+> De son point de vue, si elle se met en travers de sa route, ce n'est qu'à cause de l'ignorance contagieuse de Morphée. Pour lui, les autres sont incapables de comprendre la réalité des choses, entraînés dans la mauvaise voie, il ne leur en veut pas pour autant. Il agit comme un chevalier blanc, inflexible et innocent ; il est sourd aux réels besoins de la personne qu'il tente de sauver. 
 #### Son ton
 
 > `À voir avec les Art et Théo`
