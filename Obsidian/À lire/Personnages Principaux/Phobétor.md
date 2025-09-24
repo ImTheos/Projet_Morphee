@@ -26,6 +26,9 @@ tags:
 #### Son ton
 
 > `À voir avec les Art et Théo`
+#### Bruit signature lors des dialogues
+
+> `En parler avec Hector`
 #### Exemples de dialogue
 
 > ...
