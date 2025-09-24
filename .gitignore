@@ -77,3 +77,7 @@ DerivedDataCache/*
 # j espere ca marche parcque jpp
 Windows
 Content/GameLogic/Camera/BP_Camera.uasset
+Obsidian/.obsidian/app.json
+Obsidian/.obsidian/appearance.json
+Obsidian/.obsidian/core-plugins.json
+Obsidian/.obsidian/workspace.json
