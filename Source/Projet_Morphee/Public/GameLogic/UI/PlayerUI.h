@@ -7,6 +7,7 @@
 #include "Blueprint/UserWidget.h"
 #include "PlayerUI.generated.h"
 
+class UDialogUI;
 /**
  * 
  */
@@ -14,6 +15,11 @@ UCLASS()
 class PROJET_MORPHEE_API UPlayerUI : public UUserWidget
 {
 	GENERATED_BODY()
+
+	UPROPERTY()
+	UDialogUI* dialogUI;
+
+	void InitDialogUI();
 	
 public:
 	UFUNCTION(BlueprintCallable)
@@ -21,4 +27,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UHealthBar* healthBar;
+	
+	void SetDialogUIVisibility(ESlateVisibility visibility);
 };
