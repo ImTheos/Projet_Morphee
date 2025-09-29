@@ -4,10 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
+#include "MyCPPCharacter.h"
 #include "Nodes/FlowNode.h"
 #include "DialogBase.generated.h"
 
-class AMyCPPCharacter;
 /**
  * 
  */

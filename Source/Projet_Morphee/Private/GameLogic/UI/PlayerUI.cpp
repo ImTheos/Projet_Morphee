@@ -100,3 +100,19 @@ void UPlayerUI::SetDialogUIVisibility(ESlateVisibility visibility)
 
 	dialogUI->SetVisibility(visibility);
 }
+
+void UPlayerUI::SetDialogText(const FText& dialogText)
+{
+	if (!dialogUI)
+	{
+		InitDialogUI();
+	}
+
+	if (!dialogUI)
+	{
+		UE_LOG(LogTemp, Error, TEXT("PlayerUI : no dialog UI available"));
+		return;
+	}
+
+	dialogUI->SetText(dialogText);
+}

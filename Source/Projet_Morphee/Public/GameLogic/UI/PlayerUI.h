@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "HealthBar.h"
 #include "Blueprint/UserWidget.h"
+#include "FlowGraph/Dialog/DisplayDialog.h"
 #include "PlayerUI.generated.h"
 
 class UDialogUI;
@@ -29,4 +30,5 @@ public:
 	UHealthBar* healthBar;
 	
 	void SetDialogUIVisibility(ESlateVisibility visibility);
+	void SetDialogText(const FText& dialogText);
 };
