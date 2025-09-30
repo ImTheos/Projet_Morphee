@@ -87,12 +87,12 @@ void UPlayerUI::UpdateHealthBar(int playerHealth, bool animate)
 
 void UPlayerUI::SetDialogUIVisibility(ESlateVisibility visibility)
 {
-	if (!dialogUI)
+	if (!IsValid(dialogUI))
 	{
 		InitDialogUI();
 	}
 
-	if (!dialogUI)
+	if (!IsValid(dialogUI))
 	{
 		UE_LOG(LogTemp, Error, TEXT("PlayerUI : no dialog UI available"));
 		return;
@@ -101,7 +101,7 @@ void UPlayerUI::SetDialogUIVisibility(ESlateVisibility visibility)
 	dialogUI->SetVisibility(visibility);
 }
 
-void UPlayerUI::SetDialogText(const FText& dialogText)
+void UPlayerUI::SetDialogText(const FText& dialogText, const FText& dialogTitle)
 {
 	if (!dialogUI)
 	{
@@ -114,5 +114,26 @@ void UPlayerUI::SetDialogText(const FText& dialogText)
 		return;
 	}
 
-	dialogUI->SetText(dialogText);
+	dialogUI->SetText(dialogText, dialogTitle);
+}
+
+void UPlayerUI::SetDialogImages(UTexture2D* leftImage, UTexture2D* rightImage)
+{
+	if (!dialogUI)
+	{
+		InitDialogUI();
+	}
+
+	if (!dialogUI)
+	{
+		UE_LOG(LogTemp, Error, TEXT("PlayerUI : no dialog UI available"));
+		return;
+	}
+
+	dialogUI->setImages(leftImage, rightImage);
+}
+
+void UPlayerUI::BindButtonToEnd(UDisplayDialog* dialogToEnd)
+{
+	dialogUI->BindButtonToEnd(dialogToEnd);
 }

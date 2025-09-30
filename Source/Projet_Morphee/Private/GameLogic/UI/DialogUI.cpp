@@ -3,36 +3,33 @@
 
 #include "GameLogic/UI/DialogUI.h"
 
-#include "Blueprint/WidgetTree.h"
-
-void UDialogUI::InitTextBlock()
+void UDialogUI::SetText(const FText& dialogText, const FText& dialogTitle)
 {
-	TArray<UWidget*> widgetArray;
-	WidgetTree->GetAllWidgets(widgetArray);
-
-	// Loop through all UI widgets to find the dialog UI
-	for (UWidget* widget : widgetArray)
+	if (!dialogTextBlock || !dialogCharacterName)
 	{
-		if (URichTextBlock* tmpDialogTextBlock = Cast<URichTextBlock>(widget))
-		{
-			dialogTextBlock = tmpDialogTextBlock;
-			break;
-		}
-	}
-}
-
-void UDialogUI::SetText(const FText& dialogText)
-{
-	if (!dialogTextBlock)
-	{
-		InitTextBlock();
-	}
-
-	if (!dialogTextBlock)
-	{
-		UE_LOG(LogTemp, Error, TEXT("PlayerUI : no dialog text block available"));
+		UE_LOG(LogTemp, Error, TEXT("DialogUI : invalid dialog textblock"));
 		return;
 	}
 
 	dialogTextBlock->SetText(dialogText);
+	dialogCharacterName->SetText(dialogTitle);
+}
+
+void UDialogUI::setImages(UTexture2D* leftImageTexture, UTexture2D* rightImageTexture)
+{
+	if (!leftImage || !rightImage)
+	{
+		UE_LOG(LogTemp, Error, TEXT("DialogUI : invalid dialog image"));
+		return;
+	}
+
+	leftImage->SetBrushFromTexture(leftImageTexture);
+	rightImage->SetBrushFromTexture(rightImageTexture);
+}
+
+void UDialogUI::BindButtonToEnd(UDisplayDialog* dialogToEnd)
+{
+	FScriptDelegate endDelegate;
+	endDelegate.BindUFunction(dialogToEnd, "TriggerEnd");
+	skipButton->OnClicked.Add(endDelegate);
 }

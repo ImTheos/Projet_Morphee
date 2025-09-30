@@ -6,7 +6,10 @@
 #include "GameplayTagContainer.h"
 #include "MyCPPCharacter.h"
 #include "Nodes/FlowNode.h"
+#include "NativeGameplayTags.h"
 #include "DialogBase.generated.h"
+
+UE_DECLARE_GAMEPLAY_TAG_EXTERN(DefaultPlayerTag);
 
 /**
  * 
@@ -24,5 +27,5 @@ protected:
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sequence")
-	FGameplayTag playerTag;
+	FGameplayTag playerTag = DefaultPlayerTag;
 };

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/Image.h"
 #include "FlowGraph/Dialog/DialogBase.h"
 #include "DisplayDialog.generated.h"
 
@@ -18,5 +19,17 @@ class PROJET_MORPHEE_API UDisplayDialog : public UDialogBase
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialog")
+	FText dialogTitle;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialog")
 	FText dialogText;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialog")
+	UTexture2D* leftImage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialog")
+	UTexture2D* rightImage;
+
+	UFUNCTION()
+	void TriggerEnd();
 };

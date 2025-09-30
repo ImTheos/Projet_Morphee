@@ -19,12 +19,17 @@ void UDisplayDialog::ExecuteInput(const FName& PinName)
 		}
 	}
 
-	// Change dialog text
-	playerCharacter->playerUIWidget->SetDialogText(dialogText);
+	// Change dialog text and character name
+	playerCharacter->playerUIWidget->SetDialogText(dialogText, dialogTitle);
 
-	// TODO Change first icon
+	// change characters icons
+	playerCharacter->playerUIWidget->SetDialogImages(leftImage, rightImage);
 
-	// TODO Change second icon
-	
+	playerCharacter->playerUIWidget->BindButtonToEnd(this);
+}
+
+void UDisplayDialog::TriggerEnd()
+{
+	UE_LOG(LogTemp, Display, TEXT("Trigger End reached"));
 	TriggerFirstOutput(true);
 }

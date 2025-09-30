@@ -6,6 +6,8 @@
 #include "FlowSubsystem.h"
 #include "MyCPPCharacter.h"
 
+UE_DEFINE_GAMEPLAY_TAG(DefaultPlayerTag, "Flow.Identify.MyPlayer");
+
 void UDialogBase::InitPlayerCharacter()
 {
 	const TSet<TWeakObjectPtr<AMyCPPCharacter>> playerCharacterSet = GetFlowSubsystem()->GetActors<AMyCPPCharacter>(playerTag);

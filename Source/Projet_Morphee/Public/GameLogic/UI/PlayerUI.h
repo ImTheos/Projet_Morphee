@@ -19,7 +19,6 @@ class PROJET_MORPHEE_API UPlayerUI : public UUserWidget
 
 	UPROPERTY()
 	UDialogUI* dialogUI;
-
 	void InitDialogUI();
 	
 public:
@@ -30,5 +29,9 @@ public:
 	UHealthBar* healthBar;
 	
 	void SetDialogUIVisibility(ESlateVisibility visibility);
-	void SetDialogText(const FText& dialogText);
+	
+	void SetDialogText(const FText& dialogText, const FText& dialogTitle);
+	void SetDialogImages(UTexture2D* leftImage, UTexture2D* rightImage);
+
+	void BindButtonToEnd(UDisplayDialog* dialogToEnd);
 };
