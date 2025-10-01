@@ -45,7 +45,14 @@
   "switcher:open": [],
   "workspace:edit-file-title": [],
   "editor:open-search-replace": [],
-  "editor:open-search": [],
+  "editor:open-search": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "F"
+    }
+  ],
   "global-search:open": [],
   "editor:toggle-bold": [
     {

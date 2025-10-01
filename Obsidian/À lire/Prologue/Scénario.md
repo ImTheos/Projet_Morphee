@@ -9,4 +9,19 @@
 
 	 Au réveil, la jeune femme prend la forme d'une hermine au pelage orange. Mi-enjouée mi-paniquée, Thalia s'accoutume rapidement à son nouveau corps. La fille se décide à emprunter un chemin qui distingue du reste de l'île sur laquelle elle se trouve. Une ile composée de cristaux, seule source de lumière du lieu, et de surcroît entourée d'un océan reflétant pleinement la lumière comme un miroir. Pendant qu'elle longe le sentier, les alentours tendent vers un environnement plus sombre. Elle est inquiète. L'idée de faire demi-tour s'empare d'elle. Néanmoins, elle brave sa crainte et poursuit sa route.
 
-	Le chemin débouche sur une cour décorée de part et d'autre, dans laquelle des statues inquiétantes semblent s'articuler autour d'un étrange artéfact. L'artéfact se trouve être Morphée, une sphère de laquelle émane une flamme bleutée. Thalia, motivée par la curiosité, pénètre dans la cour. Son arrivée transforme soudainement les statues en monstres qui se ruent sur elle. Instinctivement, Thalia se précipite vers la sphère. À l'instant où sa main effleure Morphée, tous les ennemis sont balayés par une explosion magique. Surprenamment, l'attaque ne blesse pas la protagoniste. Avant qu'elle ne puisse le confondre avec un ennemi, Morphée la rassure lui certifiant être une entité pacifiste. Sans la laisser parler, il la remercie pour son aide et assure pouvoir continuer seul. Et sans explication, Thalia est renvoyée dans le monde réel.
+	Le chemin débouche sur une cour décorée de part et d'autre, dans laquelle des statues inquiétantes semblent s'articuler autour d'un étrange artéfact. L'artéfact se trouve être Morphée, une sphère de laquelle émane une flamme bleutée. Thalia, motivée par la curiosité, pénètre dans la cour. Son arrivée transforme soudainement les statues en monstres qui se ruent sur elle. Instinctivement, Thalia se précipite vers la sphère. À l'instant où sa main effleure Morphée, tous les ennemis sont balayés par une explosion magique. Surprenamment, l'attaque ne blesse pas la protagoniste. Avant qu'elle ne puisse le confondre avec un ennemi, Morphée la rassure lui certifiant être une entité pacifique. Sans la laisser parler, il la remercie pour son aide et assure pouvoir continuer seul. Et sans explication, Thalia est renvoyée dans le monde réel.
+
+	Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroine surmonte son apathie et sort du lit. Les corvées qui l'attendent dissipent rapidement ses ruminations au sujet de son rêve. En se baladant dans son appartement, Thalia s'efforce de compléter ces tâches de la journée. Cependant, à chaque tentative de sa part, même avec sa bonne volonté, un mur invisible(?) semble l'empêcher de les réaliser. Sortir les poubelles, la vaisselle, répondre à ses mails, finir tel dossier, nettoyer son bureau. Le schéma(?) s'est répété toute la journée et le soir venu, rien n'a été fait.
+
+> [!Success] Comment traduire en jeu le paragraphe précédent ?
+> Une multitude d'objets interactifs seront parsemés au sein de l'appartement de Thalia, certains en plusieurs instances (ex. sac**s** poubelle**s**). 
+> 
+> Chaque interaction sera suivie d'une boîte de dialogue de la part de Thalia décrivant l'objet, son lien avec, ce qu'il représente ou sa fonction. Suivie ensuite par une description et/ou dialogue partageant au joueur l'impossibilité pour Thalia de s'occuper de, se débarrasser de ou de nettoyer l'objet en question.
+
+	Thalia termine la journée avec amertume. Sur son lit, elle expose son épuisement face à sa situation à la peluche d'hermine; sa seule amie contre l'insomnie. Brièvement, elle repense à ce rêve où elle incarnait une hermine et la joie(?) qu'elle a pu ressentir durant. L'espoir de retourner en Onyria lui esquisse un sourire, avant qu'elle se rende compte de l'heure qu'il est. Tard en l'occurrence. Toutefois, l'envie de se perdre sur les réseaux sociaux l'emporte sur la fatigue et la rationalité. Mais le sommeil la rattrape et après un moment, elle s'endort.
+
+> [!Abstract] Animation ? Cinématique ? Séquence ?
+> Réfléchir à comment réaliser cette partie, faute de quoi, elle sera retravaillée. 
+
+
+
