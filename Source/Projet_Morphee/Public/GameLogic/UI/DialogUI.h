@@ -11,6 +11,17 @@
 #include "FlowGraph/Dialog/DisplayDialog.h"
 #include "DialogUI.generated.h"
 
+USTRUCT()
+struct FRichTextTag
+{
+	GENERATED_BODY()
+
+	FString tagName;
+
+	int beginIndex;
+	int endIndex;
+};
+
 /**
  * 
  */
@@ -19,9 +30,16 @@ class PROJET_MORPHEE_API UDialogUI : public UUserWidget
 {
 	GENERATED_BODY()
 	
+	FString parseRichText(const FText& text, TArray<FRichTextTag>& tagArray);
+	FString applyTagsToString(const FString& baseString, TArray<FRichTextTag>& tagArray);
+
+	void animateDialog(const FText& dialogText, const float delaySeconds);
+
+	
 public:
 	void SetText(const FText& dialogText, const FText& dialogTitle);
 	void setImages(UTexture2D* leftImageTexture, UTexture2D* rightImageTexture);
+	
 	void BindButtonToEnd(UDisplayDialog* dialogToEnd);
 
 	UPROPERTY(meta = (BindWidget))
