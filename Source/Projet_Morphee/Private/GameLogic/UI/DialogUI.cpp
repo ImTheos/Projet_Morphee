@@ -5,35 +5,35 @@
 
 FString UDialogUI::parseRichText(const FText& text, TArray<FRichTextTag>& tagArray)
 {
-	FString resultString;
+	FString processedText;
 
 	FRegexPattern regexPattern(TEXT(R"(([^<]+)|<([^>]+)>(.*?)</>)"));
 
 	FRegexMatcher regexMatcher(regexPattern, text.ToString());
 
-	int charCounter = 0;
+	int processedTextLength = 0;
 
 	while (regexMatcher.FindNext())
 	{
-		FString captureGroup1 = regexMatcher.GetCaptureGroup(1); // regular text
-		FString captureGroup2 = regexMatcher.GetCaptureGroup(2); // tag name
-		FString captureGroup3 = regexMatcher.GetCaptureGroup(3); // text inside tag
-
-		resultString += captureGroup1 + captureGroup3;
+		FString regularText = regexMatcher.GetCaptureGroup(1); // regular text
+		FString tagName = regexMatcher.GetCaptureGroup(2); // tag name
+		FString taggedText = regexMatcher.GetCaptureGroup(3); // text inside tag
 		
-		if (!captureGroup2.IsEmpty() && !captureGroup3.IsEmpty())
+		if (!tagName.IsEmpty() && !taggedText.IsEmpty())
 		{
-			FRichTextTag newTag = FRichTextTag(	captureGroup2,
-												charCounter + captureGroup1.Len(),
-												charCounter + captureGroup1.Len() + captureGroup3.Len());
+			FRichTextTag newTag = FRichTextTag(	tagName,
+												processedText.Len() + regularText.Len(),
+												processedText.Len() + regularText.Len() + taggedText.Len());
 
 			tagArray.Add(newTag);
 		}
+		
+		processedText += regularText + taggedText;
 
-		charCounter += captureGroup1.Len() + captureGroup3.Len();
+		processedTextLength += regularText.Len() + taggedText.Len();
 	}
 	
-	return resultString;
+	return processedText;
 }
 
 FString UDialogUI::applyTagsToString(const FString& baseString, TArray<FRichTextTag>& tagArray)
@@ -41,19 +41,28 @@ FString UDialogUI::applyTagsToString(const FString& baseString, TArray<FRichText
 	FString resultString;
 	int tagIndex = 0;
 
+	bool openTag = false;
+
 	for (int i = 0; i < baseString.Len(); i++)
 	{
 		if (tagIndex < tagArray.Num() && i == tagArray[tagIndex].beginIndex)
 		{
 			resultString += "<" + tagArray[tagIndex].tagName + ">";
+			openTag = true;
 		}
 		if (tagIndex < tagArray.Num() && i == tagArray[tagIndex].endIndex)
 		{
 			resultString += "</>";
 			tagIndex++;
+			openTag = false;
 		}
 
 		resultString += baseString[i];
+	}
+
+	if (openTag)
+	{
+		resultString += "</>";
 	}
 
 	return resultString;
@@ -63,22 +72,31 @@ void UDialogUI::animateDialog(const FText& dialogText, const float delaySeconds)
 {
 	auto tagArray = TArray<FRichTextTag>();
 
-	FString parsedString = parseRichText(dialogText, tagArray);
-	
-	for (int i = parsedString.Len() - 1; i >= 0; i++)
-	{
-		FString choppedRichString = applyTagsToString(parsedString.RightChop(i), tagArray);
+	FString parsedDialogString = parseRichText(dialogText, tagArray);
 
-		FTimerHandle timerHandle;
-		// GetWorld()->GetTimerManager().SetTimer(timerHandle, [parsedString, tagArray]()
-		// {
-		// 	// faire un appel récursif
-		// });
-		dialogTextBlock->SetText(FText::FromString(choppedRichString));
-	}
+	displayPartialDialog(parsedDialogString, tagArray, delaySeconds, 0);
 }
 
-void UDialogUI::SetText(const FText& dialogText, const FText& dialogTitle)
+void UDialogUI::displayPartialDialog(const FString& parsedDialogString, TArray<FRichTextTag> tagArray, const float delaySeconds, int displayedCharactersAmount)
+{
+	if (displayedCharactersAmount > parsedDialogString.Len())
+	{
+		skipButtonDelegate.Broadcast();
+		return;
+	}
+
+	FString choppedRichString = applyTagsToString(parsedDialogString.LeftChop(parsedDialogString.Len() - displayedCharactersAmount), tagArray);
+
+	dialogTextBlock->SetText(FText::FromString(choppedRichString));
+
+	FTimerHandle timerHandle;
+	GetWorld()->GetTimerManager().SetTimer(timerHandle, [this, parsedDialogString, tagArray, delaySeconds, displayedCharactersAmount]()
+	{
+		displayPartialDialog(parsedDialogString, tagArray, delaySeconds, displayedCharactersAmount + 1);
+	}, delaySeconds, false);
+}
+
+void UDialogUI::SetText(const FText& dialogText, const FText& dialogTitle, const float textDelayTime)
 {
 	if (!dialogTextBlock || !dialogCharacterName)
 	{
@@ -87,6 +105,20 @@ void UDialogUI::SetText(const FText& dialogText, const FText& dialogTitle)
 	}
 
 	dialogCharacterName->SetText(dialogTitle);
+	animateDialog(dialogText, textDelayTime);
+}
+
+void UDialogUI::SetTextNoDelay(const FText& dialogText, const FText& dialogTitle)
+{
+	if (!dialogTextBlock || !dialogCharacterName)
+	{
+		UE_LOG(LogTemp, Error, TEXT("DialogUI : invalid dialog textblock"));
+		return;
+	}
+
+	dialogCharacterName->SetText(dialogTitle);
+	dialogTextBlock->SetText(dialogText);
+	skipButtonDelegate.Broadcast();
 }
 
 void UDialogUI::setImages(UTexture2D* leftImageTexture, UTexture2D* rightImageTexture)
@@ -101,9 +133,7 @@ void UDialogUI::setImages(UTexture2D* leftImageTexture, UTexture2D* rightImageTe
 	rightImage->SetBrushFromTexture(rightImageTexture);
 }
 
-void UDialogUI::BindButtonToEnd(UDisplayDialog* dialogToEnd)
+UButton* UDialogUI::GetSkipButton() const
 {
-	FScriptDelegate endDelegate;
-	endDelegate.BindUFunction(dialogToEnd, "TriggerEnd");
-	skipButton->OnClicked.Add(endDelegate);
+	return skipButton;
 }

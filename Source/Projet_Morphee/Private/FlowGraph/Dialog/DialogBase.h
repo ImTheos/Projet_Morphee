@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
-#include "MyCPPCharacter.h"
 #include "Nodes/FlowNode.h"
 #include "NativeGameplayTags.h"
+#include "GameLogic/UI/DialogUI.h"
 #include "DialogBase.generated.h"
 
 UE_DECLARE_GAMEPLAY_TAG_EXTERN(DefaultPlayerTag);
@@ -21,9 +21,9 @@ class UDialogBase : public UFlowNode
 
 protected:
 	UPROPERTY()
-	AMyCPPCharacter* playerCharacter;
+	UDialogUI* dialogUI;
 	
-	void InitPlayerCharacter();
+	void InitDialogUI();
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sequence")

@@ -9,19 +9,19 @@
 
 void UActivateDialog::ExecuteInput(const FName& PinName)
 {
-	if (!IsValid(playerCharacter))
+	if (!IsValid(dialogUI))
 	{
-		InitPlayerCharacter();
+		InitDialogUI();
 
-		if (!IsValid(playerCharacter))
+		if (!IsValid(dialogUI))
 		{
-			UE_LOG(LogTemp, Error, TEXT("Player Character is not valid"));
+			UE_LOG(LogTemp, Error, TEXT("Dialog UI is not valid"));
 			TriggerFirstOutput(true);
 			return;
 		}
 	}
 	
-	playerCharacter->playerUIWidget->SetDialogUIVisibility(ESlateVisibility::Visible);
+	dialogUI->SetVisibility(ESlateVisibility::Visible);
 	
 	// TODO : ajouter la mise en pause des contrôles du joueur pendant le dialogue (?)
 

@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/Image.h"
 #include "FlowGraph/Dialog/DialogBase.h"
 #include "DisplayDialog.generated.h"
 
@@ -17,6 +16,14 @@ class PROJET_MORPHEE_API UDisplayDialog : public UDialogBase
 
 	virtual void ExecuteInput(const FName& PinName) override;
 
+	UFUNCTION()
+	void ActivateSkipButton();
+	
+	FScriptDelegate endDelegate;
+
+	UPROPERTY()
+	UButton* skipButton;
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialog")
 	FText dialogTitle;
@@ -29,6 +36,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialog")
 	UTexture2D* rightImage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialog", meta=(ToolTip="If activated, the text will appear progressively, each letter being delayed by the value of textDelayTime in seconds"))
+	bool bDelayTextAppearance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dialog", meta=(EditCondition="bDelayTextAppearance", ClampMin=0))
+	float textDelayTime = 0.0f;
 
 	UFUNCTION()
 	void TriggerEnd();

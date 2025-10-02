@@ -3,33 +3,50 @@
 
 #include "FlowGraph/Dialog/DisplayDialog.h"
 
-#include "GameLogic/UI/PlayerUI.h"
-
 void UDisplayDialog::ExecuteInput(const FName& PinName)
 {
-	if (!IsValid(playerCharacter))
+	if (!IsValid(dialogUI))
 	{
-		InitPlayerCharacter();
+		InitDialogUI();
 
-		if (!IsValid(playerCharacter))
+		if (!IsValid(dialogUI))
 		{
-			UE_LOG(LogTemp, Error, TEXT("Player Character is not valid"));
+			UE_LOG(LogTemp, Error, TEXT("dialogUI is not valid"));
 			TriggerFirstOutput(true);
 			return;
 		}
 	}
 
 	// Change dialog text and character name
-	playerCharacter->playerUIWidget->SetDialogText(dialogText, dialogTitle);
-
+	if (bDelayTextAppearance)
+	{
+		dialogUI->SetText(dialogText, dialogTitle, textDelayTime);
+	}
+	else
+	{
+		dialogUI->SetTextNoDelay(dialogText, dialogTitle);
+	}
+	
 	// change characters icons
-	playerCharacter->playerUIWidget->SetDialogImages(leftImage, rightImage);
+	dialogUI->setImages(leftImage, rightImage);
 
-	playerCharacter->playerUIWidget->BindButtonToEnd(this);
+	// bind skip button activation
+	dialogUI->skipButtonDelegate.AddDynamic(this, &UDisplayDialog::ActivateSkipButton);
+}
+
+void UDisplayDialog::ActivateSkipButton()
+{
+	// TODO Visually indicate that the button is activated
+	
+	skipButton = dialogUI->GetSkipButton();
+	endDelegate.BindUFunction(this, "TriggerEnd");
+	skipButton->OnClicked.Add(endDelegate);
 }
 
 void UDisplayDialog::TriggerEnd()
 {
+	skipButton->OnClicked.RemoveDynamic(this, &UDisplayDialog::TriggerEnd);
+	
 	UE_LOG(LogTemp, Display, TEXT("Trigger End reached"));
 	TriggerFirstOutput(true);
 }

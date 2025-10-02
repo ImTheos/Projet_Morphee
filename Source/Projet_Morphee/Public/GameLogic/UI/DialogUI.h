@@ -8,8 +8,9 @@
 #include "Components/Image.h"
 #include "Components/RichTextBlock.h"
 #include "Components/TextBlock.h"
-#include "FlowGraph/Dialog/DisplayDialog.h"
 #include "DialogUI.generated.h"
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDisplaySkipButton);
 
 USTRUCT()
 struct FRichTextTag
@@ -34,13 +35,16 @@ class PROJET_MORPHEE_API UDialogUI : public UUserWidget
 	FString applyTagsToString(const FString& baseString, TArray<FRichTextTag>& tagArray);
 
 	void animateDialog(const FText& dialogText, const float delaySeconds);
+	void displayPartialDialog(const FString& parsedDialogString, TArray<FRichTextTag> tagArray, const float delaySeconds, int displayedCharactersAmount);
 
 	
 public:
-	void SetText(const FText& dialogText, const FText& dialogTitle);
+	void SetText(const FText& dialogText, const FText& dialogTitle, const float textDelayTime);
+	void SetTextNoDelay(const FText& dialogText, const FText& dialogTitle);
+	
 	void setImages(UTexture2D* leftImageTexture, UTexture2D* rightImageTexture);
 	
-	void BindButtonToEnd(UDisplayDialog* dialogToEnd);
+	UButton* GetSkipButton() const;
 
 	UPROPERTY(meta = (BindWidget))
 	UTextBlock* dialogCharacterName;
@@ -56,4 +60,6 @@ public:
 
 	UPROPERTY(meta = (BindWidget))
 	UButton* skipButton;
+
+	FDisplaySkipButton skipButtonDelegate;
 };
