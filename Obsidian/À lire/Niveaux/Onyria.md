@@ -7,7 +7,7 @@ tags:
 
 - Où se situe l’histoire ? 
 
-> Dans les rêves de [[Thalia]], un monde onirique peuplé d'entités et décoré de paysages fantastiques. Sous sa forme d'hermine, elle explore en compagnie de [Morphée]() différents strates de ce monde appelé [Onyria](Onyria.md) représentant le Sommeil.
+> Dans les rêves de [[Thalia]], nommé Onyria, un monde onirique peuplé d'entités et décoré de paysages fantastiques. Sous sa forme d'hermine, elle explore en compagnie de [Morphée]() différents strates de ce monde représentant le Sommeil.
 
 - Qui sont les personnes qui habitent cet endroit ? 
 
