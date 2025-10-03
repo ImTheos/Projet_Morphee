@@ -14,7 +14,8 @@
 > [!bug] De manière plus subtile.
 > (Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroine surmonte son apathie et sort du lit. Les corvées qui l'attendent interrompent ses pensées. En se baladant dans son appartement, Thalia s'efforce de s'occuper de son appartement. Cependant, chaque tentative de sa part se solde par une paralysie. Sortir les poubelles, faire la vaisselle, répondre à ses mails, finir tel dossier, nettoyer son bureau. Le schéma s'est répété toute la journée et le soir venu, rien n'a été fait.)
 
-	Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroïne surmonte son apathie et sort du lit. Les corvées qui l'attendent interrompent ses pensées. En se baladant dans son appartement, Thalia se motive à s'occuper de celui-ci. En commençant par la vaisselle, poussée par la soif, elle nettoie un premier verre. Avec ce premier verre, elle se sert de l'eau avec mollasse. Le deuxième verre est difficile à nettoyer. Le troisième en main, elle pose son regard sur la pile de vaisselle. Soudainement, un blocage survient et ses mains s'engourdissent. Avec calme, elle passe à une des autres corvées restantes. Cependant, à chaque tentative, une sorte de paralysie l'envahit. Les tâches sont abandonnées au beau milieu voir à peine commencées. Le schéma s'est répété toute la journée et le soir venu, rien n'a été fait.
+> [!bug] Thalia a l'envie de boire un verre par instinct puis par balayage du regard, elle se rend compte de tout ce qui l'attend comme corvées.
+> (Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroïne surmonte son apathie et sort du lit. Les corvées qui l'attendent interrompent ses pensées. En se baladant dans son appartement, Thalia se motive à s'occuper de celui-ci. En commençant par la vaisselle, poussée par la soif, elle nettoie un premier verre. Avec ce premier verre, elle se sert de l'eau avec mollasse. Le deuxième verre est difficile à nettoyer. Le troisième en main, elle pose son regard sur la vaisselle suivante. Soudainement, un blocage survient et ses mains s'engourdissent. Avec calme, elle passe à une des autres corvées restantes. Cependant, à chaque tentative, une sorte de paralysie l'envahit. Les tâches sont abandonnées au beau milieu voir à peine commencées. Le schéma s'est répété toute la journée et le soir venu, rien n'a été fait.)
 
 > [!Success] Comment traduire en jeu le paragraphe précédent ?
 > Une multitude d'objets interactifs seront parsemés au sein de l'appartement de Thalia, certains en plusieurs instances (ex. sac**s** poubelle**s**). 
@@ -28,11 +29,11 @@
 >  
 > Réponse : En comics ou séquencer simple.
 
-
 > [!failure] Déplacer vers l'entracte entre Niveau 1 et 2
 > (Brièvement, elle repense à ce rêve où elle incarnait une hermine et la joie qu'elle a pu ressentir durant. L'espoir de retourner en Onyria lui esquisse un sourire)
 
 <center> FIN </center>
 
+---
 
-
+[[Script]]
