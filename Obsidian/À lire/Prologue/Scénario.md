@@ -32,6 +32,7 @@
 > [!failure] Déplacer vers l'entracte entre Niveau 1 et 2
 > (Brièvement, elle repense à ce rêve où elle incarnait une hermine et la joie qu'elle a pu ressentir durant. L'espoir de retourner en Onyria lui esquisse un sourire)
 
+<center> FIN </center>
 
 
 

@@ -9,7 +9,7 @@ tags:
 
 - **Nom**
 
-> Thalia (La Rêveuse), sans mention du nom de famille.
+> **Thalia**[^6], sans mention du nom de famille.
 
 - **Âge approximatif**
 
@@ -33,23 +33,23 @@ tags:
 
 - **Gabarit général : plutôt fin·e, athlétique, massif·ve, fragile…**
 
-> `En discussion avec Laura et Sorya`
+> `...`[^3]
 
 - **Silhouette / posture : indice sur la manière de se tenir, de bouger**
 
-> `En discussion avec Laura et Sorya`
+> `...`[^4]
 
 - __Détail distinctif optionnel (ex : cicatrice, tatouage, chevelure remarquable)__
 
-> `En discussion avec Laura et Sorya`
+> `...`[^5]
 
 - **Handicap** 
 
-> ==Insomnie== visible sur son allure et son comportement.
+> **==Insomnie==** visible sur son allure et son comportement.
 
 - **Conséquence dans sa vie quotidienne**
 
-> Désintérêt pour tout, fatigue chronique, incapacité à sortir, isolement sociable. ==Perte d'estime de soir.==
+> Désintérêt pour tout, fatigue chronique, incapacité à sortir, isolement sociable. **==Perte d'estime de soi**==.
 
 ---
 
@@ -57,16 +57,16 @@ tags:
 
 - **Vie d'avant**
 
-> Enfant unique, ses parents ont toujours été en soutien, dans le domaine/le monde de la musique. Elle a donc toujours eu un lien, une connexion et une éducation liée à la musique. Son instrument phare est le piano dont elle a appris les rudiments très tôt dans un conservatoire réputé et très strict. Précisément, un professeur imposant avec une vision très renfermée de la musique, avec lequel elle a eu des ennuis.
+> Enfant unique, ses parents ont toujours été en soutien, dans le domaine/le monde de la musique. ==**Elle a donc toujours eu un lien, une connexion et une éducation liée à la musique**==. Son instrument phare est le piano dont elle a appris les rudiments très tôt dans un conservatoire réputé et très strict. Précisément, un professeur imposant avec une vision très renfermée de la musique, avec lequel elle a eu des ennuis.
 > Son enfance s'est déroulée à la capitale en compagnie de ses amis de tout bord où elle a pu expérimenter, vivre des drames et des joies. Tout cela se retrouvant dans ses rêves...
 
 - **Expérience transformatif**
 
-> Traumatisme indélébile, cryptique au début du jeu, il se révèle morceau par morceau au contact des personnages, niveaux, boss ect... jusqu'à être révélé tel un puzzle à la fin du jeu.
+> **==Traumatisme indélébile==**, cryptique au début du jeu, il se révèle morceau par morceau au contact des personnages, niveaux, boss ect... jusqu'à être révélé tel un puzzle à la fin du jeu.
 
 - **Situation actuelle**
 
-> Endommagée sur le plan psychologique, elle s'est isolée, se sent dépossédée de la musique hormis cela elle se trouve dans une situation financière acceptable avec des parents et des amis toujours présents pour elle. L'insomnie rythme sa vie jusqu'à l'empêcher de profiter du moment présent, de sorties entre amis ou des simples plaisirs du quotidien. Son appartement relativement insalubre et sale, qu'elle n'ose pas le ranger. Aucun médicament ou traitement. Pas de suivi.
+> Endommagée sur le plan psychologique, **==elle s'est isolée==**, se sent dépossédée de la musique hormis cela elle se trouve dans une situation financière acceptable avec des parents et des amis toujours présents pour elle. **==L'insomnie rythme sa vie==** jusqu'à l'empêcher de profiter du moment présent, de sorties entre amis ou des simples plaisirs du quotidien. Son appartement relativement insalubre et sale, qu'elle n'ose pas le ranger. Aucun médicament ou traitement. Pas de suivi.
 
 ---
 
@@ -78,13 +78,13 @@ tags:
 > 2. Calme
 > 3. Rigoureuse
 > 4. Obstinée
-> 5. Problem solving(?)
+> 5. Problem solving
 
 - **Qualité majeure / Défaut majeur**
 
-> 1. Entraide
-> 2. Ouverte d'esprit
-> 3. Fiable
+> 6. Entraide
+> 7. Ouverte d'esprit
+> 8. Fiable
 
 ---
 
@@ -104,7 +104,7 @@ tags:
 > 1. Regard des autres
 > 2. Culpabilité de ne pas être à la hauteur de ses parents, être dans leur ombre
 > 3. Déni d'elle-même
-> 4. Addiction par compensation, pour le réconfort
+> 4. ==Addictions== par compensation, pour le réconfort
 
 - **Croyances, valeurs ou obsessions**
 
@@ -128,7 +128,7 @@ tags:
 - **Aime / N'Aime Pas**
 
 > 1. Les hermines
-> 2. Le piano
+> 2. **==Le piano==**
 > 3. La composition
 > 4. (Un artiste musicien dans le classique)
 > 5. (Un artiste musicien dans de la musique récente)
@@ -237,3 +237,11 @@ tags:
 [^1]: En conclusion.
 
 [^2]: Thalia, elle-même est faussement positive.
+
+[^3]: À discuter...
+
+[^4]: À décider...
+
+[^5]: À décider...
+
+[^6]: Aka La Rêveuse.
