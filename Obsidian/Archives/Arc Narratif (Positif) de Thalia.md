@@ -16,36 +16,4 @@ Quelle est la vérité que le personnage doit comprendre pour améliorer sa vie 
 ```
 > Est-ce qu’il a besoin de se débarrasser de la chose qu’il veut pour obtenir ce dont il a besoin ou doit-il d’abord obtenir ce dont il a besoin avant d’obtenir ce qu’il veut ? 
 
-c.f [Voyage du Héros]
-
----
-# Déroulement
-
-#### ARC 1
-
-> 
-###### FIRST PLOT POINT 
-
-> 
-#### ARC 2
-
-> 
-###### FIRST HALF
-
-> 
-
-###### MID POINT
-
-> 
-###### SECOND HALF
-
-> 
-#### ARC 3
-
-> 
-###### SECOND PLOT POINT
-
-> 
-##### CLIMAX
-
-> 
+Il doit se débarrasser de la chose qu'il veut obtenir pour obtenir ce dont il a besoin.

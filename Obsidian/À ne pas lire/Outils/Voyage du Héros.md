@@ -1,6 +1,7 @@
 ---
 tags:
   - Narration
+  - Protagoniste
 ---
 
 > [!info] Le Voyage du Héros de Campbell et Vogler

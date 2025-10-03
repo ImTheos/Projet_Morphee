@@ -5,7 +5,7 @@ tags:
 #### Ordre d'apparition des Boss et leurs niveaux
 
 1. [Anxiété]() — [[Niveau 1 - Forêt de l'Isolement]]
-2. [Hygiène]() — Souk (?)
+2. [Hygiène]() — [[Souk]]
 3. [Isolement]() — [Metro]() - [Théâtre]()
 4. [Phobétor]() — [Final]()
 
@@ -60,3 +60,7 @@ tags:
 > 
 
 ---
+
+[[Phobétor]] [[Isolement]] [[Hygiène]] [[Anxiété]] 
+
+![[Canva des Niveaux.canvas]]
