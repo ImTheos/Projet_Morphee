@@ -8,6 +8,7 @@
 #include "AbilitySystemInterface.h"
 #include "MyCPPCharacter.generated.h"
 
+class UPlayerUI;
 class UAbilitySystemComponent;
 class USpringArmComponent;
 class UCameraComponent;
@@ -48,5 +49,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
+	UPROPERTY(BlueprintReadWrite)
+	UPlayerUI* playerUIWidget;
 };

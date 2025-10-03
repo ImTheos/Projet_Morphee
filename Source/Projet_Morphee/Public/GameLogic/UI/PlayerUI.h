@@ -5,8 +5,10 @@
 #include "CoreMinimal.h"
 #include "HealthBar.h"
 #include "Blueprint/UserWidget.h"
+#include "FlowGraph/Dialog/DisplayDialog.h"
 #include "PlayerUI.generated.h"
 
+class UDialogUI;
 /**
  * 
  */
@@ -16,9 +18,12 @@ class PROJET_MORPHEE_API UPlayerUI : public UUserWidget
 	GENERATED_BODY()
 	
 public:
+	UPROPERTY(meta = (BindWidget))
+	UDialogUI* dialogUI;
+	
 	UFUNCTION(BlueprintCallable)
 	void UpdateHealthBar(int playerHealth, bool animate = true);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	UHealthBar* healthBar;
 };
