@@ -35,6 +35,7 @@ bool UEnableDialog::TrySetUIOnlyInputMode()
 	}
 
 	playerController->SetInputMode(FInputModeUIOnly());
+	playerController->FlushPressedKeys();
 	return true;
 }
 

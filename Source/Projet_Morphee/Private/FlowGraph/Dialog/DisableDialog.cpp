@@ -36,6 +36,7 @@ bool UDisableDialog::TrySetGameAndUIInputMode()
 	}
 
 	playerController->SetInputMode(FInputModeGameAndUI());
+	playerController->FlushPressedKeys();
 	return true;
 }
 

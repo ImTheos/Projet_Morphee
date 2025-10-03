@@ -13,6 +13,18 @@ void UDisplayDialog::ExecuteInput(const FName& PinName)
 		TriggerFirstOutput(true);
 		return;
 	}
+
+	skipButton = dialogUI->skipButton;
+	if (!IsValid(skipButton))
+	{
+		UE_LOG(LogTemp, Error, TEXT("DisplayDialog : skipButton is not valid"));
+		TriggerFirstOutput(true);
+		return;
+	}
+	
+	// Hides button
+	skipButton->SetVisibility(ESlateVisibility::Hidden);
+	dialogUI->skipLogo->SetVisibility(ESlateVisibility::Hidden);
 	
 	// binds skip button activation, used to display the skip button when the whole text will be displayed
 	dialogUI->displaySkipButtonDelegate.AddDynamic(this, &UDisplayDialog::ActivateSkipButton);
@@ -60,10 +72,6 @@ void UDisplayDialog::TriggerEnd()
 	}
 	
 	skipButton->OnClicked.RemoveDynamic(this, &UDisplayDialog::TriggerEnd);
-
-	// Hides button
-	skipButton->SetVisibility(ESlateVisibility::Hidden);
-	dialogUI->skipLogo->SetVisibility(ESlateVisibility::Hidden);
 	
 	UE_LOG(LogTemp, Display, TEXT("Trigger End reached"));
 	TriggerFirstOutput(true);
