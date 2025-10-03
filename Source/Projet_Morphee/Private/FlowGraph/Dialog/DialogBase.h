@@ -23,9 +23,9 @@ protected:
 	UPROPERTY()
 	UDialogUI* dialogUI;
 	
-	void InitDialogUI();
+	bool TryInitialize();
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sequence")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerDetection")
 	FGameplayTag playerTag = DefaultPlayerTag;
 };

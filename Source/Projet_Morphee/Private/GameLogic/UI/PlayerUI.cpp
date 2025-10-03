@@ -8,22 +8,6 @@
 #include "DynamicMesh/DynamicMesh3.h"
 #include "GameLogic/UI/DialogUI.h"
 
-void UPlayerUI::InitDialogUI()
-{
-	TArray<UWidget*> widgetArray;
-	WidgetTree->GetAllWidgets(widgetArray);
-
-	// Loop through all UI widgets to find the dialog UI
-	for (UWidget* widget : widgetArray)
-	{
-		if (UDialogUI* tmpDialogUI = Cast<UDialogUI>(widget))
-		{
-			dialogUI = tmpDialogUI;
-			break;
-		}
-	}
-}
-
 void UPlayerUI::UpdateHealthBar(int playerHealth, bool animate)
 {
 	TArray<UHeartSlot*> heartSlots = healthBar->heartSlots;
@@ -83,20 +67,4 @@ void UPlayerUI::UpdateHealthBar(int playerHealth, bool animate)
 		heartSlot->PlayAnimation(heartSlot->dissipateAnim, animTimeStart);
 		heartSlot->visible = false;
 	}
-}
-
-void UPlayerUI::SetDialogUIVisibility(ESlateVisibility visibility)
-{
-	if (!IsValid(dialogUI))
-	{
-		InitDialogUI();
-	}
-
-	if (!IsValid(dialogUI))
-	{
-		UE_LOG(LogTemp, Error, TEXT("PlayerUI : no dialog UI available"));
-		return;
-	}
-
-	dialogUI->SetVisibility(visibility);
 }

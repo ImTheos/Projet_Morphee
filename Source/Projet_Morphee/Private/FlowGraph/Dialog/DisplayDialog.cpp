@@ -5,47 +5,65 @@
 
 void UDisplayDialog::ExecuteInput(const FName& PinName)
 {
+	TryInitialize();
+
 	if (!IsValid(dialogUI))
 	{
-		InitDialogUI();
-
-		if (!IsValid(dialogUI))
-		{
-			UE_LOG(LogTemp, Error, TEXT("dialogUI is not valid"));
-			TriggerFirstOutput(true);
-			return;
-		}
+		UE_LOG(LogTemp, Error, TEXT("dialogUI is not valid"));
+		TriggerFirstOutput(true);
+		return;
 	}
+	
+	// binds skip button activation, used to display the skip button when the whole text will be displayed
+	dialogUI->displaySkipButtonDelegate.AddDynamic(this, &UDisplayDialog::ActivateSkipButton);
 
-	// Change dialog text and character name
+	// Change dialog text and character name, animates the text apperance if this feature is activated
 	if (bDelayTextAppearance)
 	{
-		dialogUI->SetText(dialogText, dialogTitle, textDelayTime);
+		dialogUI->SetText(dialogText, characterName, textDelayTime);
 	}
 	else
 	{
-		dialogUI->SetTextNoDelay(dialogText, dialogTitle);
+		dialogUI->SetTextNoDelay(dialogText, characterName);
 	}
 	
 	// change characters icons
 	dialogUI->setImages(leftImage, rightImage);
-
-	// bind skip button activation
-	dialogUI->skipButtonDelegate.AddDynamic(this, &UDisplayDialog::ActivateSkipButton);
 }
 
 void UDisplayDialog::ActivateSkipButton()
 {
-	// TODO Visually indicate that the button is activated
+	dialogUI->displaySkipButtonDelegate.RemoveDynamic(this, &UDisplayDialog::ActivateSkipButton);
 	
 	skipButton = dialogUI->GetSkipButton();
-	endDelegate.BindUFunction(this, "TriggerEnd");
-	skipButton->OnClicked.Add(endDelegate);
+
+	if (!IsValid(skipButton))
+	{
+		UE_LOG(LogTemp, Error, TEXT("DisplayDialog : skipButton is not valid"));
+		return;
+	}
+	
+	skipButton->OnClicked.AddDynamic(this, &UDisplayDialog::TriggerEnd);
+
+	// Shows button
+	skipButton->SetVisibility(ESlateVisibility::Visible);
+	dialogUI->skipLogo->SetVisibility(ESlateVisibility::Visible);
 }
 
 void UDisplayDialog::TriggerEnd()
 {
+	if (!IsValid(skipButton))
+	{
+		UE_LOG(LogTemp, Error, TEXT("DisplayDialog : skipButton is not valid"));
+		TriggerFirstOutput(true);
+		return;
+	}
+	
 	skipButton->OnClicked.RemoveDynamic(this, &UDisplayDialog::TriggerEnd);
+
+	// Hides button
+	skipButton->SetVisibility(ESlateVisibility::Hidden);
+	dialogUI->skipLogo->SetVisibility(ESlateVisibility::Hidden);
 	
 	UE_LOG(LogTemp, Display, TEXT("Trigger End reached"));
 	TriggerFirstOutput(true);

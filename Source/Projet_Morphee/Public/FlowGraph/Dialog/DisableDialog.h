@@ -14,5 +14,7 @@ class PROJET_MORPHEE_API UDisableDialog : public UDialogBase
 {
 	GENERATED_BODY()
 
+	bool TrySetGameAndUIInputMode();
+
 	virtual void ExecuteInput(const FName& PinName) override;
 };

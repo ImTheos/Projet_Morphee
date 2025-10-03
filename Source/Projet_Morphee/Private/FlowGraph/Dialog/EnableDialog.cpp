@@ -1,21 +1,20 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "FlowGraph/Dialog/DisableDialog.h"
+#include "FlowGraph/Dialog/EnableDialog.h"
 
 #include "FlowSubsystem.h"
 #include "MyCPPCharacter.h"
-#include "Components/SlateWrapperTypes.h"
 #include "GameLogic/UI/PlayerUI.h"
 #include "Kismet/GameplayStatics.h"
 
-bool UDisableDialog::TrySetGameAndUIInputMode()
+bool UEnableDialog::TrySetUIOnlyInputMode()
 {
 	const TSet<TWeakObjectPtr<AMyCPPCharacter>> playerCharacterSet = GetFlowSubsystem()->GetActors<AMyCPPCharacter>(playerTag);
 
 	if (playerCharacterSet.IsEmpty())
 	{
-		UE_LOG(LogTemp, Error, TEXT("DisableDialog FlowNode : no PlayerCharacter has required tag : %s"), *playerTag.ToString());
+		UE_LOG(LogTemp, Error, TEXT("ActivateDialog FlowNode : no PlayerCharacter has required tag : %s"), *playerTag.ToString());
 		return false;
 	}
 
@@ -23,7 +22,7 @@ bool UDisableDialog::TrySetGameAndUIInputMode()
 
 	if (!IsValid(playerCharacter))
 	{
-		UE_LOG(LogTemp, Error, TEXT("DisableDialog FlowNode : invalid PlayerCharacter"));
+		UE_LOG(LogTemp, Error, TEXT("ActivateDialog FlowNode : invalid PlayerCharacter"));
 		return false;
 	}
 
@@ -31,23 +30,23 @@ bool UDisableDialog::TrySetGameAndUIInputMode()
 
 	if (!IsValid(playerController))
 	{
-		UE_LOG(LogTemp, Error, TEXT("DisableDialog FlowNode : invalid PlayerController"));
+		UE_LOG(LogTemp, Error, TEXT("ActivateDialog FlowNode : invalid PlayerController"));
 		return false;
 	}
 
-	playerController->SetInputMode(FInputModeGameAndUI());
+	playerController->SetInputMode(FInputModeUIOnly());
 	return true;
 }
 
-void UDisableDialog::ExecuteInput(const FName& PinName)
+void UEnableDialog::ExecuteInput(const FName& PinName)
 {
-	if (!TryInitialize() || !TrySetGameAndUIInputMode())
+	if (!TryInitialize() || !TrySetUIOnlyInputMode())
 	{
 		TriggerFirstOutput(true);
 		return;
 	}
 	
-	dialogUI->SetVisibility(ESlateVisibility::Hidden);
+	dialogUI->SetVisibility(ESlateVisibility::Visible);
 
 	TriggerFirstOutput(true);
 }

@@ -81,7 +81,7 @@ void UDialogUI::displayPartialDialog(const FString& parsedDialogString, TArray<F
 {
 	if (displayedCharactersAmount > parsedDialogString.Len())
 	{
-		skipButtonDelegate.Broadcast();
+		displaySkipButtonDelegate.Broadcast();
 		return;
 	}
 
@@ -118,7 +118,7 @@ void UDialogUI::SetTextNoDelay(const FText& dialogText, const FText& dialogTitle
 
 	dialogCharacterName->SetText(dialogTitle);
 	dialogTextBlock->SetText(dialogText);
-	skipButtonDelegate.Broadcast();
+	displaySkipButtonDelegate.Broadcast();
 }
 
 void UDialogUI::setImages(UTexture2D* leftImageTexture, UTexture2D* rightImageTexture)
@@ -129,8 +129,25 @@ void UDialogUI::setImages(UTexture2D* leftImageTexture, UTexture2D* rightImageTe
 		return;
 	}
 
-	leftImage->SetBrushFromTexture(leftImageTexture);
-	rightImage->SetBrushFromTexture(rightImageTexture);
+	if (IsValid(leftImageTexture))
+	{
+		leftImage->SetVisibility(ESlateVisibility::Visible);
+		leftImage->SetBrushFromTexture(leftImageTexture);
+	}
+	else
+	{
+		leftImage->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	if (IsValid(rightImageTexture))
+	{
+		rightImage->SetVisibility(ESlateVisibility::Visible);
+		rightImage->SetBrushFromTexture(rightImageTexture);
+	}
+	else
+	{
+		rightImage->SetVisibility(ESlateVisibility::Hidden);
+	}
 }
 
 UButton* UDialogUI::GetSkipButton() const

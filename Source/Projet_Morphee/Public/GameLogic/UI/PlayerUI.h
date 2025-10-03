@@ -16,7 +16,6 @@ UCLASS()
 class PROJET_MORPHEE_API UPlayerUI : public UUserWidget
 {
 	GENERATED_BODY()
-	void InitDialogUI();
 	
 public:
 	UPROPERTY(meta = (BindWidget))
@@ -25,8 +24,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateHealthBar(int playerHealth, bool animate = true);
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	UHealthBar* healthBar;
-	
-	void SetDialogUIVisibility(ESlateVisibility visibility);
 };
