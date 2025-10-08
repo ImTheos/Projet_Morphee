@@ -159,7 +159,7 @@ tags:
 
 > Onyria correspond au propre inconscient de Thalia. Elle s'y rend tous les soirs en s'endormant.
 
-> Musicienne, avec un début de réputation, l'appréciation des gens pour elle n'avait d'égal que sa passion pour la musique. Malheureusement, c'est du passé, ne lui restant que peu de choses auxquelles se raccrocher.
+> ==Musicienne, avec un début de réputation==, l'appréciation des gens pour elle n'avait d'égal que sa passion pour la musique. Malheureusement, c'est du passé, ne lui restant que peu de choses auxquelles se raccrocher.
 
 - **Interactions avec d’autres personnages**
 
@@ -190,7 +190,7 @@ tags:
 
 > Ce qu'elle veut : Battre Phobétor pour pouvoir reprendre la représentation musicale.
 > 
-> Ce dont elle a besoin : Accepter Phobétor et résoudre le conflit entre lui et Morphée puis apprendre à s'écouter elle-même pour enfin se admettre qu'elle sera plus heureuse dans la composition.
+> Ce dont elle a besoin : ==Accepter Phobétor et résoudre le conflit entre lui et Morphée puis apprendre à s'écouter elle-même pour enfin se admettre qu'elle sera plus heureuse dans la composition.==
 
 - **Son antagoniste**
 
