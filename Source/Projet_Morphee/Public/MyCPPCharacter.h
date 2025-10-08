@@ -18,6 +18,12 @@ class PROJET_MORPHEE_API AMyCPPCharacter : public ACharacter, public IAbilitySys
 {
 	GENERATED_BODY()
 
+private:
+	FVector lastSafeLocation;
+	double safePositionRemainingCooldown = 0.0f;
+
+	double safePositionCheckCooldown;
+
 public:
 	// Sets default values for this character's properties
 	AMyCPPCharacter();

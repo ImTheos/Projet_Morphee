@@ -10,6 +10,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "AbilitySystemComponent.h"
 #include "BasicAttributeSet.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 class UAbilitySystemComponent;
 class USpringArmComponent;
@@ -59,6 +60,27 @@ void AMyCPPCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	safePositionRemainingCooldown -= DeltaTime;
+	if (safePositionRemainingCooldown > 0.0f)
+	{
+		return;
+	}
+
+	
+
+	// test if position if safe : if capsule of 1.5* player diameter and small amount down touches ground
+	UCharacterMovementComponent* movementComponent = GetCharacterMovement();
+
+	// test validité
+
+	if (movementComponent->IsMovingOnGround())
+	{
+		lastSafeLocation = GetTransform().GetLocation();
+
+		DrawDebugCapsule(GetWorld(), lastSafeLocation, GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight(), GetCapsuleComponent()->GetUnscaledCapsuleRadius(), FQuat::Identity, FColor::Yellow);
+	}
+
+	// if yes, set to new safePosition
 }
 
 // Called to bind functionality to input
