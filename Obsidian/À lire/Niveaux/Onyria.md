@@ -8,7 +8,7 @@ tags:
 
 - Où se situe l’histoire ? 
 
-> Dans les rêves de Thalia, nommé Onyria, un monde onirique peuplé d'entités et décoré de paysages fantastiques. Sous sa forme d'hermine, elle explore en compagnie de Morphée différents strates de ce monde représentant le Sommeil.
+> ==Dans les rêves de Thalia, nommé Onyria==, un monde onirique peuplé d'entités et décoré de paysages fantastiques. ==Sous sa forme d'hermine==, elle explore en compagnie de Morphée différents strates de ce monde représentant ==le Sommeil.==
 
 - Qui sont les personnes qui habitent cet endroit ? 
 
@@ -20,11 +20,11 @@ tags:
 
 - Comment est-ce qu’elles y vivent ? 
 
-> Les habitants d'Onyria possèdent leur routine définie par les traits de personnalité de la personne d'origine. Lorsque le rêve de Thalia s'interrompt, leur existence, à leur tour, s'interrompt le temps d'une journée avant de reprendre le soir venu. Récemment, leur mode de vie a été troublé par la récente dictature du nouveau "roi".
+> Les habitants d'Onyria possèdent leur routine définie par les traits de personnalité de la personne d'origine. Lorsque le rêve de Thalia s'interrompt, leur existence, à leur tour, s'interrompt le temps d'une journée avant de reprendre le soir venu. ==Récemment, leur mode de vie a été troublé par la récente dictature du nouveau "roi".==
 
 - Quels sont les obstacles auxquels elles font face ? 
 
-> Comme dit précédemment, Phobétor a chamboulé le monde interne de Thalia. Cela affecte Onyria de différentes manières, l'apparition d'aberrations, la déformation des strates et un impact variable sur les habitants du rêve.
+> Comme dit précédemment, Phobétor a chamboulé le monde interne de Thalia. ==Cela affecte Onyria de différentes manières, l'apparition d'aberrations, la déformation des strates et un impact variable sur les habitants du rêve.==
 
 - A quelle temporalité de ce monde sommes-nous ?
 

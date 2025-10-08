@@ -20,7 +20,7 @@
 > [!bug] Thalia a l'envie de boire un verre par instinct puis par balayage du regard, elle se rend compte de tout ce qui l'attend comme corvées.
 > (Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroïne surmonte son apathie et sort du lit. Les corvées qui l'attendent interrompent ses pensées. En se baladant dans son appartement, Thalia se motive à s'occuper de celui-ci. En commençant par la vaisselle, poussée par la soif, elle nettoie un premier verre. Avec ce premier verre, elle se sert de l'eau avec mollasse. Le deuxième verre est difficile à nettoyer. Le troisième en main, elle pose son regard sur la vaisselle suivante. Soudainement, un blocage survient et ses mains s'engourdissent. Avec calme, elle passe à une des autres corvées restantes. Cependant, à chaque tentative, une sorte de paralysie l'envahit. Les tâches sont abandonnées au beau milieu voir à peine commencées. Le schéma s'est répété toute la journée et le soir venu, rien n'a été fait.)
 
-Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroïne surmonte son apathie et sort du lit. Motivée par la soif, elle se dirige vers la vaisselle, récupère un verre, le lave et se sert de l'eau avec mollesse. Encore en train de reprendre ses esprits, d'un balayement du regard, elle remarque toutes les corvées qui l'attendent. Poubelles, vaisselle, linge, poussière... Son visage se crispe et l'anxiété prend l'avantage sur son calme naturel. Elle ne tente rien, sachant éperdument que rien ne sera fait le soir venu. Elle vagabonde alors à la recherche d'un divertissement dans le but d'échapper à ses responsabilités. Seulement, rien ne lui convient.
+	Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroïne surmonte son apathie et sort du lit. Motivée par la soif, elle se dirige vers la vaisselle, récupère un verre, le lave et se sert de l'eau avec mollesse. Encore en train de reprendre ses esprits, d'un balayement du regard, elle remarque toutes les corvées qui l'attendent. Poubelles, vaisselle, linge, poussière... Son visage se crispe et l'anxiété prend l'avantage sur son calme naturel. Elle ne tente rien, sachant éperdument que rien ne sera fait le soir venu. Elle vagabonde alors à la recherche d'un divertissement dans le but d'échapper à ses responsabilités. Seulement, rien ne lui convient.
 
 > [!Success] Comment traduire en jeu le paragraphe précédent ?
 > Une multitude d'objets interactifs, représentant les corvées en question, seront parsemés au sein de l'appartement de Thalia, certains en plusieurs instances (ex. sac**s** poubelle**s**). 
@@ -29,7 +29,7 @@ Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps 
 
 	Thalia termine la journée avec amertume. Sur son lit, elle expose son épuisement face à sa situation à la peluche d'hermine; sa seule amie contre l'insomnie. En récupérant son téléphone, elle se rend compte de l'heure qu'il est. Tard en l'occurrence. Toutefois, l'envie de se perdre sur les réseaux sociaux l'emporte sur la fatigue et la raison. Mais le sommeil la rattrape et après un moment, elle s'endort.
 
-> [!Abstract] Animation ? Cinématique ? Séquence ?
+> [!Abstract] Animation ? Fondu au noir ? Séquence ?
 > Réfléchir à comment réaliser cette partie, faute de quoi, elle sera retravaillée.
 >  
 > Réponse : En comics ou séquencer simple.
