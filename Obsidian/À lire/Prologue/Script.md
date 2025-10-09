@@ -1,4 +1,4 @@
-<center>CAUCHEMAR - SUR SCENE</center>
+<center>DANS UN CAUCHEMAR - SUR SCENE</center>
 
 THALIA est en train de jouer.
 

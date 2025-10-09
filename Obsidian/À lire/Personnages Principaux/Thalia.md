@@ -2,6 +2,7 @@
 tags:
   - Personnages
   - Réalité
+  - Protagoniste
 ---
 ![[Thalia_sketch.png]]
 
@@ -142,7 +143,7 @@ tags:
 
 - **Phobies**
 
-> 1. Atélophobie(?) 
+> 1. Atélophobie
 
 - **Peur principale / Conflit intérieur**  
 
@@ -158,7 +159,7 @@ tags:
 
 > Onyria correspond au propre inconscient de Thalia. Elle s'y rend tous les soirs en s'endormant.
 
-> Musicienne, avec un début de réputation, l'appréciation des gens pour elle n'avait d'égal que sa passion pour la musique. Malheureusement, c'est du passé, ne lui restant que peu de choses auxquelles se raccrocher.
+> ==Musicienne, avec un début de réputation==, l'appréciation des gens pour elle n'avait d'égal que sa passion pour la musique. Malheureusement, c'est du passé, ne lui restant que peu de choses auxquelles se raccrocher.
 
 - **Interactions avec d’autres personnages**
 
@@ -170,11 +171,11 @@ tags:
 
 > Son admiration candide pour ses parents a disparu, remplacée par l'amertume de ne pas être à leur niveau. Elle s'auto-inflige ce mode de pensée tandis que de leur côté, les parents de Thalia ont toujours été présents pour elle et sont convaincus d'avoir offert à leur enfant une parfaite éducation et un environnement propice à son épanouissement. Sans jamais se demander comment se sentait-elle de porter autant d'espoirs et d'efforts de leur part sur les épaules. 
 > 
-> À force, Thalia dissimule ses faiblesses, ses moments de doute et ses échecs par peur de les inquiéter. Comme pour "mériter" sa vie priviligiée, ses parents aimants, une bonne éducation et tous les atouts pour avancer dans la musique, elle s'oblige à réussir dans la vie comme dans la musique.  
+> À force, ==Thalia dissimule ses faiblesses==, ses moments de doute et ses échecs par peur de les inquiéter. Comme pour "mériter" sa vie privilégiée, ses parents aimants, une bonne éducation et tous les atouts pour avancer dans la musique, elle s'oblige à réussir dans la vie comme dans la musique.  
 
 - **Relations amicales**
 
-> Des amitiés sincères, pures et sans solennité. Iels ont toujours été présents, de manière similaire à ses parents, pour la soutenir dans son ascension vers la représentation musicale. Cependant, depuis son traumatisme, malgré le fait qu'elle s'ouvre souvent à eux, elle n'a pas réussi à assumer sa situation actuelle. Comme si, elle pensait qu'iels n'accepteraient pas qu'elle puisse se laisser aller de cette façon.
+> Des amitiés sincères, pures et sans solennité. ==Iels ont toujours été présents==, de manière similaire à ses parents, pour la soutenir dans son ascension vers la représentation musicale. Cependant, depuis son traumatisme, malgré le fait qu'elle s'ouvre souvent à eux, elle n'a pas réussi à assumer sa situation actuelle. Comme si, elle pensait qu'iels n'accepteraient pas qu'elle puisse se laisser aller de cette façon.
 
 - **Relations amoureuses**
 
@@ -189,15 +190,15 @@ tags:
 
 > Ce qu'elle veut : Battre Phobétor pour pouvoir reprendre la représentation musicale.
 > 
-> Ce dont elle a besoin : Accepter Phobétor et résoudre le conflit entre lui et Morphée puis apprendre à s'écouter elle-même pour enfin se admettre qu'elle sera plus heureuse dans la composition.
+> Ce dont elle a besoin : ==Accepter Phobétor et résoudre le conflit entre lui et Morphée puis apprendre à s'écouter elle-même pour enfin se admettre qu'elle sera plus heureuse dans la composition.==
 
 - **Son antagoniste**
 
-> [Phobétor](Phobétor.md)
+> Phobétor
 
 - **Quel est leur lien ?**
 
-> Phobétor est une partie de Thalia, son [Ça](obsidian://open?vault=Obsidian&file=Outils%2FRelation%20Thalia-Phob%C3%A9tor-Morph%C3%A9e)
+> ==Phobétor est une partie de Thalia==, son [Ça](obsidian://open?vault=Obsidian&file=Outils%2FRelation%20Thalia-Phob%C3%A9tor-Morph%C3%A9e)
 
 - **Définissez les obstacles**
 
@@ -245,3 +246,7 @@ tags:
 [^5]: À décider...
 
 [^6]: Aka La Rêveuse.
+
+---
+
+[[Monde Réel]] [[Parents de Thalia]] [[Meilleur(e) Ami(e)]] [[Traumatisme]] [[Onyria]] [[Morphée]] [[Phobétor]]

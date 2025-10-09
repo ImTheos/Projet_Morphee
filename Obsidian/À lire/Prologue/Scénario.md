@@ -11,28 +11,34 @@
 
 	Le chemin débouche sur une cour décorée de part et d'autre, dans laquelle des statues inquiétantes semblent s'articuler autour d'un étrange artéfact. L'artéfact se trouve être Morphée, une sphère de laquelle émane une flamme bleutée. Thalia, motivée par la curiosité, pénètre dans la cour. Son arrivée transforme soudainement les statues en monstres qui se ruent sur elle. Instinctivement, Thalia se précipite vers la sphère. À l'instant où sa main effleure Morphée, tous les ennemis sont balayés par une explosion magique. Surprenamment, l'attaque ne blesse pas la protagoniste. Avant qu'elle ne puisse le confondre avec un ennemi, Morphée la rassure lui certifiant être une entité pacifique. Sans la laisser parler, il la remercie pour son aide et assure pouvoir continuer seul. Et sans explication, Thalia est renvoyée dans le monde réel.
 
+> [!tip] Cinématique !
+> Le paragraphe ci-dessus représente la première scène d'action d'Onyria. Elle sera scriptée dès le moment où Thalia pénètre le cercle, retirant les commandes au joueur. C'est ce qu'on appellera dès à présent une séquence car composé à partir du Sequencer d'Unreal Engine 5.
+
 > [!bug] De manière plus subtile.
 > (Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroine surmonte son apathie et sort du lit. Les corvées qui l'attendent interrompent ses pensées. En se baladant dans son appartement, Thalia s'efforce de s'occuper de son appartement. Cependant, chaque tentative de sa part se solde par une paralysie. Sortir les poubelles, faire la vaisselle, répondre à ses mails, finir tel dossier, nettoyer son bureau. Le schéma s'est répété toute la journée et le soir venu, rien n'a été fait.)
 
-	Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroïne surmonte son apathie et sort du lit. Les corvées qui l'attendent interrompent ses pensées. En se baladant dans son appartement, Thalia se motive à s'occuper de celui-ci. En commençant par la vaisselle, poussée par la soif, elle nettoie un premier verre. Avec ce premier verre, elle se sert de l'eau avec mollasse. Le deuxième verre est difficile à nettoyer. Le troisième en main, elle pose son regard sur la pile de vaisselle. Soudainement, un blocage survient et ses mains s'engourdissent. Avec calme, elle passe à une des autres corvées restantes. Cependant, à chaque tentative, une sorte de paralysie l'envahit. Les tâches sont abandonnées au beau milieu voir à peine commencées. Le schéma s'est répété toute la journée et le soir venu, rien n'a été fait.
+> [!bug] Thalia a l'envie de boire un verre par instinct puis par balayage du regard, elle se rend compte de tout ce qui l'attend comme corvées.
+> (Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroïne surmonte son apathie et sort du lit. Les corvées qui l'attendent interrompent ses pensées. En se baladant dans son appartement, Thalia se motive à s'occuper de celui-ci. En commençant par la vaisselle, poussée par la soif, elle nettoie un premier verre. Avec ce premier verre, elle se sert de l'eau avec mollasse. Le deuxième verre est difficile à nettoyer. Le troisième en main, elle pose son regard sur la vaisselle suivante. Soudainement, un blocage survient et ses mains s'engourdissent. Avec calme, elle passe à une des autres corvées restantes. Cependant, à chaque tentative, une sorte de paralysie l'envahit. Les tâches sont abandonnées au beau milieu voir à peine commencées. Le schéma s'est répété toute la journée et le soir venu, rien n'a été fait.)
+
+	Les souvenirs du rêve persistent dans l'esprit de Thalia. Après quelque temps à ruminer, l'héroïne surmonte son apathie et sort du lit. Motivée par la soif, elle se dirige vers la vaisselle, récupère un verre, le lave et se sert de l'eau avec mollesse. Encore en train de reprendre ses esprits, d'un balayement du regard, elle remarque toutes les corvées qui l'attendent. Poubelles, vaisselle, linge, poussière... Son visage se crispe et l'anxiété prend l'avantage sur son calme naturel. Elle ne tente rien, sachant éperdument que rien ne sera fait le soir venu. Elle vagabonde alors à la recherche d'un divertissement dans le but d'échapper à ses responsabilités. Seulement, rien ne lui convient.
 
 > [!Success] Comment traduire en jeu le paragraphe précédent ?
-> Une multitude d'objets interactifs seront parsemés au sein de l'appartement de Thalia, certains en plusieurs instances (ex. sac**s** poubelle**s**). 
+> Une multitude d'objets interactifs, représentant les corvées en question, seront parsemés au sein de l'appartement de Thalia, certains en plusieurs instances (ex. sac**s** poubelle**s**). 
 > 
-> Chaque interaction sera suivie d'une boîte de dialogue de la part de Thalia décrivant l'objet, son lien avec, ce qu'il représente ou sa fonction. Suivie ensuite par une description et/ou dialogue partageant au joueur le début des efforts de Thalia puis son impossibilité de s'occuper de/se débarrasser de/de nettoyer l'objet en question.
+> Chaque interaction sera suivie d'une boîte de dialogue de la part de Thalia décrivant l'objet, son lien avec, ce qu'il représente ou sa fonction. Suivie ensuite par une description et/ou dialogue partageant au joueur l'urgence de la corvée puis son impossibilité de s'occuper de/se débarrasser de/de nettoyer l'objet en question.
 
 	Thalia termine la journée avec amertume. Sur son lit, elle expose son épuisement face à sa situation à la peluche d'hermine; sa seule amie contre l'insomnie. En récupérant son téléphone, elle se rend compte de l'heure qu'il est. Tard en l'occurrence. Toutefois, l'envie de se perdre sur les réseaux sociaux l'emporte sur la fatigue et la raison. Mais le sommeil la rattrape et après un moment, elle s'endort.
 
-> [!Abstract] Animation ? Cinématique ? Séquence ?
+> [!Abstract] Animation ? Fondu au noir ? Séquence ?
 > Réfléchir à comment réaliser cette partie, faute de quoi, elle sera retravaillée.
 >  
 > Réponse : En comics ou séquencer simple.
-
 
 > [!failure] Déplacer vers l'entracte entre Niveau 1 et 2
 > (Brièvement, elle repense à ce rêve où elle incarnait une hermine et la joie qu'elle a pu ressentir durant. L'espoir de retourner en Onyria lui esquisse un sourire)
 
 <center> FIN </center>
 
+---
 
-
+[[Script]]
