@@ -65,22 +65,20 @@ void AMyCPPCharacter::Tick(float DeltaTime)
 	{
 		return;
 	}
-
+	safePositionRemainingCooldown = safePositionCheckCooldown;
 	
-
-	// test if position if safe : if capsule of 1.5* player diameter and small amount down touches ground
 	UCharacterMovementComponent* movementComponent = GetCharacterMovement();
 
 	// test validité
 
 	if (movementComponent->IsMovingOnGround())
 	{
+		// if yes, set to new safePosition
 		lastSafeLocation = GetTransform().GetLocation();
+		lastSafeRotation = GetTransform().GetRotation().Rotator();
 
-		DrawDebugCapsule(GetWorld(), lastSafeLocation, GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight(), GetCapsuleComponent()->GetUnscaledCapsuleRadius(), FQuat::Identity, FColor::Yellow);
+		//DrawDebugCapsule(GetWorld(), lastSafeLocation, GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight(), GetCapsuleComponent()->GetUnscaledCapsuleRadius(), FQuat::Identity, FColor::Yellow, false, safePositionCheckCooldown * 5);
 	}
-
-	// if yes, set to new safePosition
 }
 
 // Called to bind functionality to input

@@ -17,12 +17,8 @@ UCLASS()
 class PROJET_MORPHEE_API AMyCPPCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
-
-private:
-	FVector lastSafeLocation;
+	
 	double safePositionRemainingCooldown = 0.0f;
-
-	double safePositionCheckCooldown;
 
 public:
 	// Sets default values for this character's properties
@@ -49,6 +45,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GAS", meta = (AllowPrivateAccess = "true"))
 	const class UBasicAttributeSet* BasicAttributeSet;
 
+	UPROPERTY(BlueprintReadOnly)
+	FVector lastSafeLocation;
+
+	UPROPERTY(BlueprintReadOnly)
+	FRotator lastSafeRotation;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -58,4 +60,7 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite)
 	UPlayerUI* playerUIWidget;
+
+	UPROPERTY(EditAnywhere)
+	double safePositionCheckCooldown = 2.0f;
 };
