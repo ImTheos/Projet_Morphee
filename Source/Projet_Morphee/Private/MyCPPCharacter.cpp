@@ -69,15 +69,18 @@ void AMyCPPCharacter::Tick(float DeltaTime)
 	
 	UCharacterMovementComponent* movementComponent = GetCharacterMovement();
 
-	// test validité
+	if (!IsValid(movementComponent))
+	{
+		UE_LOG(LogTemp, Error, TEXT("AMyCPPCharacter : invalid movementComponent"))
+		return;
+	}
 
+	// TODO : Adapt this to collision test in order to avoid saving location
+	// if the player stands on specific terrain (moving ground, for instance)
 	if (movementComponent->IsMovingOnGround())
 	{
-		// if yes, set to new safePosition
 		lastSafeLocation = GetTransform().GetLocation();
 		lastSafeRotation = GetTransform().GetRotation().Rotator();
-
-		//DrawDebugCapsule(GetWorld(), lastSafeLocation, GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight(), GetCapsuleComponent()->GetUnscaledCapsuleRadius(), FQuat::Identity, FColor::Yellow, false, safePositionCheckCooldown * 5);
 	}
 }
 
