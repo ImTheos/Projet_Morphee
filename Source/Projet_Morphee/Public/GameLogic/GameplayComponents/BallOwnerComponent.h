@@ -38,6 +38,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DisableBallDistanceLimit();
 
+	UPROPERTY(EditAnywhere)
+	float defaultMaxBallDistance;
+
+	UPROPERTY(EditAnywhere)
+	bool limitBallDistanceOnSpawn;
+
 private:
 	UPROPERTY()
 	ABall* ownedBall;

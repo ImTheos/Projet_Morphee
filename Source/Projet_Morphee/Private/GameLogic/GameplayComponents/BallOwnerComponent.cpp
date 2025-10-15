@@ -21,8 +21,8 @@ void UBallOwnerComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	limitBallDistance = limitBallDistanceOnSpawn;
+	maxBallDistance = defaultMaxBallDistance;
 }
 
 
@@ -51,8 +51,10 @@ void UBallOwnerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 		// get the ball back
 		ownedBall->SetActorLocation(ownerActorLocation);
 
-		// TODO ? Maybe need to do some tweaks so the owning actor grabs the ball then ?
-		// Maybe test with other actor components that already do this but at least stop ball movement ? idk
+		// TODO : link with the ball grabbing system when it's done
+		// manual set of ballSpeed is here to keep things acceptable for now
+
+		ownedBall->ballSpeed = 0;
 	}
 }
 
