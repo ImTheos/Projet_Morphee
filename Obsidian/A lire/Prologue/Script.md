@@ -91,3 +91,26 @@ FIN DE SEQUENCE.
 Thalia suit le chemin jusqu'à arrivée face à un petit gouffre. Elle s'arrête et réfléchit.
 
 DEBUT DE SEQUENCE. ZOOM SUR THALIA ET LE GOUFFRE.
+
+> [!abstract] THALIA(NEUTRAL)
+> Pour atteindre l'autre côté il me faudrait sauter assez loin...
+> C'est étrange mais j'ai l'impression d'en être capable.
+> Peut-être que si-...
+
+AFFICHAGE DU TUTORIEL. INPUT. FIN DU TUTORIEL
+
+> [!quote] THALIA(SURPRISED)
+> Wow !
+> *se retourne.* 
+> C'était incroyable ?!
+> (NEUTRAL) Non, non, Thalia, tu ne dois pas te disperser. Reconcentration !
+> (SAD) Par contre, j'ai le sentiment que quelque chose m'attend à la fin du chemin...
+
+Thalia poursuit sa route. Face à elle, un cercle de pierre craquelé se dévoile. Au centre, se trouve Morphée inactif. Intriguée, Thalia progresse vers lui.
+
+> [!quote] THALIA(NEUTRAL)
+> Qu'est ce qu'est cette endroit ? On dirait une sorte de temple.
+> Ou une prison...
+
+Thalia, trop près, active les statues.
+
