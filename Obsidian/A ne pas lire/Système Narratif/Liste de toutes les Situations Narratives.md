@@ -7,8 +7,14 @@ tags:
 
 ![[Interactions Optionnelles]]
 
-![[Interactions Multiples]]
+---
 
 ![[Interactions Obligatoires]]
 
+---
+
 ![[Les Séquences]]
+
+---
+
+![[Exceptions]]

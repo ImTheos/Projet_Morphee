@@ -58,6 +58,8 @@ ANIMATION DE TRANSITION
 
 Thalia se réveille à l'intérieur de Onyria, sous la forme d'une hermine et inconsciente. Après quelques secondes, elle se réveille. Directement, elle se met à tâter son corps frénétiquement.
 
+DEBUT DE SEQUENCE. ZOOM CAMERA. ANIMATION.
+
 > [!quote] THALIA(SURPRISED)
 > AAAAAAARGHHHH ???!!!
 > POURQUOI J'AI DES POILS !?
@@ -67,4 +69,25 @@ Thalia se réveille à l'intérieur de Onyria, sous la forme d'une hermine et in
 
 Elle observe les alentours.
 
-TRAVELING CAMERA EN DIRECTION DU CHEMIN 
+TRAVELING CAMERA EN CERCLE.
+
+> [!quote] THALIA(ANGRY)
+> Une île ?
+
+FIN DU TRAVELING SUR LE CHEMIN.
+
+> [!quote] THALIA(NEUTRAL)
+> Un chemin !
+
+RETOUR DE LA CAMERA.
+
+> [!abstract] THALIA(SMILE)
+> C'est vraiment beau ici.
+> Mais j'ai un mauvais pressentiment, je devrais plutôt suivre ce chemin.
+> Où qu'il m'emmène.
+
+FIN DE SEQUENCE.
+
+Thalia suit le chemin jusqu'à arrivée face à un petit gouffre. Elle s'arrête et réfléchit.
+
+DEBUT DE SEQUENCE. ZOOM SUR THALIA ET LE GOUFFRE.
