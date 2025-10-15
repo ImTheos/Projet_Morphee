@@ -4,17 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "GameLogic/Attractable.h"
-#include "Ball.generated.h"
+#include "Attractable.generated.h"
 
 UCLASS()
-class PROJET_MORPHEE_API ABall : public AAttractable
+class PROJET_MORPHEE_API AAttractable : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ABall();
+	AAttractable();
 
 protected:
 	// Called when the game starts or when spawned
@@ -24,6 +23,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(BlueprintReadWrite)
-	float ballSpeed;
+	void SetNewAttractionSource(const AActor* newAttractionSource);
+
+	bool IsBeingAttracted() const;
+
+private:
+	UPROPERTY()
+	const AActor* attractionSource;
+
+	bool isBeingAttracted;
+
 };
