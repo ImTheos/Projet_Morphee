@@ -33,6 +33,7 @@ void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 	if (!IsValid(attractedObject))
 	{
+		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No attractedObject has been set"));
 		return;
 	}
 
@@ -50,9 +51,18 @@ void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	{
 		return;
 	}
+
+	if (!isMagnetActive && attractedObject->GetAttractionState() != Grabbed)
+	{
+		attractedObject->FreeFromAttraction();
+	}
+	
 	
 	// grab object
-	
+	if (isMagnetActive)
+	{
+		GrabAttractedObject();
+	}
 }
 
 void UMagnetComponent::SetAttractedObject(AAttractable* objectToAttract)
@@ -67,7 +77,7 @@ void UMagnetComponent::AttractObject()
 	if (!IsValid(componentOwner))
 	{
 		// how ?
-		UE_LOG(LogTemp, Error, TEXT("MagnetComponent : the component owner is not valid (this should not happen)"))
+		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : the component owner is not valid (this should not happen)"))
 	}
 	
 	attractedObject->SetNewAttractionSource(componentOwner);
@@ -79,8 +89,16 @@ void UMagnetComponent::GrabAttractedObject()
 	if (!IsValid(componentOwner))
 	{
 		// how ?
-		UE_LOG(LogTemp, Error, TEXT("MagnetComponent : the component owner is not valid (this should not happen)"))
+		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : the component owner is not valid (this should not happen)"))
 	}
+
+	if (!IsValid(attractedObject))
+	{
+		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No attractedObject has been set"));
+		return;
+	}
+
+	attractedObject->SetNewGrabSource(componentOwner);
 }
 
 void UMagnetComponent::ActivateMagnet()
@@ -94,7 +112,7 @@ void UMagnetComponent::ActivateMagnet()
 	isMagnetActive = true;
 
 	// If object is already being attracted, no need to set up attraction again
-	if (attractedObject->IsBeingAttracted())
+	if (attractedObject->GetAttractionState() != Free)
 	{
 		return;
 	}

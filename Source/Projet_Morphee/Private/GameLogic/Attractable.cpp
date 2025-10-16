@@ -3,6 +3,8 @@
 
 #include "GameLogic/Attractable.h"
 
+#include "Components/ShapeComponent.h"
+
 // Sets default values
 AAttractable::AAttractable()
 {
@@ -23,22 +25,67 @@ void AAttractable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (!isBeingAttracted)
+	if (attractionState == Free)
 	{
 		return;
 	}
 
-	// add attracting logic, displacement towards attracting source
+	if (attractionState == Attracted)
+	{
+		TickAttract();
+		return;
+	}
+
+	if (attractionState == Grabbed)
+	{
+		TickGrab();
+		return;
+	}
+
+	// There should not be any logic here because all attractStates are used
+	return;
 }
 
 void AAttractable::SetNewAttractionSource(const AActor* newAttractionSource)
 {
+	//SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	
 	attractionSource = newAttractionSource;
-	isBeingAttracted = true;
+	attractionState = Attracted;
 }
 
-bool AAttractable::IsBeingAttracted() const
+void AAttractable::SetNewGrabSource(const AActor* newGrabSource)
 {
-	return isBeingAttracted;
+	// TODO : fix collisions
+	//SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	
+	attractionSource = newGrabSource;
+	attractionState = Grabbed;
+}
+
+EAttractableState AAttractable::GetAttractionState() const
+{
+	return attractionState;
+}
+
+void AAttractable::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
+{
+	auto* collisionComponent = GetComponentByClass<UShapeComponent>();
+
+	if (!IsValid(collisionComponent))
+	{
+		UE_LOG(LogTemp, Error, TEXT("AAttractable : No Collision Component found"))
+		return;
+	}
+
+	collisionComponent->SetCollisionEnabled(collisionType);
+}
+
+void AAttractable::FreeFromAttraction()
+{
+	//SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	
+	attractionSource = nullptr;
+	attractionState = Free;
 }
 
