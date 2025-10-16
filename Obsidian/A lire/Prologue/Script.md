@@ -56,7 +56,7 @@ ANIMATION DE TRANSITION
 
 <center>ONYRIA - PRISON DE MORPHEE - LA NUIT</center>
 
-Thalia se réveille à l'intérieur de Onyria, sous la forme d'une hermine et inconsciente. Après quelques secondes, elle se réveille. Directement, elle se met à tâter son corps frénétiquement.
+Thalia est transporté à l'intérieur de Onyria, sous la forme d'une hermine et inconsciente. Après quelques secondes, elle reprend conscience. Directement, elle se met à tâter son corps frénétiquement.
 
 DEBUT DE SEQUENCE. ZOOM CAMERA. ANIMATION.
 
@@ -104,7 +104,7 @@ AFFICHAGE DU TUTORIEL. INPUT. FIN DU TUTORIEL
 > *se retourne.* 
 > C'était incroyable ?!
 > (NEUTRAL) Non, non, Thalia, tu ne dois pas te disperser. Reconcentration !
-> (SAD) Par contre, j'ai le sentiment que quelque chose m'attend à la fin du chemin...
+> (SAD) Par contre, j'ai le sentiment que quelque chose d'étrange m'attend à la fin du chemin...
 
 Thalia poursuit sa route. Face à elle, un cercle de pierre craquelé se dévoile. Au centre, se trouve Morphée inactif. Intriguée, Thalia progresse vers lui.
 
