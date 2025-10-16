@@ -168,11 +168,13 @@ tags:
 
 - **Relations familiales**
 
-> Une relation dure pour la jeune femme, l'admiration candide a disparu, remplacée par une amertume due à la culpabilité de ne pas assez bien faire les choses. Elle s'auto-inflige ce ressentiment car de leur côté, les parents de Thalia ont toujours été présents et en soutien pour elle.
+> Son admiration candide pour ses parents a disparu, remplacée par l'amertume de ne pas être à leur niveau. Elle s'auto-inflige ce mode de pensée tandis que de leur côté, les parents de Thalia ont toujours été présents pour elle et sont convaincus d'avoir offert à leur enfant une parfaite éducation et un environnement propice à son épanouissement. Sans jamais se demander comment se sentait-elle de porter autant d'espoirs et d'efforts de leur part sur les épaules. 
+> 
+> À force, Thalia dissimule ses faiblesses, ses moments de doute et ses échecs par peur de les inquiéter. Comme pour "mériter" sa vie priviligiée, ses parents aimants, une bonne éducation et tous les atouts pour avancer dans la musique, elle s'oblige à réussir dans la vie comme dans la musique.  
 
 - **Relations amicales**
 
-> Des amitiés sincères, pures et sans solennité. Iels ont toujours été présents, de manière similaire à ses parents, pour la soutenir dans son ascension vers la représentation musicale.
+> Des amitiés sincères, pures et sans solennité. Iels ont toujours été présents, de manière similaire à ses parents, pour la soutenir dans son ascension vers la représentation musicale. Cependant, depuis son traumatisme, malgré le fait qu'elle s'ouvre souvent à eux, elle n'a pas réussi à assumer sa situation actuelle. Comme si, elle pensait qu'iels n'accepteraient pas qu'elle puisse se laisser aller de cette façon.
 
 - **Relations amoureuses**
 

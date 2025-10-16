@@ -4,15 +4,15 @@ tags:
 ---
 #### Ordre d'apparition des Boss et leurs niveaux
 
-1. [Anxiété]() — [Forêt]() - [Désert]()
+1. [Anxiété]() — [[Niveau 1 - Forêt de l'Isolement]]
 2. [Hygiène]() — Souk (?)
 3. [Isolement]() — [Metro]() - [Théâtre]()
-4. [Phobétor]() — [Final]() (Onirique)
+4. [Phobétor]() — [Final]()
 
 ---
 #### Actes par Boss
 
-##### Anxiété
+##### Isolement
 
 ###### Acte 1 : Exposition
 
@@ -44,7 +44,7 @@ tags:
 > 
 
 ---
-##### Isolement
+##### Anxiété
 
 ###### Acte 1 : Exposition
 

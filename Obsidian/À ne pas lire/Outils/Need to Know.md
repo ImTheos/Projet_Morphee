@@ -74,5 +74,4 @@ tags:
 10. Il n'est pas la source direct de la corruption mais s'en sert à son avantage
 
 11. Pour lui, il peut se permettre de mettre de côté les sentiments de Thalia pour son futur
-
 ```
