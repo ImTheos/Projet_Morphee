@@ -24,6 +24,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(BlueprintReadWrite)
+	virtual void TickAttract() override;
+
+	virtual void TickGrab() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float ballSpeed;
+
+	// TODO : find a better way to set this
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float epsilonDistance = 0.2f;
 };

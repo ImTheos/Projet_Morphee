@@ -38,17 +38,17 @@ private:
 	AAttractable* attractedObject;
 
 public:
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void ActivateMagnet();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void DeactivateMagnet();
 	
 private:
 	// Pulls the tracked object towards its magnetic source and activates magneting
 	void AttractObject();
-
-	bool isMagnetActive;
-
+	
 	void GrabAttractedObject();
+	
+	bool isMagnetActive;
 };

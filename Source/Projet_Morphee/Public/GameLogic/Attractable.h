@@ -6,31 +6,48 @@
 #include "GameFramework/Actor.h"
 #include "Attractable.generated.h"
 
-UCLASS()
+UENUM()
+enum EAttractableState
+{
+	Free,
+	Attracted,
+	Grabbed
+};
+
+UCLASS(Abstract)
 class PROJET_MORPHEE_API AAttractable : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	AAttractable();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
+public:
 	virtual void Tick(float DeltaTime) override;
+	
+	virtual void TickAttract() {}
+	virtual void TickGrab() {}
 
 	void SetNewAttractionSource(const AActor* newAttractionSource);
+	void SetNewGrabSource(const AActor* newGrabSource);;
 
-	bool IsBeingAttracted() const;
+	EAttractableState GetAttractionState() const;
 
-private:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float grabAnimDistance;
+
+protected:
 	UPROPERTY()
 	const AActor* attractionSource;
 
-	bool isBeingAttracted;
+private:
+	EAttractableState attractionState = Free;
+	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
 
+public:
+	void FreeFromAttraction();
+	
 };
