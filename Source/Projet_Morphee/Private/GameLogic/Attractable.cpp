@@ -48,7 +48,7 @@ void AAttractable::Tick(float DeltaTime)
 
 void AAttractable::SetNewAttractionSource(const AActor* newAttractionSource)
 {
-	//SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
 	
 	attractionSource = newAttractionSource;
 	attractionState = Attracted;
@@ -56,8 +56,8 @@ void AAttractable::SetNewAttractionSource(const AActor* newAttractionSource)
 
 void AAttractable::SetNewGrabSource(const AActor* newGrabSource)
 {
-	// TODO : fix collisions
-	//SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	// TODO : fix collisions 
+	SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	
 	attractionSource = newGrabSource;
 	attractionState = Grabbed;
@@ -83,7 +83,7 @@ void AAttractable::SetCollisionEnabled(ECollisionEnabled::Type collisionType) co
 
 void AAttractable::FreeFromAttraction()
 {
-	//SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
 	
 	attractionSource = nullptr;
 	attractionState = Free;
