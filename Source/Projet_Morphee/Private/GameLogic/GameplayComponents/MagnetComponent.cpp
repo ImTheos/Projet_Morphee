@@ -52,11 +52,10 @@ void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		return;
 	}
 
-	if (!isMagnetActive && attractedObject->GetAttractionState() != Grabbed)
+	if (!isMagnetActive && attractedObject->GetAttractionState() == Attracted)
 	{
 		attractedObject->FreeFromAttraction();
 	}
-	
 	
 	// grab object
 	if (isMagnetActive)
