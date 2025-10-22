@@ -124,3 +124,14 @@ void UMagnetComponent::DeactivateMagnet()
 	isMagnetActive = false;
 }
 
+void UMagnetComponent::FreeBall()
+{
+	if (!IsValid(attractedObject))
+	{
+		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No attractedObject has been set"));
+		return;
+	}
+
+	attractedObject->FreeFromAttraction();
+}
+

@@ -45,12 +45,12 @@ void ABall::TickGrab()
 	FVector newForwardVector;
 
 	// TODO : add smoother transition between the three cases if needed
-	if (distanceToAttractionSouce > grabAnimDistance + epsilonDistance * ballSpeed)
+	if (distanceToAttractionSouce > grabAnimDistance + epsilonDistance)
 	{
 		// Get the ball closer
 		newForwardVector = attractionSource->GetActorLocation() - GetActorLocation();
 	}
-	else if (distanceToAttractionSouce < grabAnimDistance - epsilonDistance * ballSpeed)
+	else if (distanceToAttractionSouce < grabAnimDistance - epsilonDistance)
 	{
 		// Get the ball further
 		newForwardVector = GetActorLocation() - attractionSource->GetActorLocation();

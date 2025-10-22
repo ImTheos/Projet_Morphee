@@ -25,11 +25,6 @@ void AAttractable::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (attractionState == Free)
-	{
-		return;
-	}
-
 	if (attractionState == Attracted)
 	{
 		TickAttract();
@@ -41,8 +36,7 @@ void AAttractable::Tick(float DeltaTime)
 		TickGrab();
 		return;
 	}
-
-	// There should not be any logic here because all attractStates are used
+	
 	return;
 }
 
@@ -60,7 +54,7 @@ void AAttractable::SetNewGrabSource(const AActor* newGrabSource)
 	SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	
 	attractionSource = newGrabSource;
-	attractionState = Grabbed;
+	attractionState = Grabbed; 
 }
 
 EAttractableState AAttractable::GetAttractionState() const

@@ -44,6 +44,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DeactivateMagnet();
 	
+	UFUNCTION(BlueprintCallable)
+	void FreeBall();
+
 private:
 	// Pulls the tracked object towards its magnetic source and activates magneting
 	void AttractObject();
