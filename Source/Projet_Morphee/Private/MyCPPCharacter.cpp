@@ -10,6 +10,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "AbilitySystemComponent.h"
 #include "BasicAttributeSet.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 class UAbilitySystemComponent;
 class USpringArmComponent;
@@ -59,6 +60,25 @@ void AMyCPPCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	safePositionRemainingCooldown -= DeltaTime;
+	if (safePositionRemainingCooldown > 0.0f)
+	{
+		return;
+	}
+	safePositionRemainingCooldown = safePositionCheckCooldown;
+	
+	UCharacterMovementComponent* movementComponent = GetCharacterMovement();
+
+	// test validité
+
+	if (movementComponent->IsMovingOnGround())
+	{
+		// if yes, set to new safePosition
+		lastSafeLocation = GetTransform().GetLocation();
+		lastSafeRotation = GetTransform().GetRotation().Rotator();
+
+		//DrawDebugCapsule(GetWorld(), lastSafeLocation, GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight(), GetCapsuleComponent()->GetUnscaledCapsuleRadius(), FQuat::Identity, FColor::Yellow, false, safePositionCheckCooldown * 5);
+	}
 }
 
 // Called to bind functionality to input

@@ -4,7 +4,9 @@
 #include "GameLogic/UI/PlayerUI.h"
 
 #include "Animation/WidgetAnimation.h"
+#include "Blueprint/WidgetTree.h"
 #include "DynamicMesh/DynamicMesh3.h"
+#include "GameLogic/UI/DialogUI.h"
 
 void UPlayerUI::UpdateHealthBar(int playerHealth, bool animate)
 {
