@@ -30,7 +30,7 @@ public:
 	void AssignBall(ABall* ball);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float maxBallDistance;
+	float currentMaxBallDistance;
 
 	UFUNCTION(BlueprintCallable)
 	void EnableBallDistanceLimit(float distanceLimit);
@@ -39,16 +39,24 @@ public:
 	void DisableBallDistanceLimit();
 
 	UPROPERTY(EditAnywhere)
-	float defaultMaxBallDistance;
-
-	UPROPERTY(EditAnywhere)
 	bool limitBallDistanceOnSpawn;
+	
+	UPROPERTY(EditAnywhere)
+	bool isLimitingBallDistance;
+
+	virtual void Serialize(FArchive& Ar) override;
+
+	virtual void InitializeComponent() override;
+
+#if WITH_EDITOR
+protected:
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
+	
 
 private:
-	UPROPERTY()
-	ABall* ownedBall;
-
-	bool limitBallDistance;
+	UPROPERTY(Transient)
+	TObjectPtr<ABall> ownedBall;
 	
 	bool IsBallTooFar(const FVector& ownerActorLocation) const;
 };

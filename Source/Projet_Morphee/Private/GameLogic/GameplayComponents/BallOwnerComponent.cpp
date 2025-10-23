@@ -4,6 +4,7 @@
 #include "GameLogic/GameplayComponents/BallOwnerComponent.h"
 
 #include "GameLogic/Ball/Ball.h"
+#include "GameLogic/GameplayComponents/MagnetComponent.h"
 
 // Sets default values for this component's properties
 UBallOwnerComponent::UBallOwnerComponent()
@@ -21,8 +22,7 @@ void UBallOwnerComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	limitBallDistance = limitBallDistanceOnSpawn;
-	maxBallDistance = defaultMaxBallDistance;
+	isLimitingBallDistance = limitBallDistanceOnSpawn;
 }
 
 
@@ -31,7 +31,7 @@ void UBallOwnerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!limitBallDistance)
+	if (!isLimitingBallDistance)
 	{
 		return;
 	}
@@ -46,16 +46,25 @@ void UBallOwnerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 	FVector ownerActorLocation = ballOwnerActor->GetActorLocation();
 
-	if (IsBallTooFar(ownerActorLocation))
+	if (!IsBallTooFar(ownerActorLocation))
 	{
-		// get the ball back
-		ownedBall->SetActorLocation(ownerActorLocation);
-
-		// TODO : link with the ball grabbing system when it's done
-		// manual set of ballSpeed is here to keep things acceptable for now
-
-		ownedBall->ballSpeed = 0;
+		return;
 	}
+	
+	// get the ball back
+	ownedBall->SetActorLocation(ownerActorLocation);
+
+	// TODO : link with the ball grabbing system when it's done
+	// manual set of ballSpeed is here to keep things acceptable for now
+	auto* magnetComponent = ballOwnerActor->GetComponentByClass<UMagnetComponent>();
+
+	if (!IsValid(magnetComponent))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABallOwnerComponent : Invalid MagnetComponent for actor"))
+		return;
+	}
+
+	magnetComponent->GrabAttractedObject();
 }
 
 void UBallOwnerComponent::AssignBall(ABall* ball)
@@ -65,15 +74,49 @@ void UBallOwnerComponent::AssignBall(ABall* ball)
 
 void UBallOwnerComponent::EnableBallDistanceLimit(const float distanceLimit)
 {
-	maxBallDistance	= distanceLimit;
+	currentMaxBallDistance	= distanceLimit;
 
-	limitBallDistance = true;
+	isLimitingBallDistance = true;
 }
 
 void UBallOwnerComponent::DisableBallDistanceLimit()
 {
-	limitBallDistance = false;
+	isLimitingBallDistance = false;
 }
+
+
+void UBallOwnerComponent::Serialize(FArchive& Ar)
+{
+	Super::Serialize(Ar);
+
+	UE_LOG(LogTemp, Log, TEXT("BallOwnerComponent : Serialize called"));
+}
+
+void UBallOwnerComponent::InitializeComponent()
+{
+	Super::InitializeComponent();
+
+	UE_LOG(LogTemp, Log, TEXT("BallOwnerComponent : InitializeComponent called"))
+}
+
+#if WITH_EDITOR
+
+void UBallOwnerComponent::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	const FName ChangedPropertyName = PropertyChangedEvent.Property ? PropertyChangedEvent.Property->GetFName() : NAME_None;
+
+	if (ChangedPropertyName == GET_MEMBER_NAME_CHECKED(UBallOwnerComponent, ownedBall))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ownedBall change has been detected"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("no ownedball change"));
+	}
+}
+#endif
 
 bool UBallOwnerComponent::IsBallTooFar(const FVector& ownerActorLocation) const
 {
@@ -84,6 +127,6 @@ bool UBallOwnerComponent::IsBallTooFar(const FVector& ownerActorLocation) const
 	}
 
 	// Use of square to reduce compute time
-	return FVector::DistSquared(ownedBall->GetActorLocation(), ownerActorLocation) > FMath::Square(maxBallDistance);
+	return FVector::DistSquared(ownedBall->GetActorLocation(), ownerActorLocation) > FMath::Square(currentMaxBallDistance);
 }
 

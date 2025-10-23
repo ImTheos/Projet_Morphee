@@ -34,8 +34,8 @@ public:
 	float magnetRadius;
 
 private:
-	UPROPERTY()
-	AAttractable* attractedObject;
+	UPROPERTY(Transient)
+	TObjectPtr<AAttractable> attractedObject;
 
 public:
 	UFUNCTION(BlueprintCallable)
@@ -46,12 +46,12 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void FreeBall();
+	
+	void GrabAttractedObject();
 
 private:
 	// Pulls the tracked object towards its magnetic source and activates magneting
 	void AttractObject();
-	
-	void GrabAttractedObject();
 	
 	bool isMagnetActive;
 };
