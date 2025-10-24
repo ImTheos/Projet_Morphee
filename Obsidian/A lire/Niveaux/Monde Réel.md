@@ -72,4 +72,4 @@ tags:
 
 ---
 
-[[Thalia]] [[Meilleur(e) Ami(e)]] [[Parents de Thalia]] [[Traumatisme]]
+[[Thalia]] [[Meilleur Ami]] [[Parents de Thalia]] [[Traumatisme]]

@@ -249,4 +249,4 @@ tags:
 
 ---
 
-[[Monde Réel]] [[Parents de Thalia]] [[Meilleur(e) Ami(e)]] [[Traumatisme]] [[Onyria]] [[Morphée]] [[Phobétor]]
+[[Monde Réel]] [[Parents de Thalia]] [[Meilleur Ami]] [[Traumatisme]] [[Onyria]] [[Morphée]] [[Phobétor]]
