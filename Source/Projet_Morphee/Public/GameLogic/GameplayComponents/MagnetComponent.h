@@ -45,7 +45,7 @@ public:
 	void DeactivateMagnet();
 	
 	UFUNCTION(BlueprintCallable)
-	void FreeBall();
+	void FreeAttractedObject();
 	
 	void GrabAttractedObject();
 

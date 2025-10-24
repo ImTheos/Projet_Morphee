@@ -32,6 +32,5 @@ public:
 	float ballSpeed;
 
 	// TODO : find a better way to set this
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float epsilonDistance = 0.2f;
+	float epsilonDistance = 20.0f;
 };

@@ -124,7 +124,7 @@ void UMagnetComponent::DeactivateMagnet()
 	isMagnetActive = false;
 }
 
-void UMagnetComponent::FreeBall()
+void UMagnetComponent::FreeAttractedObject()
 {
 	if (!IsValid(attractedObject))
 	{
