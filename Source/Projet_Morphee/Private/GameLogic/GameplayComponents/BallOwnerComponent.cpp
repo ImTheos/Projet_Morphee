@@ -84,40 +84,6 @@ void UBallOwnerComponent::DisableBallDistanceLimit()
 	isLimitingBallDistance = false;
 }
 
-
-void UBallOwnerComponent::Serialize(FArchive& Ar)
-{
-	Super::Serialize(Ar);
-
-	UE_LOG(LogTemp, Log, TEXT("BallOwnerComponent : Serialize called"));
-}
-
-void UBallOwnerComponent::InitializeComponent()
-{
-	Super::InitializeComponent();
-
-	UE_LOG(LogTemp, Log, TEXT("BallOwnerComponent : InitializeComponent called"))
-}
-
-#if WITH_EDITOR
-
-void UBallOwnerComponent::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
-{
-	Super::PostEditChangeProperty(PropertyChangedEvent);
-
-	const FName ChangedPropertyName = PropertyChangedEvent.Property ? PropertyChangedEvent.Property->GetFName() : NAME_None;
-
-	if (ChangedPropertyName == GET_MEMBER_NAME_CHECKED(UBallOwnerComponent, ownedBall))
-	{
-		UE_LOG(LogTemp, Error, TEXT("ownedBall change has been detected"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("no ownedball change"));
-	}
-}
-#endif
-
 bool UBallOwnerComponent::IsBallTooFar(const FVector& ownerActorLocation) const
 {
 	if (!IsValid(ownedBall))
