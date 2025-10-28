@@ -100,7 +100,7 @@ void UMagnetComponent::GrabAttractedObject()
 	attractedObject->SetNewGrabSource(componentOwner);
 }
 
-void UMagnetComponent::ActivateMagnet()
+void UMagnetComponent::ActivateMagnet(float minimumSpeed)
 {
 	if (!IsValid(attractedObject))
 	{
@@ -115,6 +115,8 @@ void UMagnetComponent::ActivateMagnet()
 	{
 		return;
 	}
+
+	attractedObject->speed = FMath::Max(minimumSpeed, attractedObject->speed);
 
 	AttractObject();
 }

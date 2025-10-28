@@ -39,7 +39,7 @@ private:
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void ActivateMagnet();
+	void ActivateMagnet(float minimumSpeed = 0.0f);
 
 	UFUNCTION(BlueprintCallable)
 	void DeactivateMagnet();

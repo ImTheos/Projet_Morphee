@@ -28,9 +28,6 @@ public:
 
 	virtual void TickGrab() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float ballSpeed;
-
 	// TODO : find a better way to set this
 	float epsilonDistance = 20.0f;
 };

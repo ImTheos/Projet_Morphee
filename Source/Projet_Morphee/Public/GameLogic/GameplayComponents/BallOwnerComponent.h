@@ -40,6 +40,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	bool limitBallDistanceOnSpawn;
+
+	UPROPERTY(EditAnywhere, meta=(EditCondition=limitBallDistanceOnSpawn, DisplayName="Maximum distance on spawn", ToolTip="On spawn, the distance between the ball and its owner will be limited to this value"))
+	float maxDistanceOnSpawn;
 	
 	UPROPERTY()
 	bool isLimitingBallDistance;
