@@ -1,0 +1,4 @@
+owner: klembot
+repo: twinejs
+provider: github
+updaterCacheDirName: twine-updater
