@@ -5,6 +5,7 @@
 
 #include "Components/BoxComponent.h"
 #include "Components/ShapeComponent.h"
+#include "GameLogic/Ball/Ball.h"
 
 // Sets default values
 ABallContainer::ABallContainer()
@@ -13,14 +14,15 @@ ABallContainer::ABallContainer()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CollisionComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionComponent"));
+	BallMeshPreview = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BallMeshPreview"));
 
+	CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABallContainer::OnBoxOverlap);
 }
 
 // Called when the game starts or when spawned
 void ABallContainer::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -28,5 +30,21 @@ void ABallContainer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ABallContainer::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp, Warning, TEXT("ABallContainer %s : Collision detected with %s"), *GetName(), *OtherActor->GetName());
+
+	ABall* CollidedBall = Cast<ABall>(OtherActor);
+
+	if (!IsValid(CollidedBall))
+	{
+		return;
+	}
+
+	CollidedBall->speed = 0;
+	CollidedBall->SetActorTransform(BallMeshPreview->GetComponentTransform());
 }
 

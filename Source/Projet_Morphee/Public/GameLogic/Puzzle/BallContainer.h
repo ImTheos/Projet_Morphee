@@ -28,9 +28,13 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void OutputSignal();
 
-	void DetectCollision();
+	UFUNCTION()
+	void OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 private:
 	UPROPERTY(EditAnywhere)
 	UBoxComponent* CollisionComponent;
+
+	UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* BallMeshPreview;
 };
