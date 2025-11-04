@@ -38,7 +38,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float grabAnimDistance;
-
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float speed;
+	
 protected:
 	UPROPERTY()
 	const AActor* attractionSource;
@@ -48,6 +51,7 @@ private:
 	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
 
 public:
+	UFUNCTION(BlueprintCallable)
 	void FreeFromAttraction();
 	
 };

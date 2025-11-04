@@ -23,6 +23,10 @@ void UBallOwnerComponent::BeginPlay()
 	Super::BeginPlay();
 
 	isLimitingBallDistance = limitBallDistanceOnSpawn;
+	if (limitBallDistanceOnSpawn)
+	{
+		currentMaxBallDistance = maxDistanceOnSpawn;
+	}
 }
 
 
@@ -55,7 +59,7 @@ void UBallOwnerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	ownedBall->SetActorLocation(ownerActorLocation);
 
 	// TODO : link with the ball grabbing system when it's done
-	// manual set of ballSpeed is here to keep things acceptable for now
+	// manual set of speed is here to keep things acceptable for now
 	auto* magnetComponent = ballOwnerActor->GetComponentByClass<UMagnetComponent>();
 
 	if (!IsValid(magnetComponent))
