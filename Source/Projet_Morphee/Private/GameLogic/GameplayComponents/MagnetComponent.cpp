@@ -3,7 +3,7 @@
 
 #include "GameLogic/GameplayComponents/MagnetComponent.h"
 
-#include "GameLogic/Attractable.h"
+#include "GameLogic/Ball/Ball.h"
 
 // Sets default values for this component's properties
 UMagnetComponent::UMagnetComponent()
@@ -52,7 +52,7 @@ void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		return;
 	}
 
-	if (!isMagnetActive && attractedObject->GetAttractionState() == Attracted)
+	if (!isMagnetActive && attractedObject->GetBallState() == Attracted)
 	{
 		attractedObject->FreeFromAttraction();
 	}
@@ -64,7 +64,7 @@ void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	}
 }
 
-void UMagnetComponent::SetAttractedObject(AAttractable* objectToAttract)
+void UMagnetComponent::SetAttractedObject(ABall* objectToAttract)
 {
 	attractedObject = objectToAttract;
 }
@@ -111,7 +111,7 @@ void UMagnetComponent::ActivateMagnet(float minimumSpeed)
 	isMagnetActive = true;
 
 	// If object is already being attracted, no need to set up attraction again
-	if (attractedObject->GetAttractionState() != Free)
+	if (attractedObject->GetBallState() != Free)
 	{
 		return;
 	}

@@ -6,7 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "MagnetComponent.generated.h"
 
-class AAttractable;
+class ABall;
 // Component that allows the owner to attract a specific entity
 // from a distance and to grab it when the attracted object arrives
 // in a certain range from the owner
@@ -28,14 +28,14 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
 	UFUNCTION(BlueprintCallable)
-	void SetAttractedObject(AAttractable* objectToAttract);
+	void SetAttractedObject(ABall* objectToAttract);
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float magnetRadius;
 
 private:
-	UPROPERTY(Transient)
-	TObjectPtr<AAttractable> attractedObject;
+	UPROPERTY()
+	TObjectPtr<ABall> attractedObject;
 
 public:
 	UFUNCTION(BlueprintCallable)

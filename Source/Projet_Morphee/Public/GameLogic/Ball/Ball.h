@@ -4,11 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "GameLogic/Attractable.h"
 #include "Ball.generated.h"
 
+UENUM(BlueprintType)
+enum EBallState
+{
+	Free,
+	Attracted,
+	Grabbed,
+	Stationary
+};
+
 UCLASS()
-class PROJET_MORPHEE_API ABall : public AAttractable
+class PROJET_MORPHEE_API ABall : public AActor
 {
 	GENERATED_BODY()
 	
@@ -24,9 +32,32 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void TickAttract() override;
+	virtual void TickAttract();
 
-	virtual void TickGrab() override;
+	virtual void TickGrab();
+
+	void SetNewAttractionSource(const AActor* newAttractionSource);
+	void SetNewGrabSource(const AActor* newGrabSource);
+	void FreeFromAttraction();
+	void SetStationaryAtLocation(const FVector& location);
+	
+	UFUNCTION(BlueprintCallable)
+	EBallState GetBallState() const;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float grabAnimDistance;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float speed;
+	
+private:
+	UPROPERTY()
+	const AActor* attractionSource;
+	
+	EBallState ballState = Free;
+	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
+
+public:
 
 	// TODO : find a better way to set this
 	float epsilonDistance = 20.0f;

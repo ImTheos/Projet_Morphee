@@ -14,9 +14,12 @@ ABallContainer::ABallContainer()
 	PrimaryActorTick.bCanEverTick = true;
 
 	CollisionComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionComponent"));
-	BallMeshPreview = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BallMeshPreview"));
+	CollisionComponent->SetupAttachment(RootComponent);
+	//
+	// BallMeshPreview = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BallMeshPreview"));
+	// BallMeshPreview->SetupAttachment(RootComponent);
 
-	CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABallContainer::OnBoxOverlap);
+	// CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABallContainer::OnBoxOverlap);
 }
 
 // Called when the game starts or when spawned
@@ -43,8 +46,7 @@ void ABallContainer::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 	{
 		return;
 	}
-
-	CollidedBall->speed = 0;
-	CollidedBall->SetActorTransform(BallMeshPreview->GetComponentTransform());
+	
+	// CollidedBall->SetStationaryAtLocation(BallMeshPreview->GetComponentLocation());
 }
 

@@ -34,7 +34,7 @@ public:
 private:
 	UPROPERTY(EditAnywhere)
 	UBoxComponent* CollisionComponent;
-
-	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* BallMeshPreview;
+	//
+	// UPROPERTY(EditAnywhere)
+	// UStaticMeshComponent* BallMeshPreview;
 };
