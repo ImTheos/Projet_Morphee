@@ -51,7 +51,6 @@ private:
 	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
 
 public:
-	UFUNCTION(BlueprintCallable)
 	void FreeFromAttraction();
 	
 };
