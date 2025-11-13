@@ -4,6 +4,7 @@
 #include "GameLogic/Ball/Ball.h"
 
 #include "Components/SphereComponent.h"
+#include "GameFramework/Character.h"
 
 // Sets default values
 ABall::ABall()
@@ -112,6 +113,11 @@ void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
 
 void ABall::FreeFromAttraction()
 {
+	if (ballState != Grabbed && ballState != Attracted)
+	{
+		return;
+	}
+	
 	SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
 	
 	attractionSource = nullptr;
@@ -128,6 +134,37 @@ void ABall::SetStationaryAtLocation(const FVector& location)
 	
 	// TODO : Add animation for ball transition to new location
 	SetActorLocation(location);
+}
+
+void ABall::ReleaseFromStationary(float releaseSpeed)
+{
+	speed = releaseSpeed;
+	
+	UWorld* world = GetWorld();
+	if (!IsValid(world))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::ReleaseFromStationary : The world is invalid ?!"));
+		return;
+	}
+	
+	APlayerController* playerController = world->GetFirstPlayerController();
+	
+	if (!IsValid(playerController))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::ReleaseFromStationary : playerController is invalid"));
+		return;
+	}
+	
+	// Dirty way of getting the player character
+	ACharacter* playerCharacter = Cast<ACharacter>(playerController->GetPawn());
+	
+	if (!IsValid(playerCharacter))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::ReleaseFromStationary : playerCharacter is invalid"));
+		return;
+	}
+	
+	SetNewGrabSource(playerCharacter);
 }
 
 

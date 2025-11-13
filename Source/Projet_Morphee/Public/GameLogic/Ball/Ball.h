@@ -39,7 +39,9 @@ public:
 	void SetNewAttractionSource(const AActor* newAttractionSource);
 	void SetNewGrabSource(const AActor* newGrabSource);
 	void FreeFromAttraction();
+	
 	void SetStationaryAtLocation(const FVector& location);
+	void ReleaseFromStationary(float releaseSpeed);
 	
 	UFUNCTION(BlueprintCallable)
 	EBallState GetBallState() const;
