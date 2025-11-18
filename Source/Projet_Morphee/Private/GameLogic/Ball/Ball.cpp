@@ -4,6 +4,7 @@
 #include "GameLogic/Ball/Ball.h"
 
 #include "Components/SphereComponent.h"
+#include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
 
 // Sets default values
@@ -11,7 +12,6 @@ ABall::ABall()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
@@ -134,11 +134,15 @@ void ABall::SetStationaryAtLocation(const FVector& location)
 	
 	// TODO : Add animation for ball transition to new location
 	SetActorLocation(location);
+	
+	directionWidget->SetVisibility(false);
 }
 
 void ABall::ReleaseFromStationary(float releaseSpeed)
 {
 	speed = releaseSpeed;
+	
+	directionWidget->SetVisibility(true);
 	
 	UWorld* world = GetWorld();
 	if (!IsValid(world))

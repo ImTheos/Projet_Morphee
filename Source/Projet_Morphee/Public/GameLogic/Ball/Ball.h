@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Ball.generated.h"
 
+class UWidgetComponent;
+
 UENUM(BlueprintType)
 enum EBallState
 {
@@ -58,6 +60,9 @@ private:
 	
 	EBallState ballState = Free;
 	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
+	
+	UPROPERTY(EditAnywhere)
+	UWidgetComponent* directionWidget;
 
 public:
 
