@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "BallContainer.generated.h"
 
+class ABall;
 class UBoxComponent;
 
 UCLASS()
@@ -27,14 +28,26 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OutputSignal();
+	
+	UFUNCTION(BlueprintCallable)
+	void ReleaseBalls(float releaseSpeed);
 
 	UFUNCTION()
 	void OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 private:
 	UPROPERTY(EditAnywhere)
-	UBoxComponent* CollisionComponent;
-
+	UBoxComponent* collisionComponent;
+	
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* BallMeshPreview;
+	UStaticMeshComponent* ballMeshPreview;
+	
+	UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* containerMesh;
+	
+	UPROPERTY(EditAnywhere)
+	USceneComponent* sceneRoot;
+	
+	UPROPERTY()
+	TArray<ABall*> storedBalls;
 };

@@ -12,11 +12,20 @@ ABallContainer::ABallContainer()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
+	sceneRoot = CreateDefaultSubobject<USceneComponent>("SceneRoot");
+	sceneRoot->SetupAttachment(RootComponent);
 
-	CollisionComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionComponent"));
-	BallMeshPreview = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BallMeshPreview"));
-
-	CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABallContainer::OnBoxOverlap);
+	collisionComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionComponent"));
+	collisionComponent->SetupAttachment(sceneRoot);
+	
+	ballMeshPreview = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BallMeshPreview"));
+	ballMeshPreview->SetupAttachment(sceneRoot);
+	
+	containerMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ContainerMesh"));
+	containerMesh->SetupAttachment(sceneRoot);
+	
+	collisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABallContainer::OnBoxOverlap);
 }
 
 // Called when the game starts or when spawned
@@ -32,19 +41,35 @@ void ABallContainer::Tick(float DeltaTime)
 
 }
 
+void ABallContainer::ReleaseBalls(float releaseSpeed)
+{
+	for (ABall* ball : storedBalls)
+	{
+		if (!IsValid(ball))
+		{
+			UE_LOG(LogTemp, Error, TEXT("ABallContainer::ReleaseBalls : invalid Ball"))
+			continue;
+		}
+		
+		ball->ReleaseFromStationary(releaseSpeed);
+	}
+}
+
 void ABallContainer::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+                                  UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp, Warning, TEXT("ABallContainer %s : Collision detected with %s"), *GetName(), *OtherActor->GetName());
 
-	ABall* CollidedBall = Cast<ABall>(OtherActor);
+	ABall* collidedBall = Cast<ABall>(OtherActor);
 
-	if (!IsValid(CollidedBall))
+	if (!IsValid(collidedBall))
 	{
 		return;
 	}
-
-	CollidedBall->speed = 0;
-	CollidedBall->SetActorTransform(BallMeshPreview->GetComponentTransform());
+	
+	collidedBall->SetStationaryAtLocation(ballMeshPreview->GetComponentLocation());
+	storedBalls.Add(collidedBall);
+	
+	OutputSignal();
 }
 
