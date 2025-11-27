@@ -9,13 +9,6 @@
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
 
-UMinNavDistanceFromTarget::UMinNavDistanceFromTarget(const FObjectInitializer& OI) : Super(OI)
-{
-	targetKeyName.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UMinNavDistanceFromTarget, targetKeyName), AActor::StaticClass());
-	targetKeyName.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UMinNavDistanceFromTarget, targetKeyName));
-	
-	resultKeyName.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UMinNavDistanceFromTarget, resultKeyName));
-}
 
 void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
@@ -39,7 +32,10 @@ void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 	
 	FVector targetLocation;
 	
-	if (targetKeyName.SelectedKeyType == UBlackboardKeyType_Object::StaticClass())
+	FBlackboard::FKey KeyID = targetKeyName.GetSelectedKeyID();
+	TSubclassOf<UBlackboardKeyType> targetKeyType = blackboard->GetKeyType(KeyID);
+	
+	if (targetKeyType == UBlackboardKeyType_Object::StaticClass())
 	{
 		AActor* targetActor = Cast<AActor>(blackboard->GetValueAsObject(targetKeyName.SelectedKeyName));
 		if (!IsValid(targetActor))
@@ -49,7 +45,7 @@ void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 		
 		targetLocation = targetActor->GetActorLocation();
 	}
-	else if (targetKeyName.SelectedKeyType == UBlackboardKeyType_Vector::StaticClass())
+	else if (targetKeyType == UBlackboardKeyType_Vector::StaticClass())
 	{
 		targetLocation = blackboard->GetValueAsVector(targetKeyName.SelectedKeyName);
 	}
