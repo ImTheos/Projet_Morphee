@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "AI/Decorator/MinNavDistanceFromTarget.h"
+#include "AI/Service/MinNavDistanceFromTarget.h"
 
 #include "AIController.h"
 #include "NavigationSystem.h"
@@ -72,3 +72,16 @@ void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 	
 	blackboard->SetValueAsBool(resultKeyName.SelectedKeyName, result);
 }
+
+void UMinNavDistanceFromTarget::InitializeFromAsset(UBehaviorTree& Asset)
+{
+	Super::InitializeFromAsset(Asset);
+	
+	UBlackboardData* BBAsset = GetBlackboardAsset();
+	
+	if (ensure(BBAsset))
+	{
+		targetKeyName.ResolveSelectedKey(*BBAsset);
+		resultKeyName.ResolveSelectedKey(*BBAsset);
+	}
+} 
