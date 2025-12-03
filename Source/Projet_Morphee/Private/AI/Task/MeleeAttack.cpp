@@ -22,7 +22,7 @@ EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 		return EBTNodeResult::Failed;
 	}
 	
-	UBlackboardComponent* blackboard = OwnerComp.GetBlackboardComponent();
+	blackboard = OwnerComp.GetBlackboardComponent();
 	
 	if (!blackboard)
 	{
@@ -33,7 +33,7 @@ EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 	
 	if (remainingCooldown != 0.0f)
 	{
-		return EBTNodeResult::InProgress;
+		return EBTNodeResult::Failed;
 	}
 	
 	blackboard->SetValueAsFloat(remainingCooldownKey.SelectedKeyName, cooldown);
@@ -46,8 +46,7 @@ EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 	// wait for startup to finish
 	FTimerHandle timerHandle;
 	
-	FTimerDelegate attackDelegate;
-	attackDelegate.BindUFunction(this, "Attack");
+	blackboard->SetValueAsBool(canAttackKey.SelectedKeyName, false);
 	
 	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMeleeAttack::Attack, attackStartupDuration);
 	
@@ -66,9 +65,10 @@ void UMeleeAttack::InitializeFromAsset(UBehaviorTree& Asset)
 	}
 	
 	remainingCooldownKey.ResolveSelectedKey(*BBAsset);
+	canAttackKey.ResolveSelectedKey(*BBAsset);
 }
 
-void UMeleeAttack::Attack() const
+void UMeleeAttack::Attack()
 {
 	USkeletalMeshComponent* meshComponent = pawn->GetComponentByClass<USkeletalMeshComponent>();
 	
@@ -77,8 +77,20 @@ void UMeleeAttack::Attack() const
 		return;
 	}
 	
+	UAnimInstance* AnimInstance = meshComponent->GetAnimInstance();
+	
+	if (!IsValid(AnimInstance))
+	{
+		return;
+	}
+	
 	// launch attack
-	meshComponent->PlayAnimation(attackAnimation, false);
+	AnimInstance->Montage_Play(attackAnimationMontage);
+	
+	FOnMontageEnded animEndDelegate;
+	animEndDelegate.BindUObject(this, &UMeleeAttack::EndAttackAnim);
+	
+	AnimInstance->Montage_SetEndDelegate(animEndDelegate, attackAnimationMontage);
 	
 	// test for hit
 	FHitResult hitResult;
@@ -87,18 +99,28 @@ void UMeleeAttack::Attack() const
 	collisionShape.MakeSphere(attackSphereSize);
 	
 	// TODO : un-hardcode the collision profile
-	GetWorld()->SweepSingleByProfile(hitResult, pawn->GetActorLocation(), pawn->GetActorLocation(), FQuat::Identity, TEXT("Pawn"), collisionShape);
+	GetWorld()->SweepSingleByProfile(hitResult, pawn->GetActorLocation(), pawn->GetActorLocation(), FQuat::Identity, TEXT("EnemyPawn"), collisionShape);
 	
 	if (hitResult.bBlockingHit)
 	{
-		UE_LOG(LogTemp, Verbose, TEXT("UMeleeAttack : Collision detected !"));
+		UE_LOG(LogTemp, Log, TEXT("Hit blocking hit!"));
 	}
 	else
 	{
-		UE_LOG(LogTemp, Verbose, TEXT("UMeleeAttack : No collision detected :("));
+		UE_LOG(LogTemp, Log, TEXT("UMeleeAttack : No collision detected :("));
 	}
 	
 	// TODO
 	// send hit to player (if player hit) 
 	
+}
+
+void UMeleeAttack::EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) const
+{
+	if (!blackboard)
+	{
+		return;
+	}
+	
+	blackboard->SetValueAsBool(canAttackKey.SelectedKeyName, true);
 }

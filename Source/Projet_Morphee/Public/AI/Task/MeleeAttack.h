@@ -18,7 +18,7 @@ class PROJET_MORPHEE_API UMeleeAttack : public UBTTaskNode
 	
 public:
 	UPROPERTY(EditAnywhere, Category="Animation")
-	UAnimationAsset* attackAnimation;
+	UAnimMontage* attackAnimationMontage;
 	
 	UPROPERTY(EditAnywhere, Category="Attack")
 	float cooldown;
@@ -31,6 +31,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, Category="Attack")
 	FBlackboardKeySelector remainingCooldownKey;
+
+	UPROPERTY(EditAnywhere, Category="Attack")
+	FBlackboardKeySelector canAttackKey;
 	
 private:
 	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
@@ -39,6 +42,11 @@ private:
 	APawn* pawn;
 	
 	UFUNCTION()
-	void Attack() const;
+	void Attack();
 	
+	UFUNCTION()
+	void EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) const;
+	
+	UPROPERTY()
+	UBlackboardComponent* blackboard;
 };
