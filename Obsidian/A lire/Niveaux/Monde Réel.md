@@ -6,18 +6,16 @@ tags:
 ### Le Conservatoire
 
 ---
-### La Chambre
+### L'Appartement
 
 ![[Appartement.png]]
-#### Objets/Interactions avec Sequencer[^2]
+#### Objets/Interactions
 
 - PC et Téléphone
 
-| Avant Onyria                                                                                                                                                                                                                                                                                                                                                                                                                  | Après Isolement                                                                                                                                                                                                                        |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Deux des addictions de Thalia. Sur les deux écrans, elle passe du temps exclusivement sur les réseaux sociaux. Son intérêt pour les jeux et autres a décroît avec le temps. Les réseaux lui offrent une bribe de contact social. Juste ce qu'il faut pour oublier sa solitude le temps d'un instant. Depuis récemment, son PC demande une réparation mais Thalia n'a pas la force de le réparer seule ni d'aller le déposer : | Réparée par elle-même, le PC de Thalia lui offre le plaisir de jouer à des jeux en ligne pour se changer les idées avec des inconnus. Quant à son téléphone, elle ne dort plus avec et l'utilise pour envoyer des messages à ses amis. |
-| Dialogue 1 : "XXXXXXXXXXXXXXXXXXXX"                                                                                                                                                                                                                                                                                                                                                                                           | "XXXXXXXXXXXXXXXXXXXX"                                                                                                                                                                                                                 |
-| Dialogue 2 : "####################"                                                                                                                                                                                                                                                                                                                                                                                           | "####################"                                                                                                                                                                                                                 |
+| Avant Onyria                                                                                                                                                                                                                                                                                                                                                                                                                 | Après Isolement                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Deux des addictions de Thalia. Sur les deux écrans, elle passe du temps exclusivement sur les réseaux sociaux. Son intérêt pour les jeux et autres a décroît avec le temps. Les réseaux lui offrent une bribe de contact social. Juste ce qu'il faut pour oublier sa solitude le temps d'un instant. Depuis récemment, son PC demande une réparation mais Thalia n'a pas la force de le réparer seule ni d'aller le déposer. | Réparée par elle-même, le PC de Thalia lui offre le plaisir de jouer à des jeux en ligne pour se changer les idées avec des inconnus. Quant à son téléphone, elle ne dort plus avec et l'utilise pour envoyer des messages à ses amis. |
 
 - Vaisselle
 
@@ -46,29 +44,16 @@ tags:
 > 	1. Posters références à des musiciens ou groupes de musiques
 > 	2. ...
 
--  Journal Intime
-
-> Sur son bureau, un journal intime datant de l'époque du collège qu'elle remplissait quasiment tous les jours. 
-
-| Avant Onyria                                                                                                                                               | Après Anxiété                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Thalia ose à peine l'ouvrir par peur de se remémorer une époque bien différente de l'actuelle. Une époque où elle pensait avoir un avenir dans la musique. | Son journal lui permet de suivre ses avancées ainsi que de poser sur papier son expérience de la dépression.<br> |
 - Synthé
 
 > Le synthé est un reliquat des tentatives ratées de Thalia à l'égard de la composition. Il a été offert par Nathan, qui a déjà un pied dans ce domaine, à son dernier anniversaire avec une promesse de la part de Thalia. Un jour, lui présenter une composition capable de le surprendre.
 
-| Avant Onyria                                                                                                                  | Après Phobétor                                                                                                                                                               |
-| ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Elle espère un jour présenter une composition parfaite à son ami. Sauf que depuis, le synthé est poussiéreux, laissé de côté. | Elle s'est mise à composer son premier son dont elle est fière, très inspiré par le piano et les instruments joués par ses parents. Elle en parle avec Nathan par téléphone. |
-#### Objets/Interactions sans Sequencer
+| Avant Onyria | Après Phobétor |
+| ------------ | -------------- |
+|              |                |
 
--  Son armoire.
+*  TV
 
-> XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-[^1]: À décider...
-
-[^2]: Dans l'ordre chronologique
 
 ---
 
