@@ -4,6 +4,7 @@
 #include "AI/Task/MeleeAttack.h"
 
 #include "AIController.h"
+#include "MyCPPCharacter.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
 EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
@@ -95,23 +96,19 @@ void UMeleeAttack::Attack()
 	// test for hit
 	FHitResult hitResult;
 	
-	FCollisionShape collisionShape;
-	collisionShape.MakeSphere(attackSphereSize);
+	FCollisionShape collisionShape = FCollisionShape::MakeSphere(attackSphereSize);
 	
 	// TODO : un-hardcode the collision profile
-	GetWorld()->SweepSingleByProfile(hitResult, pawn->GetActorLocation(), pawn->GetActorLocation(), FQuat::Identity, TEXT("EnemyPawn"), collisionShape);
+	GetWorld()->SweepSingleByChannel(hitResult, pawn->GetActorLocation(), pawn->GetActorLocation(), FQuat::Identity, ECC_GameTraceChannel4, collisionShape);
 	
-	if (hitResult.bBlockingHit)
+	if (!hitResult.bBlockingHit)
 	{
-		UE_LOG(LogTemp, Log, TEXT("Hit blocking hit!"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Log, TEXT("UMeleeAttack : No collision detected :("));
+		return;
 	}
 	
 	// TODO
-	// send hit to player (if player hit) 
+	// send hit to player (if player hit)
+	auto* playerCharacter = Cast<AMyCPPCharacter>(hitResult.GetActor());
 	
 }
 
