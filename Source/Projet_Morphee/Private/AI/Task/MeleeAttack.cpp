@@ -110,6 +110,8 @@ void UMeleeAttack::Attack()
 	// send hit to player (if player hit)
 	auto* playerCharacter = Cast<AMyCPPCharacter>(hitResult.GetActor());
 	
+	
+	
 }
 
 void UMeleeAttack::EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) const
