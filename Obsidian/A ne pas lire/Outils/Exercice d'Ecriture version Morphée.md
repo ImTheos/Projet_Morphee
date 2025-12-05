@@ -1,37 +1,37 @@
+---
+tags:
+  - Protagoniste
+---
+### Exo 1 
 
-J’ai rencontré un voyageur venu d’une terre antique  
-Qui m’a dit : « Deux jambes de pierre vastes et sans tronc  
-Se dressent dans le désert. Près d’elles, sur le sable,  
-À moitié enfoncé, gît un visage brisé, dont le froncement de sourcil  
-  
-Et la lèvre plissée, et le ricanement de froid commandement  
-Disent que le sculpteur sut bien lire ces passions  
-Qui survivent encore, empreintes sur ces choses sans vie,  
-À la main qui les imita et au cœur qui les nourrit.  
-  
-Et sur le piédestal apparaissent ces mots :  
-« Mon nom est Ozymandias, roi des rois ;  
-Regardez mes œuvres, ô puissants, et désespérez ! »  
-  
-Il ne reste rien à côté. Autour de la ruine  
-De ce colossal débris, sans limites et nus,  
-Les sables étendent au loin leur niveau solitaire. »
+```
+# Contexte
 
-# Essai N°1
+Nos deux protagonistes sont à leur deuxième jour d'aventure. Morphée comprend depuis un moment qu'il a besoin de Thalia pour avancer. Toutefois, cela ne l'empêche pas de manquer de respect à la jeune hermine. Qui laisse alors échapper sa frustration et sa colère.
 
-Un voyageur venu tout droit d'un pays au nom imprononçable
-M'a raconté : « Deux jambes immenses d'une statue encore plus grande
-Se tiennent là, dans le désert. À côté d'elles se trouvait un visage brisé, à moitié enfoncé dans le sable
+# Motif Principal
 
-Avec son froncement de sourcil, ses lèvres plissées et son ricanement froid
-On se rend compte que le sculpteur savait bien lire les passions
-Qui survivent, sculptés dans la pierre sans vie,
-À la personne qui les incarnait et au cœur qui les nourrit
 
-Et sur son piédestal, apparait un honneur :
-«Mon nom est Ozymandias, roi des rois ;
-Regardez mes œuvres, ô puissants, et désespérez ! »
 
-Autour de la ruine, rien ne persiste. 
-Les débris, entourés de sables
-Dont l'horizon s'étend, seul, à l'infini lointain
+# Motif Secondaire 
+
+
+
+# Conclusion
+
+
+
+# Ce qu'à apprit le joueur
+
+
+```
+
+
+> [!quote] Thalia
+> Morphée ! Tu peux arrêter de me prendre pour une imbécile ?!
+> J'en ai marre que tu me caches des choses, que tu me donnes des ordres.
+> Je sais pas qui t'es, je t'ai juste aidé  bonne volonté.
+> Tu n'es pas mon père.
+
+> [!quote] Morphée
+> 
