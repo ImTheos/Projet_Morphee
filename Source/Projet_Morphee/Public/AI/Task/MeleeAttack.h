@@ -21,19 +21,10 @@ public:
 	UAnimMontage* attackAnimationMontage;
 	
 	UPROPERTY(EditAnywhere, Category="Attack")
-	float cooldown;
-	
-	UPROPERTY(EditAnywhere, Category="Attack")
-	float attackStartupDuration;
-	
-	UPROPERTY(EditAnywhere, Category="Attack")
-	float attackSphereSize;
-	
-	UPROPERTY(EditAnywhere, Category="Attack")
-	FBlackboardKeySelector remainingCooldownKey;
+	FBlackboardKeySelector remainingAttackCooldownKey;
 
 	UPROPERTY(EditAnywhere, Category="Attack")
-	FBlackboardKeySelector canAttackKey;
+	FBlackboardKeySelector canMoveKey;
 	
 private:
 	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
