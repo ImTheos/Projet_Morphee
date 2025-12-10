@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTTaskNode.h"
+#include "BehaviorTree/BTTaskNode.h"
 #include "MeleeAttack.generated.h"
 
 /**
@@ -14,30 +15,38 @@ class PROJET_MORPHEE_API UMeleeAttack : public UBTTaskNode
 {
 	GENERATED_BODY()
 	
+	// Setup of variables and blackboard values
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+	
+	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
 	
 public:
 	UPROPERTY(EditAnywhere, Category="Animation")
 	UAnimMontage* attackAnimationMontage;
 	
+	/** Blackboard key that stores the remaining cooldown before the player can attack again **/
 	UPROPERTY(EditAnywhere, Category="Attack")
 	FBlackboardKeySelector remainingAttackCooldownKey;
 
+	/** Blackboard key that stores the remaining cooldown before the player can act again **/
 	UPROPERTY(EditAnywhere, Category="Attack")
-	FBlackboardKeySelector canMoveKey;
+	FBlackboardKeySelector attackEndLagKey;
 	
 private:
-	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
-	
 	UPROPERTY()
-	APawn* pawn;
-	
-	UFUNCTION()
-	void Attack();
-	
-	UFUNCTION()
-	void EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) const;
+	ACharacter* aiCharacter;
 	
 	UPROPERTY()
 	UBlackboardComponent* blackboard;
+	
+	// Attack hitbox preview
+	void PreAttack();
+	
+	// Actual attack animation and hit detection 
+	UFUNCTION()
+	void Attack();
+	
+	// Allows the character to act again
+	UFUNCTION()
+	void EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) const;
 };

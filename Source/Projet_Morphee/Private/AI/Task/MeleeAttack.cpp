@@ -5,7 +5,23 @@
 
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "GameFramework/Character.h"
 #include "GameLogic/Interfaces/Damageable.h"
+
+void UMeleeAttack::PreAttack()
+{
+	// Play animation startup
+	// TODO : add real preview animation
+	DrawDebugCircle(GetWorld(), aiCharacter->GetActorLocation(), blackboard->GetValueAsFloat("attackRange"), 
+		100, FColor::Red, false, blackboard->GetValueAsFloat("attackStartupDuration"), 0, 10, 
+		FVector(1,0,0), FVector(0,1,0));
+	
+	blackboard->SetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName, blackboard->GetValueAsFloat("attackCooldown"));
+	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, false);
+	
+	FTimerHandle timerHandle;
+	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMeleeAttack::Attack, blackboard->GetValueAsFloat("attackStartupDuration"));
+}
 
 EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
@@ -13,13 +29,15 @@ EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 	
 	if (!aiController)
 	{
+		UE_LOG(LogTemp, Error, TEXT("UMeleeAttack::ExecuteTask : aiController is invalid"));
 		return EBTNodeResult::Failed;
 	}
 	
-	pawn = aiController->GetPawn();
+	aiCharacter = Cast<ACharacter>(aiController->GetPawn());
 	
-	if (!IsValid(pawn) || !IsValid(pawn->GetComponentByClass<USkeletalMeshComponent>()))
+	if (!IsValid(aiCharacter))
 	{
+		UE_LOG(LogTemp, Error, TEXT("UMeleeAttack::ExecuteTask : aiCharacter is invalid"));
 		return EBTNodeResult::Failed;
 	}
 	
@@ -27,29 +45,19 @@ EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 	
 	if (!blackboard)
 	{
+		UE_LOG(LogTemp, Error, TEXT("UMeleeAttack::ExecuteTask : blackboard is invalid"));
 		return EBTNodeResult::Failed;
 	} 
 	
-	float remainingCooldown = blackboard->GetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName);
+	float remainingAttackCooldown = blackboard->GetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName);
 	
-	if (remainingCooldown != 0.0f)
+	// Check if the player can attack right now
+	if (remainingAttackCooldown != 0.0f)
 	{
 		return EBTNodeResult::Failed;
 	}
 	
-	blackboard->SetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName, blackboard->GetValueAsFloat("attackCooldown"));
-	
-	// play animation startup
-	DrawDebugCircle(GetWorld(), pawn->GetActorLocation(), blackboard->GetValueAsFloat("attackRange"), 
-		10000, FColor::Red, false, blackboard->GetValueAsFloat("attackStartupDuration"), 0, 10, 
-		FVector(1,0,0), FVector(0,1,0));
-	
-	// wait for startup to finish
-	FTimerHandle timerHandle;
-	
-	blackboard->SetValueAsBool(canMoveKey.SelectedKeyName, false);
-	
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMeleeAttack::Attack, blackboard->GetValueAsFloat("attackStartupDuration"));
+	PreAttack();
 	
 	return EBTNodeResult::Succeeded;
 }
@@ -58,66 +66,74 @@ void UMeleeAttack::InitializeFromAsset(UBehaviorTree& Asset)
 {
 	Super::InitializeFromAsset(Asset);
 	
-	UBlackboardData* BBAsset = GetBlackboardAsset();
+	remainingAttackCooldownKey.AddFloatFilter(this, GET_MEMBER_NAME_CHECKED(UMeleeAttack, remainingAttackCooldownKey));
+	attackEndLagKey.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UMeleeAttack, attackEndLagKey));
+
+	const UBlackboardData* blackboardData = GetBlackboardAsset();
 	
-	if (!ensure(BBAsset))
+	if (!ensure(blackboardData))
 	{
+		UE_LOG(LogTemp, Error, TEXT("UMeleeAttack::InitializeFromAsset : blackboardData is invalid"))
 		return;
 	}
 	
-	remainingAttackCooldownKey.ResolveSelectedKey(*BBAsset);
-	canMoveKey.ResolveSelectedKey(*BBAsset);
-	
-	remainingAttackCooldownKey.AddFloatFilter(this, GET_MEMBER_NAME_CHECKED(UMeleeAttack, remainingAttackCooldownKey));
-	canMoveKey.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UMeleeAttack, canMoveKey));
+	// /!\ Necessary for Blackboards key to work correctly
+	remainingAttackCooldownKey.ResolveSelectedKey(*blackboardData);
+	attackEndLagKey.ResolveSelectedKey(*blackboardData);
 }
 
 void UMeleeAttack::Attack()
 {
-	USkeletalMeshComponent* meshComponent = pawn->GetComponentByClass<USkeletalMeshComponent>();
+	USkeletalMeshComponent* meshComponent = aiCharacter->GetComponentByClass<USkeletalMeshComponent>();
 	
 	if (!IsValid(meshComponent))
 	{
+		UE_LOG(LogTemp, Error, TEXT("UMeleeAttack::Attack : meshComponent is invalid"));
 		return;
 	}
 	
-	UAnimInstance* AnimInstance = meshComponent->GetAnimInstance();
+	UAnimInstance* animInstance = meshComponent->GetAnimInstance();
 	
-	if (!IsValid(AnimInstance))
+	if (!IsValid(animInstance))
 	{
+		UE_LOG(LogTemp, Error, TEXT("UMeleeAttack::Attack : animInstance is invalid"));
 		return;
 	}
 	
-	// launch attack
-	AnimInstance->Montage_Play(attackAnimationMontage);
+	animInstance->Montage_Play(attackAnimationMontage);
 	
 	FOnMontageEnded animEndDelegate;
 	animEndDelegate.BindUObject(this, &UMeleeAttack::EndAttackAnim);
 	
-	AnimInstance->Montage_SetEndDelegate(animEndDelegate, attackAnimationMontage);
+	animInstance->Montage_SetEndDelegate(animEndDelegate, attackAnimationMontage);
 	
-	// test for hit
-	FHitResult hitResult;
+	FHitResult attackHitResult;
+	const auto attackCollisionShape = 
+		FCollisionShape::MakeSphere(blackboard->GetValueAsFloat("attackRange"));
 	
-	FCollisionShape collisionShape = FCollisionShape::MakeSphere(blackboard->GetValueAsFloat("attackRange"));
+	// TODO : Allow this to be changed from editor
+	constexpr ECollisionChannel attackTraceChannel = ECC_GameTraceChannel4;
 	
-	// TODO : un-hardcode the collision profile
-	GetWorld()->SweepSingleByChannel(hitResult, pawn->GetActorLocation(), pawn->GetActorLocation(), FQuat::Identity, ECC_GameTraceChannel4, collisionShape);
+	// TODO : Test for collision during the whole animation
+	GetWorld()->SweepSingleByChannel(attackHitResult, 
+		aiCharacter->GetActorLocation(), aiCharacter->GetActorLocation(), 
+		FQuat::Identity, attackTraceChannel, attackCollisionShape);
 	
-	if (!hitResult.bBlockingHit)
+	if (!attackHitResult.bBlockingHit)
 	{
+		// Attack did not hit a target
 		return;
 	}
 	
-	// TODO
-	// send hit to player (if player hit)
-	auto* hitActor = Cast<AActor>(hitResult.GetActor());
+	auto* hitActor = Cast<AActor>(attackHitResult.GetActor());
 	if (!hitActor->GetClass()->ImplementsInterface(UDamageable::StaticClass()))
 	{
 		return;
 	}
 	
-	IDamageable::Execute_ReceiveDamage(hitActor, blackboard->GetValueAsFloat("attackDamage"), hitResult.ImpactNormal, pawn);
+	IDamageable::Execute_ReceiveDamage(hitActor, 
+		blackboard->GetValueAsFloat("attackDamage"), 
+		attackHitResult.ImpactNormal, aiCharacter);
 }
 
 void UMeleeAttack::EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) const
@@ -127,5 +143,5 @@ void UMeleeAttack::EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) c
 		return;
 	}
 	
-	blackboard->SetValueAsBool(canMoveKey.SelectedKeyName, true);
+	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, true);
 }

@@ -8,8 +8,6 @@
 
 void ARunnerCharacter::InitCharacter()
 {
-	Super::InitCharacter();
-	
 	AAIController* activeController = Cast<AAIController>(GetController());
 	if (!IsValid(activeController))
 	{

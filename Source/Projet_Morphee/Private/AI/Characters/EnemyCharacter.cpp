@@ -11,28 +11,8 @@ AEnemyCharacter::AEnemyCharacter()
 
 }
 
-// Called when the game starts or when spawned
-void AEnemyCharacter::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void AEnemyCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
-// Called to bind functionality to input
-void AEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-
 void AEnemyCharacter::InitCharacter()
 {
+	UE_LOG(LogTemp, Warning, TEXT("AEnemyCharacter::InitCharacter : this function should be overwritten and not called by Super()"))
 }
 
