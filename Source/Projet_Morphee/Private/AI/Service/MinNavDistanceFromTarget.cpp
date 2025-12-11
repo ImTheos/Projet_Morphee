@@ -12,34 +12,37 @@
 
 void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
-	UBlackboardComponent* blackboard = OwnerComp.GetBlackboardComponent();
-	if (!blackboard)
+	const AAIController* aiController = OwnerComp.GetAIOwner();
+	if (!IsValid(aiController))
 	{
+		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : aiController is invalid"));
 		return;
 	}
-	
-	AAIController* controller = OwnerComp.GetAIOwner();
-	if (!IsValid(controller))
+
+	const APawn* aiCharacterActor = aiController->GetPawn();
+	if (!IsValid(aiCharacterActor))
 	{
-		return;
-	}
-	
-	APawn* currentActor = controller->GetPawn();
-	if (!IsValid(currentActor))
-	{
+		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : aiCharacterActor is invalid"));
 		return;
 	}
 	
 	FVector targetLocation;
 	
-	FBlackboard::FKey KeyID = targetKeyName.GetSelectedKeyID();
-	TSubclassOf<UBlackboardKeyType> targetKeyType = blackboard->GetKeyType(KeyID);
+	UBlackboardComponent* blackboard = OwnerComp.GetBlackboardComponent();
+	if (!blackboard)
+	{
+		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : blackboard is invalid"));
+		return;
+	}
+	
+	TSubclassOf<UBlackboardKeyType> targetKeyType = blackboard->GetKeyType(targetKeyName.GetSelectedKeyID());
 	
 	if (targetKeyType == UBlackboardKeyType_Object::StaticClass())
 	{
-		AActor* targetActor = Cast<AActor>(blackboard->GetValueAsObject(targetKeyName.SelectedKeyName));
+		const AActor* targetActor = Cast<AActor>(blackboard->GetValueAsObject(targetKeyName.SelectedKeyName));
 		if (!IsValid(targetActor))
 		{
+			UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : targetActor is invalid"));
 			return;
 		}
 		
@@ -51,24 +54,38 @@ void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 	}
 	else
 	{
+		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : invalid target key type"));
 		return;
 	}
 	
-	// TODO do this properly
-	UNavigationSystemV1* navSystem = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+	UWorld* world = GetWorld();
+	if (!IsValid(world))
+	{
+		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : world is invalid"));
+		return;
+	}
+	
+	// TODO refactor this distance calculation by using the EQS system
+	UNavigationSystemV1* navSystem = FNavigationSystem::GetCurrent<UNavigationSystemV1>(world);
 	if (!IsValid(navSystem))
 	{
+		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : navSystem is invalid"));
 		return;
 	}
 	
 	// TODO add world check
-	ANavigationData* navData = navSystem->GetDefaultNavDataInstance(FNavigationSystem::DontCreate);
+	const ANavigationData* navData = navSystem->GetDefaultNavDataInstance(FNavigationSystem::DontCreate);
+	if (!IsValid(navData))
+	{
+		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : navData is invalid"));
+		return;
+	}
 	
 	FVector::FReal pathLength;
 	
-	navData->CalcPathLength(currentActor->GetActorLocation(), targetLocation, pathLength);
-	
-	bool result = pathLength < distance;
+	navData->CalcPathLength(aiCharacterActor->GetActorLocation(), targetLocation, pathLength);
+
+	const bool result = pathLength < distance;
 	
 	blackboard->SetValueAsBool(resultKeyName.SelectedKeyName, result);
 }
@@ -77,11 +94,18 @@ void UMinNavDistanceFromTarget::InitializeFromAsset(UBehaviorTree& Asset)
 {
 	Super::InitializeFromAsset(Asset);
 	
-	UBlackboardData* BBAsset = GetBlackboardAsset();
+	resultKeyName.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UMinNavDistanceFromTarget, resultKeyName));
+	targetKeyName.AddVectorFilter(this, GET_MEMBER_NAME_CHECKED(UMinNavDistanceFromTarget, targetKeyName));
+	targetKeyName.AddObjectFilter(this, GET_MEMBER_NAME_CHECKED(UMinNavDistanceFromTarget, targetKeyName), AActor::StaticClass());
 	
-	if (ensure(BBAsset))
+	const UBlackboardData* blackboardData = GetBlackboardAsset();
+	
+	if (!ensure(blackboardData))
 	{
-		targetKeyName.ResolveSelectedKey(*BBAsset);
-		resultKeyName.ResolveSelectedKey(*BBAsset);
+		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::InitializeFromAsset : blackboardData is invalid"))
+		return;
 	}
+	
+	targetKeyName.ResolveSelectedKey(*blackboardData);
+	resultKeyName.ResolveSelectedKey(*blackboardData);
 } 

@@ -10,7 +10,15 @@ void UCooldown::InitializeFromAsset(UBehaviorTree& Asset)
 {
 	Super::InitializeFromAsset(Asset);
 	
-	UBlackboardData* blackboardData = Asset.GetBlackboardAsset();
+	cooldownKey.AddFloatFilter(this, GET_MEMBER_NAME_CHECKED(UCooldown, cooldownKey));
+	
+	const UBlackboardData* blackboardData = GetBlackboardAsset();
+	
+	if (!ensure(blackboardData))
+	{
+		UE_LOG(LogTemp, Error, TEXT("UCooldown::InitializeFromAsset : blackboardData is invalid"))
+		return;
+	}
 	
 	cooldownKey.ResolveSelectedKey(*blackboardData);
 }
@@ -23,6 +31,7 @@ void UCooldown::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, f
 	
 	if (!ensure(blackboard))
 	{
+		UE_LOG(LogTemp, Error, TEXT("UCooldown::TickNode : blackboard is invalid"))
 		return;
 	}
 	

@@ -7,7 +7,7 @@
 #include "Cooldown.generated.h"
 
 /**
- * 
+ * Service node that counts down a float value to zero
  */
 UCLASS()
 class PROJET_MORPHEE_API UCooldown : public UBTService

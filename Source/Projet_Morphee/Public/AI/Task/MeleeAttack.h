@@ -8,7 +8,10 @@
 #include "MeleeAttack.generated.h"
 
 /**
- * 
+ * When called, this character attacks with the attackAnimationMontage animation after attackStartupDuration seconds
+ * The attacks hits in a attackRange radius sphere, and prevents this character fron attacking again for attackCooldown seconds
+ * remainingAttackCooldownKey should be ticked down using the Cooldown service node
+ * attackEndLagKey should be used to prevent this character from acting when valued to false (attack endlag)
  */
 UCLASS()
 class PROJET_MORPHEE_API UMeleeAttack : public UBTTaskNode

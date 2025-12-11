@@ -17,8 +17,8 @@ class PROJET_MORPHEE_API UMinNavDistanceFromTarget : public UBTService
 	
 protected:
 	virtual void TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
-	
-	void InitializeFromAsset(UBehaviorTree& Asset) override;
+
+	virtual void InitializeFromAsset(UBehaviorTree& Asset) override;
 	
 	UPROPERTY(EditAnywhere, Category="Blackboard")
 	FBlackboardKeySelector resultKeyName;
