@@ -1,0 +1,5 @@
+### Robin - Byrone
+
+Jeune pianiste et élève de Thalia, il est un miroir de Thalia plus jeune. Dans Onyria, il est un chinchilla (trop) passionné par la musique mais inquiété par le danger de Phobétor. Un vent de douceur pour le joueur et un rappel de sa jeunesse pour Thalia, une opportunité pour apaiser sa relation avec le piano et ses parents.
+
+Il évoque donc une version plus jeune de Thalia lorsqu'elle débutait à peine le piano sans enjeux professionnels ou monétaires. Il a beaucoup aidé Thalia dans ses moments de doute grâce à sa personnalité candide, optimiste, voir même un peu naïve. Intérieurement, Thalia a peur de voir Robin finir tourmenté par son perfectionnisme et sa passion ardente, comme elle a pu l'être. Byrone est un chinchilla qui ne s'arrête jamais de partager sa passion constante pour la musique jusqu'à oppresser. Récemment, son inquiétude face au danger que représente Phobétor l'empêche de profiter de la musique comme avant.

@@ -2,5 +2,4 @@
 tags:
   - Réalité
   - Personnages
-  - Alliés
 ---

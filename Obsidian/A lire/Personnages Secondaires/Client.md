@@ -1,0 +1,5 @@
+Il y a plusieurs semaines, Thalia a accepté de composer pour une connaissance découverte en sortant avec son mentor, Lena. Le premier jet de compositions lui a énormément plu et depuis il attend la suite. La pression provoqué par ses rappels incessants et son sur-enthousiasme a écœuré Thalia du projet. Depuis, elle est bloquée avec cette dette sur le dos.
+
+Une connaissance de Thalia, elle lui doit une dernière composition pour un court métrage qu'il doit finaliser. Il représente la pression de la vie sur Thalia. Ce que les gens attendent d'elle dans les milieux artistiques et comment cette attente peut saboter une personne. Elle s'écrase face à lui par messages et de plus n'arrive pas à produire ce qu'il souhaite. Son orgueil l'empêche de se résigner. Il intervient de temps en temps avec des messages, des tentatives d'appels tant que Thalia ne lui aura pas envoyé la compo.
+
+Le personnage ne va pas évoluer durant l'aventure, c'est la réaction de Thalia aux messages et la situation en général qui va changer/évoluer au fur et à mesure de ses efforts.

@@ -7,7 +7,7 @@ tags:
 ###### ACCROCHE (INCLUT LE JOUEUR)
 
 > [!abstract] À lire
-> [[Thalia]] - [[Traumatisme]] - [[Meilleur(e) Ami(e)]] - [[Monde Réel]]
+> [[Thalia]] - [[Traumatisme]] - [[Meilleur Ami]] - [[Monde Réel]]
 
 >  Le jeu débute avec une séquence floue et brouillonne montrant une jeune fille durant une représentation, de la musique au piano est jouée puis brusquement tout s'aggrave. La musique se coupe, la fille fuit la scène et commence à pleurer. Elle traverse une sortie de secours et le cauchemar s'arrête. 
 >  
