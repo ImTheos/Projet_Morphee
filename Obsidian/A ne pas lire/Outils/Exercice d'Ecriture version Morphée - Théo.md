@@ -32,13 +32,13 @@ Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur l
 
 
 > [!quote] Thalia
-> C'est toujours les mêmes qui travaillent, on dirait. 
+> C'est toujours les mêmes qui triment, on dirait. 
 
  > [!quote] Morphée
 >...
  
  > [!quote] Thalia
->Un peu d'aide ne serait pas de refus !
+>Un peu d'aide ne serait pas de refus.
 
 > [!quote] Morphée
 > Je travaille également, je te prête déjà ma magie non.
@@ -54,7 +54,7 @@ Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur l
 > Rappelle-moi lequel de nous deux est bloqué dans une Poké-ball déjà ? 
 
 > [!quote] Morphée
-> Une Poké-quoi ?... Quelle insolence ! Si tu pense que je doive me soucier de ton avis, alors que tu ne sais rien à propos de ce monde. Elle parle comme  serait-ce qu'une once de savoir sur ce qu'elle a aperçu dans un endroit 
+> Une Poké-quoi ?... Quelle insolence ! Si tu pense que je doive me soucier de ton avis, alors que tu ne sais rien à propos de ce monde. Elle parle comme si elle possédait ne serait-ce qu'une once de compréhension de la situation.
  
 > [!quote] Thalia
 >...
@@ -64,31 +64,39 @@ Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur l
 > Chacune de tes paroles laissent transparaitre ton manque de savoir. Une telle ignorance, c'est étourdissant !
 
 > [!quote] Thalia
-> Et bien, INSTRUIS-MOI ! Toi qui semble tout connaître de cet endroit, mais que j'ai pourtant trouvé piégé dans un endroit des plus lugubre. 
+> Et bien, INSTRUIS-MOI ! Toi qui semble tout connaître de cet endroit, mais que j'ai pourtant trouvé piégé au fond d'un trou. 
 
 > [!quote] Morphée
 >C’est adorable, vraiment, ta façon de t’imaginer les choses... 
->Je n'étais pas "piégé dans une endroit lugubre" comme tu t'appliques si bien à le croire. 
->Je récupérais. Voilà c'est ça, je récupérais après un combat féroce avec mon plus grand rival - et le seul capable de me tenir tête tout court pour être tout à fait honnête.  
+>Je n'étais pas "piégé au fond d'un trou" comme tu t'appliques si bien à le croire. 
+>Je... récupérais. Voilà c'est ça, je récupérais. 
+>Je récupérais suite à un combat des plus dantesque avec mon rival de longue date — et le seul capable de me tenir tête tout court pour être tout à fait honnête.  
 
 > [!quote] Thalia
->Je vois. Ce doit être serré comme ça à chaque fois, j'imagine...
+>Je vois. Ce doit être serré comme ça à chaque fois alors.
 
 > [!quote] Morphée
 >Serré ? Pas le moins du monde. 
->L’issue du combat est décidée bien avant qu'il ne me porte son premier coup. Je suis plus fort que lui sur bien des aspects, ce n'est qu'en ayant recours à des stratagèmes qu'il ne peut faire pencher la balance en sa faveur.
+>L’issue du combat est décidée bien avant qu'il ne me porte son premier coup. Je suis plus fort que lui sur bien des aspects. 
+>Sans ses petits artifices, il n’aurait pas la moindre chance.
 
 > [!quote] Thalia
 >Mh-hmm ?
 
 >[!quote] Morphée
->Vois-tu… Mon rival et moi n’avons pas exactement vos manières de faire. Vous, les mortels, vous disputez, élevez un peu la voix, et en cas d'extrême nécessité, échangez deux ou trois coups — rien qui sorte de l'ordinaire finalement. 
+>Vois-tu… Mon rival et moi avons... Des visions divergentes l'une de l'autre. 
+>Or nous n’avons pas exactement vos manières de faire. 
+>Vous, les mortels, vous vous disputez, élevez un peu la voix, puis en cas d'extrême nécessité, échangez un ou deux coups — rien qui ne sorte de l'ordinaire finalement. 
 
 > [!quote] Thalia
-> Oui, évidemment. Tu as tout à fait raison.
+> Oui. Tu as tout à fait raison.
 
 >[!quote] Morphée
->Nous, en revanche… nous manipulons des forces qui pourraient réduire ce monde en poussière simplement parce qu’un geste a dépassé l’autre. C’est un tout autre niveau. Nous nous devons de nous maîtriser.
+>Nous, en revanche… Nous manipulons des forces qui pourraient réduire ce monde en poussière, simplement parce qu’un geste a dépassé l’autre. 
+>C’est d'un tout autre niveau. Nous nous devons de nous maîtriser.
+
+> [!quote] Thalia
+> Bien évidemment.
 
 > [!quote] Morphée
 > Si je me trouvais ici, c'est uniquement parce que cette fois, j'ai... disons... dépensé un peu plus d'énergie que d’habitude. 
@@ -98,14 +106,14 @@ Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur l
 >[!quote] Thalia
 > Ah oui ?...
 >  Et combien de temps a-t-il duré ce repos, au juste ? 
->  Aussi, pourquoi t'ai-je trouvé toi, là-bas, plutôt que ton cher rival alors que visiblement tu le surclasses sur tous les points ? 
+>  Aussi, pourquoi t'ai-je trouvé toi, là-bas, plutôt que ton cher rival alors que visiblement tu le surclasses en tous points ? 
 
 > [!quote] Morphée
 >...
 
 > [!quote] Thalia
 >
-Et qu'en est-il du fait que je puisse utiliser ta propre magie sans même avoir à te demander ? 
+Qu'en est-il du fait que je puisse utiliser ta propre magie sans même avoir à te demander ? 
 
 > [!quote] Morphée
 >...
@@ -137,4 +145,4 @@ Et qu'en est-il du fait que je puisse utiliser ta propre magie sans même avoir 
 >"D'accord, OK" ? Rien de plus ? 
 
 > [!quote] Thalia
-> Oui, et bien j'essaye d'en faire du sens, voilà tout. Laisse-moi tranquille à la fin. 
+> Oui, et bien j'essaye de comprendre, voilà tout. Laisse-moi tranquille à la fin. 
