@@ -41,14 +41,14 @@ Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur l
 >Un peu d'aide ne serait pas de refus.
 
 > [!quote] Morphée
-> Je travaille également, je te prête déjà ma magie non.
+> Je travaille également, je te prête déjà ma magie, non ?
 > N'est-ce pas suffisant ?
 
 > [!quote] Thalia
-> Tu te rends compte que sans moi tu serais encore bloqué dans ta grotte ? 
+> Tu te rends compte que sans moi tu serais encore coincé dans ta grotte ? 
 
 > [!quote] Morphée
-> Bloqué, moi ? Hah, ce qu'il ne faut pas entendre ! Vous, alors les humains ! Vous êtes vraiment doté d'un sens de l'humour, comment dirais-je... Unique ! Non, c'est à mourir de rire, franchement.
+> Coincé ? Moi ? Hah, ce qu'il ne faut pas entendre ! Vous, alors les humains ! Vous êtes vraiment doté d'un sens de l'humour, comment dirais-je... Unique ! Non, c'est à mourir de rire, franchement.
 
 > [!quote] Thalia
 > Rappelle-moi lequel de nous deux est bloqué dans une Poké-ball déjà ? 
@@ -61,10 +61,11 @@ Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur l
 
 > [!quote] Morphée
 >C'est ici mon domaine et j'ai des possibilités en tant que dieu que tu n'oserais même pas t'imaginer. 
-> Chacune de tes paroles laissent transparaitre ton manque de savoir. Une telle ignorance, c'est étourdissant !
+> Chacune de tes paroles laissent transparaitre ton manque de savoir. 
+> Une telle ignorance, c'est étourdissant !
 
 > [!quote] Thalia
-> Et bien, INSTRUIS-MOI ! Toi qui semble tout connaître de cet endroit, mais que j'ai pourtant trouvé piégé au fond d'un trou. 
+> INSTRUIS-MOI, dans ce cas ! Toi qui semble tout connaître de cet endroit, mais que j'ai pourtant trouvé piégé au fond d'un trou. 
 
 > [!quote] Morphée
 >C’est adorable, vraiment, ta façon de t’imaginer les choses... 
@@ -73,11 +74,12 @@ Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur l
 >Je récupérais suite à un combat des plus dantesque avec mon rival de longue date — et le seul capable de me tenir tête tout court pour être tout à fait honnête.  
 
 > [!quote] Thalia
->Je vois. Ce doit être serré comme ça à chaque fois alors.
+>Je vois... Ce doit être serré comme ça à chaque fois alors.
 
 > [!quote] Morphée
 >Serré ? Pas le moins du monde. 
->L’issue du combat est décidée bien avant qu'il ne me porte son premier coup. Je suis plus fort que lui sur bien des aspects. 
+>L’issue du combat est décidée bien avant qu'il ne me porte son premier coup. 
+>Je suis plus fort que lui sur bien des aspects. 
 >Sans ses petits artifices, il n’aurait pas la moindre chance.
 
 > [!quote] Thalia
@@ -89,14 +91,14 @@ Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur l
 >Vous, les mortels, vous vous disputez, élevez un peu la voix, puis en cas d'extrême nécessité, échangez un ou deux coups — rien qui ne sorte de l'ordinaire finalement. 
 
 > [!quote] Thalia
-> Oui. Tu as tout à fait raison.
+> *(sarcasme)* Oui. Tu as tout à fait raison. 
 
 >[!quote] Morphée
 >Nous, en revanche… Nous manipulons des forces qui pourraient réduire ce monde en poussière, simplement parce qu’un geste a dépassé l’autre. 
 >C’est d'un tout autre niveau. Nous nous devons de nous maîtriser.
 
 > [!quote] Thalia
-> Bien évidemment.
+> *(sarcasme)* Bien évidemment.
 
 > [!quote] Morphée
 > Si je me trouvais ici, c'est uniquement parce que cette fois, j'ai... disons... dépensé un peu plus d'énergie que d’habitude. 
@@ -112,8 +114,8 @@ Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur l
 >...
 
 > [!quote] Thalia
->
-Qu'en est-il du fait que je puisse utiliser ta propre magie sans même avoir à te demander ? 
+>Pourquoi as-tu décidé de me suivre en premier lieu, alors que tu sembles avoir la situation si bien en main ? 
+>Aussi, qu'en est-il du fait que je puisse utiliser ta propre magie sans même avoir à te demander ? 
 
 > [!quote] Morphée
 >...
@@ -133,7 +135,7 @@ Qu'en est-il du fait que je puisse utiliser ta propre magie sans même avoir à 
 
 > [!quote] Thalia
 >Hum, d'accord. Très bien. 
->Et pourquoi ça au juste ? 
+>Et... pourquoi ça au juste ? 
 
 > [!quote] Morphée
 >Parce que tu es lié à cet endroit. 
