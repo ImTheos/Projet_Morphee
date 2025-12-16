@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BallEffect.h"
 #include "GameFramework/Actor.h"
 #include "Ball.generated.h"
 
@@ -29,6 +30,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	UPROPERTY(BlueprintReadWrite)
+	TSubclassOf<UBallEffect> ballEffect;
 
 public:	
 	// Called every frame
@@ -53,6 +57,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float speed;
+	
+	UFUNCTION(BlueprintCallable)
+	void Explode();
 	
 private:
 	UPROPERTY()

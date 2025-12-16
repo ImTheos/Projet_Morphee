@@ -6,6 +6,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
+#include "GameLogic/Interfaces/Damageable.h"
 
 // Sets default values
 ABall::ABall()
@@ -96,6 +97,43 @@ void ABall::SetNewGrabSource(const AActor* newGrabSource)
 EBallState ABall::GetBallState() const
 {
 	return ballState;
+}
+
+void ABall::Explode()
+{
+	// TODO : change that
+	float explosionRange = 600.f;
+	float explosionDamage = 2000.f;
+	
+	
+	
+	TArray<FHitResult> attackHitResults;
+	const auto attackCollisionShape = FCollisionShape::MakeSphere(explosionRange);
+	
+	// TODO : Allow this to be changed from editor
+	constexpr ECollisionChannel attackTraceChannel = ECC_GameTraceChannel3;
+	
+	// TODO : Test for collision during the whole animation
+	GetWorld()->SweepMultiByChannel(attackHitResults, 
+		GetActorLocation(), GetActorLocation(), 
+		FQuat::Identity, attackTraceChannel, attackCollisionShape);
+	
+	if (attackHitResults.IsEmpty())
+	{
+		// Attack did not hit a target
+		return;
+	}
+	
+	for (FHitResult hitResult : attackHitResults)
+	{
+		auto* hitActor = Cast<AActor>(hitResult.GetActor());
+		if (!hitActor->GetClass()->ImplementsInterface(UDamageable::StaticClass()))
+		{
+			continue;
+		}
+	
+		IDamageable::Execute_ReceiveDamage(hitActor, explosionDamage, hitResult.ImpactNormal, this);
+	}
 }
 
 void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
