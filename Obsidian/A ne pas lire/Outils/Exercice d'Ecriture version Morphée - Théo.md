@@ -5,28 +5,26 @@ tags:
 ### Exo 1 
 
 ```
-# Contexte
+# Contexte 
 
 Nos deux protagonistes sont à leur deuxième jour d'aventure. Morphée comprend depuis un moment qu'il a besoin de Thalia pour avancer. Toutefois, cela ne l'empêche pas de manquer de respect à la jeune hermine. Qui laisse alors échapper sa frustration et sa colère.
 
-# Motif Principal
+# Motif Explicite
 
 Thalia souhaite que Morphée stoppe ce comportement hautain qu'il a depuis leur première rencontre. 
 
-# Motif Secondaire 
+# Motif Implicite
 
-Ce qui la frustre réellement, c'est son ignorance à propos d'Onyria et de l'identité de Morphée. Pourquoi chaque nuit elle se réveille auprès de lui pour une nouvelle aventure.
+Ce qui la frustre réellement, c'est son ignorance à propos d'Onyria et de l'identité de Morphée.
 
-# Conclusion
+# Conclusion du dialogue
 
 Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur la dispute initialle qui lui a valu d'être enfermé. Il refuse de se révéler à Thalia, prétextant qu'il s'agit d'un secret "divin". Et finalement affirme que Thalia a un lien avec Onyria.
 
-# Ce qu'à apprit le joueur
+# Ce qu'à apprit le joueur avec ce dialogue
 
-* Thalia se sent inconfortable avec le comportement actuel de Morphée
 * Thalia a un lien avec Onyria
-* Phobétor n'est pas un villain mais un antagoniste
-* Morphée semble avoir des choses à se reprocher
+* Morphée semble avoir des choses à se reprocher au sujet de Phobétor
 * Morphée continue d'avoir ses secrets, plus particulièrement à propos de son identité
 ```
 
