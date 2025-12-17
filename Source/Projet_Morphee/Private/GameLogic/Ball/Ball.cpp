@@ -6,6 +6,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
+#include "GameLogic/GameplayComponents/MagnetComponent.h"
 #include "GameLogic/Interfaces/Damageable.h"
 
 // Sets default values
@@ -99,14 +100,8 @@ EBallState ABall::GetBallState() const
 	return ballState;
 }
 
-void ABall::Explode()
+void ABall::Explode(UNiagaraSystem* explosionParticleSystem, float explosionRange, float explosionDamage)
 {
-	// TODO : change that
-	float explosionRange = 600.f;
-	float explosionDamage = 2000.f;
-	
-	
-	
 	TArray<FHitResult> attackHitResults;
 	const auto attackCollisionShape = FCollisionShape::MakeSphere(explosionRange);
 	
@@ -134,6 +129,33 @@ void ABall::Explode()
 	
 		IDamageable::Execute_ReceiveDamage(hitActor, explosionDamage, hitResult.ImpactNormal, this);
 	}
+	
+	// Spawn Niagara System
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), explosionParticleSystem, GetActorLocation(), FRotator::ZeroRotator,
+		FVector(0.4));
+	
+	// TODO : do this properly
+	// Get player character
+	APawn* playerCharacter = Cast<APawn>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	if (!IsValid(playerCharacter))
+	{
+		return;
+	}
+	
+	UMagnetComponent* magnetComponent = playerCharacter->GetComponentByClass<UMagnetComponent>();
+	
+	if (!IsValid(magnetComponent))
+	{
+		return;
+	}
+	
+	// Set attracted object
+	magnetComponent->SetAttractedObject(this);
+	
+	// Grab attracted object
+	magnetComponent->GrabAttractedObject();
+	
+	SetActorLocation(playerCharacter->GetActorLocation());
 }
 
 void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const

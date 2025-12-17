@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "BallEffect.h"
 #include "GameFramework/Actor.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Ball.generated.h"
 
 class UWidgetComponent;
@@ -59,7 +60,7 @@ public:
 	float speed;
 	
 	UFUNCTION(BlueprintCallable)
-	void Explode();
+	void Explode(UNiagaraSystem* explosionParticleSystem, float explosionRange = 300.f, float explosionDamage = 100.f);
 	
 private:
 	UPROPERTY()
