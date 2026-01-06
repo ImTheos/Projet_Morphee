@@ -73,7 +73,6 @@ private:
 	UWidgetComponent* directionWidget;
 
 public:
-
 	// TODO : find a better way to set this
 	float epsilonDistance = 20.0f;
 };

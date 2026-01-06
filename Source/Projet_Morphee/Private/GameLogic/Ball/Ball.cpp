@@ -39,6 +39,13 @@ void ABall::Tick(float DeltaTime)
 		TickGrab();
 		return;
 	}
+	
+	if (ballState == Free)
+	{
+		// There might be a nicer way to do this, but I'm unsure of the best solution. This will work for now
+		// The CDO is not supposed to get instanced at each call 
+		ballEffect.GetDefaultObject()->Tick(DeltaTime, this);
+	}
 }
 
 void ABall::TickAttract()

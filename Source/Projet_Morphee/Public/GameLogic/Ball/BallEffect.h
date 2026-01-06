@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Ball.h"
 #include "UObject/NoExportTypes.h"
 #include "BallEffect.generated.h"
 
@@ -19,4 +20,20 @@ public:
 	FName effectName;
 	
 	bool operator==(const UBallEffect&) const;
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void Tick(float deltaTime, ABall* owner);
+	virtual void Tick_Implementation(float deltaTime, ABall* owner);
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void Detonate(ABall* owner);
+	virtual void Detonate_Implementation(ABall* owner);
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void Charge(ABall* owner);
+	virtual void Charge_Implementation(ABall* owner);
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void Collide(AActor* collidedActor, UActorComponent* collidedComponent, ABall* owner);
+	virtual void Collide_Implementation(AActor* collidedActor, UActorComponent* collidedComponent, ABall* owner);
 };
