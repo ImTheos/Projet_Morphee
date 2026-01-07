@@ -8,18 +8,18 @@ bool UBallEffect::operator==(const UBallEffect& otherEffect) const
 	return effectName == otherEffect.effectName;
 }
 
-void UBallEffect::Tick_Implementation(float deltaTime, ABall* owner)
+void UBallEffect::Tick_Implementation(float deltaTime, AActor* owner)
 {
 }
 
-void UBallEffect::Detonate_Implementation(ABall* owner)
+void UBallEffect::Detonate_Implementation(AActor* owner)
 {
 }
 
-void UBallEffect::Charge_Implementation(ABall* owner)
+void UBallEffect::Charge_Implementation(AActor* owner)
 {
 }
 
-void UBallEffect::Collide_Implementation(AActor* collidedActor, UActorComponent* collidedComponent, ABall* owner)
+void UBallEffect::Collide_Implementation(AActor* collidedActor, UActorComponent* collidedComponent, AActor* owner)
 {
 }
