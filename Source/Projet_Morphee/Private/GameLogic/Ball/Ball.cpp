@@ -44,7 +44,7 @@ void ABall::Tick(float DeltaTime)
 	{
 		// There might be a nicer way to do this, but I'm unsure of the best solution. This will work for now
 		// The CDO is not supposed to get instanced at each call 
-		ballEffect.GetDefaultObject()->Tick(DeltaTime, this);
+		// ballEffect.GetDefaultObject()->Tick(DeltaTime, this);
 	}
 }
 
