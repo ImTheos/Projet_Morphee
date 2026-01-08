@@ -33,6 +33,8 @@ public:
 	virtual void Charge_Implementation(AActor* owner);
 	
 	UFUNCTION(BlueprintNativeEvent)
-	void Collide(AActor* collidedActor, UActorComponent* collidedComponent, AActor* owner);
-	virtual void Collide_Implementation(AActor* collidedActor, UActorComponent* collidedComponent, AActor* owner);
+	void Collide(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	virtual void Collide_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
 };

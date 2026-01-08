@@ -20,6 +20,7 @@ void UBallEffect::Charge_Implementation(AActor* owner)
 {
 }
 
-void UBallEffect::Collide_Implementation(AActor* collidedActor, UActorComponent* collidedComponent, AActor* owner)
+void UBallEffect::Collide_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult)
 {
 }

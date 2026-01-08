@@ -21,6 +21,13 @@ void ABall::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	USphereComponent* SphereCollision = FindComponentByClass<USphereComponent>();
+	if (!IsValid(SphereCollision))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("The sphere collision is invalid"));
+		return;
+	}
+	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollision);
 }
 
 // Called every frame
@@ -44,7 +51,22 @@ void ABall::Tick(float DeltaTime)
 	{
 		// There might be a nicer way to do this, but I'm unsure of the best solution. This will work for now
 		// The CDO is not supposed to get instanced at each call 
-		// ballEffect.GetDefaultObject()->Tick(DeltaTime, this);
+		
+		if (!IsValid(ballEffect))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("The effect is invalid"));
+			return;
+		}
+		
+		UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject());
+		
+		if (!IsValid(defaultObject))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
+			return;
+		}
+		
+		defaultObject->Tick(DeltaTime, this);
 	}
 }
 
@@ -176,6 +198,28 @@ void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
 	}
 
 	collisionComponent->SetCollisionEnabled(collisionType);
+}
+
+void ABall::OnCollision(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult)
+{
+	OnCollisionBP(overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+	
+	if (!IsValid(ballEffect))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("The ball effect is invalid"));
+		return;
+	}
+		
+	UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject());
+		
+	if (!IsValid(defaultObject))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
+		return;
+	}
+		
+	defaultObject->Collide(this, overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
 }
 
 void ABall::FreeFromAttraction()

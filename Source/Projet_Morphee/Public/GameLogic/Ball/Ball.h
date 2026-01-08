@@ -71,8 +71,16 @@ private:
 	
 	UPROPERTY(EditAnywhere)
 	UWidgetComponent* directionWidget;
-
+	
+	UFUNCTION()
+	void OnCollision(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	
 public:
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnCollisionBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	
 	// TODO : find a better way to set this
 	float epsilonDistance = 20.0f;
 };
