@@ -54,7 +54,7 @@ void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 	if (!isMagnetActive && attractedObject->GetBallState() == Attracted)
 	{
-		attractedObject->FreeFromAttraction();
+		attractedObject->SetBallState(Free);
 	}
 	
 	// grab object
@@ -79,7 +79,7 @@ void UMagnetComponent::AttractObject()
 		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : the component owner is not valid (this should not happen)"))
 	}
 	
-	attractedObject->SetNewAttractionSource(componentOwner);
+	attractedObject->SetBallState(Attracted, componentOwner);
 }
 
 void UMagnetComponent::GrabAttractedObject()
@@ -97,7 +97,7 @@ void UMagnetComponent::GrabAttractedObject()
 		return;
 	}
 
-	attractedObject->SetNewGrabSource(componentOwner);
+	attractedObject->SetBallState(Grabbed, componentOwner);
 }
 
 void UMagnetComponent::ActivateMagnet(float minimumSpeed)
@@ -134,6 +134,6 @@ void UMagnetComponent::FreeAttractedObject()
 		return;
 	}
 
-	attractedObject->FreeFromAttraction();
+	attractedObject->SetBallState(Free);
 }
 

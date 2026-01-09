@@ -72,56 +72,62 @@ void ABall::Tick(float DeltaTime)
 
 void ABall::TickAttract()
 {
-	if (!IsValid(attractionSource))
+	if (!IsValid(influenceSource))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("The attraction source is invalid"));
 		return;
 	}
+	
+	FVector influenceSourceLocation;
+	if (const AActor* influenceSourceActor = Cast<AActor>(influenceSource))
+	{
+		influenceSourceLocation = influenceSourceActor->GetActorLocation();
+	}
+	else if (const USceneComponent* sceneComp = Cast<USceneComponent>(influenceSource))
+	{
+		influenceSourceLocation = sceneComp->GetComponentLocation();
+	}
 
-	FVector newForwardVector = attractionSource->GetActorLocation() - GetActorLocation();
+	FVector newForwardVector = influenceSourceLocation - GetActorLocation();
 	SetActorRotation(newForwardVector.ToOrientationRotator());
 }
 
 void ABall::TickGrab()
 {
-	float distanceToAttractionSouce = FVector::Dist(GetActorLocation(), attractionSource->GetActorLocation());
+	FVector influenceSourceLocation;
+	if (const AActor* influenceSourceActor = Cast<AActor>(influenceSource))
+	{
+		influenceSourceLocation = influenceSourceActor->GetActorLocation();
+	}
+	else if (const USceneComponent* sceneComp = Cast<USceneComponent>(influenceSource))
+	{
+		influenceSourceLocation = sceneComp->GetComponentLocation();
+	}
+	
+	float distanceToAttractionSouce = FVector::Dist(GetActorLocation(), influenceSourceLocation);
 	FVector newForwardVector;
+	
+	// TODO : find a better way to set this
+	float epsilonDistance = 20.0f;
 
 	// TODO : add smoother transition between the three cases if needed
 	if (distanceToAttractionSouce > grabAnimDistance + epsilonDistance)
 	{
 		// Get the ball closer
-		newForwardVector = attractionSource->GetActorLocation() - GetActorLocation();
+		newForwardVector = influenceSourceLocation - GetActorLocation();
 	}
 	else if (distanceToAttractionSouce < grabAnimDistance - epsilonDistance)
 	{
 		// Get the ball further
-		newForwardVector = GetActorLocation() - attractionSource->GetActorLocation();
+		newForwardVector = GetActorLocation() - influenceSourceLocation;
 	}
 	else
 	{
 		// Rotate ball clockwise
-		newForwardVector = FVector::CrossProduct(FVector::UpVector, attractionSource->GetActorLocation() - GetActorLocation());
+		newForwardVector = FVector::CrossProduct(FVector::UpVector, influenceSourceLocation - GetActorLocation());
 	}
 
 	SetActorRotation(newForwardVector.ToOrientationRotator());
-}
-
-void ABall::SetNewAttractionSource(const AActor* newAttractionSource)
-{
-	SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
-	
-	attractionSource = newAttractionSource;
-	ballState = Attracted;
-}
-
-void ABall::SetNewGrabSource(const AActor* newGrabSource)
-{
-	// TODO : fix collisions 
-	SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	
-	attractionSource = newGrabSource;
-	ballState = Grabbed; 
 }
 
 EBallState ABall::GetBallState() const
@@ -222,47 +228,20 @@ void ABall::OnCollision(UPrimitiveComponent* overlappedComponent, AActor* otherA
 	defaultObject->Collide(this, overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
 }
 
-void ABall::FreeFromAttraction()
-{
-	if (ballState != Grabbed && ballState != Attracted)
-	{
-		return;
-	}
-	
-	SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
-	
-	attractionSource = nullptr;
-	ballState = Free;
-}
-
-void ABall::SetStationaryAtLocation(const FVector& location)
-{
-	SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-	
-	attractionSource = nullptr;
-	ballState = Stationary;
-	speed = 0;
-	
-	// TODO : Add animation for ball transition to new location
-	SetActorLocation(location);
-	
-	directionWidget->SetVisibility(false);
-}
-
 void ABall::ReleaseFromStationary(float releaseSpeed)
 {
 	speed = releaseSpeed;
 	
 	directionWidget->SetVisibility(true);
 	
-	UWorld* world = GetWorld();
-	if (!IsValid(world))
+	UWorld* World = GetWorld();
+	if (!IsValid(World))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ABall::ReleaseFromStationary : The world is invalid ?!"));
 		return;
 	}
 	
-	APlayerController* playerController = world->GetFirstPlayerController();
+	APlayerController* playerController = World->GetFirstPlayerController();
 	
 	if (!IsValid(playerController))
 	{
@@ -270,7 +249,7 @@ void ABall::ReleaseFromStationary(float releaseSpeed)
 		return;
 	}
 	
-	// Dirty way of getting the player character
+	// TODO : Dirty way of getting the player character, do this properly (some day)
 	ACharacter* playerCharacter = Cast<ACharacter>(playerController->GetPawn());
 	
 	if (!IsValid(playerCharacter))
@@ -279,7 +258,61 @@ void ABall::ReleaseFromStationary(float releaseSpeed)
 		return;
 	}
 	
-	SetNewGrabSource(playerCharacter);
+	SetBallState(Grabbed, playerCharacter);
+}
+
+void ABall::SetBallState(const EBallState newBallState, const UObject* newInfluenceSource)
+{
+	if (newBallState == Free) 
+	{
+		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		
+		ballState = newBallState;
+		directionWidget->SetVisibility(true);
+		return;
+	}
+	
+	if (!IsValid(Cast<AActor>(newInfluenceSource)) && !IsValid(Cast<USceneComponent>(newInfluenceSource)))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABall::SetBallState : invalid influenceSource, it should be an AActor or a SceneComponent"))
+	}
+	
+	ballState = newBallState; 
+	influenceSource = newInfluenceSource;
+	
+	if (newBallState == Grabbed)
+	{
+		SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		
+		directionWidget->SetVisibility(true);
+		return;
+	}
+	
+	if (newBallState == Attracted)
+	{
+		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		
+		directionWidget->SetVisibility(true);
+		return;
+	}
+	
+	if (newBallState == Stationary)
+	{
+		SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+		
+		speed = 0;
+		if (const AActor* influenceSourceActor = Cast<AActor>(influenceSource))
+		{
+			SetActorLocation(influenceSourceActor->GetActorLocation());
+		}
+		else if (const USceneComponent* sceneComp = Cast<USceneComponent>(influenceSource))
+		{
+			SetActorLocation(sceneComp->GetComponentLocation());
+		}
+		
+		directionWidget->SetVisibility(false);
+		return;
+	}
 }
 
 
