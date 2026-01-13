@@ -31,9 +31,9 @@ void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (!IsValid(attractedObject))
+	if (!IsValid(ownedBall))
 	{
-		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No attractedObject has been set"));
+		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No ownedBall has been set"));
 		return;
 	}
 
@@ -47,14 +47,14 @@ void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	}
 
 	// test distance between owner and magneted object
-	if (FVector::Dist(componentOwner->GetActorLocation(), attractedObject->GetActorLocation()) > magnetRadius)
+	if (FVector::Dist(componentOwner->GetActorLocation(), ownedBall->GetActorLocation()) > magnetRadius)
 	{
 		return;
 	}
 
-	if (!isMagnetActive && attractedObject->GetBallState() == Attracted)
+	if (!isMagnetActive && ownedBall->GetBallState() == Attracted)
 	{
-		attractedObject->SetBallState(Free);
+		ownedBall->SetBallState(Free);
 	}
 	
 	// grab object
@@ -64,9 +64,9 @@ void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	}
 }
 
-void UMagnetComponent::SetAttractedObject(ABall* objectToAttract)
+void UMagnetComponent::AssignBall(ABall* ball)
 {
-	attractedObject = objectToAttract;
+	ownedBall = ball;
 }
 
 void UMagnetComponent::AttractObject()
@@ -79,7 +79,7 @@ void UMagnetComponent::AttractObject()
 		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : the component owner is not valid (this should not happen)"))
 	}
 	
-	attractedObject->SetBallState(Attracted, componentOwner);
+	ownedBall->SetBallState(Attracted, componentOwner);
 }
 
 void UMagnetComponent::GrabAttractedObject()
@@ -91,32 +91,32 @@ void UMagnetComponent::GrabAttractedObject()
 		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : the component owner is not valid (this should not happen)"))
 	}
 
-	if (!IsValid(attractedObject))
+	if (!IsValid(ownedBall))
 	{
-		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No attractedObject has been set"));
+		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No ownedBall has been set"));
 		return;
 	}
 
-	attractedObject->SetBallState(Grabbed, componentOwner);
+	ownedBall->SetBallState(Grabbed, componentOwner);
 }
 
 void UMagnetComponent::ActivateMagnet(float minimumSpeed)
 {
-	if (!IsValid(attractedObject))
+	if (!IsValid(ownedBall))
 	{
-		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No attractedObject has been set"));
+		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No ownedBall has been set"));
 		return;
 	}
 	
 	isMagnetActive = true;
 
 	// If object is already being attracted, no need to set up attraction again
-	if (attractedObject->GetBallState() != Free)
+	if (ownedBall->GetBallState() != Free)
 	{
 		return;
 	}
 
-	attractedObject->speed = FMath::Max(minimumSpeed, attractedObject->speed);
+	ownedBall->speed = FMath::Max(minimumSpeed, ownedBall->speed);
 
 	AttractObject();
 }
@@ -128,12 +128,12 @@ void UMagnetComponent::DeactivateMagnet()
 
 void UMagnetComponent::FreeAttractedObject()
 {
-	if (!IsValid(attractedObject))
+	if (!IsValid(ownedBall))
 	{
-		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No attractedObject has been set"));
+		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No ownedBall has been set"));
 		return;
 	}
 
-	attractedObject->SetBallState(Free);
+	ownedBall->SetBallState(Free);
 }
 

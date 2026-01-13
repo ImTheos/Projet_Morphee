@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "GameLogic/Ball/BallEffect.h"
+#include "GameLogic/Ball/BallEffects/BallEffect.h"
 
 bool UBallEffect::operator==(const UBallEffect& otherEffect) const
 {
@@ -14,6 +14,7 @@ void UBallEffect::Tick_Implementation(float deltaTime, AActor* owner)
 
 void UBallEffect::Detonate_Implementation(AActor* owner)
 {
+	UE_LOG(LogTemp, Display, TEXT("UBallEffect::Detonate was triggered"))
 }
 
 void UBallEffect::Charge_Implementation(AActor* owner)

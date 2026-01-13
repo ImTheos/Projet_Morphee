@@ -3,9 +3,11 @@
 
 #include "GameLogic/Ball/Ball.h"
 
+#include "MyCPPCharacter.h"
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
+#include "GameLogic/GameplayComponents/BallOwnerComponent.h"
 #include "GameLogic/GameplayComponents/MagnetComponent.h"
 #include "GameLogic/Interfaces/Damageable.h"
 
@@ -28,6 +30,37 @@ void ABall::BeginPlay()
 		return;
 	}
 	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollision);
+	
+	UWorld* world = Cast<UWorld>(GetWorld());
+	
+	if (!IsValid(world))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid world"));
+		return;
+	}
+	
+	APlayerController* playerController = world->GetFirstPlayerController();
+	if (!IsValid(playerController))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid PlayerController"));
+		return;
+	}
+	
+	AMyCPPCharacter* playerCharacter = Cast<AMyCPPCharacter>(playerController->GetPawn());
+	if (!IsValid(playerCharacter))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid player character"));
+		return;
+	}
+	
+	UBallOwnerComponent* ballOwnerComponent = playerCharacter->GetComponentByClass<UBallOwnerComponent>();
+	if (!IsValid(ballOwnerComponent))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid ballOwnerComponent"));
+		return;
+	}
+	
+	ballOwnerComponent->AssignBall(this);
 }
 
 // Called every frame
@@ -185,7 +218,7 @@ void ABall::Explode(UNiagaraSystem* explosionParticleSystem, float explosionRang
 	}
 	
 	// Set attracted object
-	magnetComponent->SetAttractedObject(this);
+	magnetComponent->AssignBall(this);
 	
 	// Grab attracted object
 	magnetComponent->GrabAttractedObject();

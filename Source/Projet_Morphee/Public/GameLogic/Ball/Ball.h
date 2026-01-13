@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BallEffect.h"
+#include "BallEffects/BallEffect.h"
 #include "GameFramework/Actor.h"
 #include "NiagaraFunctionLibrary.h"
 #include "Ball.generated.h"
@@ -86,7 +86,7 @@ public:
 	// ------- BALL EFFECT -------
 	// -------  -------  ------- 
 public:
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	TSubclassOf<UBallEffect> ballEffect;
 	
 	// TODO : move this function to an "explosive" ballEffect
