@@ -161,12 +161,3 @@ Morphée se réveille sous sa forme de sphère. Il interpelle Thalia.
 
 > [!quote] MORPHEE
 > X
-
-
-
-
-[^1]: 
-
-[^2]: 
-
-[^3]: 
