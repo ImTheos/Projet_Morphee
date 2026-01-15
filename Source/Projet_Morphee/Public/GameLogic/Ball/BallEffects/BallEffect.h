@@ -26,14 +26,19 @@ public:
 	UFUNCTION(BlueprintNativeEvent)
 	void Detonate(AActor* owner);
 	virtual void Detonate_Implementation(AActor* owner);
-	
-	UFUNCTION(BlueprintNativeEvent)
-	void Charge(AActor* owner);
-	virtual void Charge_Implementation(AActor* owner);
-	
+
+	// Not implemented yet
+	// UFUNCTION(BlueprintNativeEvent)
+	// void Charge(AActor* owner);
+	// virtual void Charge_Implementation(AActor* owner);
+
 	UFUNCTION(BlueprintNativeEvent)
 	void Collide(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
 	virtual void Collide_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void EffectApplied(AActor* owner);
+	virtual void EffectApplied_Implementation(AActor* owner);
 };

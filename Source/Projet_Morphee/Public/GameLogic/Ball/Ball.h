@@ -85,12 +85,13 @@ public:
 	// -------  -------  ------- 
 	// ------- BALL EFFECT -------
 	// -------  -------  ------- 
-public:
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+private:
 	TSubclassOf<UBallEffect> ballEffect;
 	
-	// TODO : move this function to an "explosive" ballEffect
+public:
 	UFUNCTION(BlueprintCallable)
-	void Explode(UNiagaraSystem* explosionParticleSystem, float explosionRange = 300.f, float explosionDamage = 100.f);
+	TSubclassOf<UBallEffect> GetBallEffect() const { return ballEffect; }
 	
+	UFUNCTION(BlueprintCallable)
+	void SetBallEffect(TSubclassOf<UBallEffect> newBallEffect, bool actualize = false);
 };

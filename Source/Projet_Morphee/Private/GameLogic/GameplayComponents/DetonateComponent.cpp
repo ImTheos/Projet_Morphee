@@ -45,14 +45,17 @@ void UDetonateComponent::Detonate()
 		return;
 	}
 	
-	// add base Detonate Logic here if needed (only effect override for now)
+	// Add a base Detonate Logic here if needed
+	
+	// -- end of base logic
+	
 	if (!IsValid(ownedBall))
 	{
 		UE_LOG(LogTemp, Error, TEXT("UDetonateComponent::Detonate : Invalid ownedBall"));
 		return;
 	}
 	
-	TSubclassOf<UBallEffect> ballEffect = ownedBall->ballEffect;
+	TSubclassOf<UBallEffect> ballEffect = ownedBall->GetBallEffect();
 	
 	if (!IsValid(ballEffect))
 	{

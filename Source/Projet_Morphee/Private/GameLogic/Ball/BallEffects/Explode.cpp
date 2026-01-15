@@ -20,22 +20,27 @@ void UExplode::Detonate_Implementation(AActor* owner)
 		return;
 	}
 	
+	const UWorld* world = GetWorld();
+	
+	if (!IsValid(world))
+	{
+		UE_LOG(LogTemp, Error, TEXT("UExplode::Detonate_Implementation : Invalid world"))
+		return;
+	}
+	
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(	world, explosionParticleSystem, 
+													ball->GetActorLocation(), 
+													FRotator::ZeroRotator,
+													FVector(0.4));
+	
 	TArray<FHitResult> attackHitResults;
 	const auto attackCollisionShape = FCollisionShape::MakeSphere(explosionRange);
 	
-	// TODO : Allow this to be changed from editor
-	constexpr ECollisionChannel attackTraceChannel = ECC_GameTraceChannel3;
-	
 	// TODO : Test for collision during the whole animation
-	GetWorld()->SweepMultiByChannel(attackHitResults, 
+	// This could be done by using a timer that calls a Sweep at every tick for the particle duration
+	world->SweepMultiByChannel(attackHitResults, 
 		ball->GetActorLocation(), ball->GetActorLocation(), 
-		FQuat::Identity, attackTraceChannel, attackCollisionShape);
-	
-	if (attackHitResults.IsEmpty())
-	{
-		// Attack did not hit a target
-		return;
-	}
+		FQuat::Identity, explosionCollisionChannel, attackCollisionShape);
 	
 	for (FHitResult hitResult : attackHitResults)
 	{
@@ -47,31 +52,31 @@ void UExplode::Detonate_Implementation(AActor* owner)
 	
 		IDamageable::Execute_ReceiveDamage(hitActor, explosionDamage, hitResult.ImpactNormal, ball);
 	}
+
+	const APlayerController* playerController = world->GetFirstPlayerController();
 	
-	// Spawn Niagara System
-	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), explosionParticleSystem, ball->GetActorLocation(), FRotator::ZeroRotator,
-		FVector(0.4));
-	
-	// TODO : do this properly
-	// Get player character
-	APawn* playerCharacter = Cast<APawn>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	if (!IsValid(playerCharacter))
+	if (!IsValid(playerController))
 	{
+		UE_LOG(LogTemp, Error, TEXT("UExplode::Detonate_Implementation : Invalid player controller"));
+		return;
+	}
+
+	const APawn* playerPawn = playerController->GetPawn();
+	if (!IsValid(playerPawn))
+	{
+		UE_LOG(LogTemp, Error, TEXT("UExplode::Detonate_Implementation : Invalid player pawn"));
 		return;
 	}
 	
-	UMagnetComponent* magnetComponent = playerCharacter->GetComponentByClass<UMagnetComponent>();
+	UMagnetComponent* magnetComponent = playerPawn->GetComponentByClass<UMagnetComponent>();
 	
 	if (!IsValid(magnetComponent))
 	{
+		UE_LOG(LogTemp, Error, TEXT("UExplode::Detonate_Implementation : Invalid magnet component"));
 		return;
 	}
 	
-	// Set attracted object
-	magnetComponent->AssignBall(ball);
-	
-	// Grab attracted object
 	magnetComponent->GrabAttractedObject();
 	
-	ball->SetActorLocation(playerCharacter->GetActorLocation());
+	ball->SetActorLocation(playerPawn->GetActorLocation());
 }

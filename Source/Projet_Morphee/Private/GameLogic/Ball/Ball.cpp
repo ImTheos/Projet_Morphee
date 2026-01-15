@@ -87,7 +87,7 @@ void ABall::Tick(float DeltaTime)
 		
 		if (!IsValid(ballEffect))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("The effect is invalid"));
+			UE_LOG(LogTemp, Warning, TEXT("ABall::Tick : The effect is invalid"));
 			return;
 		}
 		
@@ -168,64 +168,6 @@ EBallState ABall::GetBallState() const
 	return ballState;
 }
 
-void ABall::Explode(UNiagaraSystem* explosionParticleSystem, float explosionRange, float explosionDamage)
-{
-	TArray<FHitResult> attackHitResults;
-	const auto attackCollisionShape = FCollisionShape::MakeSphere(explosionRange);
-	
-	// TODO : Allow this to be changed from editor
-	constexpr ECollisionChannel attackTraceChannel = ECC_GameTraceChannel3;
-	
-	// TODO : Test for collision during the whole animation
-	GetWorld()->SweepMultiByChannel(attackHitResults, 
-		GetActorLocation(), GetActorLocation(), 
-		FQuat::Identity, attackTraceChannel, attackCollisionShape);
-	
-	if (attackHitResults.IsEmpty())
-	{
-		// Attack did not hit a target
-		return;
-	}
-	
-	for (FHitResult hitResult : attackHitResults)
-	{
-		auto* hitActor = Cast<AActor>(hitResult.GetActor());
-		if (!hitActor->GetClass()->ImplementsInterface(UDamageable::StaticClass()))
-		{
-			continue;
-		}
-	
-		IDamageable::Execute_ReceiveDamage(hitActor, explosionDamage, hitResult.ImpactNormal, this);
-	}
-	
-	// Spawn Niagara System
-	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), explosionParticleSystem, GetActorLocation(), FRotator::ZeroRotator,
-		FVector(0.4));
-	
-	// TODO : do this properly
-	// Get player character
-	APawn* playerCharacter = Cast<APawn>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	if (!IsValid(playerCharacter))
-	{
-		return;
-	}
-	
-	UMagnetComponent* magnetComponent = playerCharacter->GetComponentByClass<UMagnetComponent>();
-	
-	if (!IsValid(magnetComponent))
-	{
-		return;
-	}
-	
-	// Set attracted object
-	magnetComponent->AssignBall(this);
-	
-	// Grab attracted object
-	magnetComponent->GrabAttractedObject();
-	
-	SetActorLocation(playerCharacter->GetActorLocation());
-}
-
 void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
 {
 	auto* collisionComponent = GetComponentByClass<UShapeComponent>();
@@ -259,6 +201,32 @@ void ABall::OnCollision(UPrimitiveComponent* overlappedComponent, AActor* otherA
 	}
 		
 	defaultObject->Collide(this, overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+}
+
+void ABall::SetBallEffect(const TSubclassOf<UBallEffect> newBallEffect, bool actualize)
+{
+	if (newBallEffect == ballEffect)
+	{
+		return;
+	}
+	
+	ballEffect = newBallEffect;
+	
+	if (!IsValid(ballEffect))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("The ball effect is invalid"));
+		return;
+	}
+		
+	UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject());
+		
+	if (!IsValid(defaultObject))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
+		return;
+	}
+
+	defaultObject->EffectApplied(this);
 }
 
 void ABall::ReleaseFromStationary(float releaseSpeed)

@@ -27,4 +27,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	float explosionDamage = 100.f;
 	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	TEnumAsByte<ECollisionChannel> explosionCollisionChannel;
+	
 };
