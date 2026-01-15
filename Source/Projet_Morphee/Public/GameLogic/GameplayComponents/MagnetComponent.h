@@ -27,15 +27,14 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
-	UFUNCTION(BlueprintCallable)
-	void SetAttractedObject(ABall* objectToAttract);
+	void AssignBall(ABall* ball);
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float magnetRadius;
 
 private:
 	UPROPERTY()
-	TObjectPtr<ABall> attractedObject;
+	TObjectPtr<ABall> ownedBall;
 
 public:
 	UFUNCTION(BlueprintCallable)
