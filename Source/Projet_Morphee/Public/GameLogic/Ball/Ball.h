@@ -85,6 +85,10 @@ public:
 	// -------  -------  ------- 
 	// ------- BALL EFFECT -------
 	// -------  -------  ------- 
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UBallEffect> defaultBallEffect;
+	
 private:
 	TSubclassOf<UBallEffect> ballEffect;
 	
@@ -92,6 +96,20 @@ public:
 	UFUNCTION(BlueprintCallable)
 	TSubclassOf<UBallEffect> GetBallEffect() const { return ballEffect; }
 	
+	/**
+	 * Sets a new value for the ballEffect parameter
+	 *
+	 * @param newBallEffect  The new value ballEffect should have
+	 * @param actualize Whether the ballEffect's "EffectApplied" function should be applied if the new effect is the same as the current version
+	 */
 	UFUNCTION(BlueprintCallable)
 	void SetBallEffect(TSubclassOf<UBallEffect> newBallEffect, bool actualize = false);
+	
+	// -------  -------  ------- 
+	// ------- BALL IS HIT -------
+	// -------  -------  ------- 
+public:
+	UFUNCTION(BlueprintCallable)
+	void BallHitByAttack(AActor* attacker);
+	
 };

@@ -23,6 +23,8 @@ void ABall::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	ballEffect = defaultBallEffect;
+	
 	USphereComponent* SphereCollision = FindComponentByClass<USphereComponent>();
 	if (!IsValid(SphereCollision))
 	{
@@ -199,13 +201,35 @@ void ABall::OnCollision(UPrimitiveComponent* overlappedComponent, AActor* otherA
 		UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
 		return;
 	}
+	
+	if (!IsValid(otherActor))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollision : invalid otherActor"))
+		return;
+	}
+	
+	UClass* otherActorClass = Cast<UClass>(otherActor->GetClass());
+	if (!IsValid(otherActorClass))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollision : invalid otherActor class"))
+		return;
+	}
 		
-	defaultObject->Collide(this, overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+	if (otherActorClass->ImplementsInterface(UDamageable::StaticClass()))
+	{
+		defaultObject->CollideDamageable(this, overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+	}
+	else
+	{
+		defaultObject->CollideNotDamageable(this, overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+	}
+		
+	
 }
 
 void ABall::SetBallEffect(const TSubclassOf<UBallEffect> newBallEffect, bool actualize)
 {
-	if (newBallEffect == ballEffect)
+	if (!actualize && newBallEffect == ballEffect)
 	{
 		return;
 	}
@@ -227,6 +251,25 @@ void ABall::SetBallEffect(const TSubclassOf<UBallEffect> newBallEffect, bool act
 	}
 
 	defaultObject->EffectApplied(this);
+}
+
+void ABall::BallHitByAttack(AActor* attacker)
+{
+	if (!IsValid(ballEffect))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("The ball effect is invalid"));
+		return;
+	}
+		
+	UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject());
+		
+	if (!IsValid(defaultObject))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
+		return;
+	}
+
+	defaultObject->Attack(this, attacker);
 }
 
 void ABall::ReleaseFromStationary(float releaseSpeed)

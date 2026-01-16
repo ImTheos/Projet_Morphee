@@ -26,16 +26,21 @@ public:
 	UFUNCTION(BlueprintNativeEvent)
 	void Detonate(AActor* owner);
 	virtual void Detonate_Implementation(AActor* owner);
-
-	// Not implemented yet
-	// UFUNCTION(BlueprintNativeEvent)
-	// void Charge(AActor* owner);
-	// virtual void Charge_Implementation(AActor* owner);
-
+	
 	UFUNCTION(BlueprintNativeEvent)
-	void Collide(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	void Attack(AActor* ball, AActor* attacker);
+	virtual void Attack_Implementation(AActor* ball, AActor* attacker);
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void CollideDamageable(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
-	virtual void Collide_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	virtual void CollideDamageable_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, 
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void CollideNotDamageable(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	virtual void CollideNotDamageable_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, 
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
 	
 	UFUNCTION(BlueprintNativeEvent)
