@@ -45,6 +45,8 @@ void UDetonateComponent::Detonate()
 		return;
 	}
 	
+	remainingDetonationTime = detonationCooldown;
+	
 	// Add a base Detonate Logic here if needed
 	
 	// -- end of base logic

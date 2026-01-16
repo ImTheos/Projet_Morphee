@@ -20,7 +20,7 @@ void UExplode::Detonate_Implementation(AActor* owner)
 		return;
 	}
 	
-	const UWorld* world = GetWorld();
+	const UWorld* world = owner->GetWorld();
 	
 	if (!IsValid(world))
 	{
@@ -45,7 +45,18 @@ void UExplode::Detonate_Implementation(AActor* owner)
 	for (FHitResult hitResult : attackHitResults)
 	{
 		auto* hitActor = Cast<AActor>(hitResult.GetActor());
-		if (!hitActor->GetClass()->ImplementsInterface(UDamageable::StaticClass()))
+		if (!IsValid(hitActor))
+		{
+			continue;
+		}
+		
+		UClass* hitActorClass = Cast<UClass>(hitActor->GetClass());
+		if (!IsValid(hitActorClass))
+		{
+			continue;
+		}
+		
+		if (!hitActorClass->ImplementsInterface(UDamageable::StaticClass()))
 		{
 			continue;
 		}

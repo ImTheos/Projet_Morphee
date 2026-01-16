@@ -77,7 +77,7 @@ private:
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
 	
 public:
-	UFUNCTION(BlueprintImplementableEvent)
+	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision"))
 	void OnCollisionBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
 	
