@@ -50,4 +50,9 @@ public:
 	UFUNCTION(BlueprintNativeEvent)
 	void EffectRemoved(AActor* owner);
 	virtual void EffectRemoved_Implementation(AActor* owner);
+	
+	UFUNCTION(BlueprintCallable)
+	void SpawnObject(const AActor* contextActor, UClass* spawnedClass, const FVector& location, const FRotator& rotation, ESpawnActorCollisionHandlingMethod spawnCollisionMethod,
+	const ESpawnActorScaleMethod spawnScaleMethod, AActor* owner);
 };
+
