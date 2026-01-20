@@ -38,5 +38,12 @@ void UBallEffect::CollisionBlock_Implementation(AActor* owner, UPrimitiveCompone
 
 void UBallEffect::EffectApplied_Implementation(AActor* owner)
 {
-	UE_LOG(LogTemp, Display, TEXT("UBallEffect::EffectApplied was triggered"))
+	FString displayName = effectName.ToString().IsEmpty() ? GetClass()->GetName() : effectName.ToString();
+	UE_LOG(LogTemp, Display, TEXT("UBallEffect::EffectApplied was triggered for effect %s"), *displayName)
+}
+
+void UBallEffect::EffectRemoved_Implementation(AActor* owner)
+{
+	FString displayName = effectName.ToString().IsEmpty() ? GetClass()->GetName() : effectName.ToString();
+	UE_LOG(LogTemp, Display, TEXT("UBallEffect::EffectRemoved was triggered for effect %s"), *displayName)
 }

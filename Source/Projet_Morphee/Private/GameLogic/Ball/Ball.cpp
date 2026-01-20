@@ -265,6 +265,14 @@ void ABall::SetBallEffect(const TSubclassOf<UBallEffect> newBallEffect, bool act
 		return;
 	}
 	
+	if (IsValid(ballEffect))
+	{
+		if (UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject()); IsValid(defaultObject))
+		{
+			defaultObject->EffectRemoved(this);
+		}
+	}
+	
 	ballEffect = newBallEffect;
 	
 	if (!IsValid(ballEffect))
