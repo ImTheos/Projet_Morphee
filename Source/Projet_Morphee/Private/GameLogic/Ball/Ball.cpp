@@ -8,7 +8,6 @@
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
 #include "GameLogic/GameplayComponents/BallOwnerComponent.h"
-#include "GameLogic/GameplayComponents/MagnetComponent.h"
 #include "GameLogic/Interfaces/Damageable.h"
 
 // Sets default values
@@ -31,7 +30,8 @@ void ABall::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("The sphere collision is invalid"));
 		return;
 	}
-	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollision);
+	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollisionBeginOverlap);
+	SphereCollision->OnComponentHit.AddDynamic(this, &ABall::OnCollisionBlock);
 	
 	UWorld* world = Cast<UWorld>(GetWorld());
 	
@@ -183,14 +183,14 @@ void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
 	collisionComponent->SetCollisionEnabled(collisionType);
 }
 
-void ABall::OnCollision(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult)
+void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor,
+	UPrimitiveComponent* otherHitComponent, FVector normalImpulse, const FHitResult& hit)
 {
-	OnCollisionBP(overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+	OnCollisionBlockBP(hitComponent, otherActor, otherHitComponent, normalImpulse, hit);
 	
 	if (!IsValid(ballEffect))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("The ball effect is invalid"));
+		UE_LOG(LogTemp, Warning, TEXT("ABall::OnCollisionBlock : The ball effect is invalid"));
 		return;
 	}
 		
@@ -198,33 +198,64 @@ void ABall::OnCollision(UPrimitiveComponent* overlappedComponent, AActor* otherA
 		
 	if (!IsValid(defaultObject))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
+		UE_LOG(LogTemp, Warning, TEXT("ABall::OnCollisionBlock : The default object is NULL"));
 		return;
 	}
 	
 	if (!IsValid(otherActor))
 	{
-		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollision : invalid otherActor"))
+		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBlock : invalid otherActor"))
 		return;
 	}
 	
 	UClass* otherActorClass = Cast<UClass>(otherActor->GetClass());
 	if (!IsValid(otherActorClass))
 	{
-		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollision : invalid otherActor class"))
+		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBeginOverlap : invalid otherActor class"))
+		return;
+	}
+	
+	bool isDamageable = otherActorClass->ImplementsInterface(UDamageable::StaticClass());
+		
+	defaultObject->CollisionBlock(this, hitComponent, otherActor, otherHitComponent, normalImpulse, hit, isDamageable);
+}
+
+void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+                                    int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult)
+{
+	OnCollisionBeginOverlapBP(overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+	
+	if (!IsValid(ballEffect))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::OnCollisionBeginOverlap : invalid ballEffect"));
 		return;
 	}
 		
-	if (otherActorClass->ImplementsInterface(UDamageable::StaticClass()))
-	{
-		defaultObject->CollideDamageable(this, overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
-	}
-	else
-	{
-		defaultObject->CollideNotDamageable(this, overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
-	}
+	UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject());
 		
+	if (!IsValid(defaultObject))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::OnCollisionBeginOverlap : invalid defaultObject"));
+		return;
+	}
 	
+	if (!IsValid(otherActor))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBeginOverlap : invalid otherActor"))
+		return;
+	}
+	
+	UClass* otherActorClass = Cast<UClass>(otherActor->GetClass());
+	if (!IsValid(otherActorClass))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBeginOverlap : invalid otherActor class"))
+		return;
+	}
+
+	const bool isDamageable = otherActorClass->ImplementsInterface(UDamageable::StaticClass());
+	
+	defaultObject->CollisionBeginOverlap(this, overlappedComponent, otherActor, otherComponent, 
+		otherBodyIndex, fromSweep, sweepResult, isDamageable);
 }
 
 void ABall::SetBallEffect(const TSubclassOf<UBallEffect> newBallEffect, bool actualize)

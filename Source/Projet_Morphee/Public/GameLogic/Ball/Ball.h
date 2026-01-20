@@ -71,16 +71,24 @@ public:
 	// -------  -------  ------- 
 private:
 	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
-	
+
+
 	UFUNCTION()
-	void OnCollision(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	void OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
-	
+
+	UFUNCTION()
+	void OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+	                      FVector normalImpulse, const FHitResult& hit);
+
 public:
-	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision"))
-	void OnCollisionBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision Begin Overlap"))
+	void OnCollisionBeginOverlapBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
 	
+	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision Hit"))
+	void OnCollisionBlockBP(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+		FVector normalImpulse, FHitResult hit);
 	
 	// -------  -------  ------- 
 	// ------- BALL EFFECT -------
