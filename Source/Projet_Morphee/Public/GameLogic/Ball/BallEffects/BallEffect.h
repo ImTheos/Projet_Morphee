@@ -32,18 +32,27 @@ public:
 	virtual void Attack_Implementation(AActor* ball, AActor* attacker);
 	
 	UFUNCTION(BlueprintNativeEvent)
-	void CollideDamageable(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
-	virtual void CollideDamageable_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, 
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	void CollisionBeginOverlap(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult, bool isDamageable);
+	virtual void CollisionBeginOverlap_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, 
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult, bool isDamageable);
 	
 	UFUNCTION(BlueprintNativeEvent)
-	void CollideNotDamageable(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
-	virtual void CollideNotDamageable_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, 
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	void CollisionBlock(AActor* owner, UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+		FVector normalImpulse, FHitResult hit, bool isDamageable);
+	virtual void CollisionBlock_Implementation(AActor* owner, UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+		FVector normalImpulse, FHitResult hit, bool isDamageable);
 	
 	UFUNCTION(BlueprintNativeEvent)
 	void EffectApplied(AActor* owner);
 	virtual void EffectApplied_Implementation(AActor* owner);
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void EffectRemoved(AActor* owner);
+	virtual void EffectRemoved_Implementation(AActor* owner);
+	
+	UFUNCTION(BlueprintCallable)
+	void SpawnObject(const AActor* contextActor, UClass* spawnedClass, const FVector& location, const FRotator& rotation, ESpawnActorCollisionHandlingMethod spawnCollisionMethod,
+	const ESpawnActorScaleMethod spawnScaleMethod, AActor* owner);
 };
+
