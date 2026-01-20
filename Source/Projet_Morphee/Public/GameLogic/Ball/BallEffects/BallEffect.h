@@ -46,4 +46,8 @@ public:
 	UFUNCTION(BlueprintNativeEvent)
 	void EffectApplied(AActor* owner);
 	virtual void EffectApplied_Implementation(AActor* owner);
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void EffectRemoved(AActor* owner);
+	virtual void EffectRemoved_Implementation(AActor* owner);
 };
