@@ -46,10 +46,10 @@ FVector UDashAbility::CalculateDashTeleport(FVector actorLocation, FVector targe
 
 	for (int i = 0; i < capsuleAmount; i++)
 	{
-		world->SweepSingleByChannel(traceHitResult,
+		world->SweepSingleByProfile(traceHitResult,
 								dashLocation + differenceThresholdVector,
 								dashLocation - differenceThresholdVector,
-								FQuat::Identity, dashTraceChannel, traceShape);
+								FQuat::Identity, dashTraceProfileName, traceShape);
 
 		float testDotProduct = traceHitResult.Normal.Dot(FVector::UpVector);
 		
@@ -93,10 +93,10 @@ FVector UDashAbility::CalculateDashEndPostTeleport(FVector actorLocation, FVecto
 	for (int i = 0; i < capsuleAmount; i++)
 	{
 		FVector newPosition = initialPosition + dashDirection;
-		world->SweepSingleByChannel(traceHitResult,
+		world->SweepSingleByProfile(traceHitResult,
 								newPosition + differenceThresholdVector,
 								newPosition - differenceThresholdVector,
-								FQuat::Identity, dashTraceChannel, traceShape);
+								FQuat::Identity, dashTraceProfileName, traceShape);
 
 		if (!traceHitResult.bBlockingHit || traceHitResult.PenetrationDepth > 0.f)
 		{
@@ -114,7 +114,7 @@ bool UDashAbility::DashCollidesWithObstacle(FVector dashInitialLocation, FVector
 {
 	UWorld* world = GetWorld();
 	FHitResult traceHitResult;
-	world->LineTraceSingleByChannel(traceHitResult, dashInitialLocation, dashEndLocation, dashTraceChannel);
+	world->LineTraceSingleByProfile(traceHitResult, dashInitialLocation, dashEndLocation, dashTraceProfileName);
 
 	return traceHitResult.bBlockingHit;
 }

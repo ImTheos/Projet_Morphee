@@ -10,6 +10,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "AbilitySystemComponent.h"
 #include "BasicAttributeSet.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 class UAbilitySystemComponent;
 class USpringArmComponent;
@@ -59,6 +60,28 @@ void AMyCPPCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	safePositionRemainingCooldown -= DeltaTime;
+	if (safePositionRemainingCooldown > 0.0f)
+	{
+		return;
+	}
+	safePositionRemainingCooldown = safePositionCheckCooldown;
+	
+	UCharacterMovementComponent* movementComponent = GetCharacterMovement();
+
+	if (!IsValid(movementComponent))
+	{
+		UE_LOG(LogTemp, Error, TEXT("AMyCPPCharacter : invalid movementComponent"))
+		return;
+	}
+
+	// TODO : Adapt this to collision test in order to avoid saving location
+	// if the player stands on specific terrain (moving ground, for instance)
+	if (movementComponent->IsMovingOnGround())
+	{
+		lastSafeLocation = GetTransform().GetLocation();
+		lastSafeRotation = GetTransform().GetRotation().Rotator();
+	}
 }
 
 // Called to bind functionality to input
