@@ -32,6 +32,15 @@ void ABall::BeginPlay()
 	}
 	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollisionBeginOverlap);
 	SphereCollision->OnComponentHit.AddDynamic(this, &ABall::OnCollisionBlock);
+	
+	UWidgetComponent* widgetComponent = FindComponentByClass<UWidgetComponent>();
+	if (!IsValid(widgetComponent))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : no WidgetComponent for Direction Widget"));
+		return;
+	}
+	
+	directionWidget = widgetComponent;
 }
 
 // Called every frame
@@ -284,7 +293,10 @@ void ABall::ReleaseFromStationary(float releaseSpeed)
 {
 	speed = releaseSpeed;
 	
-	directionWidget->SetVisibility(true);
+	if (IsValid(directionWidget))
+	{
+		directionWidget->SetVisibility(true);
+	}
 	
 	UWorld* World = GetWorld();
 	if (!IsValid(World))
@@ -320,7 +332,10 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
 		
 		ballState = newBallState;
-		directionWidget->SetVisibility(true);
+		if (IsValid(directionWidget))
+		{
+			directionWidget->SetVisibility(true);
+		}
 		return;
 	}
 	
@@ -336,7 +351,10 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	{
 		SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		
-		directionWidget->SetVisibility(true);
+		if (IsValid(directionWidget))
+		{
+			directionWidget->SetVisibility(true);
+		}
 		return;
 	}
 	
@@ -344,7 +362,10 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	{
 		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
 		
-		directionWidget->SetVisibility(true);
+		if (IsValid(directionWidget))
+		{
+			directionWidget->SetVisibility(true);
+		}
 		return;
 	}
 	
@@ -362,7 +383,10 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 			SetActorLocation(sceneComp->GetComponentLocation());
 		}
 		
-		directionWidget->SetVisibility(false);
+		if (IsValid(directionWidget))
+		{
+			directionWidget->SetVisibility(false);
+		}
 		return;
 	}
 }
