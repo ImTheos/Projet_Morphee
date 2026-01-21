@@ -51,6 +51,10 @@ void UBallEffect::EffectRemoved_Implementation(AActor* owner)
 void UBallEffect::SpawnObject(const AActor* contextActor, UClass* spawnedClass, const FVector& location, const FRotator& rotation, ESpawnActorCollisionHandlingMethod spawnCollisionMethod,
 	const ESpawnActorScaleMethod spawnScaleMethod, AActor* owner)
 {
+	if (!IsValid(contextActor))
+	{
+		UE_LOG(LogTemp, Error, TEXT("UBallEffect::SpawnObject : invalid contextActor"))
+	}
 	UWorld* world = contextActor->GetWorld();
 	
 	FActorSpawnParameters spawnParams = FActorSpawnParameters();
