@@ -32,37 +32,6 @@ void ABall::BeginPlay()
 	}
 	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollisionBeginOverlap);
 	SphereCollision->OnComponentHit.AddDynamic(this, &ABall::OnCollisionBlock);
-	
-	UWorld* world = Cast<UWorld>(GetWorld());
-	
-	if (!IsValid(world))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid world"));
-		return;
-	}
-	
-	APlayerController* playerController = world->GetFirstPlayerController();
-	if (!IsValid(playerController))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid PlayerController"));
-		return;
-	}
-	
-	AMyCPPCharacter* playerCharacter = Cast<AMyCPPCharacter>(playerController->GetPawn());
-	if (!IsValid(playerCharacter))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid player character"));
-		return;
-	}
-	
-	UBallOwnerComponent* ballOwnerComponent = playerCharacter->GetComponentByClass<UBallOwnerComponent>();
-	if (!IsValid(ballOwnerComponent))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid ballOwnerComponent"));
-		return;
-	}
-	
-	ballOwnerComponent->AssignBall(this);
 }
 
 // Called every frame
