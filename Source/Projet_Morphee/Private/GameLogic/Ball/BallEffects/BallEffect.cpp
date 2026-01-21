@@ -47,3 +47,20 @@ void UBallEffect::EffectRemoved_Implementation(AActor* owner)
 	FString displayName = effectName.ToString().IsEmpty() ? GetClass()->GetName() : effectName.ToString();
 	UE_LOG(LogTemp, Display, TEXT("UBallEffect::EffectRemoved was triggered for effect %s"), *displayName)
 }
+
+void UBallEffect::SpawnObject(const AActor* contextActor, UClass* spawnedClass, const FVector& location, const FRotator& rotation, ESpawnActorCollisionHandlingMethod spawnCollisionMethod,
+	const ESpawnActorScaleMethod spawnScaleMethod, AActor* owner)
+{
+	if (!IsValid(contextActor))
+	{
+		UE_LOG(LogTemp, Error, TEXT("UBallEffect::SpawnObject : invalid contextActor"))
+	}
+	UWorld* world = contextActor->GetWorld();
+	
+	FActorSpawnParameters spawnParams = FActorSpawnParameters();
+	spawnParams.SpawnCollisionHandlingOverride = spawnCollisionMethod;
+	spawnParams.Owner = owner;
+	spawnParams.TransformScaleMethod = spawnScaleMethod;
+	
+	world->SpawnActor(spawnedClass, &location, &rotation, spawnParams);
+}

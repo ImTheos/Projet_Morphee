@@ -40,8 +40,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float speed;
 	
-private:
-	
 	UPROPERTY(EditAnywhere)
 	UWidgetComponent* directionWidget;
 	
