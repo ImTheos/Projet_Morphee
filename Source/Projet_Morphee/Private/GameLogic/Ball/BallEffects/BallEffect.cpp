@@ -48,13 +48,16 @@ void UBallEffect::EffectRemoved_Implementation(AActor* owner)
 	UE_LOG(LogTemp, Display, TEXT("UBallEffect::EffectRemoved was triggered for effect %s"), *displayName)
 }
 
-void UBallEffect::SpawnObject(const AActor* contextActor, UClass* spawnedClass, const FVector& location, const FRotator& rotation, ESpawnActorCollisionHandlingMethod spawnCollisionMethod,
+AActor* UBallEffect::SpawnObject(const AActor* contextActor, UClass* spawnedClass, ESpawnResult& OutputPins, const FVector location, const FRotator rotation, ESpawnActorCollisionHandlingMethod spawnCollisionMethod,
 	const ESpawnActorScaleMethod spawnScaleMethod, AActor* owner)
 {
 	if (!IsValid(contextActor))
 	{
 		UE_LOG(LogTemp, Error, TEXT("UBallEffect::SpawnObject : invalid contextActor"))
+		OutputPins = ESpawnResult::SpawnResult_Failed;
+		return nullptr;
 	}
+	
 	UWorld* world = contextActor->GetWorld();
 	
 	FActorSpawnParameters spawnParams = FActorSpawnParameters();
@@ -62,5 +65,15 @@ void UBallEffect::SpawnObject(const AActor* contextActor, UClass* spawnedClass, 
 	spawnParams.Owner = owner;
 	spawnParams.TransformScaleMethod = spawnScaleMethod;
 	
-	world->SpawnActor(spawnedClass, &location, &rotation, spawnParams);
+	AActor* spawnedActor = world->SpawnActor(spawnedClass, &location, &rotation, spawnParams);
+	
+	if (!IsValid(spawnedActor))
+	{
+		UE_LOG(LogTemp, Error, TEXT("UBallEffect::SpawnObject : spawned actor was invalid"))
+		OutputPins = ESpawnResult::SpawnResult_Failed;
+		return nullptr;
+	}
+	
+	OutputPins = ESpawnResult::SpawnResult_Success;
+	return spawnedActor;
 }

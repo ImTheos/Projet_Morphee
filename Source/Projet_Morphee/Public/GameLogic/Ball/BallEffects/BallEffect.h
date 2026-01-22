@@ -5,6 +5,13 @@
 #include "CoreMinimal.h"
 #include "BallEffect.generated.h"
 
+UENUM(BlueprintType)
+enum class ESpawnResult : uint8
+{
+	SpawnResult_Success UMETA(DisplayName="Success"),
+	SpawnResult_Failed UMETA(DisplayName="Spawn Failed"),
+};
+
 /**
  * 
  */
@@ -51,8 +58,8 @@ public:
 	void EffectRemoved(AActor* owner);
 	virtual void EffectRemoved_Implementation(AActor* owner);
 	
-	UFUNCTION(BlueprintCallable)
-	void SpawnObject(const AActor* contextActor, UClass* spawnedClass, const FVector& location, const FRotator& rotation, ESpawnActorCollisionHandlingMethod spawnCollisionMethod,
-	const ESpawnActorScaleMethod spawnScaleMethod, AActor* owner);
+	UFUNCTION(BlueprintCallable, Meta = (ExpandEnumAsExecs = "OutputPins", ReturnDisplayName="Spawned Object"))
+	AActor* SpawnObject(const AActor* contextActor, UClass* spawnedClass, ESpawnResult& OutputPins, const FVector location = FVector::ZeroVector, const FRotator rotation = FRotator::ZeroRotator, ESpawnActorCollisionHandlingMethod spawnCollisionMethod = ESpawnActorCollisionHandlingMethod::AlwaysSpawn,
+	const ESpawnActorScaleMethod spawnScaleMethod = ESpawnActorScaleMethod::MultiplyWithRoot, AActor* owner = nullptr);
 };
 
