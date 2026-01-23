@@ -250,6 +250,7 @@ void ABall::SetBallEffect(const TSubclassOf<ABallEffect> newBallEffectClass, boo
 	
 	ballEffect = newBallEffectClass;
 	ballEffectInstance = newBallEffectInstance;
+	ballEffectInstance->effectOwner = this;
 
 	ballEffectInstance->EffectApplied();
 }
