@@ -3,64 +3,82 @@
 
 #include "GameLogic/Ball/BallEffects/BallEffect.h"
 
-bool UBallEffect::operator==(const UBallEffect& otherEffect) const
+ABallEffect::ABallEffect()
+{
+	effectName = FName(GetClass()->GetName());
+}
+
+bool ABallEffect::operator==(const ABallEffect& otherEffect) const
 {
 	return effectName == otherEffect.effectName;
 }
 
-void UBallEffect::Tick_Implementation(float deltaTime, AActor* owner)
+void ABallEffect::EffectTick_Implementation(float deltaTime)
 {
 	
 }
 
-void UBallEffect::Detonate_Implementation(AActor* owner)
+void ABallEffect::Detonate_Implementation()
 {
-	UE_LOG(LogTemp, Display, TEXT("UBallEffect::Detonate was triggered"))
+	UE_LOG(LogTemp, Display, TEXT("ABallEffect::Detonate was triggered"))
 }
 
-void UBallEffect::Attack_Implementation(AActor* ball, AActor* attacker)
+void ABallEffect::Attack_Implementation(AActor* attacker)
 {
 	UE_LOG(LogTemp, Display, TEXT("UBalEffect::Attack was triggered"))
 }
 
-void UBallEffect::CollisionBeginOverlap_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent,
-	AActor* otherActor, UPrimitiveComponent* otherComponent, int32 otherBodyIndex, bool fromSweep,
-	const FHitResult& sweepResult, bool isDamageable)
+void ABallEffect::CollisionBeginOverlap_Implementation(UPrimitiveComponent* overlappedComponent,
+                                                       AActor* otherActor, UPrimitiveComponent* otherComponent, int32 otherBodyIndex, bool fromSweep,
+                                                       const FHitResult& sweepResult, bool isDamageable)
 {
-	UE_LOG(LogTemp, Display, TEXT("UBallEffect::CollisionBeginOverlap was triggered"))
+	UE_LOG(LogTemp, Display, TEXT("ABallEffect::CollisionBeginOverlap was triggered"))
 }
 
-void UBallEffect::CollisionBlock_Implementation(AActor* owner, UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
-		FVector normalImpulse, FHitResult hit, bool isDamageable)
+void ABallEffect::CollisionBlock_Implementation(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+                                                FVector normalImpulse, FHitResult hit, bool isDamageable)
 {
-	UE_LOG(LogTemp, Display, TEXT("UBallEffect::CollisionBlock was triggered"))
+	UE_LOG(LogTemp, Display, TEXT("ABallEffect::CollisionBlock was triggered"))
 }
 
-void UBallEffect::EffectApplied_Implementation(AActor* owner)
-{
-	FString displayName = effectName.ToString().IsEmpty() ? GetClass()->GetName() : effectName.ToString();
-	UE_LOG(LogTemp, Display, TEXT("UBallEffect::EffectApplied was triggered for effect %s"), *displayName)
-}
-
-void UBallEffect::EffectRemoved_Implementation(AActor* owner)
+void ABallEffect::EffectApplied_Implementation()
 {
 	FString displayName = effectName.ToString().IsEmpty() ? GetClass()->GetName() : effectName.ToString();
-	UE_LOG(LogTemp, Display, TEXT("UBallEffect::EffectRemoved was triggered for effect %s"), *displayName)
+	UE_LOG(LogTemp, Display, TEXT("ABallEffect::EffectApplied was triggered for effect %s"), *displayName)
 }
 
-void UBallEffect::SpawnObject(const AActor* contextActor, UClass* spawnedClass, const FVector& location, const FRotator& rotation, ESpawnActorCollisionHandlingMethod spawnCollisionMethod,
-	const ESpawnActorScaleMethod spawnScaleMethod, AActor* owner)
+void ABallEffect::EffectRemoved_Implementation()
+{
+	FString displayName = effectName.ToString().IsEmpty() ? GetClass()->GetName() : effectName.ToString();
+	UE_LOG(LogTemp, Display, TEXT("ABallEffect::EffectRemoved was triggered for effect %s"), *displayName)
+}
+
+AActor* ABallEffect::SpawnObject(const AActor* contextActor, UClass* spawnedClass, ESpawnResult& OutputPins, const FVector location, const FRotator rotation, ESpawnActorCollisionHandlingMethod spawnCollisionMethod,
+	const ESpawnActorScaleMethod spawnScaleMethod, AActor* objectOwner)
 {
 	if (!IsValid(contextActor))
 	{
-		UE_LOG(LogTemp, Error, TEXT("UBallEffect::SpawnObject : invalid contextActor"))
+		UE_LOG(LogTemp, Error, TEXT("ABallEffect::SpawnObject : invalid contextActor"))
+		OutputPins = ESpawnResult::SpawnResult_Failed;
+		return nullptr;
 	}
+	
 	UWorld* world = contextActor->GetWorld();
 	
 	FActorSpawnParameters spawnParams = FActorSpawnParameters();
 	spawnParams.SpawnCollisionHandlingOverride = spawnCollisionMethod;
-	spawnParams.Owner = owner;
+	spawnParams.Owner = objectOwner;
 	spawnParams.TransformScaleMethod = spawnScaleMethod;
 	
-	world->SpawnActor(spawnedClass, &location, &rotation, spawnParams);
+	AActor* spawnedActor = world->SpawnActor(spawnedClass, &location, &rotation, spawnParams);
+	
+	if (!IsValid(spawnedActor))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABallEffect::SpawnObject : spawned actor was invalid"))
+		OutputPins = ESpawnResult::SpawnResult_Failed;
+		return nullptr;
+	}
+	
+	OutputPins = ESpawnResult::SpawnResult_Success;
+	return spawnedActor;
 }
