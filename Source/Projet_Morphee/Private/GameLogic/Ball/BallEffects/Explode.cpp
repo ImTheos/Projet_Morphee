@@ -8,11 +8,11 @@
 #include "GameLogic/GameplayComponents/MagnetComponent.h"
 #include "GameLogic/Interfaces/Damageable.h"
 
-void UExplode::Detonate_Implementation(AActor* owner)
+void AExplode::Detonate_Implementation()
 {
-	Super::Detonate_Implementation(owner);
+	Super::Detonate_Implementation();
 	
-	ABall* ball = Cast<ABall>(owner);
+	ABall* ball = Cast<ABall>(effectOwner);
 	
 	if (!IsValid(ball))
 	{
@@ -20,11 +20,11 @@ void UExplode::Detonate_Implementation(AActor* owner)
 		return;
 	}
 	
-	const UWorld* world = owner->GetWorld();
+	const UWorld* world = effectOwner->GetWorld();
 	
 	if (!IsValid(world))
 	{
-		UE_LOG(LogTemp, Error, TEXT("UExplode::Detonate_Implementation : Invalid world"))
+		UE_LOG(LogTemp, Error, TEXT("AExplode::Detonate_Implementation : Invalid world"))
 		return;
 	}
 	
@@ -68,14 +68,14 @@ void UExplode::Detonate_Implementation(AActor* owner)
 	
 	if (!IsValid(playerController))
 	{
-		UE_LOG(LogTemp, Error, TEXT("UExplode::Detonate_Implementation : Invalid player controller"));
+		UE_LOG(LogTemp, Error, TEXT("AExplode::Detonate_Implementation : Invalid player controller"));
 		return;
 	}
 
 	const APawn* playerPawn = playerController->GetPawn();
 	if (!IsValid(playerPawn))
 	{
-		UE_LOG(LogTemp, Error, TEXT("UExplode::Detonate_Implementation : Invalid player pawn"));
+		UE_LOG(LogTemp, Error, TEXT("AExplode::Detonate_Implementation : Invalid player pawn"));
 		return;
 	}
 	
@@ -83,7 +83,7 @@ void UExplode::Detonate_Implementation(AActor* owner)
 	
 	if (!IsValid(magnetComponent))
 	{
-		UE_LOG(LogTemp, Error, TEXT("UExplode::Detonate_Implementation : Invalid magnet component"));
+		UE_LOG(LogTemp, Error, TEXT("AExplode::Detonate_Implementation : Invalid magnet component"));
 		return;
 	}
 	

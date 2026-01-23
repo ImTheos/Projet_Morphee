@@ -11,11 +11,11 @@
  * 
  */
 UCLASS()
-class PROJET_MORPHEE_API UExplode : public UBallEffect
+class PROJET_MORPHEE_API AExplode : public ABallEffect
 {
 	GENERATED_BODY()
 	
-	virtual void Detonate_Implementation(AActor* owner) override;
+	virtual void Detonate_Implementation() override;
 	
 public:
 	UPROPERTY(EditDefaultsOnly)
