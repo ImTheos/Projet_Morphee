@@ -41,4 +41,4 @@
 
 ---
 
-[[Script]]
+[[Script (Obselète)]]
