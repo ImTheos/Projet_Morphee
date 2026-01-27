@@ -67,7 +67,7 @@ void ABallContainer::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 		return;
 	}
 	
-	collidedBall->SetStationaryAtLocation(ballMeshPreview->GetComponentLocation());
+	collidedBall->SetBallState(Stationary, ballMeshPreview);
 	storedBalls.Add(collidedBall);
 	
 	OutputSignal();

@@ -13,7 +13,8 @@
 				"GameplayAbilities",
 				"UMG",
 				"Flow",
-				"AIModule"
+				"AIModule",
+				"CoreUObject"
 			]
 		}
 	],
@@ -53,6 +54,6 @@
 		{
 			"Name": "ActorPalette",
 			"Enabled": true
-		}
+		},
 	]
 }
