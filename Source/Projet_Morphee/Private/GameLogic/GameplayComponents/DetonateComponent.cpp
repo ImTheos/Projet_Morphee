@@ -57,22 +57,19 @@ void UDetonateComponent::Detonate()
 		return;
 	}
 	
-	TSubclassOf<UBallEffect> ballEffect = ownedBall->GetBallEffect();
+	if (ownedBall->GetBallState() != Free)
+	{
+		return;
+	}
 	
-	if (!IsValid(ballEffect))
+	ABallEffect* ballEffectInstance = ownedBall->GetBallEffectInstance();
+	
+	if (!IsValid(ballEffectInstance))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("UDetonateComponent::Detonate : the ballEffect is invalid"));
+		UE_LOG(LogTemp, Warning, TEXT("UDetonateComponent::Detonate : the ballEffectInstance is invalid"));
 		return;
 	}
-		
-	UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject());
-		
-	if (!IsValid(defaultObject))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
-		return;
-	}
-		
-	defaultObject->Detonate(ownedBall);
+	
+	ballEffectInstance->Detonate();
 }
 
