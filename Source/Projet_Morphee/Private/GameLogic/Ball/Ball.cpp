@@ -3,12 +3,9 @@
 
 #include "GameLogic/Ball/Ball.h"
 
-#include "MyCPPCharacter.h"
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
-#include "GameLogic/GameplayComponents/BallOwnerComponent.h"
-#include "GameLogic/GameplayComponents/MagnetComponent.h"
 #include "GameLogic/Interfaces/Damageable.h"
 
 // Sets default values
@@ -23,46 +20,29 @@ void ABall::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	ballEffect = defaultBallEffect;
+	if (IsValid(defaultBallEffect))
+	{
+		SetBallEffect(defaultBallEffect);
+	}
 	
-	USphereComponent* SphereCollision = FindComponentByClass<USphereComponent>();
-	if (!IsValid(SphereCollision))
+	USphereComponent* sphereCollision = FindComponentByClass<USphereComponent>();
+	if (!IsValid(sphereCollision))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("The sphere collision is invalid"));
 		return;
 	}
-	SphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollision);
+	sphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollisionBeginOverlap);
+	sphereCollision->OnComponentHit.AddDynamic(this, &ABall::OnCollisionBlock);
 	
-	UWorld* world = Cast<UWorld>(GetWorld());
-	
-	if (!IsValid(world))
+	// TODO : Check this
+	UWidgetComponent* widgetComponent = FindComponentByClass<UWidgetComponent>();
+	if (!IsValid(widgetComponent))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid world"));
+		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : no WidgetComponent for Direction Widget"));
 		return;
 	}
 	
-	APlayerController* playerController = world->GetFirstPlayerController();
-	if (!IsValid(playerController))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid PlayerController"));
-		return;
-	}
-	
-	AMyCPPCharacter* playerCharacter = Cast<AMyCPPCharacter>(playerController->GetPawn());
-	if (!IsValid(playerCharacter))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid player character"));
-		return;
-	}
-	
-	UBallOwnerComponent* ballOwnerComponent = playerCharacter->GetComponentByClass<UBallOwnerComponent>();
-	if (!IsValid(ballOwnerComponent))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("ABall::BeginPlay : invalid ballOwnerComponent"));
-		return;
-	}
-	
-	ballOwnerComponent->AssignBall(this);
+	directionWidget = widgetComponent;
 }
 
 // Called every frame
@@ -87,21 +67,13 @@ void ABall::Tick(float DeltaTime)
 		// There might be a nicer way to do this, but I'm unsure of the best solution. This will work for now
 		// The CDO is not supposed to get instanced at each call 
 		
-		if (!IsValid(ballEffect))
+		if (!IsValid(ballEffectInstance))
 		{
-			UE_LOG(LogTemp, Warning, TEXT("ABall::Tick : The effect is invalid"));
+			UE_LOG(LogTemp, Warning, TEXT("ABall::Tick : The ballEffectInstance is invalid"));
 			return;
 		}
 		
-		UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject());
-		
-		if (!IsValid(defaultObject))
-		{
-			UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
-			return;
-		}
-		
-		defaultObject->Tick(DeltaTime, this);
+		ballEffectInstance->EffectTick(DeltaTime);
 	}
 }
 
@@ -183,109 +155,134 @@ void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
 	collisionComponent->SetCollisionEnabled(collisionType);
 }
 
-void ABall::OnCollision(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult)
+void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor,
+	UPrimitiveComponent* otherHitComponent, FVector normalImpulse, const FHitResult& hit)
 {
-	OnCollisionBP(overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+	OnCollisionBlockBP(hitComponent, otherActor, otherHitComponent, normalImpulse, hit);
 	
-	if (!IsValid(ballEffect))
+	if (!IsValid(ballEffectInstance))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("The ball effect is invalid"));
-		return;
-	}
-		
-	UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject());
-		
-	if (!IsValid(defaultObject))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
+		UE_LOG(LogTemp, Warning, TEXT("ABall::OnCollisionBlock : The ballEffectInstance is invalid"));
 		return;
 	}
 	
 	if (!IsValid(otherActor))
 	{
-		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollision : invalid otherActor"))
+		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBlock : invalid otherActor"))
 		return;
 	}
 	
 	UClass* otherActorClass = Cast<UClass>(otherActor->GetClass());
 	if (!IsValid(otherActorClass))
 	{
-		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollision : invalid otherActor class"))
+		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBeginOverlap : invalid otherActor class"))
 		return;
 	}
-		
-	if (otherActorClass->ImplementsInterface(UDamageable::StaticClass()))
-	{
-		defaultObject->CollideDamageable(this, overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
-	}
-	else
-	{
-		defaultObject->CollideNotDamageable(this, overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
-	}
-		
 	
+	bool isDamageable = otherActorClass->ImplementsInterface(UDamageable::StaticClass());
+		
+	ballEffectInstance->CollisionBlock(hitComponent, otherActor, otherHitComponent, normalImpulse, hit, isDamageable);
 }
 
-void ABall::SetBallEffect(const TSubclassOf<UBallEffect> newBallEffect, bool actualize)
+void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+                                    int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult)
 {
-	if (!actualize && newBallEffect == ballEffect)
+	OnCollisionBeginOverlapBP(overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+	
+	if (!IsValid(ballEffectInstance))
 	{
+		UE_LOG(LogTemp, Warning, TEXT("ABall::OnCollisionBeginOverlap : invalid ballEffectInstance"));
 		return;
 	}
 	
-	ballEffect = newBallEffect;
-	
-	if (!IsValid(ballEffect))
+	if (!IsValid(otherActor))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("The ball effect is invalid"));
+		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBeginOverlap : invalid otherActor"))
 		return;
 	}
-		
-	UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject());
-		
-	if (!IsValid(defaultObject))
+	
+	UClass* otherActorClass = Cast<UClass>(otherActor->GetClass());
+	if (!IsValid(otherActorClass))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
+		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBeginOverlap : invalid otherActor class"))
 		return;
 	}
 
-	defaultObject->EffectApplied(this);
+	const bool isDamageable = otherActorClass->ImplementsInterface(UDamageable::StaticClass());
+	
+	ballEffectInstance->CollisionBeginOverlap(overlappedComponent, otherActor, otherComponent, 
+		otherBodyIndex, fromSweep, sweepResult, isDamageable);
+}
+
+void ABall::SetBallEffect(const TSubclassOf<ABallEffect> newBallEffectClass, bool actualize)
+{
+	if (!IsValid(newBallEffectClass))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABall::SetBallEffect : invalid newBallEffectClass"));
+		return;
+	}
+	
+	UWorld* world = GetWorld();
+	
+	if (!IsValid(world))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABall::SetBallEffect : invalid world"));
+	}
+	
+	if (!actualize && newBallEffectClass == ballEffect)
+	{
+		return;
+	}
+	
+	if (IsValid(ballEffectInstance))
+	{
+		ballEffectInstance->EffectRemoved();
+		ballEffectInstance->Destroy();
+	}
+	
+	ABallEffect* newBallEffectInstance = Cast<ABallEffect>(world->SpawnActor(newBallEffectClass));
+	
+	if (!IsValid(newBallEffectInstance))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABall::SetBallEffect : could not spawn new ballEffectInstance"));
+		return;
+	}
+	
+	ballEffect = newBallEffectClass;
+	ballEffectInstance = newBallEffectInstance;
+	ballEffectInstance->effectOwner = this;
+
+	ballEffectInstance->EffectApplied();
 }
 
 void ABall::BallHitByAttack(AActor* attacker)
 {
-	if (!IsValid(ballEffect))
+	if (!IsValid(ballEffectInstance))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("The ball effect is invalid"));
-		return;
-	}
-		
-	UBallEffect* defaultObject = Cast<UBallEffect>(ballEffect.Get()->GetDefaultObject());
-		
-	if (!IsValid(defaultObject))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("The default object is NULL"));
+		UE_LOG(LogTemp, Warning, TEXT("ABall::BallHitByAttack : no effect has been set"));
 		return;
 	}
 
-	defaultObject->Attack(this, attacker);
+	ballEffectInstance->Attack(attacker);
 }
 
 void ABall::ReleaseFromStationary(float releaseSpeed)
 {
 	speed = releaseSpeed;
 	
-	directionWidget->SetVisibility(true);
+	if (IsValid(directionWidget))
+	{
+		directionWidget->SetVisibility(true);
+	}
 	
-	UWorld* World = GetWorld();
-	if (!IsValid(World))
+	UWorld* world = GetWorld();
+	if (!IsValid(world))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ABall::ReleaseFromStationary : The world is invalid ?!"));
 		return;
 	}
 	
-	APlayerController* playerController = World->GetFirstPlayerController();
+	APlayerController* playerController = world->GetFirstPlayerController();
 	
 	if (!IsValid(playerController))
 	{
@@ -312,7 +309,10 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
 		
 		ballState = newBallState;
-		directionWidget->SetVisibility(true);
+		if (IsValid(directionWidget))
+		{
+			directionWidget->SetVisibility(true);
+		}
 		return;
 	}
 	
@@ -328,7 +328,10 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	{
 		SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		
-		directionWidget->SetVisibility(true);
+		if (IsValid(directionWidget))
+		{
+			directionWidget->SetVisibility(true);
+		}
 		return;
 	}
 	
@@ -336,7 +339,10 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	{
 		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
 		
-		directionWidget->SetVisibility(true);
+		if (IsValid(directionWidget))
+		{
+			directionWidget->SetVisibility(true);
+		}
 		return;
 	}
 	
@@ -354,7 +360,10 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 			SetActorLocation(sceneComp->GetComponentLocation());
 		}
 		
-		directionWidget->SetVisibility(false);
+		if (IsValid(directionWidget))
+		{
+			directionWidget->SetVisibility(false);
+		}
 		return;
 	}
 }

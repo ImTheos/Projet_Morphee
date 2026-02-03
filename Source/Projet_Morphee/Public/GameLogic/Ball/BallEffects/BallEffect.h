@@ -5,45 +5,68 @@
 #include "CoreMinimal.h"
 #include "BallEffect.generated.h"
 
+class ABall;
+
+UENUM(BlueprintType)
+enum class ESpawnResult : uint8
+{
+	SpawnResult_Success UMETA(DisplayName="Success"),
+	SpawnResult_Failed UMETA(DisplayName="Spawn Failed"),
+};
+
 /**
  * 
  */
 UCLASS(Blueprintable)
-class PROJET_MORPHEE_API UBallEffect : public UObject
+class PROJET_MORPHEE_API ABallEffect : public AActor
 {
 	GENERATED_BODY()
 	
 public:
+	ABallEffect();
+	
+	UPROPERTY(BlueprintReadOnly, meta=(ExposeOnSpawn = true))
+	ABall* effectOwner;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FName effectName;
 	
-	bool operator==(const UBallEffect&) const;
+	bool operator==(const ABallEffect&) const;
 	
 	UFUNCTION(BlueprintNativeEvent)
-	void Tick(float deltaTime, AActor* owner);
-	virtual void Tick_Implementation(float deltaTime, AActor* owner);
+	void EffectTick(float deltaTime);
+	virtual void EffectTick_Implementation(float deltaTime);
 	
 	UFUNCTION(BlueprintNativeEvent)
-	void Detonate(AActor* owner);
-	virtual void Detonate_Implementation(AActor* owner);
+	void Detonate();
+	virtual void Detonate_Implementation();
 	
 	UFUNCTION(BlueprintNativeEvent)
-	void Attack(AActor* ball, AActor* attacker);
-	virtual void Attack_Implementation(AActor* ball, AActor* attacker);
+	void Attack(AActor* attacker);
+	virtual void Attack_Implementation(AActor* attacker);
 	
 	UFUNCTION(BlueprintNativeEvent)
-	void CollideDamageable(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
-	virtual void CollideDamageable_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, 
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	void CollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	                           int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult, bool isDamageable);
+	virtual void CollisionBeginOverlap_Implementation(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, 
+	                                                  int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult, bool isDamageable);
 	
 	UFUNCTION(BlueprintNativeEvent)
-	void CollideNotDamageable(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
-	virtual void CollideNotDamageable_Implementation(AActor* owner, UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, 
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	void CollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+	                    FVector normalImpulse, FHitResult hit, bool isDamageable);
+	virtual void CollisionBlock_Implementation(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+	                                           FVector normalImpulse, FHitResult hit, bool isDamageable);
 	
 	UFUNCTION(BlueprintNativeEvent)
-	void EffectApplied(AActor* owner);
-	virtual void EffectApplied_Implementation(AActor* owner);
+	void EffectApplied();
+	virtual void EffectApplied_Implementation();
+	
+	UFUNCTION(BlueprintNativeEvent)
+	void EffectRemoved();
+	virtual void EffectRemoved_Implementation();
+	
+	UFUNCTION(BlueprintCallable, Meta = (ExpandEnumAsExecs = "OutputPins", ReturnDisplayName="Spawned Object"))
+	AActor* SpawnObject(const AActor* contextActor, UClass* spawnedClass, ESpawnResult& OutputPins, const FVector location = FVector::ZeroVector, const FRotator rotation = FRotator::ZeroRotator, ESpawnActorCollisionHandlingMethod spawnCollisionMethod = ESpawnActorCollisionHandlingMethod::AlwaysSpawn,
+	const ESpawnActorScaleMethod spawnScaleMethod = ESpawnActorScaleMethod::MultiplyWithRoot, AActor* objectOwner = nullptr);
 };
+

@@ -40,8 +40,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float speed;
 	
-private:
-	
 	UPROPERTY(EditAnywhere)
 	UWidgetComponent* directionWidget;
 	
@@ -71,39 +69,54 @@ public:
 	// -------  -------  ------- 
 private:
 	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
-	
+
+
 	UFUNCTION()
-	void OnCollision(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	void OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
-	
+
+	UFUNCTION()
+	void OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+	                      FVector normalImpulse, const FHitResult& hit);
+
 public:
-	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision"))
-	void OnCollisionBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision Begin Overlap"))
+	void OnCollisionBeginOverlapBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
 	
+	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision Hit"))
+	void OnCollisionBlockBP(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+		FVector normalImpulse, FHitResult hit);
 	
 	// -------  -------  ------- 
 	// ------- BALL EFFECT -------
 	// -------  -------  ------- 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UBallEffect> defaultBallEffect;
+	TSubclassOf<ABallEffect> defaultBallEffect;
 	
 private:
-	TSubclassOf<UBallEffect> ballEffect;
+	UPROPERTY(VisibleAnywhere)
+	TSubclassOf<ABallEffect> ballEffect;
+	
+	UPROPERTY()
+	ABallEffect* ballEffectInstance;
 	
 public:
 	UFUNCTION(BlueprintCallable)
-	TSubclassOf<UBallEffect> GetBallEffect() const { return ballEffect; }
+	TSubclassOf<ABallEffect> GetBallEffect() const { return ballEffect; }
+	
+	UFUNCTION(BlueprintCallable)
+	ABallEffect* GetBallEffectInstance() const { return ballEffectInstance; }
 	
 	/**
 	 * Sets a new value for the ballEffect parameter
 	 *
-	 * @param newBallEffect  The new value ballEffect should have
+	 * @param newBallEffectClass  The new value ballEffect should have
 	 * @param actualize Whether the ballEffect's "EffectApplied" function should be applied if the new effect is the same as the current version
 	 */
 	UFUNCTION(BlueprintCallable)
-	void SetBallEffect(TSubclassOf<UBallEffect> newBallEffect, bool actualize = false);
+	void SetBallEffect(TSubclassOf<ABallEffect> newBallEffectClass, bool actualize = false);
 	
 	// -------  -------  ------- 
 	// ------- BALL IS HIT -------
