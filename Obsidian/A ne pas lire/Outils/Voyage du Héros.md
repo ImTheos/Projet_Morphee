@@ -13,7 +13,7 @@ tags:
 Le héros est un personnage ordinaire dans un monde ordinaire. Nous découvrons ses forces, ses faiblesses, ses objectifs, ses contradictions, ses valeurs.
 ```
 
-> On retrouve une Thalia au plus bas. Habituée à une vie d'isolement toxique et d'un rythme du sommeil désastreux, elle n'est ni heureuse ni épanouie toutefois elle demeure dans un certain déni d'elle-même.
+> On retrouve une Thalia au plus bas. Habituée à une vie d'isolement et d'un rythme du sommeil désastreux, elle n'est ni heureuse ni épanouie toutefois elle demeure dans un certain déni de sa condition.
 
  ##### 2 - L'appel de l'aventure
 
@@ -21,7 +21,7 @@ Le héros est un personnage ordinaire dans un monde ordinaire. Nous découvrons 
 Un problème survient. Le monde du héros est en danger. Il est le seul à pouvoir le sauver.
 ```
 
-> Durant un instant rare de sommeil, un cauchemar la réveille brusquement, cryptique et angoissant. On découvre l'état de l'appartement dans lequel elle passe ses journées, délabré, sale et preuve de sa santé mentale vacillante. La journée finit par l'ennuyer et elle se rendort. Cette fois-ci, la voilà devenue une hermine dans le monde d'Onyria. Lieu corrompu par des aberrations et un certain Phobétor.
+> Durant son sommeil, un cauchemar la réveille brusquement, cryptique et angoissant. On découvre l'état de l'appartement dans lequel elle passe ses journées, délabré, sale et preuve de sa santé mentale vacillante. La journée finit par l'ennuyer et elle se rendort. Cette fois-ci, la voilà devenue une hermine dans le monde d'Onyria.
 
 ##### 3 - Le refus de l'appel
 
@@ -37,7 +37,7 @@ Le héros a peur de répondre à l’appel. Il a peur de l’inconnu, de ce qui 
 Le héros rencontre un mentor qui va l’encourager à franchir le cap et lui donner un objet magique, une arme qui l’aidera dans son voyage. Le mentor est souvent un ancien héros qui a lui-même vécu une ou plusieurs aventures. Il en a tiré une certaine sagesse.
 ```
 
-> Thalia dans son échappée, rencontre une sphère flamboyante d'un bleu doux entourée par une seconde sphère dorée. La réalité se dévoile d'elle-même, Morphée se met à parler et raconte qu'il a été piégé par Phobétor. En danger, Morphée lui propose son aide pour éliminer ses poursuivants. Thalia accepte en s'en servant de lui comme une balle pour se frayer un chemin parmi les monstres et les puzzles.
+> Thalia dans son échappée, rencontre une sphère flamboyante d'un bleu doux. Morphée se met à parler et raconte qu'il a été piégé par Phobétor. En danger, Morphée lui propose son aide pour quitter Onyria en échange d'aide pour destituer Phobétor.
 
 ##### 5 - Le passage du seuil
 
@@ -53,7 +53,7 @@ Le héros se décide enfin à passer le seuil et à basculer dans le monde extra
 Le héros est dans le monde extraordinaire. Il rencontre des personnages incroyables dont il ne soupçonnait pas l’existence. Certains de ces personnages seront des alliés prêts à l’aider. D’autres seront des ennemis et l’empêcheront d’avancer. Le héros est soumis à de nombreuses épreuves dont il devra triompher pour avancer dans son voyage.
 ```
 
-> Ignorante de la véritable face d'Onyria, Thalia rencontre des personnifications de ses proches, d'événements de sa vie et d'objets chers à son cœur au travers de ses aventures. Sauf que Morphée se comporte de plus en plus étrangement et un suspens se forme dans les pensées de son alliée. Avec le temps, leur relation mais le mystère sur Onyria, Morphée et Phobétor plane au dessus d'eux et le secret ne perdura pas encore longtemps. Tout cela se passe nuit après nuit, chaque jour elle tente de réparer morceau par morceau sa vie dans le monde réel.
+> Ignorante de la véritable face d'Onyria, Thalia rencontre des personnifications de ses proches et d'événements de sa vie et d'objets chers à son cœur au travers de ses aventures. Sauf que Morphée se comporte de plus en plus étrangement et un suspens se forme dans les pensées de son alliée. Avec le temps, leur relation grandit mais les mystères sur Onyria, Morphée lui-même et Phobétor planent au dessus de Thalia. Tout cela se passe nuit après nuit, chaque jour elle tente de réparer morceau par morceau sa vie dans le monde réel.
 
 ##### 7 - L'approche de la caverne
 
@@ -61,7 +61,8 @@ Le héros est dans le monde extraordinaire. Il rencontre des personnages incroya
 Le héros approche enfin du but de son voyage, de sa quête. La caverne est le lieu secret où se trouve le trésor, l’objet de sa quête : l’élixir. C’est également l’endroit le plus dangereux de sa quête.
 ```
 
-> Après avoir vaincu des boss et traverser des paysages entiers, Thalia se rapproche de la figure énigmatique et fantasmagorique qu'est Phobétor. Seulement, elle en vient finalement à découvrir la vérité. Morphée et Phobétor ne sont que la même face d'une même pièce : son être intérieur. Que les erreurs de Morphée ont mené à son mode de vie actuel et le déchaînement de Phobétor, décidé à reprendre le contrôle pour améliorer la vie de Thalia en la forçant à changer.
+> Après avoir vaincu des boss et traverser des paysages entiers, Thalia se rapproche de la figure énigmatique et fantasmagorique qu'est Phobétor. Seulement, elle en vient à découvrir
+> une vérité différente. Morphée et Phobétor ne sont que la même face d'une même pièce : son être intérieur. Que les erreurs de Morphée ont mené à son mode de vie actuel et le déchaînement de Phobétor, décidé à reprendre le contrôle pour améliorer la vie de Thalia en la forçant à changer.
 
 ##### 8 - L'épreuve suprême
 
@@ -69,7 +70,7 @@ Le héros approche enfin du but de son voyage, de sa quête. La caverne est le l
 Le héros doit affronter un ennemi redoutable pour atteindre l’élixir. Il est face à l’épreuve la plus dangereuse de son voyage. Pour la première fois il affronte la mort.
 ```
 
-> Perplexe à cause de la récente révélation, Thalia se décide à affronter Phobétor et a récupéré ce qu'elle veut : Reprendre le piano et redevenir qui elle était avant. En surpassant le contrôle de Morphée et en affrontant l'acharnement de Phobétor. Durant ce combat, elle commence à comprendre que se débarrasser de Phobétor n'est pas la bonne solution, elle a besoin de lui, comme elle a aussi besoin de Morphée. Et que peut-être, redevenir qui elle était avant n'est pas non plus la bonne voie. Progressivement, se dévoile ce dont elle a réellement besoin : Se libérer, s'écouter soi-même, faire ses propres choix. Phobétor n'est qu'un appel à l'aide de son être intérieur.
+> Perplexe dû à la récente révélation, Thalia se décide à affronter Phobétor et a récupéré ce qu'elle veut : Reprendre le piano et redevenir qui elle était avant. En surpassant le contrôle de Morphée et en affrontant l'acharnement de Phobétor. Durant ce combat, elle commence à comprendre que se débarrasser de Phobétor n'est pas la bonne solution, elle a besoin de lui, comme elle a aussi besoin de Morphée. Et que peut-être, redevenir qui elle était avant n'est pas non plus la bonne voie. Progressivement, se dévoile ce dont elle a réellement besoin : Se libérer, s'écouter soi-même, faire ses propres choix. Phobétor n'est qu'un appel à l'aide de son être intérieur.
 
 ##### 9 - La récompense, l'élixir
 
@@ -99,4 +100,4 @@ Le héros a réussi à traverser le seuil dans le sens inverse. Il est revenu da
 Le héros utilise l’élixir pour guérir son monde. Par la même occasion il donne un sens final à son voyage, sa quête.
 ```
 
-> ...`À voir`
+> 
