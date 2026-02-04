@@ -16,7 +16,6 @@ void UMeleeAttack::PreAttack()
 		100, FColor::Red, false, blackboard->GetValueAsFloat("attackStartupDuration"), 0, 10, 
 		FVector(1,0,0), FVector(0,1,0));
 	
-	blackboard->SetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName, blackboard->GetValueAsFloat("attackCooldown"));
 	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, false);
 	
 	FTimerHandle timerHandle;
@@ -51,13 +50,14 @@ EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 	
 	float remainingAttackCooldown = blackboard->GetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName);
 	
-	// Check if the player can attack right now
-	if (remainingAttackCooldown != 0.0f)
+	if (remainingAttackCooldown > 0.0f)
 	{
 		return EBTNodeResult::Failed;
 	}
 	
 	PreAttack();
+	
+	blackboard->SetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName, blackboard->GetValueAsFloat("attackCooldown"));
 	
 	return EBTNodeResult::Succeeded;
 }
@@ -110,9 +110,6 @@ void UMeleeAttack::Attack()
 	FHitResult attackHitResult;
 	const auto attackCollisionShape = 
 		FCollisionShape::MakeSphere(blackboard->GetValueAsFloat("attackRange"));
-	
-	// TODO : Allow this to be changed from editor
-	constexpr ECollisionChannel attackTraceChannel = ECC_GameTraceChannel4;
 	
 	// TODO : Test for collision during the whole animation
 	GetWorld()->SweepSingleByChannel(attackHitResult, 
