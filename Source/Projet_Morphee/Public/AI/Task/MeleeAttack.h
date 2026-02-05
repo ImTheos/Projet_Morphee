@@ -35,9 +35,6 @@ public:
 	UPROPERTY(EditAnywhere, Category="Attack")
 	FBlackboardKeySelector attackEndLagKey;
 	
-	UPROPERTY(EditAnywhere, Category="Attack")
-	TEnumAsByte<ECollisionChannel> attackTraceChannel;
-	
 private:
 	UPROPERTY()
 	ACharacter* aiCharacter;
