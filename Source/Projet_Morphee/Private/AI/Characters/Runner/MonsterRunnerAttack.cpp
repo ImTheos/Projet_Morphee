@@ -1,10 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "MonsterRunnerAttack.h"
-
-#include "AI/Characters/RunnerCharacter.h"
-#include "GameLogic/Interfaces/Damageable.h"
+#include "AI/Characters/Runner/MonsterRunnerAttack.h"
+#include "AI/Characters/Runner/RunnerCharacter.h"
 
 void UMonsterRunnerAttack::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
 	float TotalDuration, const FAnimNotifyEventReference& EventReference)

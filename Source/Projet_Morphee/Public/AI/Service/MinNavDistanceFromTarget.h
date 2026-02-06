@@ -29,4 +29,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Blackboard")
 	float distance;
 	
+	UPROPERTY(EditAnywhere, Category="Blackboard")
+	bool displayDistance;
+	
 };

@@ -3,6 +3,8 @@
 
 #include "AI/Service/MinNavDistanceFromTarget.h"
 
+#include <string>
+
 #include "AIController.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
@@ -84,6 +86,12 @@ void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 	FVector::FReal pathLength;
 	
 	navData->CalcPathLength(aiCharacterActor->GetActorLocation(), targetLocation, pathLength);
+	
+	if (displayDistance)
+	{
+		FString debugMessage = FString::Printf(TEXT("PathLength: %f"), pathLength);
+		GEngine->AddOnScreenDebugMessage(2, 5.0f, FColor::Blue, debugMessage);
+	}
 
 	const bool result = pathLength < distance;
 	

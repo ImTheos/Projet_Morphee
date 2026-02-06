@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "AI/Characters/RunnerCharacter.h"
+#include "AI/Characters/Runner/RunnerCharacter.h"
 
 #include "AIController.h"
 #include "MyCPPCharacter.h"
