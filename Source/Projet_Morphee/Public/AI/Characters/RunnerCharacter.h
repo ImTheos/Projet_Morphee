@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AI/Characters/EnemyCharacter.h"
+#include "Components/SphereComponent.h"
 #include "RunnerCharacter.generated.h"
 
 /**
@@ -14,22 +15,27 @@ class PROJET_MORPHEE_API ARunnerCharacter : public AEnemyCharacter
 {
 	GENERATED_BODY()
 	
+	virtual void BeginPlay() override;
+	
 public:
-	/** Radius of the attack sphere hitbox **/
-	UPROPERTY(EditAnywhere, meta=(Category="Attack"))
-	float attackRange;
-
 	/** Time needed between the beginning of an attack and the beginning of the next one **/
 	UPROPERTY(EditAnywhere, meta=(Category="Attack"))
 	float attackCooldown;
-	
-	/** Duration of the attack windup, i.e. the time span where the attack indicator is displayed but no hitbox is active yet **/
-	UPROPERTY(EditAnywhere, meta=(Category="Attack"))
-	float attackStartupDuration;
 	
 	/** Damage dealt by each attack **/
 	UPROPERTY(EditAnywhere, meta=(Category="Attack"))
 	float attackDamage;
 	
+	UPROPERTY(EditAnywhere)
+	USphereComponent* attackHitbox;
+	
 	virtual void InitCharacter() override;
+	
+	UFUNCTION()
+	void OnHitboxOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+									int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	
+	UFUNCTION()
+	void OnHitboxBlock(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+						  FVector normalImpulse, const FHitResult& hit);
 };

@@ -106,31 +106,6 @@ void UMeleeAttack::Attack()
 	animEndDelegate.BindUObject(this, &UMeleeAttack::EndAttackAnim);
 	
 	animInstance->Montage_SetEndDelegate(animEndDelegate, attackAnimationMontage);
-	
-	FHitResult attackHitResult;
-	const auto attackCollisionShape = 
-		FCollisionShape::MakeSphere(blackboard->GetValueAsFloat("attackRange"));
-	
-	// TODO : Test for collision during the whole animation
-	GetWorld()->SweepSingleByChannel(attackHitResult, 
-		aiCharacter->GetActorLocation(), aiCharacter->GetActorLocation(), 
-		FQuat::Identity, attackTraceChannel, attackCollisionShape);
-	
-	if (!attackHitResult.bBlockingHit)
-	{
-		// Attack did not hit a target
-		return;
-	}
-	
-	auto* hitActor = Cast<AActor>(attackHitResult.GetActor());
-	if (!hitActor->GetClass()->ImplementsInterface(UDamageable::StaticClass()))
-	{
-		return;
-	}
-	
-	IDamageable::Execute_ReceiveDamage(hitActor, 
-		blackboard->GetValueAsFloat("attackDamage"), 
-		attackHitResult.ImpactNormal, aiCharacter);
 }
 
 void UMeleeAttack::EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) const
