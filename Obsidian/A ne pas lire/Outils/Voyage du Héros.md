@@ -99,5 +99,3 @@ Le héros a réussi à traverser le seuil dans le sens inverse. Il est revenu da
 ```
 Le héros utilise l’élixir pour guérir son monde. Par la même occasion il donne un sens final à son voyage, sa quête.
 ```
-
-> 

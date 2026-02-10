@@ -4,7 +4,6 @@ tags:
   - Personnages
   - Narration
 ---
-
 > [!Info] Qu'est ce que c'est que cette page ?
 > Il s'agit des différentes listes des éléments du lore dont il est nécessaire de les partager au joueur. Celui-ci est dense, il est donc nécessaire de se mettre d'accord sur ce qui est ou non partagé au joueur.
 
@@ -71,7 +70,7 @@ tags:
    
 9. Les autres boss ne sont pas à ses ordres mais retiennent l'avancée de Morphée et Thalia
 
-10. Il n'est pas la source direct de la corruption mais s'en sert à son avantage
+10. Les monstres sont ses créations. Ils sont similaires à des homunculus
 
-11. Pour lui, il peut se permettre de mettre de côté les sentiments de Thalia pour son futur
+11. "La fin justifie les moyens"
 ```

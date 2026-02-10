@@ -3,13 +3,13 @@ tags:
   - Narration
 ---
 
-| **Thalia**                                                                                         | **Morphée** | Phobétor | Onyria | Les Parents de Thalia |
-| -------------------------------------------------------------------------------------------------- | ----------- | -------- | ------ | --------------------- |
-| [The Insomniac](https://tvtropes.org/pmwiki/pmwiki.php/Main/TheInsomniac)                          |             |          |        |                       |
-| [Sleep Deprivation](https://tvtropes.org/pmwiki/pmwiki.php/Main/SleepDeprivation)                  |             |          |        |                       |
-| [Exhaustation-Induced Idiocy](https://tvtropes.org/pmwiki/pmwiki.php/Main/ExhaustionInducedIdiocy) |             |          |        |                       |
-| [The Perfectionnist](https://tvtropes.org/pmwiki/pmwiki.php/Main/ThePerfectionist)                 |             |          |        |                       |
-| [Plucky Girl](https://tvtropes.org/pmwiki/pmwiki.php/Main/PluckyGirl)                              |             |          |        |                       |
+| **Thalia**                                                                                         | **Morphée** | Phobétor                                                                            | Onyria | Les Parents de Thalia |
+| -------------------------------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------- | ------ | --------------------- |
+| [The Insomniac](https://tvtropes.org/pmwiki/pmwiki.php/Main/TheInsomniac)                          |             | [Above Good And Evil](https://tvtropes.org/pmwiki/pmwiki.php/Main/AboveGoodAndEvil) |        |                       |
+| [Sleep Deprivation](https://tvtropes.org/pmwiki/pmwiki.php/Main/SleepDeprivation)                  |             |                                                                                     |        |                       |
+| [Exhaustation-Induced Idiocy](https://tvtropes.org/pmwiki/pmwiki.php/Main/ExhaustionInducedIdiocy) |             |                                                                                     |        |                       |
+| [The Perfectionnist](https://tvtropes.org/pmwiki/pmwiki.php/Main/ThePerfectionist)                 |             |                                                                                     |        |                       |
+| [Plucky Girl](https://tvtropes.org/pmwiki/pmwiki.php/Main/PluckyGirl)                              |             |                                                                                     |        |                       |
 
 ---
 
