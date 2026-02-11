@@ -76,6 +76,7 @@ void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 	}
 	
 	// TODO add world check
+	
 	const ANavigationData* navData = navSystem->GetDefaultNavDataInstance(FNavigationSystem::DontCreate);
 	if (!IsValid(navData))
 	{
