@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+UE_DISABLE_OPTIMIZATION
 
 #include "AI/Service/MinNavDistanceFromTarget.h"
 
 #include <string>
 
 #include "AIController.h"
+#include "NavigationPath.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
@@ -21,14 +22,12 @@ void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 		return;
 	}
 
-	const APawn* aiCharacterActor = aiController->GetPawn();
+	APawn* aiCharacterActor = aiController->GetPawn();
 	if (!IsValid(aiCharacterActor))
 	{
 		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : aiCharacterActor is invalid"));
 		return;
 	}
-	
-	FVector targetLocation;
 	
 	UBlackboardComponent* blackboard = OwnerComp.GetBlackboardComponent();
 	if (!blackboard)
@@ -38,6 +37,8 @@ void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 	}
 	
 	TSubclassOf<UBlackboardKeyType> targetKeyType = blackboard->GetKeyType(targetKeyName.GetSelectedKeyID());
+	
+	FVector targetLocation;
 	
 	if (targetKeyType == UBlackboardKeyType_Object::StaticClass())
 	{
@@ -67,34 +68,63 @@ void UMinNavDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint
 		return;
 	}
 	
-	// TODO refactor this distance calculation by using the EQS system
-	UNavigationSystemV1* navSystem = FNavigationSystem::GetCurrent<UNavigationSystemV1>(world);
-	if (!IsValid(navSystem))
+	UNavigationSystemV1* navigationSystem = FNavigationSystem::GetCurrent<UNavigationSystemV1>(world);
+	if (!IsValid(navigationSystem))
 	{
 		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : navSystem is invalid"));
 		return;
 	}
 	
-	// TODO add world check
-	
-	const ANavigationData* navData = navSystem->GetDefaultNavDataInstance(FNavigationSystem::DontCreate);
-	if (!IsValid(navData))
+	const ANavigationData* navigationData = navigationSystem->GetDefaultNavDataInstance(FNavigationSystem::DontCreate);
+	if (!IsValid(navigationData))
 	{
 		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : navData is invalid"));
 		return;
 	}
 	
-	FVector::FReal pathLength;
+	UNavigationPath* navigationPath = navigationSystem->FindPathToLocationSynchronously(GetWorld(), 
+																		aiCharacterActor->GetActorLocation(), 
+																		targetLocation, 
+																		aiCharacterActor);
 	
-	navData->CalcPathLength(aiCharacterActor->GetActorLocation(), targetLocation, pathLength);
+	if (!IsValid(navigationPath) || navigationPath->PathPoints.Num() < 2)
+	{
+		UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : invalid navigationPath"))
+		return;
+	}
+	
+	float pathLength = 0.f;
+	for (int i = 1; i < navigationPath->PathPoints.Num(); i++)
+	{
+		pathLength += FVector::Dist(navigationPath->PathPoints[i-1], navigationPath->PathPoints[i]);
+	}
 	
 	if (displayDistance)
 	{
-		FString debugMessage = FString::Printf(TEXT("PathLength: %f"), pathLength);
-		GEngine->AddOnScreenDebugMessage(2, 5.0f, FColor::Blue, debugMessage);
+		const FString distanceDisplayMessage = FString::Printf(TEXT("%s : distance joueur =  L %.1f unités"), *aiCharacterActor->GetActorLabel(), pathLength);
+		GEngine->AddOnScreenDebugMessage((uint64) aiCharacterActor->GetUniqueID(), 1.f, FColor::Yellow, distanceDisplayMessage);
+	}
+	
+	if (displayRange)
+	{
+		DrawDebugCircle(world, FMatrix::Identity, distance, 200, FColor::Yellow, false, 0.5f);
 	}
 
 	const bool result = pathLength < distance;
+	
+	
+	if (result && displayPath)
+	{
+		for (int i = 1; i < navigationPath->PathPoints.Num(); i++)
+		{
+			DrawDebugLine(world, 
+				navigationPath->PathPoints[i-1],
+				navigationPath->PathPoints[i],
+				FColor::Yellow,
+				false,
+				0.5f);
+		}
+	}
 	
 	blackboard->SetValueAsBool(resultKeyName.SelectedKeyName, result);
 }
