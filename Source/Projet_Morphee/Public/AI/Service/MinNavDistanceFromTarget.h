@@ -29,4 +29,13 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Blackboard")
 	float distance;
 	
+	UPROPERTY(EditAnywhere, Category="Debug")
+	bool displayDistance = false;
+	
+	UPROPERTY(EditAnywhere, Category="Debug")
+	bool displayPath = false;
+	
+	UPROPERTY(EditAnywhere, Category="Debug")
+	bool displayRange = false;
+	
 };
