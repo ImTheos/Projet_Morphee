@@ -6,21 +6,6 @@
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "GameFramework/Character.h"
-#include "GameLogic/Interfaces/Damageable.h"
-
-void UMeleeAttack::PreAttack()
-{
-	// Play animation startup
-	// TODO : add real preview animation
-	DrawDebugCircle(GetWorld(), aiCharacter->GetActorLocation(), blackboard->GetValueAsFloat("attackRange"), 
-		100, FColor::Red, false, blackboard->GetValueAsFloat("attackStartupDuration"), 0, 10, 
-		FVector(1,0,0), FVector(0,1,0));
-	
-	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, false);
-	
-	FTimerHandle timerHandle;
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMeleeAttack::Attack, blackboard->GetValueAsFloat("attackStartupDuration"));
-}
 
 EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
@@ -55,7 +40,7 @@ EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 		return EBTNodeResult::Failed;
 	}
 	
-	PreAttack();
+	Attack();
 	
 	blackboard->SetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName, blackboard->GetValueAsFloat("attackCooldown"));
 	

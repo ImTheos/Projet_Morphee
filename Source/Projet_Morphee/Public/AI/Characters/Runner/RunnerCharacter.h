@@ -38,4 +38,13 @@ public:
 	UFUNCTION()
 	void OnHitboxBlock(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
 						  FVector normalImpulse, const FHitResult& hit);
+	
+	UPROPERTY(EditDefaultsOnly, Category="AI")
+	FName attackCooldownKey = TEXT("attackCooldown");
+	
+	UPROPERTY(EditDefaultsOnly, Category="AI")
+	FName baseLocationKey = TEXT("baseLocation");
+	
+	UPROPERTY(EditDefaultsOnly, Category="AI")
+	FName targetActorKey = TEXT("targetActor");
 };

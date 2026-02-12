@@ -16,6 +16,15 @@ public:
 	// Sets default values for this character's properties
 	AEnemyCharacter();
 	
+	UPROPERTY(EditDefaultsOnly, Category="AI")
+	FName bCanActKey = TEXT("bCanAct");
+	
 	UFUNCTION(BlueprintCallable)
 	virtual void InitCharacter();
+	
+	UFUNCTION(BlueprintCallable)
+	void StunCharacter(float stunTime, bool autoUnStun = true);
+	
+	UFUNCTION(BlueprintCallable)
+	void UnStunCharacter();
 };
