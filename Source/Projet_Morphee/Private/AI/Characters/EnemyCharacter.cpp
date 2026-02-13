@@ -19,7 +19,7 @@ void AEnemyCharacter::InitCharacter()
 	UE_LOG(LogTemp, Warning, TEXT("AEnemyCharacter::InitCharacter : this function should be overwritten and not called by Super()"))
 }
 
-void AEnemyCharacter::StunCharacter(float stunTime, bool autoUnStun)
+void AEnemyCharacter::StunForSeconds(float stunDuration)
 {
 	AAIController* activeController = Cast<AAIController>(GetController());
 	if (!IsValid(activeController))
@@ -34,28 +34,19 @@ void AEnemyCharacter::StunCharacter(float stunTime, bool autoUnStun)
 		return;
 	}
 	
-	blackboard->SetValueAsFloat(bCanActKey, false);
-	
-	if (!autoUnStun)
-	{
-		return;
-	}
+	blackboard->SetValueAsBool(bIsStunnedKey, true);
 	
 	UWorld* world = GetWorld();
 	
-	if (!IsValid(world))
-	{
-		return;
-	}
+	FTimerDelegate unstunDelegate;
+	unstunDelegate.BindUObject(this, &AEnemyCharacter::Unstun);
 	
-	FTimerHandle timerHandle;
-	FTimerDelegate timerDelegate;
-	timerDelegate.BindUObject(this, &AEnemyCharacter::UnStunCharacter);
+	FTimerHandle unstunHandle;
 	
-	world->GetTimerManager().SetTimer(timerHandle, timerDelegate, stunTime, false);
+	world->GetTimerManager().SetTimer(unstunHandle, unstunDelegate, stunDuration, false);
 }
 
-void AEnemyCharacter::UnStunCharacter()
+void AEnemyCharacter::Stun()
 {
 	AAIController* activeController = Cast<AAIController>(GetController());
 	if (!IsValid(activeController))
@@ -70,6 +61,24 @@ void AEnemyCharacter::UnStunCharacter()
 		return;
 	}
 	
-	blackboard->SetValueAsFloat(bCanActKey, true);
+	blackboard->SetValueAsBool(bIsStunnedKey, true);
+}
+
+void AEnemyCharacter::Unstun()
+{
+	AAIController* activeController = Cast<AAIController>(GetController());
+	if (!IsValid(activeController))
+	{
+		return;
+	}
+	
+	UBlackboardComponent* blackboard = activeController->GetBlackboardComponent();
+	
+	if (!IsValid(blackboard))
+	{
+		return;
+	}
+	
+	blackboard->SetValueAsBool(bIsStunnedKey, false);
 }
 

@@ -17,14 +17,17 @@ public:
 	AEnemyCharacter();
 	
 	UPROPERTY(EditDefaultsOnly, Category="AI")
-	FName bCanActKey = TEXT("bCanAct");
+	FName bIsStunnedKey = TEXT("bIsStunned");
 	
 	UFUNCTION(BlueprintCallable)
 	virtual void InitCharacter();
 	
 	UFUNCTION(BlueprintCallable)
-	void StunCharacter(float stunTime, bool autoUnStun = true);
+	void Stun();
 	
 	UFUNCTION(BlueprintCallable)
-	void UnStunCharacter();
+	void Unstun();
+	
+	UFUNCTION(BlueprintCallable)
+	void StunForSeconds(float stunDuration);
 };
