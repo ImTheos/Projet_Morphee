@@ -102,3 +102,5 @@ Thalia lui soutire quelques informations sur Phobétor mais il reste vague sur l
 
 >[!quote] Morphée
 >X
+
+[[Exercice d'Ecriture version Morphée - Wassim]][[Structure Narratif en 3 Actes]][[Références]][[Easter Eggs]][[Scénario (Obselète)]][[Script (Obselète)]][[Textes Archivés]][[Arc Narratif (Positif) de Thalia]]![[Canva des Niveaux.canvas]]

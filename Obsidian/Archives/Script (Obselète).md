@@ -161,3 +161,5 @@ Morphée se réveille sous sa forme de sphère. Il interpelle Thalia.
 
 > [!quote] MORPHEE
 > X
+
+[[Exercice d'Ecriture version Morphée - Wassim]][[Structure Narratif en 3 Actes]][[Références]][[Easter Eggs]][[Scénario (Obselète)]][[Script (Obselète)]][[Textes Archivés]][[Arc Narratif (Positif) de Thalia]]![[Canva des Niveaux.canvas]]

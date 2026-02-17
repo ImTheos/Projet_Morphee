@@ -61,6 +61,6 @@ tags:
 
 ---
 
-[[Phobétor]] [[Isolement]] [[Hygiène]] [[Anxiété]] 
+[[Phobétor]] [[Isolement]] [[Hygiène de vie]] [[Anxiété]] 
 
 ![[Canva des Niveaux.canvas]]

@@ -36,17 +36,15 @@ tags:
 
 3. Depuis sa naissance, il influence Thalia avec des rêves indicatifs
 
-4. La rigueur, le travail, la concentration, le perfectionnisme et tout ce qui rentre dans le registre du travail acharné correspondent à ce que Morphée met en valeur aux yeux de Thalia
+4. Il est en partie responsable de la situation de Thalia après sa représentation ratée et en ressent la culpabilité
 
-5. Il est en partie responsable de la situation de Thalia après sa représentation ratée et en ressent la culpabilité
+5. En conflit direct avec Phobétor malgré leur ancienne collaboration
 
-6. En conflit direct avec Phobétor malgré leur ancienne collaboration
+6. Actuellement retenu sous la forme d'une sphère à cause de ce dernier
 
-7. Actuellement retenu sous la forme d'une sphère à cause de ce dernier
+7. Ses pouvoirs lui permettent de détruire les aberrations si Thalia l'utilise comme balle
 
-8. Ses pouvoirs lui permettent de détruire les aberrations si Thalia l'utilise comme balle
-
-9. Il possède une forme plus puissante qui lui permettra de défaire Phobétor s’il parvient à se libérer
+8. Il possède une forme plus puissante qui lui permettra de défaire Phobétor s’il parvient à se libérer
 ```
 
 ```
@@ -58,19 +56,17 @@ tags:
    
 3. Comparé à Morphée, il a longtemps été passif dans son influence sur Thalia
    
-4. Il représente les besoins primaires et parfois enfouis de Thalia. Souvent réprimé pour permettre à Thalia de réussir dans la musique
-   
-5. Il se prétend être le sauveur qu'à besoin Thalia pour sortir de sa situation
+4. Il se prétend être le sauveur qu'à besoin Thalia pour sortir de sa situation
 
-6. Comparé à Morphée, il n'est pas en conflit direct
+5. Comparé à Morphée, il n'est pas en conflit direct
    
-7. Il confronte réguliérement Thalia 
+6. Il confronte réguliérement Thalia 
    
-8. Sa pensée est dogmatique
+7. Sa pensée est dogmatique
    
-9. Les autres boss ne sont pas à ses ordres mais retiennent l'avancée de Morphée et Thalia
+8. Les autres boss ne sont pas à ses ordres.
 
-10. Les monstres sont ses créations. Ils sont similaires à des homunculus
+9. Les monstres sont ses créations. Ils sont similaires à des homunculus
 
-11. "La fin justifie les moyens"
+10. "La fin justifie les moyens"
 ```

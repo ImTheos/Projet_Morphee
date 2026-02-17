@@ -17,3 +17,5 @@ Quelle est la vérité que le personnage doit comprendre pour améliorer sa vie 
 > Est-ce qu’il a besoin de se débarrasser de la chose qu’il veut pour obtenir ce dont il a besoin ou doit-il d’abord obtenir ce dont il a besoin avant d’obtenir ce qu’il veut ? 
 
 Il doit se débarrasser de la chose qu'il veut obtenir pour obtenir ce dont il a besoin.
+
+[[Exercice d'Ecriture version Morphée - Wassim]][[Structure Narratif en 3 Actes]][[Références]][[Easter Eggs]][[Scénario (Obselète)]][[Script (Obselète)]][[Textes Archivés]][[Arc Narratif (Positif) de Thalia]]![[Canva des Niveaux.canvas]]

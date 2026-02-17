@@ -6,16 +6,10 @@ tags:
 
 ###### ACCROCHE (INCLUT LE JOUEUR)
 
-> [!abstract] À lire
-> [[Thalia]] - [[Traumatisme]] - [[Meilleur Ami]] - [[Monde Réel]]
-
 >  Le jeu débute avec une séquence floue et brouillonne montrant une jeune fille durant une représentation, de la musique au piano est jouée puis brusquement tout s'aggrave. La musique se coupe, la fille fuit la scène et commence à pleurer. Elle traverse une sortie de secours et le cauchemar s'arrête. 
 >  
 >  Thalia se réveille en pleine nuit, tremblante, en sueur. Avant qu'elle ne puisse questionner son rêve, son téléphone vibre et illumine son appartement. Elle se relève et se traîne jusqu'au téléphone. Elle venait de recevoir plusieurs messages d'un ami proche, ce dernier l'avait invité à venir à une soirée mais Thalia endormie, il avait été laissé sans réponse. Finalement, il lui envoie un dernier message avec en pièce jointe une photo de leur bande d'amis et lui partage que ça fait bien trop longtemps qu'ils ne l'ont pas vu. Face au remord, Thalia éteint le téléphone et repart s'endormir.
 ###### ELEMENT PERTURBATEUR (INCLUT LE PERSONNAGE)
-
-> [!abstract] À lire
-> [[Morphée]] - [[Onyria]]
 
 > Thalia se réveille à nouveau, en l'occurrence, sous la forme d'une hermine au pelage marron. Secouée, elle tente d'échapper de l'endroit où elle se trouve, plus précisément sur une étrange île recouverte de cristaux et entourée d'un océan miroir. En suivant le chemin, des ennemis se lancent à sa poursuite. Dans son état actuel, elle comprend vite son incapacité à se battre et envisage rapidement la fuite comme seule option. 
 > 
@@ -73,3 +67,5 @@ tags:
 ###### DENOUEMENT (BOUCLAGE DES ELEMENTS/REPONSES DONNEES AU JOUEUR)
 
 > 
+
+[[Exercice d'Ecriture version Morphée - Wassim]][[Structure Narratif en 3 Actes]][[Références]][[Easter Eggs]][[Scénario (Obselète)]][[Script (Obselète)]][[Textes Archivés]][[Arc Narratif (Positif) de Thalia]]![[Canva des Niveaux.canvas]]

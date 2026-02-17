@@ -38,4 +38,4 @@ tags:
 
 ---
 
-[[Thalia]] [[Morphée]] [[Phobétor]] [[Anxiété]] [[Hygiène]] [[Isolement]] [[Traumatisme]]
+[[Thalia]] [[Morphée]] [[Phobétor]] [[Anxiété]] [[Hygiène de vie]] [[Isolement]] [[Traumatisme]]
