@@ -6,7 +6,7 @@
 #include "BehaviorTree/BTService.h"
 #include "MinDistanceFromTarget.generated.h"
 
-UENUM(Blueprintable)
+UENUM(BlueprintType)
 enum EDistanceType
 {
 	NavDistance,
@@ -35,7 +35,7 @@ protected:
 	float distance;
 	
 	UPROPERTY(EditAnywhere, Category="Blackboard")
-	EDistanceType distanceType;
+	TEnumAsByte<EDistanceType> distanceType;
 	
 	UPROPERTY(EditAnywhere, Category="Debug")
 	bool displayDistance = false;

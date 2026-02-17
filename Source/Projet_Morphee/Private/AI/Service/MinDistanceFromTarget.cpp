@@ -76,7 +76,8 @@ void UMinDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* 
 	
 	if (displayRange)
 	{
-		DrawDebugCircle(world, FMatrix::Identity, distance, 200, FColor::Yellow, false, 0.5f);
+		DrawDebugCircle()
+		//DrawDebugCircle(world, aiCharacterActor->GetActorLocation(), distance, 200, FColor::Yellow, false, 0.5f);
 	}
 
 	const bool result = pathLength < distance;
@@ -111,47 +112,51 @@ float UMinDistanceFromTarget::CalculateDistance(AActor* aiCharacter, FVector tar
 	switch (distanceType)
 	{
 	case NavDistance :
-		UWorld* world = GetWorld();
-		if (!IsValid(world))
 		{
-			UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : world is invalid"));
-			return pathLength;
-		}
+			UWorld* world = GetWorld();
+			if (!IsValid(world))
+			{
+				UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : world is invalid"));
+				return pathLength;
+			}
 	
-		UNavigationSystemV1* navigationSystem = FNavigationSystem::GetCurrent<UNavigationSystemV1>(world);
-		if (!IsValid(navigationSystem))
-		{
-			UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : navSystem is invalid"));
-			return 0.0f;
-		}
+			UNavigationSystemV1* navigationSystem = FNavigationSystem::GetCurrent<UNavigationSystemV1>(world);
+			if (!IsValid(navigationSystem))
+			{
+				UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : navSystem is invalid"));
+				return 0.0f;
+			}
 	
-		const ANavigationData* navigationData = navigationSystem->GetDefaultNavDataInstance(FNavigationSystem::DontCreate);
-		if (!IsValid(navigationData))
-		{
-			UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : navData is invalid"));
-			return pathLength;
-		}
+			const ANavigationData* navigationData = navigationSystem->GetDefaultNavDataInstance(FNavigationSystem::DontCreate);
+			if (!IsValid(navigationData))
+			{
+				UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : navData is invalid"));
+				return pathLength;
+			}
 	
-		UNavigationPath* navigationPath =
-			navigationSystem->FindPathToLocationSynchronously(	world, 
-																aiCharacter->GetActorLocation(), 
-																targetLocation, 
-																aiCharacter);
+			UNavigationPath* navigationPath =
+				navigationSystem->FindPathToLocationSynchronously(	world, 
+																	aiCharacter->GetActorLocation(), 
+																	targetLocation, 
+																	aiCharacter);
 	
-		if (!IsValid(navigationPath) || navigationPath->PathPoints.Num() < 2)
-		{
-			UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : invalid navigationPath"))
-			return pathLength;
-		}
+			if (!IsValid(navigationPath) || navigationPath->PathPoints.Num() < 2)
+			{
+				UE_LOG(LogTemp, Error, TEXT("UMinNavDistanceFromTarget::TickNode : invalid navigationPath"))
+				return pathLength;
+			}
 	
-		for (int i = 1; i < navigationPath->PathPoints.Num(); i++)
-		{
-			pathLength += FVector::Dist(navigationPath->PathPoints[i-1], navigationPath->PathPoints[i]);
+			for (int i = 1; i < navigationPath->PathPoints.Num(); i++)
+			{
+				pathLength += FVector::Dist(navigationPath->PathPoints[i-1], navigationPath->PathPoints[i]);
+			}
 		}
 		break;
 		
 	case RegularDistance:
-		pathLength =  FVector::Dist(aiCharacter->GetActorLocation(), targetLocation);
+		{
+			pathLength =  FVector::Dist(aiCharacter->GetActorLocation(), targetLocation);
+		}
 		break;
 	}
 	
