@@ -42,9 +42,6 @@ private:
 	UPROPERTY()
 	UBlackboardComponent* blackboard;
 	
-	// Attack hitbox preview
-	void PreAttack();
-	
 	// Actual attack animation and hit detection 
 	UFUNCTION()
 	void Attack();

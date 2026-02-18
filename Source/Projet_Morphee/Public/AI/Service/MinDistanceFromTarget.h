@@ -4,13 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/BTService.h"
-#include "MinNavDistanceFromTarget.generated.h"
+#include "MinDistanceFromTarget.generated.h"
 
-/**
- * 
- */
+UENUM(BlueprintType)
+enum EDistanceType
+{
+	NavDistance,
+	RegularDistance
+};
+
+
 UCLASS()
-class PROJET_MORPHEE_API UMinNavDistanceFromTarget : public UBTService
+class PROJET_MORPHEE_API UMinDistanceFromTarget : public UBTService
 {
 	GENERATED_BODY()
 	
@@ -29,6 +34,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Blackboard")
 	float distance;
 	
+	UPROPERTY(EditAnywhere, Category="Blackboard")
+	TEnumAsByte<EDistanceType> distanceType;
+	
 	UPROPERTY(EditAnywhere, Category="Debug")
 	bool displayDistance = false;
 	
@@ -37,5 +45,8 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category="Debug")
 	bool displayRange = false;
+
+private:
+	float CalculateDistance(AActor* aiCharacter, FVector targetLocation);
 	
 };

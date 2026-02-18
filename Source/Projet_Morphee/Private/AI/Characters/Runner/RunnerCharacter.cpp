@@ -35,13 +35,24 @@ void ARunnerCharacter::InitCharacter()
 	
 	UBlackboardComponent* blackboard = activeController->GetBlackboardComponent();
 	
-	blackboard->SetValueAsFloat(TEXT("attackCooldown"), attackCooldown);
+	if (!IsValid(blackboard))
+	{
+		return;
+	}
 	
-	// This location is set to the spawn location of the actor but this could be changed
-	blackboard->SetValueAsVector(TEXT("baseLocation"), GetActorLocation());
+	blackboard->SetValueAsFloat(attackCooldownKey, attackCooldown);
+	blackboard->SetValueAsVector(baseLocationKey, GetActorLocation());
 	
-	// Hacky way of getting the player character
-	auto* playerCharacter = UGameplayStatics::GetActorOfClass(GetWorld(), AMyCPPCharacter::StaticClass());
+	UWorld* world = GetWorld();
+	
+	APlayerController* playerController = Cast<APlayerController>(world->GetFirstPlayerController());
+	
+	if (!IsValid(playerController))
+	{
+		return;
+	}
+	
+	auto* playerCharacter = playerController->GetPawn();
 	
 	if (!IsValid(playerCharacter))
 	{
@@ -49,31 +60,41 @@ void ARunnerCharacter::InitCharacter()
 		return;
 	}
 	
-	blackboard->SetValueAsObject(TEXT("targetActor"), playerCharacter);
+	blackboard->SetValueAsObject(targetActorKey, playerCharacter);
 }
 
 void ARunnerCharacter::OnHitboxOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor,
 	UPrimitiveComponent* otherComponent, int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult)
 {
+	if (!IsValid(otherActor) || !IsValid(otherActor->GetClass()))
+	{
+		return;
+	}
+	
 	if (!otherActor->GetClass()->ImplementsInterface(UDamageable::StaticClass()))
 	{
 		return;
 	}
 	
-	IDamageable::Execute_ReceiveDamage(otherActor, 
-	attackDamage, 
-	sweepResult.ImpactNormal, this);
+	IDamageable::Execute_ReceiveDamage(	otherActor, 
+										attackDamage, 
+										sweepResult.ImpactNormal, this);
 }
 
 void ARunnerCharacter::OnHitboxBlock(UPrimitiveComponent* hitComponent, AActor* otherActor,
 	UPrimitiveComponent* otherHitComponent, FVector normalImpulse, const FHitResult& hit)
 {
+	if (!IsValid(otherActor) || !IsValid(otherActor->GetClass()))
+	{
+		return;
+	}
+	
 	if (!otherActor->GetClass()->ImplementsInterface(UDamageable::StaticClass()))
 	{
 		return;
 	}
 	
-	IDamageable::Execute_ReceiveDamage(otherActor, 
-	attackDamage, 
-	hit.ImpactNormal, this);
+	IDamageable::Execute_ReceiveDamage(	otherActor, 
+										attackDamage, 
+										hit.ImpactNormal, this);
 }
