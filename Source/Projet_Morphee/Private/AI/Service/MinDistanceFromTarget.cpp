@@ -76,8 +76,9 @@ void UMinDistanceFromTarget::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* 
 	
 	if (displayRange)
 	{
-		DrawDebugCircle()
-		//DrawDebugCircle(world, aiCharacterActor->GetActorLocation(), distance, 200, FColor::Yellow, false, 0.5f);
+		DrawDebugCircle(world, aiCharacterActor->GetActorLocation(), distance, 200, 
+						FColor::Yellow, false, 0.0f, 0, 0, 
+						FVector(1, 0, 0), FVector(0, 1, 0));
 	}
 
 	const bool result = pathLength < distance;
