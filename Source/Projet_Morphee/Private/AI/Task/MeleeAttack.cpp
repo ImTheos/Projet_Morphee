@@ -85,6 +85,8 @@ void UMeleeAttack::Attack()
 		return;
 	}
 	
+	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, true);
+	
 	animInstance->Montage_Play(attackAnimationMontage);
 	
 	FOnMontageEnded animEndDelegate;
@@ -100,5 +102,5 @@ void UMeleeAttack::EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) c
 		return;
 	}
 	
-	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, true);
+	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, false);
 }
