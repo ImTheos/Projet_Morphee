@@ -33,16 +33,7 @@ EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 		return EBTNodeResult::Failed;
 	} 
 	
-	float remainingAttackCooldown = blackboard->GetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName);
-	
-	if (remainingAttackCooldown > 0.0f)
-	{
-		return EBTNodeResult::Failed;
-	}
-	
 	Attack();
-	
-	blackboard->SetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName, blackboard->GetValueAsFloat("attackCooldown"));
 	
 	return EBTNodeResult::Succeeded;
 }
@@ -51,7 +42,6 @@ void UMeleeAttack::InitializeFromAsset(UBehaviorTree& Asset)
 {
 	Super::InitializeFromAsset(Asset);
 	
-	remainingAttackCooldownKey.AddFloatFilter(this, GET_MEMBER_NAME_CHECKED(UMeleeAttack, remainingAttackCooldownKey));
 	attackEndLagKey.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UMeleeAttack, attackEndLagKey));
 
 	const UBlackboardData* blackboardData = GetBlackboardAsset();
@@ -63,7 +53,6 @@ void UMeleeAttack::InitializeFromAsset(UBehaviorTree& Asset)
 	}
 	
 	// /!\ Necessary for Blackboards key to work correctly
-	remainingAttackCooldownKey.ResolveSelectedKey(*blackboardData);
 	attackEndLagKey.ResolveSelectedKey(*blackboardData);
 }
 

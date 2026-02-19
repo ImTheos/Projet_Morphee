@@ -26,10 +26,6 @@ class PROJET_MORPHEE_API UMeleeAttack : public UBTTaskNode
 public:
 	UPROPERTY(EditAnywhere, Category="Animation")
 	UAnimMontage* attackAnimationMontage;
-	
-	/** Blackboard key that stores the remaining cooldown before the player can attack again **/
-	UPROPERTY(EditAnywhere, Category="Attack")
-	FBlackboardKeySelector remainingAttackCooldownKey;
 
 	/** Blackboard key that stores the remaining cooldown before the player can act again **/
 	UPROPERTY(EditAnywhere, Category="Attack")
