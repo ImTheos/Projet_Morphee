@@ -6,21 +6,6 @@
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "GameFramework/Character.h"
-#include "GameLogic/Interfaces/Damageable.h"
-
-void UMeleeAttack::PreAttack()
-{
-	// Play animation startup
-	// TODO : add real preview animation
-	DrawDebugCircle(GetWorld(), aiCharacter->GetActorLocation(), blackboard->GetValueAsFloat("attackRange"), 
-		100, FColor::Red, false, blackboard->GetValueAsFloat("attackStartupDuration"), 0, 10, 
-		FVector(1,0,0), FVector(0,1,0));
-	
-	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, false);
-	
-	FTimerHandle timerHandle;
-	GetWorld()->GetTimerManager().SetTimer(timerHandle, this, &UMeleeAttack::Attack, blackboard->GetValueAsFloat("attackStartupDuration"));
-}
 
 EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
@@ -48,16 +33,7 @@ EBTNodeResult::Type UMeleeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 		return EBTNodeResult::Failed;
 	} 
 	
-	float remainingAttackCooldown = blackboard->GetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName);
-	
-	if (remainingAttackCooldown > 0.0f)
-	{
-		return EBTNodeResult::Failed;
-	}
-	
-	PreAttack();
-	
-	blackboard->SetValueAsFloat(remainingAttackCooldownKey.SelectedKeyName, blackboard->GetValueAsFloat("attackCooldown"));
+	Attack();
 	
 	return EBTNodeResult::Succeeded;
 }
@@ -66,7 +42,6 @@ void UMeleeAttack::InitializeFromAsset(UBehaviorTree& Asset)
 {
 	Super::InitializeFromAsset(Asset);
 	
-	remainingAttackCooldownKey.AddFloatFilter(this, GET_MEMBER_NAME_CHECKED(UMeleeAttack, remainingAttackCooldownKey));
 	attackEndLagKey.AddBoolFilter(this, GET_MEMBER_NAME_CHECKED(UMeleeAttack, attackEndLagKey));
 
 	const UBlackboardData* blackboardData = GetBlackboardAsset();
@@ -78,7 +53,6 @@ void UMeleeAttack::InitializeFromAsset(UBehaviorTree& Asset)
 	}
 	
 	// /!\ Necessary for Blackboards key to work correctly
-	remainingAttackCooldownKey.ResolveSelectedKey(*blackboardData);
 	attackEndLagKey.ResolveSelectedKey(*blackboardData);
 }
 
@@ -100,37 +74,14 @@ void UMeleeAttack::Attack()
 		return;
 	}
 	
+	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, true);
+	
 	animInstance->Montage_Play(attackAnimationMontage);
 	
 	FOnMontageEnded animEndDelegate;
 	animEndDelegate.BindUObject(this, &UMeleeAttack::EndAttackAnim);
 	
 	animInstance->Montage_SetEndDelegate(animEndDelegate, attackAnimationMontage);
-	
-	FHitResult attackHitResult;
-	const auto attackCollisionShape = 
-		FCollisionShape::MakeSphere(blackboard->GetValueAsFloat("attackRange"));
-	
-	// TODO : Test for collision during the whole animation
-	GetWorld()->SweepSingleByChannel(attackHitResult, 
-		aiCharacter->GetActorLocation(), aiCharacter->GetActorLocation(), 
-		FQuat::Identity, attackTraceChannel, attackCollisionShape);
-	
-	if (!attackHitResult.bBlockingHit)
-	{
-		// Attack did not hit a target
-		return;
-	}
-	
-	auto* hitActor = Cast<AActor>(attackHitResult.GetActor());
-	if (!hitActor->GetClass()->ImplementsInterface(UDamageable::StaticClass()))
-	{
-		return;
-	}
-	
-	IDamageable::Execute_ReceiveDamage(hitActor, 
-		blackboard->GetValueAsFloat("attackDamage"), 
-		attackHitResult.ImpactNormal, aiCharacter);
 }
 
 void UMeleeAttack::EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) const
@@ -140,5 +91,5 @@ void UMeleeAttack::EndAttackAnim(UAnimMontage* animMontage, bool bInterrupted) c
 		return;
 	}
 	
-	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, true);
+	blackboard->SetValueAsBool(attackEndLagKey.SelectedKeyName, false);
 }
