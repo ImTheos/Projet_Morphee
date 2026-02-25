@@ -111,14 +111,21 @@ void UMagnetComponent::ActivateMagnet(float minimumSpeed)
 	isMagnetActive = true;
 
 	// If object is already being attracted, no need to set up attraction again
-	if (ownedBall->GetBallState() != Free)
+	if (ownedBall->GetBallState() == Grabbed || ownedBall->GetBallState() == Attracted)
 	{
 		return;
 	}
 
 	ownedBall->speed = FMath::Max(minimumSpeed, ownedBall->speed);
-
-	AttractObject();
+	
+	if (ownedBall->GetBallState() == Free)
+	{
+		AttractObject();
+	}
+	else if (ownedBall->GetBallState() == Stationary)
+	{
+		GrabAttractedObject();
+	}
 }
 
 void UMagnetComponent::DeactivateMagnet()

@@ -18,16 +18,11 @@ public:
 	// Sets default values for this actor's properties
 	ABallContainer();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 	UFUNCTION(BlueprintImplementableEvent)
 	void OutputSignal();
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void BallReleasedSignal();
 	
 	UFUNCTION(BlueprintCallable)
 	void ReleaseBalls(float releaseSpeed);

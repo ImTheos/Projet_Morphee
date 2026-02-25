@@ -50,6 +50,9 @@ void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	UEnum* EnumPtr = StaticEnum<EBallState>();
+	FString debugMessage = FString::Printf(TEXT("Ball state : %s"), *EnumPtr->GetNameStringByValue(static_cast<int64>(ballState)));
+	GEngine->AddOnScreenDebugMessage(1, 1.0f, FColor::Red, debugMessage);
 	if (ballState == Attracted)
 	{
 		TickAttract();
@@ -266,7 +269,7 @@ void ABall::BallHitByAttack(AActor* attacker)
 	ballEffectInstance->Attack(attacker);
 }
 
-void ABall::ReleaseFromStationary(float releaseSpeed)
+void ABall::ReleaseFromStationary(const float releaseSpeed)
 {
 	speed = releaseSpeed;
 	
@@ -274,15 +277,15 @@ void ABall::ReleaseFromStationary(float releaseSpeed)
 	{
 		directionWidget->SetVisibility(true);
 	}
-	
-	UWorld* world = GetWorld();
+
+	const UWorld* world = GetWorld();
 	if (!IsValid(world))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ABall::ReleaseFromStationary : The world is invalid ?!"));
 		return;
 	}
-	
-	APlayerController* playerController = world->GetFirstPlayerController();
+
+	const APlayerController* playerController = world->GetFirstPlayerController();
 	
 	if (!IsValid(playerController))
 	{
@@ -291,7 +294,7 @@ void ABall::ReleaseFromStationary(float releaseSpeed)
 	}
 	
 	// TODO : Dirty way of getting the player character, do this properly (some day)
-	ACharacter* playerCharacter = Cast<ACharacter>(playerController->GetPawn());
+	const ACharacter* playerCharacter = Cast<ACharacter>(playerController->GetPawn());
 	
 	if (!IsValid(playerCharacter))
 	{

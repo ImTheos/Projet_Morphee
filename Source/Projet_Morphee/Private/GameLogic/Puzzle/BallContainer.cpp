@@ -28,19 +28,6 @@ ABallContainer::ABallContainer()
 	collisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABallContainer::OnBoxOverlap);
 }
 
-// Called when the game starts or when spawned
-void ABallContainer::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
-// Called every frame
-void ABallContainer::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 void ABallContainer::ReleaseBalls(float releaseSpeed)
 {
 	for (ABall* ball : storedBalls)
@@ -62,7 +49,7 @@ void ABallContainer::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 
 	ABall* collidedBall = Cast<ABall>(OtherActor);
 
-	if (!IsValid(collidedBall))
+	if (!IsValid(collidedBall) || collidedBall->GetBallState() != Free)
 	{
 		return;
 	}
