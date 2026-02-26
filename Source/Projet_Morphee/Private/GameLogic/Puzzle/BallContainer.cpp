@@ -40,6 +40,8 @@ void ABallContainer::ReleaseBalls(float releaseSpeed)
 		
 		ball->ReleaseFromStationary(releaseSpeed);
 	}
+	
+	BallReleasedSignal();
 }
 
 void ABallContainer::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,

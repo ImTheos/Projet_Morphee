@@ -7,6 +7,7 @@
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
 #include "GameLogic/Interfaces/Damageable.h"
+#include "GameLogic/Puzzle/BallContainer.h"
 
 // Sets default values
 ABall::ABall()
@@ -334,6 +335,12 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 		if (IsValid(directionWidget))
 		{
 			directionWidget->SetVisibility(true);
+		}
+		
+		if (ABallContainer* ballContainer = Cast<ABallContainer>(influenceSource))
+		{
+			// TODO : edit this speed
+			ballContainer->ReleaseBalls(600.f);
 		}
 		return;
 	}

@@ -50,7 +50,7 @@ private:
 	EBallState ballState = Free;
 	
 	UPROPERTY()
-	const UObject* influenceSource;
+	UObject* influenceSource;
 	
 public:
 	UFUNCTION(BlueprintCallable)
