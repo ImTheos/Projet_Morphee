@@ -146,7 +146,7 @@ EBallState ABall::GetBallState() const
 	return ballState;
 }
 
-void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
+void ABall::SetCollisionEnabled(bool enabled) const
 {
 	auto* collisionComponent = GetComponentByClass<UShapeComponent>();
 
@@ -155,8 +155,10 @@ void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
 		UE_LOG(LogTemp, Error, TEXT("ABall : No Collision Component found"))
 		return;
 	}
-
-	collisionComponent->SetCollisionEnabled(collisionType);
+	
+	FName newCollisionProfileName = enabled ? regularBallCollisionProfile : hollowBallCollisionProfile;
+	
+	collisionComponent->SetCollisionProfileName(newCollisionProfileName);
 }
 
 void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor,
@@ -286,7 +288,7 @@ void ABall::ReleaseFromStationary(const float releaseSpeed)
 		return;
 	}
 
-	const APlayerController* playerController = world->GetFirstPlayerController();
+	APlayerController* playerController = world->GetFirstPlayerController();
 	
 	if (!IsValid(playerController))
 	{
@@ -295,7 +297,7 @@ void ABall::ReleaseFromStationary(const float releaseSpeed)
 	}
 	
 	// TODO : Dirty way of getting the player character, do this properly (some day)
-	const ACharacter* playerCharacter = Cast<ACharacter>(playerController->GetPawn());
+	ACharacter* playerCharacter = Cast<ACharacter>(playerController->GetPawn());
 	
 	if (!IsValid(playerCharacter))
 	{
@@ -306,11 +308,11 @@ void ABall::ReleaseFromStationary(const float releaseSpeed)
 	SetBallState(Grabbed, playerCharacter);
 }
 
-void ABall::SetBallState(const EBallState newBallState, const UObject* newInfluenceSource)
+void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSource)
 {
 	if (newBallState == Free) 
 	{
-		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		SetCollisionEnabled(true);
 		
 		ballState = newBallState;
 		if (IsValid(directionWidget))
@@ -330,7 +332,7 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	
 	if (newBallState == Grabbed)
 	{
-		SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		SetCollisionEnabled(false);
 		
 		if (IsValid(directionWidget))
 		{
@@ -347,7 +349,7 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	
 	if (newBallState == Attracted)
 	{
-		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		SetCollisionEnabled(true);
 		
 		if (IsValid(directionWidget))
 		{
@@ -358,7 +360,7 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	
 	if (newBallState == Stationary)
 	{
-		SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+		SetCollisionEnabled(false);
 		
 		speed = 0;
 		if (const AActor* influenceSourceActor = Cast<AActor>(influenceSource))

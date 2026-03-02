@@ -57,7 +57,7 @@ public:
 	EBallState GetBallState() const;
 	
 	// TODO : add option to set speed after state change to allow to remove ReleaseFromStationary too
-	void SetBallState(EBallState newBallState, const UObject* newInfluenceSource = nullptr);
+	void SetBallState(EBallState newBallState, UObject* newInfluenceSource = nullptr);
 	
 	void ReleaseFromStationary(float releaseSpeed);
 	
@@ -68,7 +68,7 @@ public:
 	// ------- COLLISION ------- 
 	// -------  -------  ------- 
 private:
-	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
+	void SetCollisionEnabled(bool enabled) const;
 
 
 	UFUNCTION()
@@ -80,6 +80,12 @@ private:
 	                      FVector normalImpulse, const FHitResult& hit);
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName hollowBallCollisionProfile;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName regularBallCollisionProfile;
+	
 	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision Begin Overlap"))
 	void OnCollisionBeginOverlapBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);

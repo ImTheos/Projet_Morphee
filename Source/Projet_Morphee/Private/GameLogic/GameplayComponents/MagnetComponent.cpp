@@ -71,7 +71,7 @@ void UMagnetComponent::AssignBall(ABall* ball)
 
 void UMagnetComponent::AttractObject()
 {
-	const AActor* componentOwner = GetOwner();
+	AActor* componentOwner = GetOwner();
 
 	if (!IsValid(componentOwner))
 	{
@@ -84,7 +84,7 @@ void UMagnetComponent::AttractObject()
 
 void UMagnetComponent::GrabAttractedObject()
 {
-	const AActor* componentOwner = GetOwner();
+	AActor* componentOwner = GetOwner();
 	if (!IsValid(componentOwner))
 	{
 		// how ?
