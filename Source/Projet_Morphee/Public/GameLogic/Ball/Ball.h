@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BallEffects/BallEffect.h"
 #include "GameFramework/Actor.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Ball.generated.h"
 
 class UWidgetComponent;
@@ -23,49 +25,104 @@ class PROJET_MORPHEE_API ABall : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
+	
 	ABall();
-
-protected:
-	// Called when the game starts or when spawned
+	
 	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
+	
 	virtual void Tick(float DeltaTime) override;
-
+	
+private:
 	virtual void TickAttract();
-
 	virtual void TickGrab();
-
-	void SetNewAttractionSource(const AActor* newAttractionSource);
-	void SetNewGrabSource(const AActor* newGrabSource);
-	void FreeFromAttraction();
 	
-	void SetStationaryAtLocation(const FVector& location);
-	void ReleaseFromStationary(float releaseSpeed);
-	
-	UFUNCTION(BlueprintCallable)
-	EBallState GetBallState() const;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float grabAnimDistance;
-	
+public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float speed;
 	
-private:
-	UPROPERTY()
-	const AActor* attractionSource;
-	
-	EBallState ballState = Free;
-	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
-	
 	UPROPERTY(EditAnywhere)
 	UWidgetComponent* directionWidget;
+	
+	// -------  -------  ------- 
+	// ------- BALL STATE -------
+	// -------  -------  ------- 
+private:
+	EBallState ballState = Free;
+	
+	UPROPERTY()
+	const UObject* influenceSource;
+	
+public:
+	UFUNCTION(BlueprintCallable)
+	EBallState GetBallState() const;
+	
+	// TODO : add option to set speed after state change to allow to remove ReleaseFromStationary too
+	void SetBallState(EBallState newBallState, const UObject* newInfluenceSource = nullptr);
+	
+	void ReleaseFromStationary(float releaseSpeed);
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	float grabAnimDistance;
+	
+	// -------  -------  ------- 
+	// ------- COLLISION ------- 
+	// -------  -------  ------- 
+private:
+	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
+
+
+	UFUNCTION()
+	void OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+
+	UFUNCTION()
+	void OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+	                      FVector normalImpulse, const FHitResult& hit);
 
 public:
-
-	// TODO : find a better way to set this
-	float epsilonDistance = 20.0f;
+	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision Begin Overlap"))
+	void OnCollisionBeginOverlapBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	
+	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision Hit"))
+	void OnCollisionBlockBP(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+		FVector normalImpulse, FHitResult hit);
+	
+	// -------  -------  ------- 
+	// ------- BALL EFFECT -------
+	// -------  -------  ------- 
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<ABallEffect> defaultBallEffect;
+	
+private:
+	UPROPERTY(VisibleAnywhere)
+	TSubclassOf<ABallEffect> ballEffect;
+	
+	UPROPERTY()
+	ABallEffect* ballEffectInstance;
+	
+public:
+	UFUNCTION(BlueprintCallable)
+	TSubclassOf<ABallEffect> GetBallEffect() const { return ballEffect; }
+	
+	UFUNCTION(BlueprintCallable)
+	ABallEffect* GetBallEffectInstance() const { return ballEffectInstance; }
+	
+	/**
+	 * Sets a new value for the ballEffect parameter
+	 *
+	 * @param newBallEffectClass  The new value ballEffect should have
+	 * @param actualize Whether the ballEffect's "EffectApplied" function should be applied if the new effect is the same as the current version
+	 */
+	UFUNCTION(BlueprintCallable)
+	void SetBallEffect(TSubclassOf<ABallEffect> newBallEffectClass, bool actualize = false);
+	
+	// -------  -------  ------- 
+	// ------- BALL IS HIT -------
+	// -------  -------  ------- 
+public:
+	UFUNCTION(BlueprintCallable)
+	void BallHitByAttack(AActor* attacker);
+	
 };

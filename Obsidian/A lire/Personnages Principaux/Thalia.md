@@ -32,18 +32,6 @@ tags:
 
 #### 2. Aspect physique
 
-- **Gabarit général : plutôt fin·e, athlétique, massif·ve, fragile…**
-
-> `...`[^3]
-
-- **Silhouette / posture : indice sur la manière de se tenir, de bouger**
-
-> `...`[^4]
-
-- __Détail distinctif optionnel (ex : cicatrice, tatouage, chevelure remarquable)__
-
-> `...`[^5]
-
 - **Handicap** 
 
 > **==Insomnie==** visible sur son allure et son comportement.
@@ -114,26 +102,20 @@ tags:
 > 3. Curiosité
 > 4. ==La musique pour exprimer son identité, comme expression de soi-même==[^1]
 
-- **Tics gestuels**
-
-> `?`
-
 - **Loisirs**
 
-> 1. Journal intime
-> 2. La musique
-> 3. Le dessin
-> 4. Les réseaux sociaux
-> 5. Bars à chat 
+> 5. Journal intime
+> 6. La musique
+> 7. Le dessin
+> 8. Les réseaux sociaux
+> 9. Bars à chat 
 
 - **Aime / N'Aime Pas**
 
-> 1. Les hermines
-> 2. **==Le piano==**
-> 3. La composition
-> 4. (Un artiste musicien dans le classique)
-> 5. (Un artiste musicien dans de la musique récente)
-> 6. La science de l'acoustique
+> 10. Les hermines
+> 11. **==Le piano==**
+> 12. La composition
+> 13. La science de l'acoustique
 
 ---
 
@@ -234,18 +216,6 @@ tags:
 ##### Le Héros
 
 > Le héros est le protagoniste d'une histoire. Vogler explique que tous les autres archétypes sont conçus pour servir, défier ou influencer ce personnage. Toujours caractérisé par une recherche d'identité et d'intégrité, le Héros représente nos propres luttes, obstacles et triomphes.
-
-[^1]: En conclusion.
-
-[^2]: Thalia, elle-même est faussement positive.
-
-[^3]: À discuter...
-
-[^4]: À décider...
-
-[^5]: À décider...
-
-[^6]: Aka La Rêveuse.
 
 ---
 

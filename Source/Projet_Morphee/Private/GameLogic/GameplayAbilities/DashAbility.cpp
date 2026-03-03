@@ -55,11 +55,9 @@ FVector UDashAbility::CalculateDashTeleport(FVector actorLocation, FVector targe
 		
 		if (traceHitResult.bBlockingHit && traceHitResult.PenetrationDepth == 0.f && !DashCollidesWithObstacle(actorLocation, traceHitResult.Location))
 		{
-			DrawDebugCapsule(world, traceHitResult.Location, capsuleHalfHeight, capsuleRadius, FQuat::Identity, FColor::Purple, false, 10);
 			return traceHitResult.Location;
 		}
 
-		DrawDebugCapsule(world, traceHitResult.Location, capsuleHalfHeight/4, capsuleRadius/4, FQuat::Identity, FColor::Blue, false, 10);
 		dashLocation -= dashDirection;
 	}
 	
@@ -103,7 +101,6 @@ FVector UDashAbility::CalculateDashEndPostTeleport(FVector actorLocation, FVecto
 			return initialPosition;
 		}
 
-		DrawDebugCapsule(world, traceHitResult.Location, capsuleHalfHeight/4.f, capsuleRadius/4.f, FQuat::Identity, FColor::Yellow, false, 5);
 		initialPosition = traceHitResult.Location;
 	}
 

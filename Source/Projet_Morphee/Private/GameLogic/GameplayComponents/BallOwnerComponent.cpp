@@ -4,6 +4,7 @@
 #include "GameLogic/GameplayComponents/BallOwnerComponent.h"
 
 #include "GameLogic/Ball/Ball.h"
+#include "GameLogic/GameplayComponents/DetonateComponent.h"
 #include "GameLogic/GameplayComponents/MagnetComponent.h"
 
 // Sets default values for this component's properties
@@ -74,6 +75,19 @@ void UBallOwnerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 void UBallOwnerComponent::AssignBall(ABall* ball)
 {
 	ownedBall = ball;
+	
+	// DetonateComponent
+	UDetonateComponent* detonateComponent = GetOwner()->GetComponentByClass<UDetonateComponent>();
+	if (IsValid(detonateComponent))
+	{
+		detonateComponent->AssignBall(ball);
+	}
+	
+	UMagnetComponent* magnetComponent = GetOwner()->GetComponentByClass<UMagnetComponent>();
+	if (IsValid(magnetComponent))
+	{
+		magnetComponent->AssignBall(ball);
+	}
 }
 
 void UBallOwnerComponent::EnableBallDistanceLimit(const float distanceLimit)
