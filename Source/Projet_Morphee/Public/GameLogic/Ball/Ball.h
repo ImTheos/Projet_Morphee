@@ -49,10 +49,13 @@ public:
 private:
 	EBallState ballState = Free;
 	
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float minimumSpeed;
+	
 	UPROPERTY()
 	UObject* influenceSource;
 	
-public:
 	UFUNCTION(BlueprintCallable)
 	EBallState GetBallState() const;
 	

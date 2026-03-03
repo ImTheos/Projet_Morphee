@@ -17,10 +17,20 @@ class PROJET_MORPHEE_API ABallContainer : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ABallContainer();
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void OutputSignal();
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ToolTip="If true, the player will be able to take the ball back from the container by using the magnet"))
+	bool canReleaseFromMagnet = true;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(ToolTip="If true, the ball will not be given back to the player if the distance with him exceeds the distance from the player's BallOwner component"))
+	bool ignoreBallDistanceLimit = true;
+
+	void BallReleased(ABall* releasedBall);
+	
+	// Output signal for blueprints
+	UFUNCTION(BlueprintImplementableEvent)
+	void BallReceivedSignal();
+	
+	// Output signal for blueprints
 	UFUNCTION(BlueprintImplementableEvent)
 	void BallReleasedSignal();
 	
@@ -28,8 +38,11 @@ public:
 	void ReleaseBalls(float releaseSpeed);
 
 	UFUNCTION()
-	void OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
+	void OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	
+	UFUNCTION()
+	void OnBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherOverlappedComponent, int OtherBodyIndex);
+	
 private:
 	UPROPERTY(EditAnywhere)
 	UBoxComponent* collisionComponent;
@@ -45,4 +58,7 @@ private:
 	
 	UPROPERTY()
 	TArray<ABall*> storedBalls;
+	
+	UPROPERTY()
+	TArray<ABall*> releasedBalls;
 };

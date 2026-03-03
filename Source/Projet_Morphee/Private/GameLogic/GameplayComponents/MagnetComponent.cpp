@@ -1,9 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+UE_DISABLE_OPTIMIZATION
 
 #include "GameLogic/GameplayComponents/MagnetComponent.h"
 
 #include "GameLogic/Ball/Ball.h"
+#include "GameLogic/Puzzle/BallContainer.h"
 
 // Sets default values for this component's properties
 UMagnetComponent::UMagnetComponent()
@@ -100,7 +101,7 @@ void UMagnetComponent::GrabAttractedObject()
 	ownedBall->SetBallState(Grabbed, componentOwner);
 }
 
-void UMagnetComponent::ActivateMagnet(float minimumSpeed)
+void UMagnetComponent::ActivateMagnet()
 {
 	if (!IsValid(ownedBall))
 	{
@@ -115,17 +116,37 @@ void UMagnetComponent::ActivateMagnet(float minimumSpeed)
 	{
 		return;
 	}
-
-	ownedBall->speed = FMath::Max(minimumSpeed, ownedBall->speed);
+	
+	if (ownedBall->GetBallState() == Stationary)
+	{
+		ABallContainer* ballContainer = 
+			Cast<ABallContainer>(
+			Cast<UStaticMeshComponent>(ownedBall->influenceSource)->GetAttachParentActor()
+			);
+		
+		if (!IsValid(ballContainer))
+		{
+			// to avoid blocking the game, but not supposed to happen
+			AttractObject();
+			ownedBall->speed = ownedBall->minimumSpeed;
+			return;
+		}
+		
+		if (!ballContainer->canReleaseFromMagnet)
+		{
+			return;
+		}
+		
+		ballContainer->BallReleased(ownedBall);
+		AttractObject();
+	}
 	
 	if (ownedBall->GetBallState() == Free)
 	{
 		AttractObject();
 	}
-	else if (ownedBall->GetBallState() == Stationary)
-	{
-		GrabAttractedObject();
-	}
+	
+	ownedBall->speed = FMath::Max(ownedBall->minimumSpeed, ownedBall->speed);
 }
 
 void UMagnetComponent::DeactivateMagnet()
