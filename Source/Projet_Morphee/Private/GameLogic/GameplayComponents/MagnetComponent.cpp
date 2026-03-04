@@ -1,6 +1,4 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-UE_DISABLE_OPTIMIZATION
-
 #include "GameLogic/GameplayComponents/MagnetComponent.h"
 
 #include "GameLogic/Ball/Ball.h"

@@ -6,10 +6,8 @@
 #include "Components/BoxComponent.h"
 #include "GameLogic/Ball/Ball.h"
 
-// Sets default values
 ABallContainer::ABallContainer()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
 	sceneRoot = CreateDefaultSubobject<USceneComponent>("SceneRoot");
@@ -23,7 +21,17 @@ ABallContainer::ABallContainer()
 	
 	containerMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ContainerMesh"));
 	containerMesh->SetupAttachment(sceneRoot);
-	 
+}
+
+void ABallContainer::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	if (!IsValid(collisionComponent))
+	{
+		return;
+	}
+	
 	collisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABallContainer::OnBoxBeginOverlap);
 	collisionComponent->OnComponentEndOverlap.AddDynamic(this, &ABallContainer::OnBoxEndOverlap);
 }
@@ -89,8 +97,14 @@ void ABallContainer::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	BallReceivedSignal();
 }
 
+void ABallContainer::TestFunction(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("TestFunction"));
+}
+
 void ABallContainer::OnBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherOverlappedComponent, int OtherBodyIndex)
+                                     UPrimitiveComponent* OtherOverlappedComponent, int OtherBodyIndex)
 {
 	ABall* collidedBall = Cast<ABall>(OtherActor);
 	
