@@ -50,10 +50,7 @@ void ABall::BeginPlay()
 void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	UEnum* EnumPtr = StaticEnum<EBallState>();
-	FString debugMessage = FString::Printf(TEXT("Ball state : %s"), *EnumPtr->GetNameStringByValue(static_cast<int64>(ballState)));
-	GEngine->AddOnScreenDebugMessage(1, 1.0f, FColor::Red, debugMessage);
+	
 	if (ballState == Attracted)
 	{
 		TickAttract();
@@ -68,9 +65,6 @@ void ABall::Tick(float DeltaTime)
 	
 	if (ballState == Free)
 	{
-		// There might be a nicer way to do this, but I'm unsure of the best solution. This will work for now
-		// The CDO is not supposed to get instanced at each call 
-		
 		if (!IsValid(ballEffectInstance))
 		{
 			UE_LOG(LogTemp, Warning, TEXT("ABall::Tick : The ballEffectInstance is invalid"));

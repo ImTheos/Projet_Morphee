@@ -82,11 +82,9 @@ void ABallContainer::ReleaseBalls(float releaseSpeed)
 void ABallContainer::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                   UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Warning, TEXT("ABallContainer %s : Collision detected with %s"), *GetName(), *OtherActor->GetName());
-
 	ABall* collidedBall = Cast<ABall>(OtherActor);
 
-	if (!IsValid(collidedBall) || collidedBall->GetBallState() != Free)
+	if (!IsValid(collidedBall) || collidedBall->GetBallState() == Grabbed || collidedBall->GetBallState() == Stationary)
 	{
 		return;
 	}
