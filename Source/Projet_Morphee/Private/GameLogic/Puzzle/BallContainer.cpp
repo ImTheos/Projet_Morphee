@@ -41,12 +41,14 @@ void ABallContainer::BallReleased(ABall* releasedBall)
 	storedBalls.Remove(releasedBall);
 	releasedBalls.Add(releasedBall);
 	
+	collisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	containerMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	
 	FTimerHandle timerHandle;
 	FTimerDelegate timerDelegate;
 	timerDelegate.BindLambda([this, releasedBall]()
 	{
+		collisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		containerMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		releasedBalls.Remove(releasedBall);
 	});
@@ -73,6 +75,7 @@ void ABallContainer::ReleaseBalls(float releaseSpeed)
 			continue;
 		}
 		
+		BallReleased(ball);
 		ball->ReleaseFromStationary(releaseSpeed);
 	}
 	
@@ -95,12 +98,6 @@ void ABallContainer::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	BallReceivedSignal();
 }
 
-void ABallContainer::TestFunction(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("TestFunction"));
-}
-
 void ABallContainer::OnBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                      UPrimitiveComponent* OtherOverlappedComponent, int OtherBodyIndex)
 {
@@ -114,6 +111,7 @@ void ABallContainer::OnBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, A
 	if (releasedBalls.Contains(collidedBall))
 	{
 		releasedBalls.Remove(collidedBall);
+		collisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		containerMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	}
 }

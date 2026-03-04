@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "BallEffects/BallEffect.h"
 #include "GameFramework/Actor.h"
-#include "NiagaraFunctionLibrary.h"
 #include "Ball.generated.h"
 
 class UWidgetComponent;
@@ -37,7 +36,7 @@ private:
 	virtual void TickGrab();
 	
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
 	float speed;
 	
 	UPROPERTY(EditAnywhere)
@@ -50,8 +49,8 @@ private:
 	EBallState ballState = Free;
 	
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float minimumSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	float minimumSpeed = 600.f;
 	
 	UPROPERTY()
 	UObject* influenceSource;
@@ -73,7 +72,6 @@ public:
 private:
 	void SetCollisionEnabled(bool enabled) const;
 
-
 	UFUNCTION()
 	void OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
@@ -83,11 +81,11 @@ private:
 	                      FVector normalImpulse, const FHitResult& hit);
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FName hollowBallCollisionProfile;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Collision")
+	FName hollowBallCollisionProfile = TEXT("HollowBall");
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FName regularBallCollisionProfile;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Collision")
+	FName regularBallCollisionProfile = TEXT("BouncingBall");;
 	
 	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision Begin Overlap"))
 	void OnCollisionBeginOverlapBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
@@ -101,11 +99,11 @@ public:
 	// ------- BALL EFFECT -------
 	// -------  -------  ------- 
 public:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Ball Effect")
 	TSubclassOf<ABallEffect> defaultBallEffect;
 	
 private:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="Ball Effect")
 	TSubclassOf<ABallEffect> ballEffect;
 	
 	UPROPERTY()

@@ -51,6 +51,10 @@ void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
+	// UEnum* EnumPtr = StaticEnum<EBallState>();
+	// FString debugMessage = FString::Printf(TEXT("Ball state : %s"), *EnumPtr->GetNameStringByValue(static_cast<int64>(ballState)));
+	// GEngine->AddOnScreenDebugMessage(1, 1.0f, FColor::Red, debugMessage);
+	
 	if (ballState == Attracted)
 	{
 		TickAttract();
@@ -299,7 +303,7 @@ void ABall::ReleaseFromStationary(const float releaseSpeed)
 		return;
 	}
 	
-	SetBallState(Grabbed, playerCharacter);
+	SetBallState(Attracted, playerCharacter);
 }
 
 void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSource)
