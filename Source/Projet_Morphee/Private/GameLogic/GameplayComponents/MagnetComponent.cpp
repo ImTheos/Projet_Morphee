@@ -1,9 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "GameLogic/GameplayComponents/MagnetComponent.h"
 
 #include "GameLogic/Ball/Ball.h"
+#include "GameLogic/Puzzle/BallContainer.h"
 
 // Sets default values for this component's properties
 UMagnetComponent::UMagnetComponent()
@@ -71,7 +70,7 @@ void UMagnetComponent::AssignBall(ABall* ball)
 
 void UMagnetComponent::AttractObject()
 {
-	const AActor* componentOwner = GetOwner();
+	AActor* componentOwner = GetOwner();
 
 	if (!IsValid(componentOwner))
 	{
@@ -84,7 +83,7 @@ void UMagnetComponent::AttractObject()
 
 void UMagnetComponent::GrabAttractedObject()
 {
-	const AActor* componentOwner = GetOwner();
+	AActor* componentOwner = GetOwner();
 	if (!IsValid(componentOwner))
 	{
 		// how ?
@@ -100,7 +99,7 @@ void UMagnetComponent::GrabAttractedObject()
 	ownedBall->SetBallState(Grabbed, componentOwner);
 }
 
-void UMagnetComponent::ActivateMagnet(float minimumSpeed)
+void UMagnetComponent::ActivateMagnet()
 {
 	if (!IsValid(ownedBall))
 	{
@@ -111,14 +110,41 @@ void UMagnetComponent::ActivateMagnet(float minimumSpeed)
 	isMagnetActive = true;
 
 	// If object is already being attracted, no need to set up attraction again
-	if (ownedBall->GetBallState() != Free)
+	if (ownedBall->GetBallState() == Grabbed || ownedBall->GetBallState() == Attracted)
 	{
 		return;
 	}
-
-	ownedBall->speed = FMath::Max(minimumSpeed, ownedBall->speed);
-
-	AttractObject();
+	
+	if (ownedBall->GetBallState() == Stationary)
+	{
+		ABallContainer* ballContainer = 
+			Cast<ABallContainer>(
+			Cast<UStaticMeshComponent>(ownedBall->influenceSource)->GetAttachParentActor()
+			);
+		
+		if (!IsValid(ballContainer))
+		{
+			// to avoid blocking the game, but not supposed to happen
+			AttractObject();
+			ownedBall->speed = ownedBall->minimumSpeed;
+			return;
+		}
+		
+		if (!ballContainer->canReleaseFromMagnet)
+		{
+			return;
+		}
+		
+		ballContainer->BallReleased(ownedBall);
+		AttractObject();
+	}
+	
+	if (ownedBall->GetBallState() == Free)
+	{
+		AttractObject();
+	}
+	
+	ownedBall->speed = FMath::Max(ownedBall->minimumSpeed, ownedBall->speed);
 }
 
 void UMagnetComponent::DeactivateMagnet()

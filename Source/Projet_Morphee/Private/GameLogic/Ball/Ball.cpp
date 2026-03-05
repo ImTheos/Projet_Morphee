@@ -7,6 +7,7 @@
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
 #include "GameLogic/Interfaces/Damageable.h"
+#include "GameLogic/Puzzle/BallContainer.h"
 
 // Sets default values
 ABall::ABall()
@@ -49,7 +50,11 @@ void ABall::BeginPlay()
 void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
+	// UEnum* EnumPtr = StaticEnum<EBallState>();
+	// FString debugMessage = FString::Printf(TEXT("Ball state : %s"), *EnumPtr->GetNameStringByValue(static_cast<int64>(ballState)));
+	// GEngine->AddOnScreenDebugMessage(1, 1.0f, FColor::Red, debugMessage);
+	
 	if (ballState == Attracted)
 	{
 		TickAttract();
@@ -64,9 +69,6 @@ void ABall::Tick(float DeltaTime)
 	
 	if (ballState == Free)
 	{
-		// There might be a nicer way to do this, but I'm unsure of the best solution. This will work for now
-		// The CDO is not supposed to get instanced at each call 
-		
 		if (!IsValid(ballEffectInstance))
 		{
 			UE_LOG(LogTemp, Warning, TEXT("ABall::Tick : The ballEffectInstance is invalid"));
@@ -142,7 +144,7 @@ EBallState ABall::GetBallState() const
 	return ballState;
 }
 
-void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
+void ABall::SetCollisionEnabled(bool enabled) const
 {
 	auto* collisionComponent = GetComponentByClass<UShapeComponent>();
 
@@ -151,8 +153,10 @@ void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
 		UE_LOG(LogTemp, Error, TEXT("ABall : No Collision Component found"))
 		return;
 	}
-
-	collisionComponent->SetCollisionEnabled(collisionType);
+	
+	FName newCollisionProfileName = enabled ? regularBallCollisionProfile : hollowBallCollisionProfile;
+	
+	collisionComponent->SetCollisionProfileName(newCollisionProfileName);
 }
 
 void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor,
@@ -266,7 +270,7 @@ void ABall::BallHitByAttack(AActor* attacker)
 	ballEffectInstance->Attack(attacker);
 }
 
-void ABall::ReleaseFromStationary(float releaseSpeed)
+void ABall::ReleaseFromStationary(const float releaseSpeed)
 {
 	speed = releaseSpeed;
 	
@@ -274,14 +278,14 @@ void ABall::ReleaseFromStationary(float releaseSpeed)
 	{
 		directionWidget->SetVisibility(true);
 	}
-	
-	UWorld* world = GetWorld();
+
+	const UWorld* world = GetWorld();
 	if (!IsValid(world))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ABall::ReleaseFromStationary : The world is invalid ?!"));
 		return;
 	}
-	
+
 	APlayerController* playerController = world->GetFirstPlayerController();
 	
 	if (!IsValid(playerController))
@@ -299,14 +303,14 @@ void ABall::ReleaseFromStationary(float releaseSpeed)
 		return;
 	}
 	
-	SetBallState(Grabbed, playerCharacter);
+	SetBallState(Attracted, playerCharacter);
 }
 
-void ABall::SetBallState(const EBallState newBallState, const UObject* newInfluenceSource)
+void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSource)
 {
 	if (newBallState == Free) 
 	{
-		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		SetCollisionEnabled(true);
 		
 		ballState = newBallState;
 		if (IsValid(directionWidget))
@@ -326,18 +330,24 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	
 	if (newBallState == Grabbed)
 	{
-		SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		SetCollisionEnabled(false);
 		
 		if (IsValid(directionWidget))
 		{
 			directionWidget->SetVisibility(true);
+		}
+		
+		if (ABallContainer* ballContainer = Cast<ABallContainer>(influenceSource))
+		{
+			// TODO : edit this speed
+			ballContainer->ReleaseBalls(600.f);
 		}
 		return;
 	}
 	
 	if (newBallState == Attracted)
 	{
-		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		SetCollisionEnabled(true);
 		
 		if (IsValid(directionWidget))
 		{
@@ -348,7 +358,7 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	
 	if (newBallState == Stationary)
 	{
-		SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+		SetCollisionEnabled(false);
 		
 		speed = 0;
 		if (const AActor* influenceSourceActor = Cast<AActor>(influenceSource))
