@@ -26,6 +26,14 @@ FVector ACursor::GetCursorWorldPosition()
 	{
 		return FVector::Zero();
 	}
+	
+	FString debugString = FString::Printf(TEXT("Magnitude : %f"), mouseDirection.Length());
+	GEngine->AddOnScreenDebugMessage(111, 1.0f, FColor::Yellow, debugString);
+	
+	if (mouseDirection.IsNearlyZero())
+	{
+		return FVector::Zero();
+	}
 
 	const double playerHeight = playerCharacter->GetActorLocation().Z - playerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight();
 
