@@ -32,10 +32,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 private:
-	virtual void TickAttract();
-	virtual void TickGrab();
+	virtual void TickAttract(float DeltaTime);
+	virtual void TickGrab(float DeltaTime);
 	
 public:
+	// Amount of units the balls travels per second
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
 	float speed;
 	

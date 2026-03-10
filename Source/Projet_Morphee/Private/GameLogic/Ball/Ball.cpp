@@ -57,13 +57,13 @@ void ABall::Tick(float DeltaTime)
 	
 	if (ballState == Attracted)
 	{
-		TickAttract();
+		TickAttract(DeltaTime);
 		return;
 	}
 
 	if (ballState == Grabbed)
 	{
-		TickGrab();
+		TickGrab(DeltaTime);
 		return;
 	}
 	
@@ -79,7 +79,7 @@ void ABall::Tick(float DeltaTime)
 	}
 }
 
-void ABall::TickAttract()
+void ABall::TickAttract(float DeltaTime)
 {
 	if (!IsValid(influenceSource))
 	{
@@ -101,42 +101,42 @@ void ABall::TickAttract()
 	SetActorRotation(newForwardVector.ToOrientationRotator());
 }
 
-void ABall::TickGrab()
+void ABall::TickGrab(float DeltaTime)
 {
 	FVector influenceSourceLocation;
+	FVector influenceSourceForwardVector;
 	if (const AActor* influenceSourceActor = Cast<AActor>(influenceSource))
 	{
 		influenceSourceLocation = influenceSourceActor->GetActorLocation();
+		influenceSourceForwardVector = influenceSourceActor->GetActorForwardVector();
 	}
 	else if (const USceneComponent* sceneComp = Cast<USceneComponent>(influenceSource))
 	{
 		influenceSourceLocation = sceneComp->GetComponentLocation();
+		influenceSourceForwardVector = sceneComp->GetForwardVector();
 	}
 	
-	float distanceToAttractionSouce = FVector::Dist(GetActorLocation(), influenceSourceLocation);
-	FVector newForwardVector;
+	FVector goalLocation = influenceSourceLocation + FVector::CrossProduct(FVector::UpVector, influenceSourceForwardVector) * grabAnimDistance;
+	
+	float distanceToAttractionSource = FVector::Dist(GetActorLocation(), goalLocation);
 	
 	// TODO : find a better way to set this
 	float epsilonDistance = 20.0f;
 
 	// TODO : add smoother transition between the three cases if needed
-	if (distanceToAttractionSouce > grabAnimDistance + epsilonDistance)
+	if (distanceToAttractionSource > speed * DeltaTime)
 	{
 		// Get the ball closer
-		newForwardVector = influenceSourceLocation - GetActorLocation();
-	}
-	else if (distanceToAttractionSouce < grabAnimDistance - epsilonDistance)
-	{
-		// Get the ball further
-		newForwardVector = GetActorLocation() - influenceSourceLocation;
+		FVector newForwardVector = goalLocation - GetActorLocation();
+		newForwardVector.Z = 0.0f;
+		speed = FMath::Max(speed, minimumSpeed);
+		SetActorRotation(newForwardVector.ToOrientationRotator());
 	}
 	else
 	{
-		// Rotate ball clockwise
-		newForwardVector = FVector::CrossProduct(FVector::UpVector, influenceSourceLocation - GetActorLocation());
+		SetActorLocation(goalLocation);
+		speed = 0;
 	}
-
-	SetActorRotation(newForwardVector.ToOrientationRotator());
 }
 
 EBallState ABall::GetBallState() const
