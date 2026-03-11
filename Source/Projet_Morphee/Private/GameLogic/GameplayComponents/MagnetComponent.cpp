@@ -4,32 +4,18 @@
 #include "GameLogic/Ball/Ball.h"
 #include "GameLogic/Puzzle/BallContainer.h"
 
-// Sets default values for this component's properties
 UMagnetComponent::UMagnetComponent()
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
 }
 
-
-// Called when the game starts
-void UMagnetComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-	
-}
-
-
-// Called every frame
 void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	remainingCooldown = FMath::Max(remainingCooldown - DeltaTime, 0.f);
+	
 	if (!IsValid(ownedBall))
 	{
 		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No ownedBall has been set"));
@@ -59,6 +45,7 @@ void UMagnetComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	// grab object
 	if (isMagnetActive)
 	{
+		InitMagnetCooldown();
 		GrabAttractedObject();
 	}
 }
@@ -99,8 +86,20 @@ void UMagnetComponent::GrabAttractedObject()
 	ownedBall->SetBallState(Grabbed, componentOwner);
 }
 
+void UMagnetComponent::InitMagnetCooldown()
+{
+	remainingCooldown = cooldown;
+}
+
 void UMagnetComponent::ActivateMagnet()
 {
+	if (remainingCooldown > 0.f)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("Magnet in cooldown"));
+		UE_LOG(LogTemp, Display, TEXT("UMagnetComponent : Magnet still in cooldown"));
+		return;
+	}
+	
 	if (!IsValid(ownedBall))
 	{
 		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No ownedBall has been set"));

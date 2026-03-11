@@ -25,7 +25,7 @@ Une zone de combat simple mais c'est la seconde fois que Thalia rencontre les mo
 ---
 ## Cache du Marchand
 
-La cache est bloquée par un puzzle et infestée de monstres. Thalia est fascinée par le trésor et ne se demande pas à qui il appartient. Morphée critique Thalia mais rien de plus. Un document près du trésor explique que le Marchand va dans les ruines et qu'elles sont dangereuses.
+La cache est bloquée par un puzzle et infestée de monstres. Le Marchand, qui s'est installé dans cette zone, a tenté d'enfermer des monstres en cage, mais cela s'est retourné contre lui. Quand on le retrouve, il est caché sous ce qu'il reste du camp, une tente démolie sur la tête afin de s'abriter des monstres.
 
 ---
 ## Marécage
