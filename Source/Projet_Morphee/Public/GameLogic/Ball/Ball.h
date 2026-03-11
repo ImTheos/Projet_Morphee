@@ -132,5 +132,33 @@ public:
 public:
 	UFUNCTION(BlueprintCallable)
 	void BallHitByAttack(AActor* attacker);
+
+	// -------  -------  ------- 
+	// ------- ANIMATION -------
+	// -------  -------  ------- 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	float grabAnimationCycleDuration = 3.f;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	float grabAnimationHeight = 20.f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	float grabAnimationSizeRatio = 0.5;
+	
+private:
+	float grabbedAnimationTimer = 0.f;
+	
+public:
+	// // -------  -------  ------- 
+	// ------- DIRECTION WIDGET -------
+	// -------  -------  ------- 
+	void UpdateDirectionWidgetHeight();
+	
+	double directionWidgetHeight;
+	
+	// -------  -------  ------- 
+	// ------- BALL MESH -------
+	// -------  -------  -------
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Mesh")
+	UStaticMeshComponent* ballMeshReference;
 };
