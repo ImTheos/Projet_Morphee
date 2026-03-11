@@ -4,13 +4,10 @@
 #include "GameLogic/Puzzle/BallContainer.h"
 
 #include "Components/BoxComponent.h"
-#include "Components/ShapeComponent.h"
 #include "GameLogic/Ball/Ball.h"
 
-// Sets default values
 ABallContainer::ABallContainer()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
 	sceneRoot = CreateDefaultSubobject<USceneComponent>("SceneRoot");
@@ -24,21 +21,48 @@ ABallContainer::ABallContainer()
 	
 	containerMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ContainerMesh"));
 	containerMesh->SetupAttachment(sceneRoot);
-	
-	collisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABallContainer::OnBoxOverlap);
 }
 
-// Called when the game starts or when spawned
 void ABallContainer::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	if (!IsValid(collisionComponent))
+	{
+		return;
+	}
+	
+	collisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABallContainer::OnBoxBeginOverlap);
+	collisionComponent->OnComponentEndOverlap.AddDynamic(this, &ABallContainer::OnBoxEndOverlap);
 }
 
-// Called every frame
-void ABallContainer::Tick(float DeltaTime)
+void ABallContainer::BallReleased(ABall* releasedBall)
 {
-	Super::Tick(DeltaTime);
-
+	storedBalls.Remove(releasedBall);
+	releasedBalls.Add(releasedBall);
+	
+	collisionComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	containerMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	
+	FTimerHandle timerHandle;
+	FTimerDelegate timerDelegate;
+	timerDelegate.BindLambda([this, releasedBall]()
+	{
+		collisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		containerMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		releasedBalls.Remove(releasedBall);
+	});
+	
+	UWorld* world = GetWorld();
+	
+	if (!IsValid(world))
+	{
+		return;	
+	}
+	
+	world->GetTimerManager().SetTimer(timerHandle, timerDelegate, 1.0f, false);
+	
+	BallReleasedSignal();
 }
 
 void ABallContainer::ReleaseBalls(float releaseSpeed)
@@ -51,18 +75,19 @@ void ABallContainer::ReleaseBalls(float releaseSpeed)
 			continue;
 		}
 		
+		BallReleased(ball);
 		ball->ReleaseFromStationary(releaseSpeed);
 	}
+	
+	BallReleasedSignal() ;
 }
 
-void ABallContainer::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+void ABallContainer::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
                                   UPrimitiveComponent* OtherOverlappedComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Warning, TEXT("ABallContainer %s : Collision detected with %s"), *GetName(), *OtherActor->GetName());
-
 	ABall* collidedBall = Cast<ABall>(OtherActor);
 
-	if (!IsValid(collidedBall))
+	if (!IsValid(collidedBall) || collidedBall->GetBallState() == Grabbed || collidedBall->GetBallState() == Stationary)
 	{
 		return;
 	}
@@ -70,6 +95,24 @@ void ABallContainer::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AAct
 	collidedBall->SetBallState(Stationary, ballMeshPreview);
 	storedBalls.Add(collidedBall);
 	
-	OutputSignal();
+	BallReceivedSignal();
+}
+
+void ABallContainer::OnBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+                                     UPrimitiveComponent* OtherOverlappedComponent, int OtherBodyIndex)
+{
+	ABall* collidedBall = Cast<ABall>(OtherActor);
+	
+	if (!IsValid(collidedBall))
+	{
+		return;
+	}
+	
+	if (releasedBalls.Contains(collidedBall))
+	{
+		releasedBalls.Remove(collidedBall);
+		collisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		containerMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	}
 }
 
