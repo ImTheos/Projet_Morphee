@@ -64,7 +64,7 @@ public:
 	
 	void ReleaseFromStationary(float releaseSpeed);
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
 	float grabAnimDistance;
 	
 	// -------  -------  ------- 
@@ -136,14 +136,14 @@ public:
 	// -------  -------  ------- 
 	// ------- ANIMATION -------
 	// -------  -------  ------- 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
 	float grabAnimationCycleDuration = 3.f;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
 	float grabAnimationHeight = 20.f;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
-	float grabAnimationSizeRatio = 0.5;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
+	float grabAnimationSizeRatio = 0.8;
 	
 private:
 	float grabbedAnimationTimer = 0.f;

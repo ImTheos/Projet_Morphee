@@ -310,16 +310,18 @@ void ABall::UpdateDirectionWidgetHeight()
 	float directionWidgetMaxDepth = 150.f;
 	
 	FHitResult hitResult;
-	world->LineTraceSingleByChannel(hitResult, GetActorLocation(), GetActorLocation() + directionWidgetMaxDepth * FVector::DownVector, ECC_Camera, collisionParameters);
+	world->LineTraceSingleByObjectType(hitResult, GetActorLocation(), GetActorLocation() + directionWidgetMaxDepth * FVector::DownVector, ECC_WorldStatic, collisionParameters);
 
 	if (!hitResult.bBlockingHit)
 	{
-		GEngine->AddOnScreenDebugMessage(1012, 2.f, FColor::Red, TEXT("No hit !"));
 		return;
 	}
 	
-	directionWidget->SetWorldLocation(hitResult.ImpactPoint + FVector::UpVector);
-	directionWidgetHeight = hitResult.ImpactPoint.Z + 1.f;
+	FVector newLocation = directionWidget->GetComponentLocation();
+	newLocation.Z = hitResult.ImpactPoint.Z + 1.f;
+	directionWidgetHeight = newLocation.Z;
+	
+	directionWidget->SetWorldLocation(newLocation);
 }
 
 void ABall::ReleaseFromStationary(const float releaseSpeed)
@@ -360,12 +362,12 @@ void ABall::ReleaseFromStationary(const float releaseSpeed)
 
 void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSource)
 {
-	UpdateDirectionWidgetHeight();
-	ballMeshReference->SetRelativeLocation(FVector::Zero());
 	
 	if (newBallState == Free) 
 	{
 		SetActorScale3D(FVector::OneVector);
+		UpdateDirectionWidgetHeight();
+		ballMeshReference->SetRelativeLocation(FVector::Zero());
 		SetCollisionEnabled(true);
 		
 		ballState = newBallState;
@@ -387,6 +389,8 @@ void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSou
 	if (newBallState == Grabbed)
 	{
 		UpdateDirectionWidgetHeight();
+		UpdateDirectionWidgetHeight();
+		ballMeshReference->SetRelativeLocation(FVector::Zero());
 		SetCollisionEnabled(false);
 		
 		if (IsValid(directionWidget))
@@ -404,6 +408,8 @@ void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSou
 	
 	if (newBallState == Attracted)
 	{
+		UpdateDirectionWidgetHeight();
+		ballMeshReference->SetRelativeLocation(FVector::Zero());
 		SetCollisionEnabled(true);
 		
 		if (IsValid(directionWidget))
@@ -416,6 +422,8 @@ void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSou
 	if (newBallState == Stationary)
 	{
 		SetActorScale3D(FVector::OneVector);
+		UpdateDirectionWidgetHeight();
+		ballMeshReference->SetRelativeLocation(FVector::Zero());
 		SetCollisionEnabled(false);
 		
 		speed = 0;
