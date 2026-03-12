@@ -1,6 +1,0 @@
----
-tags:
-  - Alliés
-  - Personnages
-  - Réalité
----

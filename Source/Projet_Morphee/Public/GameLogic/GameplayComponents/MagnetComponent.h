@@ -6,7 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "MagnetComponent.generated.h"
 
-class AAttractable;
+class ABall;
 // Component that allows the owner to attract a specific entity
 // from a distance and to grab it when the attracted object arrives
 // in a certain range from the owner
@@ -16,30 +16,22 @@ class PROJET_MORPHEE_API UMagnetComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
 	UMagnetComponent();
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
-	UFUNCTION(BlueprintCallable)
-	void SetAttractedObject(AAttractable* objectToAttract);
+	void AssignBall(ABall* ball);
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float magnetRadius;
 
 private:
-	UPROPERTY(Transient)
-	TObjectPtr<AAttractable> attractedObject;
+	UPROPERTY()
+	TObjectPtr<ABall> ownedBall;
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void ActivateMagnet(float minimumSpeed = 0.0f);
+	void ActivateMagnet();
 
 	UFUNCTION(BlueprintCallable)
 	void DeactivateMagnet();
@@ -48,10 +40,17 @@ public:
 	void FreeAttractedObject();
 	
 	void GrabAttractedObject();
-
+	
+	void InitMagnetCooldown();
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float cooldown = 2.f;
+	
 private:
 	// Pulls the tracked object towards its magnetic source and activates magneting
 	void AttractObject();
 	
 	bool isMagnetActive;
+	
+	float remainingCooldown = 0.f;
 };

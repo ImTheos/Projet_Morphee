@@ -40,26 +40,22 @@ FVector UDashAbility::CalculateDashTeleport(FVector actorLocation, FVector targe
 
 	FVector differenceThresholdVector = FVector(0.f, 0.f, teleportHeightDifferenceThreshold);
 	FHitResult traceHitResult;
-	FCollisionShape traceShape = FCollisionShape::MakeCapsule(capsuleRadius, capsuleHalfHeight);
+	FCollisionShape traceShape = FCollisionShape::MakeCapsule(0.1f, capsuleHalfHeight);
 
 	FVector dashLocation = targetLocation;
 
 	for (int i = 0; i < capsuleAmount; i++)
 	{
-		world->SweepSingleByChannel(traceHitResult,
+		world->SweepSingleByProfile(traceHitResult,
 								dashLocation + differenceThresholdVector,
 								dashLocation - differenceThresholdVector,
-								FQuat::Identity, dashTraceChannel, traceShape);
-
-		float testDotProduct = traceHitResult.Normal.Dot(FVector::UpVector);
+								FQuat::Identity, dashTraceProfileName, traceShape);
 		
 		if (traceHitResult.bBlockingHit && traceHitResult.PenetrationDepth == 0.f && !DashCollidesWithObstacle(actorLocation, traceHitResult.Location))
 		{
-			// DrawDebugCapsule(world, traceHitResult.Location, capsuleHalfHeight, capsuleRadius, FQuat::Identity, FColor::Purple, false, 10);
 			return traceHitResult.Location;
 		}
 
-		// DrawDebugCapsule(world, traceHitResult.Location, capsuleHalfHeight/4, capsuleRadius/4, FQuat::Identity, FColor::Blue, false, 10);
 		dashLocation -= dashDirection;
 	}
 	
@@ -88,22 +84,21 @@ FVector UDashAbility::CalculateDashEndPostTeleport(FVector actorLocation, FVecto
 	
 	FVector differenceThresholdVector = FVector(0.f, 0.f, walkHeightDifferenceThreshold);
 	FHitResult traceHitResult;
-	FCollisionShape traceShape = FCollisionShape::MakeCapsule(capsuleRadius, capsuleHalfHeight);
+	FCollisionShape traceShape = FCollisionShape::MakeCapsule(0.1f, capsuleHalfHeight);
 
 	for (int i = 0; i < capsuleAmount; i++)
 	{
 		FVector newPosition = initialPosition + dashDirection;
-		world->SweepSingleByChannel(traceHitResult,
+		world->SweepSingleByProfile(traceHitResult,
 								newPosition + differenceThresholdVector,
 								newPosition - differenceThresholdVector,
-								FQuat::Identity, dashTraceChannel, traceShape);
+								FQuat::Identity, dashTraceProfileName, traceShape);
 
 		if (!traceHitResult.bBlockingHit || traceHitResult.PenetrationDepth > 0.f)
 		{
 			return initialPosition;
 		}
 
-		// DrawDebugCapsule(world, traceHitResult.Location, capsuleHalfHeight/4.f, capsuleRadius/4.f, FQuat::Identity, FColor::Yellow, false, 5);
 		initialPosition = traceHitResult.Location;
 	}
 
@@ -114,7 +109,7 @@ bool UDashAbility::DashCollidesWithObstacle(FVector dashInitialLocation, FVector
 {
 	UWorld* world = GetWorld();
 	FHitResult traceHitResult;
-	world->LineTraceSingleByChannel(traceHitResult, dashInitialLocation, dashEndLocation, dashTraceChannel);
+	world->LineTraceSingleByProfile(traceHitResult, dashInitialLocation, dashEndLocation, dashTraceProfileName);
 
 	return traceHitResult.bBlockingHit;
 }

@@ -46,8 +46,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float dashMaxDistance = 400.f;
 
-	// Collision channel used for wall and obstacle detection during dash
+	// Collision profile used for wall and obstacle detection during dash
 	UPROPERTY(EditAnywhere)
-	TEnumAsByte<ECollisionChannel> dashTraceChannel = ECC_Camera;
-	// TODO : change collision channel to match gameplay intentions
+	FName dashTraceProfileName;
 };

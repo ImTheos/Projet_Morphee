@@ -1,12 +1,5 @@
 {
-  "markdown:add-metadata-property": [
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "End"
-    }
-  ],
+  "markdown:add-metadata-property": [],
   "workspace:close": [],
   "workspace:close-window": [],
   "command-palette:open": [],
@@ -26,14 +19,7 @@
   "workspace:goto-tab-7": [],
   "workspace:goto-tab-8": [],
   "graph:open": [],
-  "editor:insert-link": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "End"
-    }
-  ],
+  "editor:insert-link": [],
   "app:go-back": [],
   "app:go-forward": [],
   "workspace:new-tab": [],
@@ -54,160 +40,11 @@
     }
   ],
   "global-search:open": [],
-  "editor:toggle-bold": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "1"
-    }
-  ],
   "editor:toggle-checklist-status": [],
   "editor:toggle-comments": [],
-  "editor:toggle-italics": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "2"
-    }
-  ],
   "markdown:toggle-preview": [],
   "workspace:undo-close-pane": [],
-  "editor:toggle-spellcheck": [
-    {
-      "modifiers": [
-        "Meta"
-      ],
-      "key": "'"
-    }
-  ],
-  "editor:insert-embed": [
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "ArrowDown"
-    }
-  ],
-  "editor:toggle-highlight": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "3"
-    }
-  ],
-  "editor:toggle-bullet-list": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "7"
-    }
-  ],
-  "editor:toggle-code": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "4"
-    }
-  ],
-  "editor:toggle-inline-math": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "5"
-    }
-  ],
-  "editor:insert-wikilink": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "'"
-    }
-  ],
-  "editor:insert-horizontal-rule": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "Insert"
-    }
-  ],
-  "editor:insert-callout": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "ArrowDown"
-    }
-  ],
-  "editor:insert-mathblock": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "Clear"
-    }
-  ],
-  "editor:insert-table": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "ArrowRight"
-    }
-  ],
-  "editor:attach-file": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "Home"
-    }
-  ],
-  "editor:toggle-numbered-list": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "8"
-    }
-  ],
-  "editor:insert-footnote": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "ArrowLeft"
-    }
-  ],
-  "editor:toggle-strikethrough": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "9"
-    }
-  ],
-  "editor:toggle-blockquote": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "6"
-    }
-  ],
-  "editor:insert-codeblock": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "PageDown"
-    }
-  ]
+  "editor:toggle-italics": [],
+  "editor:toggle-bold": [],
+  "editor:save-file": []
 }
