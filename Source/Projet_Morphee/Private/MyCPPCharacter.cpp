@@ -38,9 +38,6 @@ AMyCPPCharacter::AMyCPPCharacter()
 
 	
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
-
-
-
 }
 
 // Called when the game starts or when spawned
