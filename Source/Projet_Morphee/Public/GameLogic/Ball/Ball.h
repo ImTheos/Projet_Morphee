@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "BallEffects/BallEffect.h"
 #include "GameFramework/Actor.h"
-#include "NiagaraFunctionLibrary.h"
 #include "Ball.generated.h"
 
 class UWidgetComponent;
@@ -33,11 +32,12 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 private:
-	virtual void TickAttract();
-	virtual void TickGrab();
+	virtual void TickAttract(float DeltaTime);
+	virtual void TickGrab(float DeltaTime);
 	
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// Amount of units the balls travels per second
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
 	float speed;
 	
 	UPROPERTY(EditAnywhere)
@@ -49,27 +49,29 @@ public:
 private:
 	EBallState ballState = Free;
 	
-	UPROPERTY()
-	const UObject* influenceSource;
-	
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	float minimumSpeed = 600.f;
+	
+	UPROPERTY()
+	UObject* influenceSource;
+	
 	UFUNCTION(BlueprintCallable)
 	EBallState GetBallState() const;
 	
 	// TODO : add option to set speed after state change to allow to remove ReleaseFromStationary too
-	void SetBallState(EBallState newBallState, const UObject* newInfluenceSource = nullptr);
+	void SetBallState(EBallState newBallState, UObject* newInfluenceSource = nullptr);
 	
 	void ReleaseFromStationary(float releaseSpeed);
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
 	float grabAnimDistance;
 	
 	// -------  -------  ------- 
 	// ------- COLLISION ------- 
 	// -------  -------  ------- 
 private:
-	void SetCollisionEnabled(ECollisionEnabled::Type collisionType) const;
-
+	void SetCollisionEnabled(bool enabled) const;
 
 	UFUNCTION()
 	void OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
@@ -80,6 +82,12 @@ private:
 	                      FVector normalImpulse, const FHitResult& hit);
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Collision")
+	FName hollowBallCollisionProfile = TEXT("HollowBall");
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Collision")
+	FName regularBallCollisionProfile = TEXT("BouncingBall");;
+	
 	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision Begin Overlap"))
 	void OnCollisionBeginOverlapBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
 	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
@@ -92,11 +100,11 @@ public:
 	// ------- BALL EFFECT -------
 	// -------  -------  ------- 
 public:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Ball Effect")
 	TSubclassOf<ABallEffect> defaultBallEffect;
 	
 private:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="Ball Effect")
 	TSubclassOf<ABallEffect> ballEffect;
 	
 	UPROPERTY()
@@ -124,5 +132,33 @@ public:
 public:
 	UFUNCTION(BlueprintCallable)
 	void BallHitByAttack(AActor* attacker);
+
+	// -------  -------  ------- 
+	// ------- ANIMATION -------
+	// -------  -------  ------- 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
+	float grabAnimationCycleDuration = 3.f;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
+	float grabAnimationHeight = 20.f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
+	float grabAnimationSizeRatio = 0.8;
+	
+private:
+	float grabbedAnimationTimer = 0.f;
+	
+public:
+	// // -------  -------  ------- 
+	// ------- DIRECTION WIDGET -------
+	// -------  -------  ------- 
+	void UpdateDirectionWidgetHeight();
+	
+	double directionWidgetHeight;
+	
+	// -------  -------  ------- 
+	// ------- BALL MESH -------
+	// -------  -------  -------
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Mesh")
+	UStaticMeshComponent* ballMeshReference;
 };

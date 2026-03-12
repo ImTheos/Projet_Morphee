@@ -40,7 +40,7 @@ FVector UDashAbility::CalculateDashTeleport(FVector actorLocation, FVector targe
 
 	FVector differenceThresholdVector = FVector(0.f, 0.f, teleportHeightDifferenceThreshold);
 	FHitResult traceHitResult;
-	FCollisionShape traceShape = FCollisionShape::MakeCapsule(capsuleRadius, capsuleHalfHeight);
+	FCollisionShape traceShape = FCollisionShape::MakeCapsule(0.1f, capsuleHalfHeight);
 
 	FVector dashLocation = targetLocation;
 
@@ -50,8 +50,6 @@ FVector UDashAbility::CalculateDashTeleport(FVector actorLocation, FVector targe
 								dashLocation + differenceThresholdVector,
 								dashLocation - differenceThresholdVector,
 								FQuat::Identity, dashTraceProfileName, traceShape);
-
-		float testDotProduct = traceHitResult.Normal.Dot(FVector::UpVector);
 		
 		if (traceHitResult.bBlockingHit && traceHitResult.PenetrationDepth == 0.f && !DashCollidesWithObstacle(actorLocation, traceHitResult.Location))
 		{
@@ -86,7 +84,7 @@ FVector UDashAbility::CalculateDashEndPostTeleport(FVector actorLocation, FVecto
 	
 	FVector differenceThresholdVector = FVector(0.f, 0.f, walkHeightDifferenceThreshold);
 	FHitResult traceHitResult;
-	FCollisionShape traceShape = FCollisionShape::MakeCapsule(capsuleRadius, capsuleHalfHeight);
+	FCollisionShape traceShape = FCollisionShape::MakeCapsule(0.1f, capsuleHalfHeight);
 
 	for (int i = 0; i < capsuleAmount; i++)
 	{

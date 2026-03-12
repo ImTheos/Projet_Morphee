@@ -7,6 +7,8 @@
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
 #include "GameLogic/Interfaces/Damageable.h"
+#include "GameLogic/Puzzle/BallContainer.h"
+#include "Math/UnrealMathUtility.h"
 
 // Sets default values
 ABall::ABall()
@@ -34,7 +36,6 @@ void ABall::BeginPlay()
 	sphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollisionBeginOverlap);
 	sphereCollision->OnComponentHit.AddDynamic(this, &ABall::OnCollisionBlock);
 	
-	// TODO : Check this
 	UWidgetComponent* widgetComponent = FindComponentByClass<UWidgetComponent>();
 	if (!IsValid(widgetComponent))
 	{
@@ -43,30 +44,42 @@ void ABall::BeginPlay()
 	}
 	
 	directionWidget = widgetComponent;
+	
+	UStaticMeshComponent* meshComponent = FindComponentByClass<UStaticMeshComponent>();
+	if (!IsValid(meshComponent))
+	{
+		return;
+	}
+	
+	ballMeshReference = meshComponent;
 }
 
 // Called every frame
 void ABall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (ballState == Attracted)
-	{
-		TickAttract();
-		return;
-	}
+	
+	// UEnum* EnumPtr = StaticEnum<EBallState>();
+	// FString debugMessage = FString::Printf(TEXT("Ball state : %s"), *EnumPtr->GetNameStringByValue(static_cast<int64>(ballState)));
+	// GEngine->AddOnScreenDebugMessage(1, 1.0f, FColor::Red, debugMessage);
+	
 
 	if (ballState == Grabbed)
 	{
-		TickGrab();
+		TickGrab(DeltaTime);
+		return;
+	}
+	
+	grabbedAnimationTimer = 0.f;
+	
+	if (ballState == Attracted)
+	{
+		TickAttract(DeltaTime);
 		return;
 	}
 	
 	if (ballState == Free)
 	{
-		// There might be a nicer way to do this, but I'm unsure of the best solution. This will work for now
-		// The CDO is not supposed to get instanced at each call 
-		
 		if (!IsValid(ballEffectInstance))
 		{
 			UE_LOG(LogTemp, Warning, TEXT("ABall::Tick : The ballEffectInstance is invalid"));
@@ -77,7 +90,7 @@ void ABall::Tick(float DeltaTime)
 	}
 }
 
-void ABall::TickAttract()
+void ABall::TickAttract(float DeltaTime)
 {
 	if (!IsValid(influenceSource))
 	{
@@ -96,45 +109,59 @@ void ABall::TickAttract()
 	}
 
 	FVector newForwardVector = influenceSourceLocation - GetActorLocation();
+	newForwardVector.Z = 0.f;
 	SetActorRotation(newForwardVector.ToOrientationRotator());
 }
 
-void ABall::TickGrab()
+void ABall::TickGrab(float DeltaTime)
 {
 	FVector influenceSourceLocation;
+	FVector influenceSourceForwardVector;
 	if (const AActor* influenceSourceActor = Cast<AActor>(influenceSource))
 	{
 		influenceSourceLocation = influenceSourceActor->GetActorLocation();
+		influenceSourceForwardVector = influenceSourceActor->GetActorForwardVector();
 	}
 	else if (const USceneComponent* sceneComp = Cast<USceneComponent>(influenceSource))
 	{
 		influenceSourceLocation = sceneComp->GetComponentLocation();
+		influenceSourceForwardVector = sceneComp->GetForwardVector();
 	}
 	
-	float distanceToAttractionSouce = FVector::Dist(GetActorLocation(), influenceSourceLocation);
-	FVector newForwardVector;
+	// One of the three size values (they should all be equal anyway)
+	double newSizeFactor = GetActorScale().X;
+	newSizeFactor = FMath::Max(newSizeFactor - DeltaTime, grabAnimationSizeRatio);
 	
-	// TODO : find a better way to set this
-	float epsilonDistance = 20.0f;
-
-	// TODO : add smoother transition between the three cases if needed
-	if (distanceToAttractionSouce > grabAnimDistance + epsilonDistance)
+	SetActorScale3D(newSizeFactor * FVector::OneVector);
+	
+	FVector goalLocation = influenceSourceLocation + FVector::CrossProduct(FVector::UpVector, influenceSourceForwardVector) * grabAnimDistance;
+	
+	float distanceToAttractionSource = FVector::Dist(GetActorLocation(), goalLocation);
+	
+	if (distanceToAttractionSource > minimumSpeed * 0.05f)
 	{
 		// Get the ball closer
-		newForwardVector = influenceSourceLocation - GetActorLocation();
-	}
-	else if (distanceToAttractionSouce < grabAnimDistance - epsilonDistance)
-	{
-		// Get the ball further
-		newForwardVector = GetActorLocation() - influenceSourceLocation;
+		FVector newForwardVector = goalLocation - GetActorLocation();
+		newForwardVector.Z = 0.0f;
+		speed = FMath::Max(speed, minimumSpeed);
+		SetActorRotation(newForwardVector.ToOrientationRotator());
+		FVector actorLocation = GetActorLocation();
+		actorLocation.Z = influenceSourceLocation.Z;
+		SetActorLocation(actorLocation);
 	}
 	else
 	{
-		// Rotate ball clockwise
-		newForwardVector = FVector::CrossProduct(FVector::UpVector, influenceSourceLocation - GetActorLocation());
+		grabbedAnimationTimer = remainderf(grabbedAnimationTimer + (2 * PI * DeltaTime / grabAnimationCycleDuration), 2 * PI);
+		
+		float ballHeightDelta = grabAnimationHeight * FMath::Sin(grabbedAnimationTimer);
+		
+		
+		SetActorLocation(goalLocation);
+		ballMeshReference->SetRelativeLocation(ballHeightDelta * FVector::UpVector);
+		
+		speed = 0;
 	}
-
-	SetActorRotation(newForwardVector.ToOrientationRotator());
+	
 }
 
 EBallState ABall::GetBallState() const
@@ -142,7 +169,7 @@ EBallState ABall::GetBallState() const
 	return ballState;
 }
 
-void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
+void ABall::SetCollisionEnabled(bool enabled) const
 {
 	auto* collisionComponent = GetComponentByClass<UShapeComponent>();
 
@@ -151,8 +178,10 @@ void ABall::SetCollisionEnabled(ECollisionEnabled::Type collisionType) const
 		UE_LOG(LogTemp, Error, TEXT("ABall : No Collision Component found"))
 		return;
 	}
-
-	collisionComponent->SetCollisionEnabled(collisionType);
+	
+	FName newCollisionProfileName = enabled ? regularBallCollisionProfile : hollowBallCollisionProfile;
+	
+	collisionComponent->SetCollisionProfileName(newCollisionProfileName);
 }
 
 void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor,
@@ -266,7 +295,36 @@ void ABall::BallHitByAttack(AActor* attacker)
 	ballEffectInstance->Attack(attacker);
 }
 
-void ABall::ReleaseFromStationary(float releaseSpeed)
+void ABall::UpdateDirectionWidgetHeight()
+{
+	FCollisionQueryParams collisionParameters;
+	collisionParameters.AddIgnoredActor(this);
+	
+	UWorld* world = GetWorld();
+	if (!IsValid(world))
+	{
+		return;
+	}
+	
+	// hacky float
+	float directionWidgetMaxDepth = 150.f;
+	
+	FHitResult hitResult;
+	world->LineTraceSingleByObjectType(hitResult, GetActorLocation(), GetActorLocation() + directionWidgetMaxDepth * FVector::DownVector, ECC_WorldStatic, collisionParameters);
+
+	if (!hitResult.bBlockingHit)
+	{
+		return;
+	}
+	
+	FVector newLocation = directionWidget->GetComponentLocation();
+	newLocation.Z = hitResult.ImpactPoint.Z + 1.f;
+	directionWidgetHeight = newLocation.Z;
+	
+	directionWidget->SetWorldLocation(newLocation);
+}
+
+void ABall::ReleaseFromStationary(const float releaseSpeed)
 {
 	speed = releaseSpeed;
 	
@@ -274,14 +332,14 @@ void ABall::ReleaseFromStationary(float releaseSpeed)
 	{
 		directionWidget->SetVisibility(true);
 	}
-	
-	UWorld* world = GetWorld();
+
+	const UWorld* world = GetWorld();
 	if (!IsValid(world))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ABall::ReleaseFromStationary : The world is invalid ?!"));
 		return;
 	}
-	
+
 	APlayerController* playerController = world->GetFirstPlayerController();
 	
 	if (!IsValid(playerController))
@@ -299,14 +357,18 @@ void ABall::ReleaseFromStationary(float releaseSpeed)
 		return;
 	}
 	
-	SetBallState(Grabbed, playerCharacter);
+	SetBallState(Attracted, playerCharacter);
 }
 
-void ABall::SetBallState(const EBallState newBallState, const UObject* newInfluenceSource)
+void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSource)
 {
+	
 	if (newBallState == Free) 
 	{
-		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		SetActorScale3D(FVector::OneVector);
+		UpdateDirectionWidgetHeight();
+		ballMeshReference->SetRelativeLocation(FVector::Zero());
+		SetCollisionEnabled(true);
 		
 		ballState = newBallState;
 		if (IsValid(directionWidget))
@@ -326,18 +388,29 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	
 	if (newBallState == Grabbed)
 	{
-		SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		UpdateDirectionWidgetHeight();
+		UpdateDirectionWidgetHeight();
+		ballMeshReference->SetRelativeLocation(FVector::Zero());
+		SetCollisionEnabled(false);
 		
 		if (IsValid(directionWidget))
 		{
-			directionWidget->SetVisibility(true);
+			directionWidget->SetVisibility(false);
+		}
+		
+		if (ABallContainer* ballContainer = Cast<ABallContainer>(influenceSource))
+		{
+			// TODO : edit this speed
+			ballContainer->ReleaseBalls(600.f);
 		}
 		return;
 	}
 	
 	if (newBallState == Attracted)
 	{
-		SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		UpdateDirectionWidgetHeight();
+		ballMeshReference->SetRelativeLocation(FVector::Zero());
+		SetCollisionEnabled(true);
 		
 		if (IsValid(directionWidget))
 		{
@@ -348,7 +421,10 @@ void ABall::SetBallState(const EBallState newBallState, const UObject* newInflue
 	
 	if (newBallState == Stationary)
 	{
-		SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+		SetActorScale3D(FVector::OneVector);
+		UpdateDirectionWidgetHeight();
+		ballMeshReference->SetRelativeLocation(FVector::Zero());
+		SetCollisionEnabled(false);
 		
 		speed = 0;
 		if (const AActor* influenceSourceActor = Cast<AActor>(influenceSource))
