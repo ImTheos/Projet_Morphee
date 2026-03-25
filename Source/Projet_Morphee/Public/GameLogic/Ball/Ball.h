@@ -64,7 +64,7 @@ public:
 	
 	void ReleaseFromStationary(float releaseSpeed);
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
 	float grabAnimDistance;
 	
 	// -------  -------  ------- 
@@ -132,5 +132,33 @@ public:
 public:
 	UFUNCTION(BlueprintCallable)
 	void BallHitByAttack(AActor* attacker);
+
+	// -------  -------  ------- 
+	// ------- ANIMATION -------
+	// -------  -------  ------- 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
+	float grabAnimationCycleDuration = 3.f;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
+	float grabAnimationHeight = 20.f;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties| Grab")
+	float grabAnimationSizeRatio = 0.8;
+	
+private:
+	float grabbedAnimationTimer = 0.f;
+	
+public:
+	// // -------  -------  ------- 
+	// ------- DIRECTION WIDGET -------
+	// -------  -------  ------- 
+	void UpdateDirectionWidgetHeight();
+	
+	double directionWidgetHeight;
+	
+	// -------  -------  ------- 
+	// ------- BALL MESH -------
+	// -------  -------  -------
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Mesh")
+	UStaticMeshComponent* ballMeshReference;
 };

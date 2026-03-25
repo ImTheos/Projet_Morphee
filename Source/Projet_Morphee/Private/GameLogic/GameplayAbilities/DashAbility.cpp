@@ -94,7 +94,7 @@ FVector UDashAbility::CalculateDashEndPostTeleport(FVector actorLocation, FVecto
 								newPosition - differenceThresholdVector,
 								FQuat::Identity, dashTraceProfileName, traceShape);
 
-		if (!traceHitResult.bBlockingHit || traceHitResult.PenetrationDepth > 0.f)
+		if (!traceHitResult.bBlockingHit || traceHitResult.PenetrationDepth > 0.f || DashCollidesWithObstacle(postTeleportLocation, traceHitResult.Location))
 		{
 			return initialPosition;
 		}
