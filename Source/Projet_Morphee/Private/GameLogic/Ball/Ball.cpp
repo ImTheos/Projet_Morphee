@@ -52,6 +52,9 @@ void ABall::BeginPlay()
 	}
 	
 	ballMeshReference = meshComponent;
+	
+	// Initializes Ball behaviour with the right parameters according to BallState rules
+	SetBallState(ballState);
 }
 
 // Called every frame
@@ -370,7 +373,10 @@ void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSou
 	{
 		SetActorScale3D(FVector::OneVector);
 		UpdateDirectionWidgetHeight();
-		ballMeshReference->SetRelativeLocation(FVector::Zero());
+		if (IsValid(ballMeshReference))
+		{
+			ballMeshReference->SetRelativeLocation(FVector::Zero());
+		}
 		SetCollisionEnabled(true);
 		
 		FVector newForwardVector = GetActorForwardVector();
