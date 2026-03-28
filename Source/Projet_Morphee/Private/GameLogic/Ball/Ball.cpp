@@ -109,7 +109,6 @@ void ABall::TickAttract(float DeltaTime)
 	}
 
 	FVector newForwardVector = influenceSourceLocation - GetActorLocation();
-	newForwardVector.Z = 0.f;
 	SetActorRotation(newForwardVector.ToOrientationRotator());
 }
 
@@ -189,6 +188,8 @@ void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherAct
 {
 	OnCollisionBlockBP(hitComponent, otherActor, otherHitComponent, normalImpulse, hit);
 	
+	ReleaseAttraction();
+	
 	if (!IsValid(ballEffectInstance))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ABall::OnCollisionBlock : The ballEffectInstance is invalid"));
@@ -217,6 +218,8 @@ void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AA
                                     int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult)
 {
 	OnCollisionBeginOverlapBP(overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+	
+	ReleaseAttraction();
 	
 	if (!IsValid(ballEffectInstance))
 	{
@@ -370,6 +373,10 @@ void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSou
 		ballMeshReference->SetRelativeLocation(FVector::Zero());
 		SetCollisionEnabled(true);
 		
+		FVector newForwardVector = GetActorForwardVector();
+		newForwardVector.Z = 0.f;
+		SetActorRotation(newForwardVector.ToOrientationRotator());
+		
 		ballState = newBallState;
 		if (IsValid(directionWidget))
 		{
@@ -441,6 +448,14 @@ void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSou
 			directionWidget->SetVisibility(false);
 		}
 		return;
+	}
+}
+
+void ABall::ReleaseAttraction()
+{
+	if (ballState == Attracted)
+	{
+		SetBallState(Free);
 	}
 }
 
