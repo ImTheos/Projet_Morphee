@@ -59,8 +59,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	EBallState GetBallState() const;
 	
-	// TODO : add option to set speed after state change to allow to remove ReleaseFromStationary too
 	void SetBallState(EBallState newBallState, UObject* newInfluenceSource = nullptr);
+	
+	void ReleaseAttraction();
 	
 	void ReleaseFromStationary(float releaseSpeed);
 	
