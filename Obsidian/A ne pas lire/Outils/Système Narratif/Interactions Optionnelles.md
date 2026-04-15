@@ -30,4 +30,4 @@ L'interaction se termine, le joueur a découvert une facette de Thalia intéress
 ```
 
 ---
-[[Interactions Obligatoires]] [[Interactions Multiples]]
+[[Interactions Obligatoires]] [[Interactions Secondaires]]
