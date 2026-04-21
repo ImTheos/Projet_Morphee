@@ -81,6 +81,12 @@ void ABall::Tick(float DeltaTime)
 		return;
 	}
 	
+	if (ballState == Stationary)
+	{
+		TickStationary(DeltaTime);
+		return;
+	}
+	
 	if (ballState == Free)
 	{
 		if (!IsValid(ballEffectInstance))
@@ -164,6 +170,18 @@ void ABall::TickGrab(float DeltaTime)
 		speed = 0;
 	}
 	
+}
+
+void ABall::TickStationary(float DeltaTime)
+{
+	if (const AActor* influenceSourceActor = Cast<AActor>(influenceSource))
+	{
+		SetActorLocation(influenceSourceActor->GetActorLocation());
+	}
+	else if (const USceneComponent* sceneComp = Cast<USceneComponent>(influenceSource))
+	{
+		SetActorLocation(sceneComp->GetComponentLocation());
+	}
 }
 
 EBallState ABall::GetBallState() const
