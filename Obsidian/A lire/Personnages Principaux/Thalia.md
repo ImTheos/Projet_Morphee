@@ -10,7 +10,7 @@ tags:
 
 - **Nom**
 
-> **Thalia**[^6], sans mention du nom de famille.
+> **Thalia**, sans mention du nom de famille.
 
 - **Âge approximatif**
 
@@ -86,46 +86,42 @@ tags:
 
 > 1. Musicienne
 > 2. Compositrice
-> 3. Sketching
 
 - **Faiblesses**
 
-> 1. Regard des autres
-> 2. Culpabilité de ne pas être à la hauteur de ses parents, être dans leur ombre
-> 3. Déni d'elle-même
-> 4. ==Addictions== par compensation, pour le réconfort
+> 3. Regard des autres
+> 4. Culpabilité de ne pas être à la hauteur de ses parents, être dans leur ombre
+> 5. Déni d'elle-même
+> 6. ==Addictions== par compensation, pour le réconfort
 
 - **Croyances, valeurs ou obsessions**
 
-> 1. Valeurs parentales de glorification du travail en contradiction avec ses valeurs personnelles centré sur l'appréciation global de la musique comme un art créatif et libre
-> 2. Agnostique
-> 3. Curiosité
-> 4. ==La musique pour exprimer son identité, comme expression de soi-même==[^1]
+> 7. Valeurs parentales de glorification du travail en contradiction avec ses valeurs personnelles centré sur l'appréciation global de la musique comme un art créatif et libre
+> 8. Agnostique
+> 9. Curiosité
+> 10. ==La musique pour exprimer son identité, comme expression de soi-même==[^1]
 
 - **Loisirs**
 
-> 5. Journal intime
-> 6. La musique
-> 7. Le dessin
-> 8. Les réseaux sociaux
-> 9. Bars à chat 
+> 11. La musique
+> 12. Les réseaux sociaux
+> 13. Bars à chat 
 
 - **Aime / N'Aime Pas**
 
-> 10. Les hermines
-> 11. **==Le piano==**
-> 12. La composition
-> 13. La science de l'acoustique
+> 14. Les hermines
+> 15. **==Le piano==**
+> 16. La composition
+> 17. La science de l'acoustique
 
 ---
 
 > 1. Le contact physique
-> 2. Le faux, le faire paraître[^2]
-> 3. ...
+> 2. Le faux, le faire paraître
 
 - **Phobies**
 
-> 1. Atélophobie
+> 3. Atélophobie
 
 - **Peur principale / Conflit intérieur**  
 

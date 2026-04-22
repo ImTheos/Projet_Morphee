@@ -34,6 +34,7 @@ public:
 private:
 	virtual void TickAttract(float DeltaTime);
 	virtual void TickGrab(float DeltaTime);
+	virtual void TickStationary(float DeltaTime);
 	
 public:
 	// Amount of units the balls travels per second
@@ -53,14 +54,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
 	float minimumSpeed = 600.f;
 	
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	UObject* influenceSource;
 	
 	UFUNCTION(BlueprintCallable)
 	EBallState GetBallState() const;
 	
-	// TODO : add option to set speed after state change to allow to remove ReleaseFromStationary too
 	void SetBallState(EBallState newBallState, UObject* newInfluenceSource = nullptr);
+	
+	void ReleaseAttraction();
 	
 	void ReleaseFromStationary(float releaseSpeed);
 	
