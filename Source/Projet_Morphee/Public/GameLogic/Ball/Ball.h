@@ -12,10 +12,10 @@ class UWidgetComponent;
 UENUM(BlueprintType)
 enum EBallState
 {
-	Free,
-	Attracted,
-	Grabbed,
-	Stationary
+	Free UMETA(DisplayName="Free"),
+	Attracted UMETA(DisplayName="Attracted"),
+	Grabbed UMETA(DisplayName="Grabbed"),
+	Stationary UMETA(DisplayName="Stationary")
 };
 
 UCLASS()
