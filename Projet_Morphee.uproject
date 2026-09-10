@@ -55,5 +55,9 @@
 			"Name": "ActorPalette",
 			"Enabled": true
 		},
+		{
+    			"Name": "Flow",
+    			"Enabled": true
+		}
 	]
 }
