@@ -1,6 +1,7 @@
 #pragma once
 #include "AddOns/FlowNodeAddOn.h"
 #include "Interfaces/FlowPredicateInterface.h"
+#include "Kismet/GameplayStatics.h"
 #include "FlowNodeAddOn_CheckFact.generated.h"
 
 // Forward Declarations
@@ -12,8 +13,12 @@ class UFlowNodeAddOn_CheckFact
 	, public IFlowPredicateInterface
 {
 	GENERATED_BODY()
+	virtual void ExecuteInput(const FName& PinName) override;
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(Categories="DST.Pawn"), Category = "PawnInfo")
+	FGameplayTag FactTag;
+	
 	UFlowNodeAddOn_CheckFact();
 
 	// UFlowNodeBase

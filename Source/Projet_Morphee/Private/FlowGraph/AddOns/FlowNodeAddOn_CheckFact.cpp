@@ -1,6 +1,7 @@
 
 #include "Flowgraph/AddOns/FlowNodeAddOn_CheckFact.h"
 
+#include "Global/GameManager.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(FlowNodeAddOn_CheckFact)
 
@@ -11,12 +12,10 @@ EFlowAddOnAcceptResult UFlowNodeAddOn_CheckFact::AcceptFlowNodeAddOnChild_Implem
 	const UFlowNodeAddOn* AddOnTemplate,
 	const TArray<UFlowNodeAddOn*>& AdditionalAddOnsToAssumeAreChildren) const
 {
-	Super();
 	return EFlowAddOnAcceptResult::TentativeAccept;
 }
 
 bool UFlowNodeAddOn_CheckFact::EvaluatePredicate_Implementation() const
 {
-	Super();
-	return true;
+	return UGameplayStatics::GetGameInstance(this)->GetSubsystem<UGameManager>()->GetGameFactValue(FactTag);
 }
