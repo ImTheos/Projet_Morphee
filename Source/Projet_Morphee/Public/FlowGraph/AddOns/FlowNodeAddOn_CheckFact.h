@@ -2,21 +2,23 @@
 #include "AddOns/FlowNodeAddOn.h"
 #include "Interfaces/FlowPredicateInterface.h"
 #include "Kismet/GameplayStatics.h"
+#include "Engine/GameEngine.h"
+#include "Global/GameManager.h"
 #include "FlowNodeAddOn_CheckFact.generated.h"
 
 // Forward Declarations
 class UFlowNode;
 
-UCLASS(MinimalApi, NotBlueprintable, meta = (DisplayName = "CHECKFACT"))
-class UFlowNodeAddOn_CheckFact
+UCLASS(NotBlueprintable, meta = (DisplayName = "CHECKFACT"))
+class PROJET_MORPHEE_API UFlowNodeAddOn_CheckFact
 	: public UFlowNodeAddOn
 	, public IFlowPredicateInterface
 {
 	GENERATED_BODY()
-	virtual void ExecuteInput(const FName& PinName) override;
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta=(Categories="DST.Pawn"), Category = "PawnInfo")
+	virtual void ExecuteInput(const FName& PinName) override;
+	UPROPERTY(EditAnywhere, meta = (Categories = "Fact"))
 	FGameplayTag FactTag;
 	
 	UFlowNodeAddOn_CheckFact();

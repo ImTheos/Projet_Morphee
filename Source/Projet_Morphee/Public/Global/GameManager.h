@@ -12,28 +12,39 @@
 class UGlobalGameFacts;
 
 UCLASS()
-class UGameManager : public UGameInstance
+class PROJET_MORPHEE_API UGameManager : public UGameInstance
 {
 	GENERATED_BODY()
 public:
+	UFUNCTION(BlueprintCallable)
 	virtual void Init() override;
-	bool GetGameFactValue(const FGameplayTag& gameFactID) const;
-	void SetGameFactValue(bool value);
-	void SaveGlobalData();
-	void LoadGlobalData();
-private:
-	UGlobalGameFacts* gameFacts;
+	UFUNCTION(BlueprintCallable)
+	virtual bool GetGameFactValue(const FGameplayTag& gameFactID);
+	UFUNCTION(BlueprintCallable)
+	virtual void SetGameFactValue(FGameplayTag& gameFactID, bool value);
+	UFUNCTION(BlueprintCallable)
+	virtual void SaveGlobalData();
+	UFUNCTION(BlueprintCallable)
+	virtual void LoadGlobalData();
+	UPROPERTY(BlueprintReadOnly)
+	UGlobalGameFacts* GameFacts;
 };
 
-
-class UGlobalGameFacts
+UCLASS(Blueprintable, BlueprintType)
+class UGlobalGameFacts : public UObject
 {
+	GENERATED_BODY()
+	
 	public:
 	
 	UGlobalGameFacts();
 	
+	UPROPERTY(BlueprintReadOnly)
 	TMap<FString, bool> GameFactsDict;
+	UFUNCTION(BlueprintCallable)
 	void ReconcileGameFactsAndGameplayTags();
+	UFUNCTION(BlueprintCallable)
 	bool GetGameFactValue(FGameplayTag GameFactTag);
+	UFUNCTION(BlueprintCallable)
 	void SetGameFactValue(FGameplayTag GameFactTag, bool value);
 };
