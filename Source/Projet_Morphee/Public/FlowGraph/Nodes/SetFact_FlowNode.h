@@ -1,5 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
+﻿
 #pragma once
 
 #include "CoreMinimal.h"
@@ -8,7 +7,7 @@
 #include "NativeGameplayTags.h"
 #include "GameLogic/UI/DialogUI.h"
 #include "Global/GameManager.h"
-#include "SetFactNode.generated.h"
+#include "SetFact_FlowNode.generated.h"
 
 UE_DECLARE_GAMEPLAY_TAG_EXTERN(DefaultPlayerTag);
 
@@ -16,7 +15,7 @@ UE_DECLARE_GAMEPLAY_TAG_EXTERN(DefaultPlayerTag);
  * 
  */
 UCLASS()
-class USetFactNode : public UFlowNode
+class USetFact_FlowNode : public UFlowNode
 {
 	GENERATED_BODY()
 

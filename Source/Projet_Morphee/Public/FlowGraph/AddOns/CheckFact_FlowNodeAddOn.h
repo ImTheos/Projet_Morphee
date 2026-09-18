@@ -4,13 +4,13 @@
 #include "Kismet/GameplayStatics.h"
 #include "Engine/GameEngine.h"
 #include "Global/GameManager.h"
-#include "FlowNodeAddOn_CheckFact.generated.h"
+#include "CheckFact_FlowNodeAddOn.generated.h"
 
 // Forward Declarations
 class UFlowNode;
 
 UCLASS(NotBlueprintable, meta = (DisplayName = "CHECKFACT"))
-class PROJET_MORPHEE_API UFlowNodeAddOn_CheckFact
+class PROJET_MORPHEE_API UCheckFact_FlowNodeAddOn
 	: public UFlowNodeAddOn
 	, public IFlowPredicateInterface
 {
@@ -18,10 +18,10 @@ class PROJET_MORPHEE_API UFlowNodeAddOn_CheckFact
 
 public:
 	virtual void ExecuteInput(const FName& PinName) override;
-	UPROPERTY(EditAnywhere, meta = (Categories = "Fact"))
+	UPROPERTY(EditAnywhere, meta = (Categories = "Flow.Fact"))
 	FGameplayTag FactTag;
 	
-	UFlowNodeAddOn_CheckFact();
+	UCheckFact_FlowNodeAddOn();
 
 	// UFlowNodeBase
 	virtual EFlowAddOnAcceptResult AcceptFlowNodeAddOnChild_Implementation(const UFlowNodeAddOn* AddOnTemplate, const TArray<UFlowNodeAddOn*>& AdditionalAddOnsToAssumeAreChildren) const override;

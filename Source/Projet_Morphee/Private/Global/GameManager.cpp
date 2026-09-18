@@ -52,7 +52,7 @@ void UGlobalGameFacts::ReconcileGameFactsAndGameplayTags()
 {
 	FGameplayTagContainer Container;
 	UGameplayTagsManager::Get().RequestAllGameplayTags(Container, false);
-	FGameplayTagContainer parent = FGameplayTagContainer(UGameplayTagsManager::Get().RequestGameplayTag(FName(TEXT("Fact")), false));
+	FGameplayTagContainer parent = FGameplayTagContainer(UGameplayTagsManager::Get().RequestGameplayTag(FName(TEXT("Flow.Fact")), false));
 	Container = Container.Filter(parent);
 	TArray<FGameplayTag> TagArray;
 	Container.GetGameplayTagArray(TagArray);

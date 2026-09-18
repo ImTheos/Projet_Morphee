@@ -1,11 +1,11 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "FlowGraph/AddOns/SetFactNode.h"
+#include "FlowGraph/Nodes/SetFact_FlowNode.h"
 
 
 
-void USetFactNode::ExecuteInput(const FName& PinName)
+void USetFact_FlowNode::ExecuteInput(const FName& PinName)
 {
 	UGameManager* gameManager = Cast<UGameManager>(UGameplayStatics::GetGameInstance(this));
 	if (!gameManager)

@@ -1,23 +1,23 @@
 
-#include "Flowgraph/AddOns/FlowNodeAddOn_CheckFact.h"
-#include UE_INLINE_GENERATED_CPP_BY_NAME(FlowNodeAddOn_CheckFact)
+#include "Flowgraph/AddOns/CheckFact_FlowNodeAddOn.h"
+#include UE_INLINE_GENERATED_CPP_BY_NAME(CheckFact_FlowNodeAddOn)
 
-void UFlowNodeAddOn_CheckFact::ExecuteInput(const FName& PinName)
+void UCheckFact_FlowNodeAddOn::ExecuteInput(const FName& PinName)
 {
 	Super::ExecuteInput(PinName);
 }
 
-UFlowNodeAddOn_CheckFact::UFlowNodeAddOn_CheckFact()
+UCheckFact_FlowNodeAddOn::UCheckFact_FlowNodeAddOn()
 	: Super(){}
 
-EFlowAddOnAcceptResult UFlowNodeAddOn_CheckFact::AcceptFlowNodeAddOnChild_Implementation(
+EFlowAddOnAcceptResult UCheckFact_FlowNodeAddOn::AcceptFlowNodeAddOnChild_Implementation(
 	const UFlowNodeAddOn* AddOnTemplate,
 	const TArray<UFlowNodeAddOn*>& AdditionalAddOnsToAssumeAreChildren) const
 {
 	return EFlowAddOnAcceptResult::TentativeAccept;
 }
 
-bool UFlowNodeAddOn_CheckFact::EvaluatePredicate_Implementation() const
+bool UCheckFact_FlowNodeAddOn::EvaluatePredicate_Implementation() const
 {
 	UGameManager* gameManager = Cast<UGameManager>(UGameplayStatics::GetGameInstance(this));
 	if (!gameManager)
