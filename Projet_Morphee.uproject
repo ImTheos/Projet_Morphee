@@ -16,6 +16,11 @@
 				"AIModule",
 				"CoreUObject"
 			]
+		},
+		{
+			"Name": "Projet_Morphee_Editor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [
@@ -56,8 +61,8 @@
 			"Enabled": true
 		},
 		{
-    			"Name": "Flow",
-    			"Enabled": true
+			"Name": "Flow",
+			"Enabled": true
 		}
 	]
 }

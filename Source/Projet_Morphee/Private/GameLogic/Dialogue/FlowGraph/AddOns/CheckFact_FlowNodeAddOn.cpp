@@ -1,5 +1,5 @@
 
-#include "Flowgraph/AddOns/CheckFact_FlowNodeAddOn.h"
+#include "GameLogic/Dialogue/FlowGraph/AddOns/CheckFact_FlowNodeAddOn.h"
 #include UE_INLINE_GENERATED_CPP_BY_NAME(CheckFact_FlowNodeAddOn)
 
 void UCheckFact_FlowNodeAddOn::ExecuteInput(const FName& PinName)

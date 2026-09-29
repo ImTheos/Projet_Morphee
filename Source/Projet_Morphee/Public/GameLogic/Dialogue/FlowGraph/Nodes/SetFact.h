@@ -1,26 +1,17 @@
-﻿
-#pragma once
-
+﻿#pragma once
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
 #include "Nodes/FlowNode.h"
 #include "NativeGameplayTags.h"
 #include "GameLogic/UI/DialogUI.h"
 #include "Global/GameManager.h"
-#include "SetFact_FlowNode.generated.h"
+#include "SetFact.generated.h"
 
-UE_DECLARE_GAMEPLAY_TAG_EXTERN(DefaultPlayerTag);
 
-/**
- * 
- */
 UCLASS()
-class USetFact_FlowNode : public UFlowNode
+class USetFact : public UFlowNode
 {
-	GENERATED_BODY()
-
-protected:	
-	bool TryInitialize();
+	GENERATED_UCLASS_BODY()
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Categories = "Fact"))
