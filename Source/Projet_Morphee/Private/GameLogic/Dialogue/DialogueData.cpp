@@ -1,7 +1,7 @@
 ﻿#include "GameLogic/Dialogue/DialogueData.h"
 
 
-UDialogueLine::UDialogueLine() : isExpressionValid(false), mainCharacterInfo(nullptr){}
+UDialogueLine::UDialogueLine() : mainCharacterInfo(nullptr){}
 
 
 UDialogueLine* UDialogueLine::Create(UObject* Outer, FName TableId, FString& Key, FString& CharacterID, FString& OtherCharacterID)
@@ -10,8 +10,6 @@ UDialogueLine* UDialogueLine::Create(UObject* Outer, FName TableId, FString& Key
 	NewLine->Line = FText::FromStringTable(TableId, Key);
 	NewLine->MainCharacterID = CharacterID;
 	NewLine->OtherCharacterID = OtherCharacterID;
-	NewLine->isExpressionValid = false; 
-	NewLine->isOtherExpressionValid = false; 
 	
 	TArray<FString> expressions = NewLine->GetMainCharacterExpressionOptions();
 	if (!expressions.IsEmpty())
@@ -21,7 +19,7 @@ UDialogueLine* UDialogueLine::Create(UObject* Outer, FName TableId, FString& Key
 	if (!otherExpressions.IsEmpty())
 		NewLine->OtherCharacterExpression = otherExpressions[0];
 	
-	NewLine->UpdateCharacterData();	
+	NewLine->Portrait = NewLine->ResolvePortraitForCurrentExpression(true);
 	return NewLine;
 }
 
@@ -42,11 +40,8 @@ TArray<FString> UDialogueLine::GetMainCharacterExpressionOptions()
 		{
 			options.Add(e.Key);
 		}
-
-		isExpressionValid = true;
 		return options;
 	}
-	isExpressionValid = false;
 	return {"NotValid"};
 }
 
@@ -61,20 +56,15 @@ TArray<FString> UDialogueLine::GetOtherCharacterExpressionOptions()
 		{
 			options.Add(e.Key);
 		}
-
-		isOtherExpressionValid = true;
 		return options;
 	}
-	isOtherExpressionValid = false;
 	return {"NotValid"};
 }
 
 void UDialogueLine::UpdateCharacterData()
 {
-	if (isExpressionValid)
-		Portrait = ResolvePortraitForCurrentExpression(true);
-	if (otherCharacterInfo != nullptr)
-		OtherPortrait = ResolvePortraitForCurrentExpression(false);
+	Portrait = ResolvePortraitForCurrentExpression(true);
+	OtherPortrait = ResolvePortraitForCurrentExpression(false);
 }
 
 TSoftObjectPtr<UTexture2D> UDialogueLine::ResolvePortraitForCurrentExpression(bool isMainCharacter)
@@ -153,21 +143,21 @@ void UDialogueLine::GetAvailableExpressionOptionsFromOther()
 
 TWeakObjectPtr<UDataTable> UDialogHelper::GetCharactersDatatable()
 {
-	if (CharactersInfo == nullptr)
+	if (CharactersData == nullptr)
 	{
 		FSoftObjectPath path(TEXT("DataTable'/Game/Data/Narration/DT_Characters'"));
-		CharactersInfo = Cast<UDataTable>(path.ResolveObject());
-		if (CharactersInfo == nullptr)
+		CharactersData = Cast<UDataTable>(path.ResolveObject());
+		if (CharactersData == nullptr)
 		{
-			CharactersInfo = CastChecked<UDataTable>(path.TryLoad());
+			CharactersData = CastChecked<UDataTable>(path.TryLoad());
 		}  
 	}
-	return CharactersInfo;
+	return CharactersData;
 }
 
 // DIALOG HELPER
 
-TWeakObjectPtr<UDataTable> UDialogHelper::CharactersInfo;
+TWeakObjectPtr<UDataTable> UDialogHelper::CharactersData;
 
 FCharacterInfo* UDialogHelper::TryGetCharacterInfo(const FString& CharacterID)
 {
@@ -177,7 +167,7 @@ FCharacterInfo* UDialogHelper::TryGetCharacterInfo(const FString& CharacterID)
 
 TArray<ECharacterExpression> UDialogHelper::GetAvailableExpressionOptionsFromCharacter(const FString& CharacterID)
 {
-	if (CharactersInfo == nullptr) return TArray<ECharacterExpression>();
+	if (CharactersData == nullptr) return TArray<ECharacterExpression>();
 	
 	TArray<ECharacterExpression> result;
 	auto info = GetCharactersDatatable()->FindRow<FCharacterInfo>(*CharacterID, "");

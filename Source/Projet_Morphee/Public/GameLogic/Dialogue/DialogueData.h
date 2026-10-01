@@ -61,11 +61,14 @@ class PROJET_MORPHEE_API UDialogueLine : public UObject
 	FText Name;
 	UPROPERTY(EditAnywhere, Category="Image",meta = (GetOptions = "GetMainCharacterExpressionOptions"))
 	FString Expression;
-	UPROPERTY(EditAnywhere, Category="Text", meta = (EditCondition = true))
+	UPROPERTY(EditAnywhere, Category="Text")
 	ELineSkipMethod LineSkipMethod = ELineSkipMethod::WAIT_FOR_USER_SKIP;	
-	UPROPERTY(EditAnywhere, Category="Text", meta = (EditCondition = true))
+	UPROPERTY(EditAnywhere, Category="Text")
 	float WaitDuration = 1.0f;
-	
+	UPROPERTY(EditAnywhere, Category="Text")
+	bool bAnimateText = true;
+	UPROPERTY(EditAnywhere, Category="Text")
+	float LetterDelay = 0.05;
 	UPROPERTY(EditAnywhere, Category="Image", meta = (EditCondition = false))
 	TSoftObjectPtr<UTexture2D> Portrait;
 	UPROPERTY(EditAnywhere, Category="Text", meta = (MultiLine = true, EditCondition = false))
@@ -84,11 +87,9 @@ class PROJET_MORPHEE_API UDialogueLine : public UObject
 	TSoftObjectPtr<UTexture2D> ResolvePortraitForCurrentExpression(bool isMainCharacter);
 	
 private:
-	bool isExpressionValid;
 	FCharacterInfo* mainCharacterInfo;
 	TMap<FString,ECharacterExpression> MainExpressionOptions;
 	
-	bool isOtherExpressionValid;
 	FCharacterInfo* otherCharacterInfo;
 	TMap<FString,ECharacterExpression> otherExpressionOptions;
 	
@@ -107,7 +108,7 @@ private:
 
 class PROJET_MORPHEE_API UDialogHelper
 {
-	static TWeakObjectPtr<UDataTable> CharactersInfo;
+	static TWeakObjectPtr<UDataTable> CharactersData;
 	
 	public:
 	static FCharacterInfo* TryGetCharacterInfo(const FString& CharacterID);

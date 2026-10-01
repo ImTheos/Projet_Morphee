@@ -1,8 +1,10 @@
 ﻿#include "GameLogic/Dialogue/FlowGraph/Nodes/PlayDialog.h"
 
 #include "DetailCategoryBuilder.h"
+#include "MyCPPCharacter.h"
 #include "Internationalization/StringTableCore.h"
 #include "Internationalization/StringTableRegistry.h"
+#include "Kismet/GameplayStatics.h"
 
 UPlayDialog::UPlayDialog(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -10,6 +12,18 @@ UPlayDialog::UPlayDialog(const FObjectInitializer& ObjectInitializer)
 #if WITH_EDITOR
 	Category = TEXT("CUSTOM");
 #endif
+}
+
+void UPlayDialog::ExecuteInput(const FName& PinName)
+{
+	Super::ExecuteInput(PinName);
+	PlayerCharacter = Cast<AMyCPPCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+
+	if (PlayerCharacter->DialogManager != nullptr)
+	{
+		PlayerCharacter->DialogManager->StartPlayDialog(LeftCharacter,RightCharacter,Lines);
+		PlayerCharacter->DialogManager->OnEndDialog.AddUniqueDynamic(this, &UPlayDialog::EndDialog);
+	}
 }
 
 void UPlayDialog::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
@@ -28,6 +42,13 @@ void UPlayDialog::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedE
 		OldDialog = Dialog;
 	}
 }
+
+void UPlayDialog::EndDialog()
+{
+	PlayerCharacter->DialogManager->OnEndDialog.RemoveDynamic(this, &UPlayDialog::EndDialog);
+	TriggerFirstOutput(true);
+}
+
 
 TArray<FString> UPlayDialog::GetLevelOptions()
 {
@@ -140,6 +161,7 @@ void UPlayDialog::SetOtherCharacter()
 		for (UDialogueLine* l : Lines)
 		{
 			l->OtherCharacterID = charactersInDialog[0] == l->MainCharacterID ? charactersInDialog[1] : charactersInDialog[0];
+			l->OtherPortrait = l->ResolvePortraitForCurrentExpression(false);
 		}
 	}
 }

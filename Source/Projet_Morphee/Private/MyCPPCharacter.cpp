@@ -11,6 +11,7 @@
 #include "AbilitySystemComponent.h"
 #include "BasicAttributeSet.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameLogic/UI/PlayerUI.h"
 
 class UAbilitySystemComponent;
 class USpringArmComponent;
@@ -38,6 +39,8 @@ AMyCPPCharacter::AMyCPPCharacter()
 
 	
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	DialogManager = CreateDefaultSubobject<UDialogManager>(TEXT("Dialog Manager"));
+	DialogManager->PlayerCharacter = this;
 }
 
 // Called when the game starts or when spawned
@@ -86,5 +89,10 @@ void AMyCPPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AMyCPPCharacter::TryLogUI()
+{
+	UE_LOG(LogTemp, Warning, TEXT("PlayerUI = %s"), *playerUIWidget->GetName());
 }
 

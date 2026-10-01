@@ -3,6 +3,7 @@
 #include "Nodes/FlowNode.h"
 #include "Engine/DataTable.h"
 #include "AssetRegistry/AssetRegistryModule.h"
+#include "GameLogic/Dialogue/DialogManager.h"
 #include "Internationalization/StringTable.h"
 #include "GameLogic/Dialogue/DialogueData.h"
 #include "PlayDialog.generated.h"
@@ -12,6 +13,9 @@ UCLASS(DontCollapseCategories)
 class PROJET_MORPHEE_API UPlayDialog : public UFlowNode
 {
 	GENERATED_UCLASS_BODY()
+	
+	virtual void ExecuteInput(const FName& PinName) override;
+	
 public:
 	
 	UPROPERTY(EditAnywhere, meta = (GetOptions = "GetLevelOptions"))
@@ -29,11 +33,16 @@ public:
 	
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 	
+	UFUNCTION()
+	void EndDialog();
+	
 	
 private:
 	TMap<FString, UStringTable*> TextDatabase;
 	FString OldLevel;
 	FString OldDialog;
+	
+	AMyCPPCharacter* PlayerCharacter;
 	
 	UFUNCTION()	
 	TArray<FString> GetLevelOptions();
