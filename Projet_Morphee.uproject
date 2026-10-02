@@ -54,10 +54,6 @@
 		{
 			"Name": "ActorPalette",
 			"Enabled": true
-		},
-		{
-			"Name": "Landmass",
-			"Enabled": true
 		}
 	]
 }
