@@ -24,7 +24,7 @@ void UOnInteract_Observer::ObserveActor(TWeakObjectPtr<AActor> Actor, TWeakObjec
 			RegisteredActors.Emplace(Actor, Component);
 			
 			ObservedInteractions.Emplace(Actor, FoundInteractions[0]);
-			FoundInteractions[0]->OnInteract.AddDynamic(this, &UOnInteract_Observer::OnEventReceived); //// HERE ------------
+			FoundInteractions[0]->OnInteractDelegate.AddDynamic(this, &UOnInteract_Observer::OnEventReceived); //// HERE ------------
 		}
 	}
 }
@@ -34,7 +34,7 @@ void UOnInteract_Observer::ForgetActor(TWeakObjectPtr<AActor> Actor, TWeakObject
 	ensureAlways(ObservedInteractions.Contains(Component->GetOwner()));
 	const TWeakObjectPtr<UInteractionComponent> InteractionComponent = ObservedInteractions[Component->GetOwner()];
 	
-	InteractionComponent->OnInteract.RemoveAll(this);
+	InteractionComponent->OnInteractDelegate.RemoveAll(this);
 }
 
 void UOnInteract_Observer::Cleanup()
@@ -43,7 +43,7 @@ void UOnInteract_Observer::Cleanup()
 
 	for (const TPair<TWeakObjectPtr<AActor>, TWeakObjectPtr<UInteractionComponent>>& Interaction : ObservedInteractions)
 	{
-		Interaction.Value->OnInteract.RemoveAll(this);
+		Interaction.Value->OnInteractDelegate.RemoveAll(this);
 	}
 	ObservedInteractions.Empty();
 }

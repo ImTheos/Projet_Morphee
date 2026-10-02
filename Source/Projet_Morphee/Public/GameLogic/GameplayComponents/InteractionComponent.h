@@ -16,9 +16,6 @@ class PROJET_MORPHEE_API UInteractionComponent : public UFlowComponent
 	public:
 		UInteractionComponent();
  
-		UPROPERTY(BlueprintAssignable, Category="Interaction")
-		FInteract OnInteract;
- 
-		UFUNCTION(BlueprintCallable, Category="Interaction")
-		void TriggerInteract();
+		UPROPERTY(BlueprintAssignable, BlueprintCallable, Category="Interaction")
+		FInteract OnInteractDelegate;
 };

@@ -20,6 +20,11 @@ class PROJET_MORPHEE_API IInteractable
 public:
 
 protected:
-	UFUNCTION(BlueprintNativeEvent, Category="Interaction")
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Interaction")
 	void OnInteract();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Interaction")
+	void OnBeginOverlap();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Interaction")
+	void OnEndOverlap();
 };

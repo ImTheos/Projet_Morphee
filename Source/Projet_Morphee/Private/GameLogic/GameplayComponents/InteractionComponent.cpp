@@ -11,18 +11,5 @@ UInteractionComponent::UInteractionComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 }
 
-void UInteractionComponent::TriggerInteract()
-{
-	if (AActor* Owner = GetOwner())
-	{
-		if (Owner->Implements<UInteractable>())
-		{
-			IInteractable::Execute_OnInteract(Owner);
-		}
-	}
- 
-	OnInteract.Broadcast();
-}
-
 
 

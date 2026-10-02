@@ -40,7 +40,6 @@ AMyCPPCharacter::AMyCPPCharacter()
 	
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	DialogManager = CreateDefaultSubobject<UDialogManager>(TEXT("Dialog Manager"));
-	DialogManager->PlayerCharacter = this;
 }
 
 // Called when the game starts or when spawned
@@ -53,6 +52,7 @@ void AMyCPPCharacter::BeginPlay()
 	BasicAttributeSet = AbilitySystemComponent->GetSet<UBasicAttributeSet>();
 	}
 
+	DialogManager->PlayerCharacter = this;
 }
 
 // Called every frame
