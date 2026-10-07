@@ -121,7 +121,7 @@ void UDialogUI::SetTextNoDelay(const FText& dialogText, const FText& dialogTitle
 	displaySkipButtonDelegate.Broadcast();
 }
 
-void UDialogUI::setImages(UTexture2D* leftImageTexture, UTexture2D* rightImageTexture)
+void UDialogUI::SetImages(TArray<UTexture2D*> leftTextures, TArray<UTexture2D*> rightTextures)
 {
 	if (!leftImage || !rightImage)
 	{
@@ -129,20 +129,20 @@ void UDialogUI::setImages(UTexture2D* leftImageTexture, UTexture2D* rightImageTe
 		return;
 	}
 
-	if (IsValid(leftImageTexture))
+	if (IsValid(leftTextures[0]))
 	{
 		leftImage->SetVisibility(ESlateVisibility::Visible);
-		leftImage->SetBrushFromTexture(leftImageTexture);
+		leftImage->SetBrushFromTexture(leftTextures[0]);
 	}
 	else
 	{
 		leftImage->SetVisibility(ESlateVisibility::Hidden);
 	}
 
-	if (IsValid(rightImageTexture))
+	if (IsValid(rightTextures[0]))
 	{
 		rightImage->SetVisibility(ESlateVisibility::Visible);
-		rightImage->SetBrushFromTexture(rightImageTexture);
+		rightImage->SetBrushFromTexture(rightTextures[0]);
 	}
 	else
 	{

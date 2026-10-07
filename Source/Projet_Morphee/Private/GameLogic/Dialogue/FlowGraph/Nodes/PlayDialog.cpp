@@ -21,7 +21,7 @@ void UPlayDialog::ExecuteInput(const FName& PinName)
 
 	if (PlayerCharacter->DialogManager != nullptr)
 	{
-		PlayerCharacter->DialogManager->StartPlayDialog(LeftCharacter,RightCharacter,Lines);
+		PlayerCharacter->DialogManager->StartPlayDialog(Lines);
 		PlayerCharacter->DialogManager->OnEndDialog.AddUniqueDynamic(this, &UPlayDialog::EndDialog);
 	}
 }
@@ -92,26 +92,6 @@ TArray<FString> UPlayDialog::GetDialogOptions()
 	return Options;
 }
 
-TArray<FString> UPlayDialog::GetInitialCharacterOptions(bool IsLeft)
-{
-	if (Level.IsEmpty() || Dialog.IsEmpty() || Lines.IsEmpty()|| !TextDatabase.Contains(Level)) return {"Error - Dialog not found"};
-	TArray<FString> Options;
-	
-	Options.Add("None");
-	
-	FString& otherCharacter = IsLeft? RightCharacter : LeftCharacter;
-	
-	for (UDialogueLine* l : Lines)
-	{
-		if (!Options.Contains(l->MainCharacterID) && l->MainCharacterID != otherCharacter)
-		{
-			Options.Add(l->MainCharacterID);		
-		}
-	}
-	
-	return Options;
-}
-
 TArray<FString> UPlayDialog::GetCharacterOptions()
 {
 	if (Level.IsEmpty() || Dialog.IsEmpty() || Lines.IsEmpty() || !TextDatabase.Contains(Level)) return {"Error - Dialog not found"};
@@ -119,13 +99,11 @@ TArray<FString> UPlayDialog::GetCharacterOptions()
 	
 	for (UDialogueLine* l : Lines)
 	{
-		if (!Options.Contains(l->MainCharacterID))
-			Options.Add(l->MainCharacterID);		
+		if (!Options.Contains(l->Main->ID))
+			Options.Add(l->Main->ID);		
 	}
 	return Options;
 }
-
-
 void UPlayDialog::TryGetLines()
 {
 	if (Level.IsEmpty() || !TextDatabase.Contains(Level))
@@ -146,22 +124,22 @@ void UPlayDialog::TryGetLines()
 		if (Parsed[0] == Dialog && !characterID.IsEmpty())
 		{
 			FString otherCharacter = "None"; 
-			Lines.Add(UDialogueLine::Create(this, TextDatabase[Level]->GetStringTableId(), KeyString, characterID, otherCharacter));
+			Lines.Add(UDialogueLine::Create(this, TextDatabase[Level]->GetStringTableId(), KeyString, characterID));
 		}
 		return true;
 	});
-	SetOtherCharacter();
+	SetOtherCharacters();
 }
 
-void UPlayDialog::SetOtherCharacter()
+void UPlayDialog::SetOtherCharacters()
 {
 	TArray<FString> charactersInDialog = GetCharacterOptions();
-	if (charactersInDialog.Num() == 2)
+	for (FString& id : charactersInDialog)
 	{
 		for (UDialogueLine* l : Lines)
 		{
-			l->OtherCharacterID = charactersInDialog[0] == l->MainCharacterID ? charactersInDialog[1] : charactersInDialog[0];
-			l->OtherPortrait = l->ResolvePortraitForCurrentExpression(false);
+			if (id == l->Main->ID) continue;
+			l->Others.Add(UCharacterDialogInfo::Create(this, id));
 		}
 	}
 }

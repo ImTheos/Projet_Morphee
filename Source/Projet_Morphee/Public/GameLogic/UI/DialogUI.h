@@ -58,7 +58,7 @@ public:
 	// displays dialogText letter after letter inside the dialog text field
 	void SetTextNoDelay(const FText& dialogText, const FText& dialogTitle);
 	
-	void setImages(UTexture2D* leftImageTexture, UTexture2D* rightImageTexture);
+	void SetImages(TArray<UTexture2D*> leftTextures, TArray<UTexture2D*> rightTextures);
 	
 	UButton* GetSkipButton() const;
 

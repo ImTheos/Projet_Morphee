@@ -19,8 +19,6 @@ enum ECharacterExpression : uint8
 	COUNT UMETA(Hidden)
 };
 
-//static std::unordered_map<FString,ECharacterExpression> const ExpressionFromStrings = { {"NEUTRAL",ECharacterExpression::NEUTRAL},{"FEAR",ECharacterExpression::FEAR},{"EXASPERATE",ECharacterExpression::EXASPERATE},{"FROWNING",ECharacterExpression::FROWNING},{"INTERROGATION",ECharacterExpression::INTERROGATION},{"MOCKING",ECharacterExpression::MOCKING},{"HURT",ECharacterExpression::HURT},{"SAD",ECharacterExpression::SAD} ,{"SMILE",ECharacterExpression::SMILE} ,{"SURPRISED",ECharacterExpression::SURPRISED} };
-
 ENUM_RANGE_BY_COUNT(ECharacterExpression, ECharacterExpression::COUNT)
 
 USTRUCT(BlueprintType)
@@ -45,6 +43,51 @@ enum class ELineSkipMethod : uint8
 	AUTO_SKIP = 1,
 };
 
+UENUM(BlueprintType)
+enum class EPosition : uint8
+{
+	NONE = 0,
+	LEFT = 1,
+	RIGHT = 2,
+};
+
+UCLASS(EditInlineNew, DefaultToInstanced, DontCollapseCategories)
+class PROJET_MORPHEE_API UCharacterDialogInfo : public UObject
+{
+	GENERATED_BODY()
+public:
+	static UCharacterDialogInfo* Create(UObject* outer, const FString& id);
+	
+	UPROPERTY(EditAnywhere, Category="Character Info",meta = (EditCondition = false))
+	FString ID;
+	
+	UPROPERTY(EditAnywhere, Category="Character Info", meta = (EditCondition = false))
+	FText Name;
+	
+	UPROPERTY(EditAnywhere, Category="Character Info",meta = (GetOptions = "GetExpressionOptions"))
+	FString Expression;
+	
+	UPROPERTY(EditAnywhere, Category="Character Info", meta = (EditCondition = false))
+	TSoftObjectPtr<UTexture2D> Portrait;
+	
+	UPROPERTY(EditAnywhere, Category="Character Info")
+	EPosition Position = EPosition::LEFT;
+
+	FLinearColor DebugColor;	
+	
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
+	TSoftObjectPtr<UTexture2D> ResolvePortraitForCurrentExpression();
+	
+private:
+	FCharacterInfo* CharacterInfo;
+	TMap<FString,ECharacterExpression> MainExpressionOptions;
+	UFUNCTION()
+	TArray<FString> GetExpressionOptions();	
+	void UpdateCharacterData();
+	bool TryUpdateCharacterInfo();
+	void GetAvailableExpressionOptions();
+};
+
 
 UCLASS(EditInlineNew, DefaultToInstanced, DontCollapseCategories)
 class PROJET_MORPHEE_API UDialogueLine : public UObject
@@ -53,62 +96,29 @@ class PROJET_MORPHEE_API UDialogueLine : public UObject
 	UDialogueLine();
 	
 	public:
-	static UDialogueLine* Create(UObject* Outer, FName TableId, FString& Key, FString& CharacterID, FString& OtherCharacterID);
+	static UDialogueLine* Create(UObject* Outer, FName TableId, FString& Key, FString& CharacterID);
 	
-	UPROPERTY(EditAnywhere, Category="Character Info",meta = (EditCondition = false))
-	FString MainCharacterID;
-	UPROPERTY(EditAnywhere, Category="Character Info", meta = (EditCondition = false))
-	FText Name;
-	UPROPERTY(EditAnywhere, Category="Image",meta = (GetOptions = "GetMainCharacterExpressionOptions"))
-	FString Expression;
-	UPROPERTY(EditAnywhere, Category="Text")
+	UPROPERTY(EditAnywhere)
+	UCharacterDialogInfo* Main;
+	
+	UPROPERTY(EditAnywhere)
+	TArray<UCharacterDialogInfo*> Others;
+	
+	UPROPERTY(EditAnywhere, Category="Line Info")
 	ELineSkipMethod LineSkipMethod = ELineSkipMethod::WAIT_FOR_USER_SKIP;	
-	UPROPERTY(EditAnywhere, Category="Text")
+	UPROPERTY(EditAnywhere, Category="Line Info")
 	float WaitDuration = 1.0f;
-	UPROPERTY(EditAnywhere, Category="Text")
+	UPROPERTY(EditAnywhere, Category="Line Info")
 	bool bAnimateText = true;
-	UPROPERTY(EditAnywhere, Category="Text")
+	UPROPERTY(EditAnywhere, Category="Line Info")
 	float LetterDelay = 0.05;
-	UPROPERTY(EditAnywhere, Category="Image", meta = (EditCondition = false))
-	TSoftObjectPtr<UTexture2D> Portrait;
-	UPROPERTY(EditAnywhere, Category="Text", meta = (MultiLine = true, EditCondition = false))
+	UPROPERTY(EditAnywhere, Category="Line Info", meta = (MultiLine = true, EditCondition = false))
 	FText Line;
-	FLinearColor DebugColor;
-	
-	
-	UPROPERTY(EditAnywhere, Category="Other",meta = (EditCondition = false))
-	FString OtherCharacterID;
-	UPROPERTY(EditAnywhere, Category="Other",meta = (GetOptions = "GetOtherCharacterExpressionOptions"))
-	FString OtherCharacterExpression;
-	UPROPERTY(EditAnywhere, Category="Other", meta = (EditCondition = false))
-	TSoftObjectPtr<UTexture2D> OtherPortrait;
-
-	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
-	TSoftObjectPtr<UTexture2D> ResolvePortraitForCurrentExpression(bool isMainCharacter);
-	
-private:
-	FCharacterInfo* mainCharacterInfo;
-	TMap<FString,ECharacterExpression> MainExpressionOptions;
-	
-	FCharacterInfo* otherCharacterInfo;
-	TMap<FString,ECharacterExpression> otherExpressionOptions;
-	
-	
-	UFUNCTION()
-	TArray<FString> GetMainCharacterExpressionOptions();	
-	UFUNCTION()
-	TArray<FString> GetOtherCharacterExpressionOptions();	
-	
-	void UpdateCharacterData();
-	bool TryUpdateCharacterInfo();
-	void GetAvailableExpressionOptionsFromMain();
-	void GetAvailableExpressionOptionsFromOther();
-	
 };
 
 class PROJET_MORPHEE_API UDialogHelper
 {
-	static TWeakObjectPtr<UDataTable> CharactersData;
+	static TWeakObjectPtr<UDataTable> CharactersDatabase;
 	
 	public:
 	static FCharacterInfo* TryGetCharacterInfo(const FString& CharacterID);
