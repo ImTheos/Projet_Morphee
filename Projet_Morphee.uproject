@@ -16,6 +16,11 @@
 				"AIModule",
 				"CoreUObject"
 			]
+		},
+		{
+			"Name": "Projet_Morphee_Editor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [
@@ -55,5 +60,9 @@
 			"Name": "ActorPalette",
 			"Enabled": true
 		},
+		{
+			"Name": "Flow",
+			"Enabled": true
+		}
 	]
 }

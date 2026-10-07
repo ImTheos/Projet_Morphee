@@ -1,0 +1,11 @@
+Key,Sourcestring,Comment
+DIALOGUE1_THALIA_1,"Bonjour, moi c'est Thalia.",test
+DIALOGUE1_MORPHEE_1,"Hello, moi c'est Morphée.",
+DIALOGUE1_THALIA_2,Comment ça va ?,
+DIALOGUE1_MORPHEE_2,"Ca va super écoute, là je vais parler énormément pour pouvoir tester l'adaptabilité de l'UI mais ne fais pas attention à ça. Et toi comment ça va ? Tout va bien ?",
+DIALOGUE1_THALIA_3,"Ecoute, super la vie est belle. Aller on peut s'arrêter là pour ce premier dialogue.",
+DIALOGUE2_THALIA_1,Morphée ! Ca fait longtemps.,
+DIALOGUE2_MORPHEE_1,Ah oui ça fait presque 30 min de gameplay depuis notre dernier dialogue. ,
+DIALOGUE2_THALIA_2,Je suis morte 8 fois entre nos deux intéractions mais je garde la pêche.,
+DIALOGUE2_MORPHEE_2,Tranquille juste dors.,
+DIALOGUE2_THALIA_3,Zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz...,
