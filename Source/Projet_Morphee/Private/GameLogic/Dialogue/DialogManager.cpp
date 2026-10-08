@@ -53,15 +53,13 @@ bool UDialogManager::TrySetUIOnlyInputMode(bool isUIOnly)
 	return false;
 }
 
-void UDialogManager::StartPlayDialog(FString leftCharacter, FString rightCharacter, TArray<UDialogueLine*> dialog)
+void UDialogManager::StartPlayDialog(TArray<UDialogueLine*> dialog)
 {
 	if (!TrySetUIOnlyInputMode(true)) return;
 	
 	dialogUI->SetVisibility(ESlateVisibility::Visible);
 	
 	CurrentLineIndex = 0;	
-	CurrentLeftCharacterID = leftCharacter;
-	CurrentRightCharacterID = rightCharacter;	
 	CurrentDialogLines = dialog;
 	
 	PlayLine(CurrentDialogLines[CurrentLineIndex]);
@@ -91,32 +89,41 @@ void UDialogManager::PlayLine(UDialogueLine* line)
 	dialogUI->displaySkipButtonDelegate.AddUniqueDynamic(this, &UDialogManager::ActivateSkipButton);
 
 	if (line->bAnimateText)
-		dialogUI->SetText(line->Line, line->Name, line->LetterDelay);
+		dialogUI->SetText(line->Line, line->Main->Name, line->LetterDelay);
 	else
-		dialogUI->SetTextNoDelay(line->Line, line->Name);
+		dialogUI->SetTextNoDelay(line->Line, line->Main->Name);
 	
 	// change characters icons
-	UTexture2D* leftPortrait = nullptr;
-	UTexture2D* rightPortrait = nullptr;
+	TArray<UTexture2D*> leftPortraits;
+	TArray<UTexture2D*> rightPortraits;
 	
-	if (CurrentLeftCharacterID != "None")
+	for (auto& o : line->Others)
 	{
-		const TSoftObjectPtr<UTexture2D>& src =
-			CurrentLeftCharacterID == line->MainCharacterID ? line->Portrait : line->OtherPortrait;
-		leftPortrait = src.LoadSynchronous();
+		switch (o->Position)
+		{
+			case EPosition::NONE:
+			break;
+			case EPosition::LEFT:
+			leftPortraits.Add(o->Portrait.LoadSynchronous());
+			break;
+			case EPosition::RIGHT:
+			rightPortraits.Add(o->Portrait.LoadSynchronous());
+			break;
+		}
 	}
-	if (CurrentRightCharacterID != "None")
+	switch (line->Main->Position)
 	{
-		const TSoftObjectPtr<UTexture2D>& src =
-			CurrentRightCharacterID == line->MainCharacterID ? line->Portrait : line->OtherPortrait;
-		rightPortrait = src.LoadSynchronous();
+		case EPosition::NONE:
+			break;
+		case EPosition::LEFT:
+			leftPortraits.Add(line->Main->Portrait.LoadSynchronous());
+			break;
+		case EPosition::RIGHT:
+			rightPortraits.Add(line->Main->Portrait.LoadSynchronous());
+			break;
 	}
-	// if (CurrentLeftCharacterID != "None")
-	// 	leftPortrait = CurrentLeftCharacterID == line->MainCharacterID ? line->Portrait.LoadSynchronous() : line->OtherPortrait.LoadSynchronous();
-	// if (CurrentRightCharacterID != "None")
-	// 	rightPortrait = CurrentRightCharacterID == line->MainCharacterID ? line->Portrait.LoadSynchronous() : line->OtherPortrait.LoadSynchronous();
-	//
-	dialogUI->setImages(leftPortrait, rightPortrait);
+	
+	dialogUI->SetImages(leftPortraits, rightPortraits);
 }
 
 

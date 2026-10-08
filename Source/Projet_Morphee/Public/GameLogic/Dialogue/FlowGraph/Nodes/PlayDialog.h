@@ -23,11 +23,6 @@ public:
 	UPROPERTY(EditAnywhere, meta = (GetOptions = "GetDialogOptions"))
 	FString Dialog;
 	
-	UPROPERTY(EditAnywhere, Category="AdditionalInfo", meta = (GetOptions = "GetLeftCharacterOptions"))
-	FString LeftCharacter = "None";
-	UPROPERTY(EditAnywhere, Category="AdditionalInfo", meta = (GetOptions = "GetRightCharacterOptions"))
-	FString RightCharacter = "None";
-	
 	UPROPERTY(EditAnywhere, EditFixedSize, meta = (ShowOnlyInnerProperties, EditFixedSize, EditFixedOrder))
 	TArray<UDialogueLine*> Lines;
 	
@@ -36,12 +31,13 @@ public:
 	UFUNCTION()
 	void EndDialog();
 	
-	
 private:
+	UPROPERTY()
 	TMap<FString, UStringTable*> TextDatabase;
 	FString OldLevel;
 	FString OldDialog;
 	
+	UPROPERTY()
 	AMyCPPCharacter* PlayerCharacter;
 	
 	UFUNCTION()	
@@ -50,15 +46,10 @@ private:
 	TArray<FString> GetDialogOptions();
 	UFUNCTION()
 	TArray<FString> GetCharacterOptions();
-	UFUNCTION()
-	TArray<FString> GetInitialCharacterOptions(bool IsLeft);
-	UFUNCTION()
-	TArray<FString> GetLeftCharacterOptions(){ return GetInitialCharacterOptions(true); }
-	UFUNCTION()
-	TArray<FString> GetRightCharacterOptions(){ return GetInitialCharacterOptions(false); }
+	
 	UFUNCTION()
 	void TryGetLines();
-	void SetOtherCharacter();
+	void SetOtherCharacters();
 };
 
 
