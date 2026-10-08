@@ -31,6 +31,9 @@ public:
 	UFUNCTION()
 	void EndDialog();
 	
+	virtual EDataValidationResult ValidateNode() override;
+	virtual void Finish() override;
+	 
 private:
 	UPROPERTY()
 	TMap<FString, UStringTable*> TextDatabase;
@@ -46,6 +49,9 @@ private:
 	TArray<FString> GetDialogOptions();
 	UFUNCTION()
 	TArray<FString> GetCharacterOptions();
+	
+	UFUNCTION()
+	static int FindLine(const TArray<UDialogueLine*>& allLines, const FString& characterID, FText line);
 	
 	UFUNCTION()
 	void TryGetLines();
