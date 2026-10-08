@@ -301,14 +301,14 @@ TSharedRef<SBorder> FDialogueDetailsCustomization::CharacterInfoUI(TSharedRef<IP
 	if (PositionHandle.IsValid())
 		PositionHandle->SetOnPropertyValueChanged(OnValueChanged);
 	
-	return SNew(SBorder).VAlign(VAlign_Center).HAlign(HAlign_Fill).BorderBackgroundColor(backgroundColor).BorderImage(FAppStyle::Get().GetBrush("WhiteBrush")).Content()
+	return SNew(SBorder).VAlign(VAlign_Fill).HAlign(HAlign_Fill).BorderBackgroundColor(backgroundColor).BorderImage(FAppStyle::Get().GetBrush("WhiteBrush")).Content()
 	[
 		SNew(SHorizontalBox)
-     	+ SHorizontalBox::Slot().HAlign(HAlign_Center).VAlign(VAlign_Center)
+     	+ SHorizontalBox::Slot().HAlign(HAlign_Right).VAlign(VAlign_Center)
      	[
      		Portrait
      	]
-     	+ SHorizontalBox::Slot().FillWidth(1).HAlign(HAlign_Center)
+     	+ SHorizontalBox::Slot().FillWidth(1).HAlign(HAlign_Left).VAlign(VAlign_Center)
      	[
      		SNew(SVerticalBox)
 			 + SVerticalBox::Slot().HAlign(HAlign_Center).VAlign(VAlign_Bottom)

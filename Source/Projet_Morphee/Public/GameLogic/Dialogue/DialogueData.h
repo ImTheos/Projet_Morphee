@@ -47,8 +47,10 @@ UENUM(BlueprintType)
 enum class EPosition : uint8
 {
 	NONE = 0,
-	LEFT = 1,
-	RIGHT = 2,
+	FAR_LEFT = 1,
+	LEFT = 2,
+	RIGHT = 3,
+	FAR_RIGHT = 4,
 };
 
 UCLASS(EditInlineNew, DefaultToInstanced, DontCollapseCategories)
