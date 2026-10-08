@@ -4,15 +4,19 @@
 #include "IDetailCustomization.h"
 #include "UObject/Object.h"
 
+class IPropertyHandle;
+class SBorder;
+struct FSlateBrush;
+class SScrollBox;
 class UCharacterDialogInfo;
 class FDetailArrayBuilder;
 
-class PROJET_MORPHEE_EDITOR_API FDialogueDetailsCustomization : public IDetailCustomization
+class PROJET_MORPHEE_EDITOR_API FDialogDetailsCustomization : public IDetailCustomization
 {
 public:
 	static TSharedRef<IDetailCustomization> MakeInstance()
 	{
-		return MakeShareable(new FDialogueDetailsCustomization);
+		return MakeShareable(new FDialogDetailsCustomization);
 	}
 
 	virtual void CustomizeDetails(IDetailLayoutBuilder& DetailBuilder) override;

@@ -2,6 +2,7 @@
 #include "GameLogic/GameplayComponents/InteractionComponent.h"
 
 #include "FlowComponent.h"
+#include "GameFramework/Actor.h"
 
 
 UOnInteract_Observer::UOnInteract_Observer(const FObjectInitializer& ObjectInitializer)
@@ -14,6 +15,7 @@ UOnInteract_Observer::UOnInteract_Observer(const FObjectInitializer& ObjectIniti
 
 void UOnInteract_Observer::ObserveActor(TWeakObjectPtr<AActor> Actor, TWeakObjectPtr<UFlowComponent> Component)
 {
+	if (!Actor.IsValid()) return;
 	if (!ObservedInteractions.Contains(Actor))
 	{
 		TArray<UInteractionComponent*> FoundInteractions;
@@ -31,19 +33,25 @@ void UOnInteract_Observer::ObserveActor(TWeakObjectPtr<AActor> Actor, TWeakObjec
 
 void UOnInteract_Observer::ForgetActor(TWeakObjectPtr<AActor> Actor, TWeakObjectPtr<UFlowComponent> Component)
 {
-	ensureAlways(ObservedInteractions.Contains(Component->GetOwner()));
-	const TWeakObjectPtr<UInteractionComponent> InteractionComponent = ObservedInteractions[Component->GetOwner()];
-	
-	InteractionComponent->OnInteractDelegate.RemoveAll(this);
+	if (const TWeakObjectPtr<UInteractionComponent>* Found = ObservedInteractions.Find(Actor))
+	{
+		if (UInteractionComponent* InteractionComponent = Found->Get())
+		{
+			InteractionComponent->OnInteractDelegate.RemoveAll(this);
+		}
+		ObservedInteractions.Remove(Actor);
+	}
 }
 
 void UOnInteract_Observer::Cleanup()
 {
-	Super::Cleanup();
-
 	for (const TPair<TWeakObjectPtr<AActor>, TWeakObjectPtr<UInteractionComponent>>& Interaction : ObservedInteractions)
 	{
-		Interaction.Value->OnInteractDelegate.RemoveAll(this);
+		if (UInteractionComponent* InteractionComponent = Interaction.Value.Get())
+		{
+			InteractionComponent->OnInteractDelegate.RemoveAll(this);
+		}
 	}
 	ObservedInteractions.Empty();
+	Super::Cleanup();
 }

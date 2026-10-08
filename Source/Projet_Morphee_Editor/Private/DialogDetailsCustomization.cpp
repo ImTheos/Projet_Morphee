@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "DialogueDetailsCustomization.h"
+#include "DialogDetailsCustomization.h"
 #include "DetailLayoutBuilder.h"
 #include "DetailCategoryBuilder.h"
 #include "DetailWidgetRow.h"
@@ -8,9 +8,16 @@
 #include "IDetailGroup.h"
 #include "IPropertyUtilities.h"
 #include "PropertyCustomizationHelpers.h"
+#include "Engine/Texture2D.h"
+#include "Framework/Layout/Overscroll.h"
 #include "GameLogic/Dialogue/FlowGraph/Nodes/PlayDialog.h"
+#include "Widgets/Images/SImage.h"
+#include "Widgets/Layout/SBox.h"
+#include "Widgets/Layout/SScrollBox.h"
+#include "Widgets/Layout/SSeparator.h"
+#include "Widgets/Text/STextBlock.h"
 
-void FDialogueDetailsCustomization::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
+void FDialogDetailsCustomization::CustomizeDetails(IDetailLayoutBuilder& DetailBuilder)
 {
 	PortraitBrushes.Empty(); 
 
@@ -25,22 +32,8 @@ void FDialogueDetailsCustomization::CustomizeDetails(IDetailLayoutBuilder& Detai
 	
 	FSimpleDelegate OnValueChanged = FSimpleDelegate::CreateLambda([PropUtils]()
 	{
-		if (!PropUtils.IsValid()) return;
-
-		TWeakPtr<IPropertyUtilities> WeakUtils = PropUtils;
-
-		TSharedRef<SWidget> DummyAnchor = SNullWidget::NullWidget;
-		FSlateApplication::Get().GetRenderer();
-
-		FTSTicker::GetCoreTicker().AddTicker(FTickerDelegate::CreateLambda(
-			[WeakUtils](float DeltaTime) -> bool
-		{
-			if (WeakUtils.IsValid())
-			{
-				WeakUtils.Pin()->ForceRefresh();
-			}
-			return false; 
-		}));
+		if (PropUtils.IsValid())
+			PropUtils->ForceRefresh();
 	});
 	
 	Category.AddProperty(LevelProp);
@@ -51,7 +44,7 @@ void FDialogueDetailsCustomization::CustomizeDetails(IDetailLayoutBuilder& Detai
 
 
 
-TSharedRef<FDetailArrayBuilder> FDialogueDetailsCustomization::LinesUI(IDetailLayoutBuilder& DetailBuilder, FSimpleDelegate& OnValueChanged)
+TSharedRef<FDetailArrayBuilder> FDialogDetailsCustomization::LinesUI(IDetailLayoutBuilder& DetailBuilder, FSimpleDelegate& OnValueChanged)
 {
 	TSharedRef<IPropertyHandle> LinesProp = DetailBuilder.GetProperty(GET_MEMBER_NAME_CHECKED(UPlayDialog, Lines));
 
@@ -82,7 +75,7 @@ TSharedRef<FDetailArrayBuilder> FDialogueDetailsCustomization::LinesUI(IDetailLa
 		TSharedRef<SWidget> SkipMethodWidget = SkipMethodHandle.IsValid()? SkipMethodHandle->CreatePropertyValueWidget(): SNew(STextBlock).Text(FText::FromString("Invalid Expression"));
 		TSharedPtr<IPropertyHandle> SkipWaitDurationHandle = ElementProp->GetChildHandle(GET_MEMBER_NAME_CHECKED(UDialogueLine, WaitDuration));
 		TSharedRef<SWidget> SkipWaitDurationWidget = SkipWaitDurationHandle.IsValid() ? SkipWaitDurationHandle->CreatePropertyValueWidget(): SNew(STextBlock).Text(FText::FromString("Invalid Expression"));
-		SkipWaitDurationWidget = Line->LineSkipMethod == ELineSkipMethod::AUTO_SKIP? SkipWaitDurationWidget: SNew(SBox);
+	SkipWaitDurationWidget = Line->LineSkipMethod == ELineSkipMethod::AUTO_SKIP? SkipWaitDurationWidget: SNew(SBox);
 		TSharedPtr<IPropertyHandle> AnimateHandle = ElementProp->GetChildHandle(GET_MEMBER_NAME_CHECKED(UDialogueLine, bAnimateText));
 		TSharedRef<SWidget> AnimateWidget = AnimateHandle.IsValid()? AnimateHandle->CreatePropertyValueWidget(): SNew(STextBlock).Text(FText::FromString("Invalid Expression"));
 		TSharedPtr<IPropertyHandle> DelayHandle = ElementProp->GetChildHandle(GET_MEMBER_NAME_CHECKED(UDialogueLine, LetterDelay));
@@ -241,7 +234,7 @@ TSharedRef<FDetailArrayBuilder> FDialogueDetailsCustomization::LinesUI(IDetailLa
 
 
 
-TSharedRef<SScrollBox> FDialogueDetailsCustomization::OthersListUI(const FText name, const TSharedPtr<IPropertyHandle> OthersHandle,const FSimpleDelegate& OnValueChanged)
+TSharedRef<SScrollBox> FDialogDetailsCustomization::OthersListUI(const FText name, const TSharedPtr<IPropertyHandle> OthersHandle,const FSimpleDelegate& OnValueChanged)
 {
 	TSharedRef<SScrollBox> OthersBox = SNew(SScrollBox).Orientation(Orient_Horizontal);
 
@@ -270,7 +263,7 @@ TSharedRef<SScrollBox> FDialogueDetailsCustomization::OthersListUI(const FText n
 }
 
 
-TSharedRef<SBorder> FDialogueDetailsCustomization::CharacterInfoUI(TSharedRef<IPropertyHandle> Handle,const FSimpleDelegate& OnValueChanged,float PortraitSize = 1.0f, FLinearColor backgroundColor = FLinearColor::Black)
+TSharedRef<SBorder> FDialogDetailsCustomization::CharacterInfoUI(TSharedRef<IPropertyHandle> Handle,const FSimpleDelegate& OnValueChanged,float PortraitSize = 1.0f, FLinearColor backgroundColor = FLinearColor::Black)
 {
 	UObject* Obj = nullptr;
 	Handle->GetValue(Obj);

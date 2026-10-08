@@ -1,5 +1,6 @@
 ﻿#include "GameLogic/Dialogue/DialogManager.h"
 #include "MyCPPCharacter.h"
+#include "TimerManager.h"
 #include "GameLogic/UI/PlayerUI.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -94,8 +95,10 @@ void UDialogManager::PlayLine(UDialogueLine* line)
 		dialogUI->SetTextNoDelay(line->Line, line->Main->Name);
 	
 	// change characters icons
-	TArray<UTexture2D*> leftPortraits;
-	TArray<UTexture2D*> rightPortraits;
+	UTexture2D* farLeftPortrait = nullptr;
+	UTexture2D* leftPortrait = nullptr;
+	UTexture2D* rightPortrait = nullptr;
+	UTexture2D* farRightPortrait = nullptr;
 	
 	for (auto& o : line->Others)
 	{
@@ -103,11 +106,17 @@ void UDialogManager::PlayLine(UDialogueLine* line)
 		{
 			case EPosition::NONE:
 			break;
+			case EPosition::FAR_LEFT:
+			farLeftPortrait = o->Portrait.LoadSynchronous();
+			break;
 			case EPosition::LEFT:
-			leftPortraits.Add(o->Portrait.LoadSynchronous());
+			leftPortrait = o->Portrait.LoadSynchronous();
 			break;
 			case EPosition::RIGHT:
-			rightPortraits.Add(o->Portrait.LoadSynchronous());
+			rightPortrait = o->Portrait.LoadSynchronous();
+			break;
+			case EPosition::FAR_RIGHT:
+			farRightPortrait = o->Portrait.LoadSynchronous();
 			break;
 		}
 	}
@@ -115,15 +124,21 @@ void UDialogManager::PlayLine(UDialogueLine* line)
 	{
 		case EPosition::NONE:
 			break;
+		case EPosition::FAR_LEFT:
+			farLeftPortrait = line->Main->Portrait.LoadSynchronous();
+			break;
 		case EPosition::LEFT:
-			leftPortraits.Add(line->Main->Portrait.LoadSynchronous());
+			leftPortrait = line->Main->Portrait.LoadSynchronous();
 			break;
 		case EPosition::RIGHT:
-			rightPortraits.Add(line->Main->Portrait.LoadSynchronous());
+			rightPortrait = line->Main->Portrait.LoadSynchronous();
+			break;
+		case EPosition::FAR_RIGHT:
+			farRightPortrait = line->Main->Portrait.LoadSynchronous();
 			break;
 	}
 	
-	dialogUI->SetImages(leftPortraits, rightPortraits);
+	dialogUI->SetImages(farLeftPortrait, leftPortrait, rightPortrait, farRightPortrait);
 }
 
 
