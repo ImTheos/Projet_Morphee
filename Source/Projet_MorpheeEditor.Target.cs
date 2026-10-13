@@ -11,5 +11,11 @@ public class Projet_MorpheeEditorTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 
 		ExtraModuleNames.AddRange( new string[] { "Projet_Morphee" } );
+		RegisterModulesCreatedByRider();
+	}
+
+	private void RegisterModulesCreatedByRider()
+	{
+		ExtraModuleNames.AddRange(new string[] { "Projet_Morphee_Editor" });
 	}
 }

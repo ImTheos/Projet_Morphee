@@ -48,19 +48,7 @@ void UBallOwnerComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 		return;
 	}
 	
-	// get the ball back
-	ownedBall->SetActorLocation(ownerActorLocation);
-	ownedBall->speed = ownedBall->minimumSpeed;
-
-	auto* magnetComponent = ballOwnerActor->GetComponentByClass<UMagnetComponent>();
-
-	if (!IsValid(magnetComponent))
-	{
-		UE_LOG(LogTemp, Error, TEXT("ABallOwnerComponent : Invalid MagnetComponent for actor"))
-		return;
-	}
-
-	magnetComponent->GrabAttractedObject();
+	RetrieveBall();
 }
 
 void UBallOwnerComponent::AssignBall(ABall* ball)
@@ -116,5 +104,37 @@ bool UBallOwnerComponent::IsBallTooFar(const FVector& ownerActorLocation) const
 
 	// Use of square to reduce compute time
 	return FVector::DistSquared(ownedBall->GetActorLocation(), ownerActorLocation) > FMath::Square(currentMaxBallDistance);
+}
+
+void UBallOwnerComponent::RetrieveBall()
+{
+	if (!IsValid(ownedBall))
+	{
+		UE_LOG(LogTemp, Error, TEXT("BallOwnerComponent : ownedBall is not valid"));
+		return;
+	}
+	
+	AActor* ballOwnerActor = GetOwner();
+
+	if (!IsValid(ballOwnerActor))
+	{
+		// how tf could that happen
+		UE_LOG(LogTemp, Error, TEXT("BallOwnerComponent : parent actor is invalid ?! (how can that happen ?)"))
+	}
+
+	FVector ownerActorLocation = ballOwnerActor->GetActorLocation();
+	
+	ownedBall->SetActorLocation(ownerActorLocation);
+	ownedBall->speed = ownedBall->minimumSpeed;
+
+	auto* magnetComponent = ballOwnerActor->GetComponentByClass<UMagnetComponent>();
+
+	if (!IsValid(magnetComponent))
+	{
+		UE_LOG(LogTemp, Error, TEXT("ABallOwnerComponent : Invalid MagnetComponent for actor"))
+		return;
+	}
+
+	magnetComponent->GrabAttractedObject();
 }
 

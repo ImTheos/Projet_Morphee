@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "AbilitySystemInterface.h"
+#include "GameLogic/Dialogue/DialogManager.h"
 #include "MyCPPCharacter.generated.h"
 
 class UPlayerUI;
@@ -60,6 +61,9 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite)
 	UPlayerUI* playerUIWidget;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UDialogManager* DialogManager;
 
 	UPROPERTY(EditAnywhere)
 	double safePositionCheckCooldown = 2.0f;

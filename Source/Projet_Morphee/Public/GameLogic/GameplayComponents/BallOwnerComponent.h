@@ -49,4 +49,7 @@ private:
 	TObjectPtr<ABall> ownedBall;
 	
 	bool IsBallTooFar(const FVector& ownerActorLocation) const;
+	
+	UFUNCTION(BlueprintCallable)
+	void RetrieveBall();
 };
