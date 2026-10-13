@@ -1,6 +1,6 @@
 ﻿#include "Projet_Morphee_Editor.h"
 
-#include "DialogueDetailsCustomization.h"
+#include "DialogDetailsCustomization.h"
 #include "GameLogic/Dialogue/FlowGraph/Nodes/PlayDialog.h"
 
 #define LOCTEXT_NAMESPACE "FProjet_Morphee_EditorModule"
@@ -11,7 +11,7 @@ void FProjet_Morphee_EditorModule::StartupModule()
 
 	PropertyModule.RegisterCustomClassLayout(
 		UPlayDialog::StaticClass()->GetFName(),
-		FOnGetDetailCustomizationInstance::CreateStatic(&FDialogueDetailsCustomization::MakeInstance)
+		FOnGetDetailCustomizationInstance::CreateStatic(&FDialogDetailsCustomization::MakeInstance)
 	);
 
 	PropertyModule.NotifyCustomizationModuleChanged();

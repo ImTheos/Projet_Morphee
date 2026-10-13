@@ -58,7 +58,7 @@ public:
 	// displays dialogText letter after letter inside the dialog text field
 	void SetTextNoDelay(const FText& dialogText, const FText& dialogTitle);
 	
-	void SetImages(TArray<UTexture2D*> leftTextures, TArray<UTexture2D*> rightTextures);
+	void SetImages(UTexture2D* farLeftTexture, UTexture2D* leftTexture, UTexture2D* rightTexture, UTexture2D* farRightTexture);
 	
 	UButton* GetSkipButton() const;
 
@@ -69,11 +69,14 @@ public:
 	URichTextBlock* dialogTextBlock;
 
 	UPROPERTY(meta = (BindWidget))
+	UImage* farLeftImage;
+	UPROPERTY(meta = (BindWidget))
 	UImage* leftImage;
-
 	UPROPERTY(meta = (BindWidget))
 	UImage* rightImage;
-
+	UPROPERTY(meta = (BindWidget))
+	UImage* farRightImage;
+	
 	UPROPERTY(meta = (BindWidget))
 	UButton* skipButton;
 

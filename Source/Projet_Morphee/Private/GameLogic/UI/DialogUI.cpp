@@ -3,6 +3,9 @@
 
 #include "GameLogic/UI/DialogUI.h"
 
+#include "TimerManager.h"
+#include "Internationalization/Regex.h"
+
 FString UDialogUI::parseRichText(const FText& text, TArray<FRichTextTag>& tagArray)
 {
 	FString processedText;
@@ -121,7 +124,8 @@ void UDialogUI::SetTextNoDelay(const FText& dialogText, const FText& dialogTitle
 	displaySkipButtonDelegate.Broadcast();
 }
 
-void UDialogUI::SetImages(TArray<UTexture2D*> leftTextures, TArray<UTexture2D*> rightTextures)
+
+void UDialogUI::SetImages(UTexture2D* farLeftTexture, UTexture2D* leftTexture, UTexture2D* rightTexture, UTexture2D* farRightTexture)
 {
 	if (!leftImage || !rightImage)
 	{
@@ -129,24 +133,47 @@ void UDialogUI::SetImages(TArray<UTexture2D*> leftTextures, TArray<UTexture2D*> 
 		return;
 	}
 
-	if (IsValid(leftTextures[0]))
+	if (farLeftTexture)
+	{
+		farLeftImage->SetVisibility(ESlateVisibility::Visible);
+		farLeftImage->SetBrushFromTexture(farLeftTexture);
+	}
+	else
+	{
+		farLeftImage->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	
+	if (leftTexture)
 	{
 		leftImage->SetVisibility(ESlateVisibility::Visible);
-		leftImage->SetBrushFromTexture(leftTextures[0]);
+		leftImage->SetBrushFromTexture(leftTexture);
 	}
 	else
 	{
 		leftImage->SetVisibility(ESlateVisibility::Hidden);
 	}
 
-	if (IsValid(rightTextures[0]))
+	
+	if (rightTexture)
 	{
 		rightImage->SetVisibility(ESlateVisibility::Visible);
-		rightImage->SetBrushFromTexture(rightTextures[0]);
+		rightImage->SetBrushFromTexture(rightTexture);
 	}
 	else
 	{
 		rightImage->SetVisibility(ESlateVisibility::Hidden);
+	}
+	
+	
+	if (farRightTexture)
+	{
+		farRightImage->SetVisibility(ESlateVisibility::Visible);
+		farRightImage->SetBrushFromTexture(farRightTexture);
+	}
+	else
+	{
+		farRightImage->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
 
