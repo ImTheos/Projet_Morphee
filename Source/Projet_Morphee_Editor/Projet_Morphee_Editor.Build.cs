@@ -22,7 +22,7 @@ public class Projet_Morphee_Editor : ModuleRules
                 "Engine",
                 "Slate",
                 "Projet_Morphee",
-                "SlateCore"
+                "SlateCore", "NNEOnnxEditor"
             }
         );
     }

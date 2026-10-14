@@ -91,8 +91,3 @@ void AMyCPPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 }
 
-void AMyCPPCharacter::TryLogUI()
-{
-	UE_LOG(LogTemp, Warning, TEXT("PlayerUI = %s"), *playerUIWidget->GetName());
-}
-

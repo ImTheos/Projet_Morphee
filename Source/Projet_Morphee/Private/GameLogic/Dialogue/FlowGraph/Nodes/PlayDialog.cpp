@@ -5,6 +5,7 @@
 #include "Internationalization/StringTableCore.h"
 #include "Internationalization/StringTableRegistry.h"
 #include "Kismet/GameplayStatics.h"
+#include "UnrealEd.h"
 
 UPlayDialog::UPlayDialog(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -21,7 +22,7 @@ void UPlayDialog::ExecuteInput(const FName& PinName)
 
 	if (PlayerCharacter->DialogManager != nullptr)
 	{
-		PlayerCharacter->DialogManager->StartPlayDialog(LeftCharacter,RightCharacter,Lines);
+		PlayerCharacter->DialogManager->StartPlayDialog(Lines);
 		PlayerCharacter->DialogManager->OnEndDialog.AddUniqueDynamic(this, &UPlayDialog::EndDialog);
 	}
 }
@@ -29,15 +30,14 @@ void UPlayDialog::ExecuteInput(const FName& PinName)
 void UPlayDialog::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
+	
 	if (OldLevel != Level)
 	{
-		Lines.Empty();
 		TryGetLines();
 		OldLevel = Level;
 	}
 	if (OldDialog != Dialog)
 	{
-		Lines.Empty();
 		TryGetLines();
 		OldDialog = Dialog;
 	}
@@ -92,26 +92,6 @@ TArray<FString> UPlayDialog::GetDialogOptions()
 	return Options;
 }
 
-TArray<FString> UPlayDialog::GetInitialCharacterOptions(bool IsLeft)
-{
-	if (Level.IsEmpty() || Dialog.IsEmpty() || Lines.IsEmpty()|| !TextDatabase.Contains(Level)) return {"Error - Dialog not found"};
-	TArray<FString> Options;
-	
-	Options.Add("None");
-	
-	FString& otherCharacter = IsLeft? RightCharacter : LeftCharacter;
-	
-	for (UDialogueLine* l : Lines)
-	{
-		if (!Options.Contains(l->MainCharacterID) && l->MainCharacterID != otherCharacter)
-		{
-			Options.Add(l->MainCharacterID);		
-		}
-	}
-	
-	return Options;
-}
-
 TArray<FString> UPlayDialog::GetCharacterOptions()
 {
 	if (Level.IsEmpty() || Dialog.IsEmpty() || Lines.IsEmpty() || !TextDatabase.Contains(Level)) return {"Error - Dialog not found"};
@@ -119,12 +99,21 @@ TArray<FString> UPlayDialog::GetCharacterOptions()
 	
 	for (UDialogueLine* l : Lines)
 	{
-		if (!Options.Contains(l->MainCharacterID))
-			Options.Add(l->MainCharacterID);		
+		if (!Options.Contains(l->Main->ID))
+			Options.Add(l->Main->ID);		
 	}
 	return Options;
 }
 
+int UPlayDialog::FindLine(const TArray<UDialogueLine*>& allLines, const FString& characterID, FText line)
+{
+	for (int i = 0; i < allLines.Num(); i++)
+	{
+		if (allLines[i]->Main->ID == characterID && allLines[i]->Line.EqualTo(line))
+			return i;
+	}
+	return -1;
+}
 
 void UPlayDialog::TryGetLines()
 {
@@ -133,11 +122,14 @@ void UPlayDialog::TryGetLines()
 		Lines.Empty();
 		return;
 	}
+	
+	auto oldLines = Lines;
+	Lines.Empty();
 	FStringTableConstRef currentStringTable = TextDatabase[Level]->GetStringTable();
 	
 	TArray<FString> Options;
 
-	currentStringTable->EnumerateKeysAndSourceStrings([this](const FTextKey& Key, const FString& SourceString) -> bool
+	currentStringTable->EnumerateKeysAndSourceStrings([this, oldLines](const FTextKey& Key, const FString& SourceString) -> bool
 	{
 		TArray<FString> Parsed;
 		FString KeyString(Key.GetChars());
@@ -145,28 +137,82 @@ void UPlayDialog::TryGetLines()
 		FString& characterID = Parsed[1];
 		if (Parsed[0] == Dialog && !characterID.IsEmpty())
 		{
-			FString otherCharacter = "None"; 
-			Lines.Add(UDialogueLine::Create(this, TextDatabase[Level]->GetStringTableId(), KeyString, characterID, otherCharacter));
+			int oldLineIndex = FindLine(oldLines, characterID, FText::FromStringTable(TextDatabase[Level]->GetStringTableId(), KeyString));
+			if (oldLineIndex == -1)
+			{
+				Lines.Add(UDialogueLine::Create(this, TextDatabase[Level]->GetStringTableId(), KeyString, characterID));
+			}
+			else
+			{
+				Lines.Add(oldLines[oldLineIndex]);				
+			}
 		}
 		return true;
 	});
-	SetOtherCharacter();
+	SetOtherCharacters();
 }
 
-void UPlayDialog::SetOtherCharacter()
+void UPlayDialog::SetOtherCharacters()
 {
 	TArray<FString> charactersInDialog = GetCharacterOptions();
-	if (charactersInDialog.Num() == 2)
+	for (UDialogueLine* l : Lines)
 	{
-		for (UDialogueLine* l : Lines)
+
+		int oldIndex = -1;
+		
+		if (!l->Others.IsEmpty())
 		{
-			l->OtherCharacterID = charactersInDialog[0] == l->MainCharacterID ? charactersInDialog[1] : charactersInDialog[0];
-			l->OtherPortrait = l->ResolvePortraitForCurrentExpression(false);
+			TArray<UCharacterDialogInfo*> oldOthers = l->Others;
+			l->Others.Empty();
+			
+			for (FString& id : charactersInDialog)
+			{
+				if (id == l->Main->ID) continue;
+				
+				for (int i = 0; i < oldOthers.Num(); i++)
+				{
+					if (oldOthers[i]->ID == id)
+						oldIndex = i;
+				}				
+				
+				if (oldIndex == -1)
+				{
+					l->Others.Add(UCharacterDialogInfo::Create(this, id));
+				}
+				else
+				{
+					l->Others.Add(oldOthers[oldIndex]);
+				}
+			}
+		}
+		else
+		{
+			for (FString& id : charactersInDialog)
+			{
+				if (id == l->Main->ID) continue;
+				l->Others.Add(UCharacterDialogInfo::Create(this, id));
+			}
 		}
 	}
 }
 
+EDataValidationResult UPlayDialog::ValidateNode()
+{
+	TryGetLines();
+	OldLevel = Level;
+	OldDialog = Dialog;
+	return Super::ValidateNode();
+}
 
+
+void UPlayDialog::Finish()
+{
+	if (IsValid(PlayerCharacter) && IsValid(PlayerCharacter->DialogManager))
+	{
+		PlayerCharacter->DialogManager->OnEndDialog.RemoveDynamic(this, &UPlayDialog::EndDialog);
+	}
+	Super::Finish();
+}
 
 FCharacterInfo::FCharacterInfo()
 {

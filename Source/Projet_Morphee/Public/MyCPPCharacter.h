@@ -67,7 +67,4 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	double safePositionCheckCooldown = 2.0f;
-	
-	UFUNCTION(BlueprintCallable)
-	void TryLogUI();
 };

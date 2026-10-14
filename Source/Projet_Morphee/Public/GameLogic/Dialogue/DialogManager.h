@@ -28,10 +28,6 @@ private:
 	UPROPERTY()
 	int CurrentLineIndex = 0;
 	UPROPERTY()
-	FString CurrentLeftCharacterID = "None";
-	UPROPERTY()
-	FString CurrentRightCharacterID = "None";
-	UPROPERTY()
 	TArray<UDialogueLine*> CurrentDialogLines;
 	
 	UFUNCTION()
@@ -58,7 +54,7 @@ public:
 	AMyCPPCharacter* PlayerCharacter;
 	
 	UFUNCTION()
-	void StartPlayDialog(FString leftCharacter, FString rightCharacter, TArray<UDialogueLine*> dialog);
+	void StartPlayDialog(TArray<UDialogueLine*> dialog);
 	
 	FEndDialogDelegate OnEndDialog;
 	
