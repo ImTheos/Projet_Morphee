@@ -10,6 +10,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "AbilitySystemComponent.h"
 #include "BasicAttributeSet.h"
+#include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameLogic/UI/PlayerUI.h"
 
@@ -26,17 +27,16 @@ AMyCPPCharacter::AMyCPPCharacter()
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 90.f);
 
 //Capsule size
-
-	GetMesh()->SetRelativeLocation(FVector(0.f, 0.f, -92.f));
+	
+	GetMesh()->SetRelativeLocation(FVector(0.f, 0.f, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()));
 	GetMesh()->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
-	SpringArm->SetupAttachment(GetCapsuleComponent());
+	SpringArm->SetupAttachment(RootComponent);
 	SpringArm->TargetArmLength = 400.f;
 
 	PlayerCamera = CreateDefaultSubobject<UCameraComponent> (TEXT("PlayerCamera"));
 	PlayerCamera->SetupAttachment(SpringArm);
-
 	
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	DialogManager = CreateDefaultSubobject<UDialogManager>(TEXT("Dialog Manager"));
@@ -82,6 +82,7 @@ void AMyCPPCharacter::Tick(float DeltaTime)
 		lastSafeLocation = GetTransform().GetLocation();
 		lastSafeRotation = GetTransform().GetRotation().Rotator();
 	}
+	
 }
 
 // Called to bind functionality to input

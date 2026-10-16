@@ -131,7 +131,9 @@ void UPlayDialog::TryGetLines()
 
 	currentStringTable->EnumerateKeysAndSourceStrings([this, oldLines](const FTextKey& Key, const FString& SourceString) -> bool
 	{
+		if (Key.IsEmpty()) return true;
 		TArray<FString> Parsed;
+		
 		FString KeyString(Key.GetChars());
 		KeyString.ParseIntoArray(Parsed, TEXT("_"), false);
 		FString& characterID = Parsed[1];
