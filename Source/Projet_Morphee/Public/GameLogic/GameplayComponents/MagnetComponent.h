@@ -31,6 +31,9 @@ private:
 
 public:
 	UFUNCTION(BlueprintCallable)
+	bool CanActivateMagnet();
+	
+	UFUNCTION(BlueprintCallable)
 	void ActivateMagnet();
 
 	UFUNCTION(BlueprintCallable)
