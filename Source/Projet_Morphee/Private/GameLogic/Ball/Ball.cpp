@@ -420,7 +420,6 @@ void ABall::SetBallState(const EBallState newBallState, UObject* newInfluenceSou
 	if (newBallState == Grabbed)
 	{
 		UpdateDirectionWidgetHeight();
-		UpdateDirectionWidgetHeight();
 		ballMeshReference->SetRelativeLocation(FVector::Zero());
 		SetCollisionEnabled(false);
 		
