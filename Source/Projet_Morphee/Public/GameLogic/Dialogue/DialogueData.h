@@ -113,7 +113,7 @@ class PROJET_MORPHEE_API UDialogueLine : public UObject
 	UPROPERTY(EditAnywhere, Category="Line Info")
 	bool bAnimateText = true;
 	UPROPERTY(EditAnywhere, Category="Line Info")
-	float LetterDelay = 0.05;
+	float LetterDelay = 0.001;
 	UPROPERTY(EditAnywhere, Category="Line Info", meta = (MultiLine = true, EditCondition = false))
 	FText Line;
 };

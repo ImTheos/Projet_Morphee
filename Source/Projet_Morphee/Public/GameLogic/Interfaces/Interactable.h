@@ -22,9 +22,9 @@ public:
 protected:
 	
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Interaction")
-	void OnInteract();
+	void OnInteract(AMyCPPCharacter *InteractingActor, AActor *InteractedActor);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Interaction")
-	void OnBeginOverlap();
+	void OnBeginOverlap(AActor *OverlappingActor, AActor *OverlappedActor);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Interaction")
-	void OnEndOverlap();
+	void OnEndOverlap(AActor *OverlappingActor, AActor *OverlappedActor);
 };

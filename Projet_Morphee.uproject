@@ -63,6 +63,10 @@
 		{
 			"Name": "Flow",
 			"Enabled": true
+		},
+		{
+			"Name": "MotionWarping",
+			"Enabled": true
 		}
 	]
 }
