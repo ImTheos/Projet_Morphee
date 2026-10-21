@@ -91,28 +91,33 @@ void UMagnetComponent::InitMagnetCooldown()
 	remainingCooldown = cooldown;
 }
 
-void UMagnetComponent::ActivateMagnet()
+bool UMagnetComponent::CanActivateMagnet()
 {
 	if (remainingCooldown > 0.f)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("Magnet in cooldown"));
 		UE_LOG(LogTemp, Display, TEXT("UMagnetComponent : Magnet still in cooldown"));
-		return;
+		return false;
 	}
 	
 	if (!IsValid(ownedBall))
 	{
 		UE_LOG(LogTemp, Error, TEXT("UMagnetComponent : No ownedBall has been set"));
-		return;
+		return false;
 	}
-	
-	isMagnetActive = true;
 
 	// If object is already being attracted, no need to set up attraction again
 	if (ownedBall->GetBallState() == Grabbed || ownedBall->GetBallState() == Attracted)
 	{
-		return;
+		return false;
 	}
+	
+	return true;
+}
+
+void UMagnetComponent::ActivateMagnet()
+{
+	isMagnetActive = true;
 	
 	if (ownedBall->GetBallState() == Stationary)
 	{
