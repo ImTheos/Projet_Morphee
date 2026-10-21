@@ -18,7 +18,7 @@ tags:
 
 4. Elle se complaît dans son déni d'elle-même
 
-5. Un traumatisme mit fin à son envie de continuer la scène
+5. Un traumatisme la fait craquer
 
 6. Onyria représente son inconscient, son être intérieur, le monde de ses rêves
 
