@@ -39,4 +39,7 @@ public:
 	void OnSpecialAttackBegin();
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnSpecialAttackEnd();
+	
+	UPROPERTY(BlueprintReadOnly)
+	bool IsAttackOngoing;
 };

@@ -16,6 +16,7 @@ void UEnemyAttackNotifyState::NotifyBegin(USkeletalMeshComponent* MeshComp, UAni
 		UE_LOG(LogTemp, Error, TEXT("UAttackNotifyState::NotifyBegin : EnemyCharacter is invalid"));
 		return;
 	}
+	Enemy->IsAttackOngoing = true;
 	Enemy->OnAttackBegin();
 }
 
@@ -31,5 +32,6 @@ void UEnemyAttackNotifyState::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimS
 		UE_LOG(LogTemp, Error, TEXT("UAttackNotifyState::NotifyEnd : EnemyCharacter is invalid"));
 		return;
 	}
+	Enemy->IsAttackOngoing = false;
 	Enemy->OnAttackEnd();
 }
