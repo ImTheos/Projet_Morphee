@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimNotifies/AnimNotifyState.h"
-#include "MonsterRunnerAttack.generated.h"
+#include "EnemySpecialAttackNotifyState.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class PROJET_MORPHEE_API UMonsterRunnerAttack : public UAnimNotifyState
+class PROJET_MORPHEE_API UEnemySpecialAttackNotifyState : public UAnimNotifyState
 {
 	GENERATED_BODY()
 	
