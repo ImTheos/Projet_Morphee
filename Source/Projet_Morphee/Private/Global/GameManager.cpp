@@ -22,7 +22,9 @@ void UGameManager::SaveGlobalData()
 	if (USaveSystem* SaveGameInstance = Cast<USaveSystem>(UGameplayStatics::CreateSaveGameObject(USaveSystem::StaticClass())))
 	{
 		SaveGameInstance->GameFacts = GameFacts->GameFactsDict;
- 
+		RoomsCompleted.Add
+		SaveGameInstance->RoomsCompleted = RoomsCompleted;
+		
 		if (UGameplayStatics::SaveGameToSlot(SaveGameInstance, "GlobalData", 0))
 		{
 			UE_LOG(LogTemp, SetColor, TEXT("Global Game Data SAVED%s"), OutputDeviceColor::COLOR_GREEN);
@@ -37,6 +39,7 @@ void UGameManager::LoadGlobalData()
 	{
 		UE_LOG(LogTemp, SetColor, TEXT("Global Game Data SAVED%s"), OutputDeviceColor::COLOR_GREEN);
 		GameFacts->GameFactsDict = LoadedGame->GameFacts;
+		RoomsCompleted = LoadedGame->RoomsCompleted;
 	}
 }
 
