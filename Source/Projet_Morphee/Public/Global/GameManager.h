@@ -28,6 +28,9 @@ public:
 	virtual void LoadGlobalData();
 	UPROPERTY(BlueprintReadOnly)
 	UGlobalGameFacts* GameFacts;
+	UPROPERTY(BlueprintReadOnly)
+	TMap<FString, bool> RoomsCompleted;
+	
 };
 
 UCLASS(Blueprintable, BlueprintType)
