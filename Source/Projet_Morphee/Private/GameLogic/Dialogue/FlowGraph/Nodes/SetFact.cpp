@@ -13,6 +13,6 @@ void USetFact::ExecuteInput(const FName& PinName)
 	UGameManager* gameManager = Cast<UGameManager>(UGameplayStatics::GetGameInstance(this));
 	if (!gameManager)
 		return;
-	gameManager->SetGameFactValue(FactTag, NewValue);
+	gameManager->SetGameFactValueFromTag(FactTag, NewValue);
 	TriggerFirstOutput(true);
 }

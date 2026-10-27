@@ -5,14 +5,24 @@ void UGameManager::Init()
 	Super::Init();
 }
 
-bool UGameManager::GetGameFactValue(const FGameplayTag& gameFactID)
+bool UGameManager::GetGameFactValueFromTag(const FGameplayTag& gameFactID)
+{
+	return GetGameFactValueFromString(gameFactID.ToString());
+}
+
+bool UGameManager::GetGameFactValueFromString(const FString& gameFactID)
 {
 	if (!GameFacts)
 		return false;
 	return GameFacts->GetGameFactValue(gameFactID);
 }
 
-void UGameManager::SetGameFactValue(FGameplayTag& gameFactID, bool value) 
+void UGameManager::SetGameFactValueFromTag(const FGameplayTag& gameFactID, bool value) 
+{
+	SetGameFactValueFromString(gameFactID.ToString(), value);
+}
+
+void UGameManager::SetGameFactValueFromString(const FString& gameFactID, bool value)
 {
 	GameFacts->SetGameFactValue(gameFactID, value);
 }
@@ -22,7 +32,6 @@ void UGameManager::SaveGlobalData()
 	if (USaveSystem* SaveGameInstance = Cast<USaveSystem>(UGameplayStatics::CreateSaveGameObject(USaveSystem::StaticClass())))
 	{
 		SaveGameInstance->GameFacts = GameFacts->GameFactsDict;
-		SaveGameInstance->RoomsCompleted = RoomsCompleted;
 		
 		if (UGameplayStatics::SaveGameToSlot(SaveGameInstance, "GlobalData", 0))
 		{
@@ -38,7 +47,6 @@ void UGameManager::LoadGlobalData()
 	{
 		UE_LOG(LogTemp, SetColor, TEXT("Global Game Data SAVED%s"), OutputDeviceColor::COLOR_GREEN);
 		GameFacts->GameFactsDict = LoadedGame->GameFacts;
-		RoomsCompleted = LoadedGame->RoomsCompleted;
 	}
 }
 
@@ -65,21 +73,21 @@ void UGlobalGameFacts::ReconcileGameFactsAndGameplayTags()
 	}
 }
 
-bool UGlobalGameFacts::GetGameFactValue(FGameplayTag GameFactTag)
+bool UGlobalGameFacts::GetGameFactValue(const FString& GameFactTag)
 {
-	if (!GameFactsDict.Contains(GameFactTag.ToString()))
+	if (!GameFactsDict.Contains(GameFactTag))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Could not find game fact %s in database"), *GameFactTag.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("Could not find game fact %s in database"), *GameFactTag);
 		return false;
 	}
 	
-	return *GameFactsDict.Find(GameFactTag.ToString());
+	return *GameFactsDict.Find(GameFactTag);
 }
 
-void UGlobalGameFacts::SetGameFactValue(FGameplayTag GameFactTag, bool value)
+void UGlobalGameFacts::SetGameFactValue(const FString& GameFactTag, bool value)
 {
-	if (GameFactsDict.Contains(GameFactTag.ToString()))
-		GameFactsDict[GameFactTag.ToString()] = value;
+	if (GameFactsDict.Contains(GameFactTag))
+		GameFactsDict[GameFactTag] = value;
 	else
-		GameFactsDict.Add(GameFactTag.ToString(), value);
+		GameFactsDict.Add(GameFactTag, value);
 }
