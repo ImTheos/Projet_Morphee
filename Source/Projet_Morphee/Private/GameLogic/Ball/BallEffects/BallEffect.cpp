@@ -18,7 +18,11 @@ void ABallEffect::EffectTick_Implementation(float deltaTime)
 	
 }
 
-void ABallEffect::Detonate_Implementation()
+void ABallEffect::DetonateEffect_Implementation(FVector detonateLocation)
+{
+	UE_LOG(LogTemp, Display, TEXT("ABallEffect::Detonate was triggered"))
+}
+void ABallEffect::DetonateHitEffect_Implementation(FHitResult HitResult)
 {
 	UE_LOG(LogTemp, Display, TEXT("ABallEffect::Detonate was triggered"))
 }

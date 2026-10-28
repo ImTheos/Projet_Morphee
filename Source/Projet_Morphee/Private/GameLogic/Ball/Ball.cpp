@@ -6,6 +6,7 @@
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/Character.h"
+#include "GameLogic/Interfaces/BallInteractable.h"
 #include "GameLogic/Interfaces/Damageable.h"
 #include "GameLogic/Puzzle/BallContainer.h"
 #include "Math/UnrealMathUtility.h"
@@ -204,10 +205,10 @@ void ABall::SetCollisionEnabled(bool enabled) const
 	collisionComponent->SetCollisionProfileName(newCollisionProfileName);
 }
 
-void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor,
-	UPrimitiveComponent* otherHitComponent, FVector normalImpulse, const FHitResult& hit)
+void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* hitActor,
+	UPrimitiveComponent* otherHitComponent, FVector normalImpulse, const FHitResult& hitResult)
 {
-	OnCollisionBlockBP(hitComponent, otherActor, otherHitComponent, normalImpulse, hit);
+	OnCollisionBlockBP(hitComponent, hitActor, otherHitComponent, normalImpulse, hitResult);
 	
 	ReleaseAttraction();
 	
@@ -217,13 +218,13 @@ void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherAct
 		return;
 	}
 	
-	if (!IsValid(otherActor))
+	if (!IsValid(hitActor))
 	{
 		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBlock : invalid otherActor"))
 		return;
 	}
 	
-	UClass* otherActorClass = Cast<UClass>(otherActor->GetClass());
+	UClass* otherActorClass = Cast<UClass>(hitActor->GetClass());
 	if (!IsValid(otherActorClass))
 	{
 		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBeginOverlap : invalid otherActor class"))
@@ -232,13 +233,14 @@ void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherAct
 	
 	bool isDamageable = otherActorClass->ImplementsInterface(UDamageable::StaticClass());
 		
-	ballEffectInstance->CollisionBlock(hitComponent, otherActor, otherHitComponent, normalImpulse, hit, isDamageable);
+	ballEffectInstance->CollisionBlock(hitComponent, hitActor, otherHitComponent, normalImpulse, hitResult, isDamageable);
+	
 }
 
-void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
-                                    int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult)
+void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* hitActor, UPrimitiveComponent* otherComponent,
+                                    int32 otherBodyIndex, bool fromSweep, const FHitResult& hitResult)
 {
-	OnCollisionBeginOverlapBP(overlappedComponent, otherActor, otherComponent, otherBodyIndex, fromSweep, sweepResult);
+	OnCollisionBeginOverlapBP(overlappedComponent, hitActor, otherComponent, otherBodyIndex, fromSweep, hitResult);
 	
 	ReleaseAttraction();
 	
@@ -248,13 +250,13 @@ void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AA
 		return;
 	}
 	
-	if (!IsValid(otherActor))
+	if (!IsValid(hitActor))
 	{
 		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBeginOverlap : invalid otherActor"))
 		return;
 	}
 	
-	UClass* otherActorClass = Cast<UClass>(otherActor->GetClass());
+	UClass* otherActorClass = Cast<UClass>(hitActor->GetClass());
 	if (!IsValid(otherActorClass))
 	{
 		UE_LOG(LogTemp, Error, TEXT("ABall::OnCollisionBeginOverlap : invalid otherActor class"))
@@ -263,8 +265,13 @@ void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AA
 
 	const bool isDamageable = otherActorClass->ImplementsInterface(UDamageable::StaticClass());
 	
-	ballEffectInstance->CollisionBeginOverlap(overlappedComponent, otherActor, otherComponent, 
-		otherBodyIndex, fromSweep, sweepResult, isDamageable);
+	if (otherActorClass->ImplementsInterface(UBallInteractable::StaticClass()))
+	{
+		IBallInteractable::Execute_OnCollideWithBall(hitActor, hitResult.ImpactPoint);
+	}
+	
+	ballEffectInstance->CollisionBeginOverlap(overlappedComponent, hitActor, otherComponent, 
+			otherBodyIndex, fromSweep, hitResult, isDamageable);
 }
 
 void ABall::SetBallEffect(const TSubclassOf<ABallEffect> newBallEffectClass, bool actualize)
