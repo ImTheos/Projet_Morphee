@@ -19,17 +19,19 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void Init() override;
 	UFUNCTION(BlueprintCallable)
-	virtual bool GetGameFactValue(const FGameplayTag& gameFactID);
+	virtual bool GetGameFactCompletedFromTag(const FGameplayTag& gameFactID);
 	UFUNCTION(BlueprintCallable)
-	virtual void SetGameFactValue(FGameplayTag& gameFactID, bool value);
+	virtual bool GetGameFactCompletedFromString(const FString& gameFactID);
+	UFUNCTION(BlueprintCallable)
+	virtual void SetGameFactCompletedFromTag(const FGameplayTag& gameFactID, bool value);
+	UFUNCTION(BlueprintCallable)
+	virtual void SetGameFactCompletedFromString(const FString& gameFactID, bool value);
 	UFUNCTION(BlueprintCallable)
 	virtual void SaveGlobalData();
 	UFUNCTION(BlueprintCallable)
 	virtual void LoadGlobalData();
 	UPROPERTY(BlueprintReadOnly)
 	UGlobalGameFacts* GameFacts;
-	UPROPERTY(BlueprintReadOnly)
-	TMap<FString, bool> RoomsCompleted;
 	
 };
 
@@ -47,7 +49,7 @@ class UGlobalGameFacts : public UObject
 	UFUNCTION(BlueprintCallable)
 	void ReconcileGameFactsAndGameplayTags();
 	UFUNCTION(BlueprintCallable)
-	bool GetGameFactValue(FGameplayTag GameFactTag);
+	bool GetGameFactCompleted(const FString& GameFactTag);
 	UFUNCTION(BlueprintCallable)
-	void SetGameFactValue(FGameplayTag GameFactTag, bool value);
+	void SetGameFactCompleted(const FString& GameFactTag, bool value);
 };
