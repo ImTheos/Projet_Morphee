@@ -26,10 +26,11 @@ public:
 	float magnetRadius;
 
 private:
-	UPROPERTY()
-	TObjectPtr<ABall> ownedBall;
 
 public:
+	UPROPERTY(BlueprintReadOnly)
+	TObjectPtr<ABall> ownedBall;
+	
 	UFUNCTION(BlueprintCallable)
 	bool CanActivateMagnet();
 	
