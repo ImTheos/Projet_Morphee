@@ -24,5 +24,5 @@ bool UCheckFact_FlowNodeAddOn::EvaluatePredicate_Implementation() const
 	{
 		return false;
 	}
-	return(gameManager->GetGameFactValueFromTag(FactTag));
+	return(gameManager->GetGameFactCompletedFromTag(FactTag));
 }

@@ -5,26 +5,26 @@ void UGameManager::Init()
 	Super::Init();
 }
 
-bool UGameManager::GetGameFactValueFromTag(const FGameplayTag& gameFactID)
+bool UGameManager::GetGameFactCompletedFromTag(const FGameplayTag& gameFactID)
 {
-	return GetGameFactValueFromString(gameFactID.ToString());
+	return GetGameFactCompletedFromString(gameFactID.ToString());
 }
 
-bool UGameManager::GetGameFactValueFromString(const FString& gameFactID)
+bool UGameManager::GetGameFactCompletedFromString(const FString& gameFactID)
 {
 	if (!GameFacts)
 		return false;
-	return GameFacts->GetGameFactValue(gameFactID);
+	return GameFacts->GetGameFactCompleted(gameFactID);
 }
 
-void UGameManager::SetGameFactValueFromTag(const FGameplayTag& gameFactID, bool value) 
+void UGameManager::SetGameFactCompletedFromTag(const FGameplayTag& gameFactID, bool value) 
 {
-	SetGameFactValueFromString(gameFactID.ToString(), value);
+	SetGameFactCompletedFromString(gameFactID.ToString(), value);
 }
 
-void UGameManager::SetGameFactValueFromString(const FString& gameFactID, bool value)
+void UGameManager::SetGameFactCompletedFromString(const FString& gameFactID, bool value)
 {
-	GameFacts->SetGameFactValue(gameFactID, value);
+	GameFacts->SetGameFactCompleted(gameFactID, value);
 }
 
 void UGameManager::SaveGlobalData()
@@ -73,7 +73,7 @@ void UGlobalGameFacts::ReconcileGameFactsAndGameplayTags()
 	}
 }
 
-bool UGlobalGameFacts::GetGameFactValue(const FString& GameFactTag)
+bool UGlobalGameFacts::GetGameFactCompleted(const FString& GameFactTag)
 {
 	if (!GameFactsDict.Contains(GameFactTag))
 	{
@@ -84,7 +84,7 @@ bool UGlobalGameFacts::GetGameFactValue(const FString& GameFactTag)
 	return *GameFactsDict.Find(GameFactTag);
 }
 
-void UGlobalGameFacts::SetGameFactValue(const FString& GameFactTag, bool value)
+void UGlobalGameFacts::SetGameFactCompleted(const FString& GameFactTag, bool value)
 {
 	if (GameFactsDict.Contains(GameFactTag))
 		GameFactsDict[GameFactTag] = value;

@@ -19,13 +19,13 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void Init() override;
 	UFUNCTION(BlueprintCallable)
-	virtual bool GetGameFactValueFromTag(const FGameplayTag& gameFactID);
+	virtual bool GetGameFactCompletedFromTag(const FGameplayTag& gameFactID);
 	UFUNCTION(BlueprintCallable)
-	virtual bool GetGameFactValueFromString(const FString& gameFactID);
+	virtual bool GetGameFactCompletedFromString(const FString& gameFactID);
 	UFUNCTION(BlueprintCallable)
-	virtual void SetGameFactValueFromTag(const FGameplayTag& gameFactID, bool value);
+	virtual void SetGameFactCompletedFromTag(const FGameplayTag& gameFactID, bool value);
 	UFUNCTION(BlueprintCallable)
-	virtual void SetGameFactValueFromString(const FString& gameFactID, bool value);
+	virtual void SetGameFactCompletedFromString(const FString& gameFactID, bool value);
 	UFUNCTION(BlueprintCallable)
 	virtual void SaveGlobalData();
 	UFUNCTION(BlueprintCallable)
@@ -49,7 +49,7 @@ class UGlobalGameFacts : public UObject
 	UFUNCTION(BlueprintCallable)
 	void ReconcileGameFactsAndGameplayTags();
 	UFUNCTION(BlueprintCallable)
-	bool GetGameFactValue(const FString& GameFactTag);
+	bool GetGameFactCompleted(const FString& GameFactTag);
 	UFUNCTION(BlueprintCallable)
-	void SetGameFactValue(const FString& GameFactTag, bool value);
+	void SetGameFactCompleted(const FString& GameFactTag, bool value);
 };
