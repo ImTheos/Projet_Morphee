@@ -76,12 +76,12 @@ private:
 	void SetCollisionEnabled(bool enabled) const;
 
 	UFUNCTION()
-	void OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
-	int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	void OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* hitActor, UPrimitiveComponent* otherComponent,
+	int32 otherBodyIndex, bool fromSweep, const FHitResult& hitResult);
 
 	UFUNCTION()
-	void OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
-	                      FVector normalImpulse, const FHitResult& hit);
+	void OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* hitActor, UPrimitiveComponent* otherHitComponent,
+	                      FVector normalImpulse, const FHitResult& hitResult);
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Collision")
@@ -89,6 +89,7 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Collision")
 	FName regularBallCollisionProfile = TEXT("BouncingBall");;
+
 	
 	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName="On Ball Collision Begin Overlap"))
 	void OnCollisionBeginOverlapBP(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
@@ -127,6 +128,9 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable)
 	void SetBallEffect(TSubclassOf<ABallEffect> newBallEffectClass, bool actualize = false);
+	
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+	void Detonate();
 	
 	// -------  -------  ------- 
 	// ------- BALL IS HIT -------

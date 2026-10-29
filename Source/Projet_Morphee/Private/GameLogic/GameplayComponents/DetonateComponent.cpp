@@ -62,14 +62,6 @@ void UDetonateComponent::Detonate()
 		return;
 	}
 	
-	ABallEffect* ballEffectInstance = ownedBall->GetBallEffectInstance();
-	
-	if (!IsValid(ballEffectInstance))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("UDetonateComponent::Detonate : the ballEffectInstance is invalid"));
-		return;
-	}
-	
-	ballEffectInstance->Detonate();
+	ownedBall->Detonate();
 }
 

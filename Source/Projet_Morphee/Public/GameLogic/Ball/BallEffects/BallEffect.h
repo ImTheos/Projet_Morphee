@@ -37,9 +37,13 @@ public:
 	void EffectTick(float deltaTime);
 	virtual void EffectTick_Implementation(float deltaTime);
 	
-	UFUNCTION(BlueprintNativeEvent)
-	void Detonate();
-	virtual void Detonate_Implementation();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void DetonateEffect(FVector detonateLocation);
+	virtual void DetonateEffect_Implementation(FVector detonateLocation);
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void DetonateHitEffect(FHitResult hitResult);
+	virtual void DetonateHitEffect_Implementation(FHitResult hitResult);
 	
 	UFUNCTION(BlueprintNativeEvent)
 	void Attack(AActor* attacker);
