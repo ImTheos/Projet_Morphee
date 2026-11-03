@@ -15,9 +15,13 @@
 ABall::ABall()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	Collider = CreateDefaultSubobject<USphereComponent>(TEXT("Collider"));
-	SetRootComponent(Collider);
-	Collider->SetNotifyRigidBodyCollision(true);
+	Collider = GetComponentByClass<USphereComponent>();
+	if (!Collider)
+	{
+		Collider = CreateDefaultSubobject<USphereComponent>(TEXT("Collider"));
+		SetRootComponent(Collider);
+		Collider->SetNotifyRigidBodyCollision(true);		
+	}
 }
 
 // Called when the game starts or when spawned
@@ -29,6 +33,8 @@ void ABall::BeginPlay()
 	{
 		SetBallEffect(defaultBallEffect);
 	}
+	
+	Collider = GetComponentByClass<USphereComponent>();
 	
 	if (!IsValid(Collider))
 	{
@@ -232,8 +238,13 @@ void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* hitActor
 		return;
 	}
 	
-	bool isDamageable = otherActorClass->ImplementsInterface(UDamageable::StaticClass());
-		
+	const bool isDamageable = otherActorClass->ImplementsInterface(UDamageable::StaticClass());
+	
+	if (otherActorClass->ImplementsInterface(UBallInteractable::StaticClass()))
+	{
+		IBallInteractable::Execute_OnCollideWithBall(hitActor, hitResult.ImpactPoint);
+	}
+	
 	ballEffectInstance->CollisionBlock(hitComponent, hitActor, otherHitComponent, normalImpulse, hitResult, isDamageable);
 	
 }
@@ -241,6 +252,7 @@ void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* hitActor
 void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* hitActor, UPrimitiveComponent* otherComponent,
                                     int32 otherBodyIndex, bool fromSweep, const FHitResult& hitResult)
 {
+	/*
 	OnCollisionBeginOverlapBP(overlappedComponent, hitActor, otherComponent, otherBodyIndex, fromSweep, hitResult);
 	
 	ReleaseAttraction();
@@ -273,6 +285,7 @@ void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AA
 	
 	ballEffectInstance->CollisionBeginOverlap(overlappedComponent, hitActor, otherComponent, 
 			otherBodyIndex, fromSweep, hitResult, isDamageable);
+			*/
 }
 
 void ABall::SetBallEffect(const TSubclassOf<ABallEffect> newBallEffectClass, bool actualize)
