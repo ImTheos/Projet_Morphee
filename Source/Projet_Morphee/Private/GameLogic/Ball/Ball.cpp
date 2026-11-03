@@ -14,8 +14,10 @@
 // Sets default values
 ABall::ABall()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	Collider = CreateDefaultSubobject<USphereComponent>(TEXT("Collider"));
+	SetRootComponent(Collider);
+	Collider->SetNotifyRigidBodyCollision(true);
 }
 
 // Called when the game starts or when spawned
@@ -28,14 +30,13 @@ void ABall::BeginPlay()
 		SetBallEffect(defaultBallEffect);
 	}
 	
-	USphereComponent* sphereCollision = FindComponentByClass<USphereComponent>();
-	if (!IsValid(sphereCollision))
+	if (!IsValid(Collider))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("The sphere collision is invalid"));
 		return;
 	}
-	sphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollisionBeginOverlap);
-	sphereCollision->OnComponentHit.AddDynamic(this, &ABall::OnCollisionBlock);
+	Collider->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollisionBeginOverlap);
+	Collider->OnComponentHit.AddDynamic(this, &ABall::OnCollisionBlock);
 	
 	UWidgetComponent* widgetComponent = FindComponentByClass<UWidgetComponent>();
 	if (!IsValid(widgetComponent))

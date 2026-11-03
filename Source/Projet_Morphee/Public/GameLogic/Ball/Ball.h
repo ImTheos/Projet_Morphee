@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Ball.generated.h"
 
+class USphereComponent;
 class UWidgetComponent;
 
 UENUM(BlueprintType)
@@ -38,6 +39,9 @@ private:
 	
 public:
 	// Amount of units the balls travels per second
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	USphereComponent* Collider;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ball Properties")
 	float speed;
 	
