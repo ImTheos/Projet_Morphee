@@ -30,4 +30,16 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void StunForSeconds(float stunDuration);
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnAttackBegin();
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnAttackEnd();
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnSpecialAttackBegin();
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnSpecialAttackEnd();
+	
+	UPROPERTY(BlueprintReadOnly)
+	bool IsAttackOngoing;
 };

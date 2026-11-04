@@ -11,5 +11,5 @@ class PROJET_MORPHEE_API USaveSystem : public UFlowSaveGame
 	
 public:
 	UPROPERTY(VisibleAnywhere)
-	TMap<FString, bool> GameFacts;
+	TMap<FString, bool> GameFacts;	
 };

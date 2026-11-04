@@ -5,6 +5,7 @@
 
 #include "AIController.h"
 #include "MyCPPCharacter.h"
+#include "ToolBuilderUtil.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "GameLogic/Interfaces/Damageable.h"
 #include "Kismet/GameplayStatics.h"
@@ -13,16 +14,18 @@ void ARunnerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	attackHitbox = FindComponentByClass<USphereComponent>();
-	if (!IsValid(attackHitbox))
+	for (UActorComponent* Component : GetComponents())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("ARunnerCharacter::BeginPlay : The attackHitbox is invalid"));
-		return;
+		if (Component && Component->IsA(USphereComponent::StaticClass()))
+		{
+			USphereComponent* hitbox = Cast<USphereComponent>(Component);
+			if (!IsValid(Component))return;
+			
+			hitbox->OnComponentBeginOverlap.AddDynamic(this, &ARunnerCharacter::OnHitboxOverlap);
+			hitbox->OnComponentHit.AddDynamic(this, &ARunnerCharacter::OnHitboxBlock);
+			hitbox->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+		}
 	}
-	
-	attackHitbox->OnComponentBeginOverlap.AddDynamic(this, &ARunnerCharacter::OnHitboxOverlap);
-	attackHitbox->OnComponentHit.AddDynamic(this, &ARunnerCharacter::OnHitboxBlock);
-	attackHitbox->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 }
 
 void ARunnerCharacter::InitCharacter()

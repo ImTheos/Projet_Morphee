@@ -26,9 +26,6 @@ public:
 	UPROPERTY(EditAnywhere, meta=(Category="Attack"))
 	float attackDamage;
 	
-	UPROPERTY()
-	USphereComponent* attackHitbox;
-	
 	virtual void InitCharacter() override;
 	
 	UFUNCTION()
