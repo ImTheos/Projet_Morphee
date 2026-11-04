@@ -14,8 +14,14 @@
 // Sets default values
 ABall::ABall()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	Collider = GetComponentByClass<USphereComponent>();
+	if (!Collider)
+	{
+		Collider = CreateDefaultSubobject<USphereComponent>(TEXT("Collider"));
+		SetRootComponent(Collider);
+		Collider->SetNotifyRigidBodyCollision(true);		
+	}
 }
 
 // Called when the game starts or when spawned
@@ -28,14 +34,15 @@ void ABall::BeginPlay()
 		SetBallEffect(defaultBallEffect);
 	}
 	
-	USphereComponent* sphereCollision = FindComponentByClass<USphereComponent>();
-	if (!IsValid(sphereCollision))
+	Collider = GetComponentByClass<USphereComponent>();
+	
+	if (!IsValid(Collider))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("The sphere collision is invalid"));
 		return;
 	}
-	sphereCollision->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollisionBeginOverlap);
-	sphereCollision->OnComponentHit.AddDynamic(this, &ABall::OnCollisionBlock);
+	Collider->OnComponentBeginOverlap.AddDynamic(this, &ABall::OnCollisionBeginOverlap);
+	Collider->OnComponentHit.AddDynamic(this, &ABall::OnCollisionBlock);
 	
 	UWidgetComponent* widgetComponent = FindComponentByClass<UWidgetComponent>();
 	if (!IsValid(widgetComponent))
@@ -231,8 +238,13 @@ void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* hitActor
 		return;
 	}
 	
-	bool isDamageable = otherActorClass->ImplementsInterface(UDamageable::StaticClass());
-		
+	const bool isDamageable = otherActorClass->ImplementsInterface(UDamageable::StaticClass());
+	
+	if (otherActorClass->ImplementsInterface(UBallInteractable::StaticClass()))
+	{
+		IBallInteractable::Execute_OnCollideWithBall(hitActor, hitResult.ImpactPoint);
+	}
+	
 	ballEffectInstance->CollisionBlock(hitComponent, hitActor, otherHitComponent, normalImpulse, hitResult, isDamageable);
 	
 }
@@ -240,6 +252,7 @@ void ABall::OnCollisionBlock(UPrimitiveComponent* hitComponent, AActor* hitActor
 void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AActor* hitActor, UPrimitiveComponent* otherComponent,
                                     int32 otherBodyIndex, bool fromSweep, const FHitResult& hitResult)
 {
+	/*
 	OnCollisionBeginOverlapBP(overlappedComponent, hitActor, otherComponent, otherBodyIndex, fromSweep, hitResult);
 	
 	ReleaseAttraction();
@@ -272,6 +285,7 @@ void ABall::OnCollisionBeginOverlap(UPrimitiveComponent* overlappedComponent, AA
 	
 	ballEffectInstance->CollisionBeginOverlap(overlappedComponent, hitActor, otherComponent, 
 			otherBodyIndex, fromSweep, hitResult, isDamageable);
+			*/
 }
 
 void ABall::SetBallEffect(const TSubclassOf<ABallEffect> newBallEffectClass, bool actualize)
