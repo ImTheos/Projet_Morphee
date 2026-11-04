@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "AI/Characters/Runner/EnemySpecialAttackNotifyState.h"
+#include "AI/Characters/EnemySpecialAttackNotifyState.h"
 #include "AI/Characters/EnemyCharacter.h"
 
 void UEnemySpecialAttackNotifyState::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation,
