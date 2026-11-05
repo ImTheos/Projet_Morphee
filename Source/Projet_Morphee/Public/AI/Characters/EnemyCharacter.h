@@ -12,6 +12,8 @@ class PROJET_MORPHEE_API AEnemyCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+	virtual void BeginPlay() override;
+	
 public:
 	// Sets default values for this character's properties
 	AEnemyCharacter();
@@ -24,10 +26,8 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void Stun();
-	
 	UFUNCTION(BlueprintCallable)
 	void Unstun();
-	
 	UFUNCTION(BlueprintCallable)
 	void StunForSeconds(float stunDuration);
 	
@@ -40,6 +40,23 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnSpecialAttackEnd();
 	
+	UFUNCTION()
+	void OnHitboxOverlap(UPrimitiveComponent* overlappedComponent, AActor* otherActor, UPrimitiveComponent* otherComponent,
+									int32 otherBodyIndex, bool fromSweep, const FHitResult& sweepResult);
+	UFUNCTION()
+	void OnHitboxBlock(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherHitComponent,
+						  FVector normalImpulse, const FHitResult& hit);
+	
 	UPROPERTY(BlueprintReadOnly)
 	bool IsAttackOngoing;
+	
+	/** Damage dealt by each attack **/
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(Category="Attack"))
+	float attackDamage;
+	
+	UPROPERTY(EditDefaultsOnly, Category="AI")
+	FName baseLocationKey = TEXT("baseLocation");
+	
+	UPROPERTY(EditDefaultsOnly, Category="AI")
+	FName targetActorKey = TEXT("targetActor");
 };

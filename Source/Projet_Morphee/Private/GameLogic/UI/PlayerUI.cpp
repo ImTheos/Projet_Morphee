@@ -11,7 +11,7 @@
 void UPlayerUI::UpdateHealthBar(int playerHealth, bool animate)
 {
 	TArray<UHeartSlot*> heartSlots = healthBar->heartSlots;
-
+	
 	for (int i = 0; i < FMath::Min(heartSlots.Num(), playerHealth); i++)
 	{
 		UHeartSlot* heartSlot = heartSlots[i];
@@ -40,7 +40,7 @@ void UPlayerUI::UpdateHealthBar(int playerHealth, bool animate)
 		heartSlot->visible = true;
 	}
 
-	for (int i = playerHealth; i < heartSlots.Num(); i++)
+	for (int i = FMath::Max(0, playerHealth); i < heartSlots.Num(); i++)
 	{
 		UHeartSlot* heartSlot = heartSlots[i];
 		if (!IsValid(heartSlot))
