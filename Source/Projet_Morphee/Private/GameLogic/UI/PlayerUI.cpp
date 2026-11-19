@@ -1,12 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "GameLogic/UI/PlayerUI.h"
-
 #include "Animation/WidgetAnimation.h"
 #include "Blueprint/WidgetTree.h"
 #include "DynamicMesh/DynamicMesh3.h"
 #include "GameLogic/UI/DialogUI.h"
+#include "Kismet/GameplayStatics.h"
+
 
 void UPlayerUI::UpdateHealthBar(int playerHealth, bool animate)
 {
@@ -67,4 +65,27 @@ void UPlayerUI::UpdateHealthBar(int playerHealth, bool animate)
 		heartSlot->PlayAnimation(heartSlot->dissipateAnim, animTimeStart);
 		heartSlot->visible = false;
 	}
+}
+
+void UPlayerUI::InitSecondaryInteractionWidgets(const TArray<UUserWidget*>& widgets)
+{
+	AvailableSecondaryInteractionWidgets = widgets;
+}
+
+UUserWidget* UPlayerUI::AcquireSecondaryInteractionWidget()
+{
+	if (AvailableSecondaryInteractionWidgets.Num() != 0)
+		return AvailableSecondaryInteractionWidgets.Pop();
+	else
+	{
+		UUserWidget* w = CreateWidget<UUserWidget>(UGameplayStatics::GetPlayerController(GetWorld(), 0), SecondaryInteractionWidgetClass);
+		w->AddToViewport();
+		return w;		
+	}
+}
+
+void UPlayerUI::ReleaseSecondaryInteractionWidget(UUserWidget* w)
+{
+	if (w != nullptr)
+		AvailableSecondaryInteractionWidgets.Push(w);
 }
