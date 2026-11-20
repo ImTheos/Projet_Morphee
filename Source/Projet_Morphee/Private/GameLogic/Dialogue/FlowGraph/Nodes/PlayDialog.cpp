@@ -31,6 +31,9 @@ void UPlayDialog::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedE
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 	
+	if (TextDatabase.IsEmpty())
+		GetLevelOptions();
+	
 	if (OldLevel != Level)
 	{
 		TryGetLines();
@@ -125,6 +128,7 @@ void UPlayDialog::TryGetLines()
 	
 	auto oldLines = Lines;
 	Lines.Empty();
+	
 	FStringTableConstRef currentStringTable = TextDatabase[Level]->GetStringTable();
 	
 	TArray<FString> Options;
@@ -200,6 +204,7 @@ void UPlayDialog::SetOtherCharacters()
 
 EDataValidationResult UPlayDialog::ValidateNode()
 {
+	GetLevelOptions();
 	TryGetLines();
 	OldLevel = Level;
 	OldDialog = Dialog;
