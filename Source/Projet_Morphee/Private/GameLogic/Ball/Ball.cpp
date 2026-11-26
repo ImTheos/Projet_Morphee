@@ -24,6 +24,15 @@ ABall::ABall()
 	}
 }
 
+void ABall::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+	directionWidget = GetComponentByClass<UWidgetComponent>();
+	if (directionWidget)
+		directionWidget->AttachToComponent(Collider, FAttachmentTransformRules::KeepRelativeTransform);
+
+}
+
 // Called when the game starts or when spawned
 void ABall::BeginPlay()
 {

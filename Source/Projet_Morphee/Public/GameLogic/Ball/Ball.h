@@ -27,7 +27,8 @@ class PROJET_MORPHEE_API ABall : public AActor
 public:	
 	
 	ABall();
-	
+	virtual void OnConstruction(const FTransform& Transform) override;
+
 	virtual void BeginPlay() override;
 	
 	virtual void Tick(float DeltaTime) override;
