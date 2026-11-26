@@ -56,17 +56,18 @@ void UPlayDialog::EndDialog()
 TArray<FString> UPlayDialog::GetLevelOptions()
 {
 	TArray<FString> options;
+	TextDatabase.Empty();
 	
 	FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>("AssetRegistry");
 	TArray<FAssetData> StringTableAssets;
 	AssetRegistryModule.Get().GetAssetsByClass(UStringTable::StaticClass()->GetClassPathName(), StringTableAssets);
+	
 	for (const auto& asset : StringTableAssets)
 	{
 		FString name = asset.AssetName.ToString();
 		UStringTable* StringTableAsset = Cast<UStringTable>(asset.GetAsset());
 		if (!StringTableAsset) continue;
 
-		FStringTableConstRef table = StringTableAsset->GetStringTable();
 		TextDatabase.Add(name, StringTableAsset);
 		options.Add(name);
 	}
