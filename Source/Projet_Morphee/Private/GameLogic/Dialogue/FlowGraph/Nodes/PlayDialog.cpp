@@ -31,8 +31,7 @@ void UPlayDialog::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedE
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 	
-	if (TextDatabase.IsEmpty())
-		GetLevelOptions();
+	GetLevelOptions();
 	
 	if (OldLevel != Level)
 	{
