@@ -11,6 +11,8 @@ UOnInteract_Observer::UOnInteract_Observer(const FObjectInitializer& ObjectIniti
 #if WITH_EDITOR
 	Category = TEXT("CUSTOM");
 #endif
+	InputPins = {FFlowPin(TEXT("Start")), FFlowPin(TEXT("Stop"))};
+	OutputPins = {FFlowPin(TEXT("On Interact")), FFlowPin(TEXT("On Overlap Begin")), FFlowPin(TEXT("On Overlap End"))};
 }
 
 void UOnInteract_Observer::ObserveActor(TWeakObjectPtr<AActor> Actor, TWeakObjectPtr<UFlowComponent> Component)
@@ -26,7 +28,9 @@ void UOnInteract_Observer::ObserveActor(TWeakObjectPtr<AActor> Actor, TWeakObjec
 			RegisteredActors.Emplace(Actor, Component);
 			
 			ObservedInteractions.Emplace(Actor, FoundInteractions[0]);
-			FoundInteractions[0]->OnInteractDelegate.AddDynamic(this, &UOnInteract_Observer::OnEventReceived); //// HERE ------------
+			FoundInteractions[0]->OnInteractDelegate.AddDynamic(this, &UOnInteract_Observer::OnInteractReceived);
+			FoundInteractions[0]->OnOverlapBeginDelegate.AddDynamic(this, &UOnInteract_Observer::OnOverlapBeginReceived);
+			FoundInteractions[0]->OnOverlapEndDelegate.AddDynamic(this, &UOnInteract_Observer::OnOverlapEndReceived);
 		}
 	}
 }
@@ -38,6 +42,8 @@ void UOnInteract_Observer::ForgetActor(TWeakObjectPtr<AActor> Actor, TWeakObject
 		if (UInteractionComponent* InteractionComponent = Found->Get())
 		{
 			InteractionComponent->OnInteractDelegate.RemoveAll(this);
+			InteractionComponent->OnOverlapBeginDelegate.RemoveAll(this);
+			InteractionComponent->OnOverlapEndDelegate.RemoveAll(this);
 		}
 		ObservedInteractions.Remove(Actor);
 	}
@@ -50,8 +56,23 @@ void UOnInteract_Observer::Cleanup()
 		if (UInteractionComponent* InteractionComponent = Interaction.Value.Get())
 		{
 			InteractionComponent->OnInteractDelegate.RemoveAll(this);
+			InteractionComponent->OnOverlapBeginDelegate.RemoveAll(this);
+			InteractionComponent->OnOverlapEndDelegate.RemoveAll(this);
 		}
 	}
 	ObservedInteractions.Empty();
 	Super::Cleanup();
+}
+
+void UOnInteract_Observer::OnInteractReceived()
+{
+	TriggerOutput(TEXT("On Interact"), false);
+}
+void UOnInteract_Observer::OnOverlapBeginReceived()
+{
+	TriggerOutput(TEXT("On Overlap Begin"), false);
+}
+void UOnInteract_Observer::OnOverlapEndReceived()
+{
+	TriggerOutput(TEXT("On Overlap End"), false);
 }
