@@ -15,6 +15,9 @@ UCLASS()
 class PROJET_MORPHEE_API UPlayerUI : public UUserWidget
 {
 	GENERATED_BODY()
+
+	UPROPERTY()	
+	TArray<UUserWidget*> AvailableSecondaryInteractionWidgets;
 	
 public:
 	UPROPERTY(meta = (BindWidget))
@@ -25,4 +28,20 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	UHealthBar* healthBar;
+	
+	UPROPERTY(BlueprintReadWrite) 
+	TSubclassOf<UUserWidget> SecondaryInteractionWidgetClass;
+	UFUNCTION(BlueprintCallable)
+	void InitSecondaryInteractionWidgets(const TArray<UUserWidget*>& widgets);
+	UFUNCTION(BlueprintCallable)
+	UUserWidget* AcquireSecondaryInteractionWidget();
+	UFUNCTION(BlueprintCallable)
+	void ReleaseSecondaryInteractionWidget(UUserWidget* w);
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, meta = (ForceAsFunction))
+	UUserWidget* ShowSecondaryIteraction(const FText& text, FVector worldLocation);
+	
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void HideSecondaryIteraction(const UUserWidget* w);
+
 };

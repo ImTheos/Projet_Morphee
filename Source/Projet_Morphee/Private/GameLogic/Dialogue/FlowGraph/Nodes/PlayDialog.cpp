@@ -31,6 +31,8 @@ void UPlayDialog::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedE
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 	
+	GetLevelOptions();
+	
 	if (OldLevel != Level)
 	{
 		TryGetLines();
@@ -53,17 +55,18 @@ void UPlayDialog::EndDialog()
 TArray<FString> UPlayDialog::GetLevelOptions()
 {
 	TArray<FString> options;
+	TextDatabase.Empty();
 	
 	FAssetRegistryModule& AssetRegistryModule = FModuleManager::LoadModuleChecked<FAssetRegistryModule>("AssetRegistry");
 	TArray<FAssetData> StringTableAssets;
 	AssetRegistryModule.Get().GetAssetsByClass(UStringTable::StaticClass()->GetClassPathName(), StringTableAssets);
+	
 	for (const auto& asset : StringTableAssets)
 	{
 		FString name = asset.AssetName.ToString();
 		UStringTable* StringTableAsset = Cast<UStringTable>(asset.GetAsset());
 		if (!StringTableAsset) continue;
 
-		FStringTableConstRef table = StringTableAsset->GetStringTable();
 		TextDatabase.Add(name, StringTableAsset);
 		options.Add(name);
 	}
@@ -125,6 +128,7 @@ void UPlayDialog::TryGetLines()
 	
 	auto oldLines = Lines;
 	Lines.Empty();
+	
 	FStringTableConstRef currentStringTable = TextDatabase[Level]->GetStringTable();
 	
 	TArray<FString> Options;
@@ -200,6 +204,7 @@ void UPlayDialog::SetOtherCharacters()
 
 EDataValidationResult UPlayDialog::ValidateNode()
 {
+	GetLevelOptions();
 	TryGetLines();
 	OldLevel = Level;
 	OldDialog = Dialog;

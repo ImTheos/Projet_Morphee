@@ -23,7 +23,7 @@ class PROJET_MORPHEE_API IDamageable
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-	void ReceiveDamage(float value, FVector hitDirection, AActor* instigator);
+	void ReceiveDamage(float value, FVector hitLocation, FVector hitDirection, AActor* instigator);
 	
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void OnDeath();
