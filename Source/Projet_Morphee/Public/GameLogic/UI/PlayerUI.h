@@ -8,9 +8,10 @@
 #include "PlayerUI.generated.h"
 
 class UDialogUI;
-/**
- * 
- */
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEndPlayFreeDialog);
+
+
 UCLASS()
 class PROJET_MORPHEE_API UPlayerUI : public UUserWidget
 {
@@ -29,19 +30,25 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (BindWidget))
 	UHealthBar* healthBar;
 	
-	UPROPERTY(BlueprintReadWrite) 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category="FreeDialog")
+	void PlayFreeDialog(const FText& text, const float& duration);
+	
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category="FreeDialog")
+	FEndPlayFreeDialog OnEndPlayFreeDialogDelegate;
+	
+	UPROPERTY(BlueprintReadWrite, Category="SecondaryInteraction") 
 	TSubclassOf<UUserWidget> SecondaryInteractionWidgetClass;
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="SecondaryInteraction")
 	void InitSecondaryInteractionWidgets(const TArray<UUserWidget*>& widgets);
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="SecondaryInteraction")
 	UUserWidget* AcquireSecondaryInteractionWidget();
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="SecondaryInteraction")
 	void ReleaseSecondaryInteractionWidget(UUserWidget* w);
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, meta = (ForceAsFunction))
+	
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, meta = (ForceAsFunction), Category="SecondaryInteraction")
 	UUserWidget* ShowSecondaryIteraction(const FText& text, FVector worldLocation);
 	
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category="SecondaryInteraction")
 	void HideSecondaryIteraction(const UUserWidget* w);
 
 };

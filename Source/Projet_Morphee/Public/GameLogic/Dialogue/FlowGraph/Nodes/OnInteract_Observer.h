@@ -19,6 +19,13 @@ protected:
 	virtual void ObserveActor(TWeakObjectPtr<AActor> Actor, TWeakObjectPtr<UFlowComponent> Component) override;
 	virtual void ForgetActor(TWeakObjectPtr<AActor> Actor, TWeakObjectPtr<UFlowComponent> Component) override;
 	
+	UFUNCTION()
+	virtual void OnInteractReceived();
+	UFUNCTION()
+	virtual void OnOverlapBeginReceived();
+	UFUNCTION()
+	virtual void OnOverlapEndReceived();
+	
 protected:
 	virtual void Cleanup() override;
 };
